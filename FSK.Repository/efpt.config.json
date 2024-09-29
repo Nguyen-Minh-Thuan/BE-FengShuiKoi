@@ -1,0 +1,118 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "SWP391FengShuiKoiSystemContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "FSK.Repository",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Advertisement]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Auspicious]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Color]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Direction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DirectionGroup]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Element]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ElementColor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ElementQuantity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[General]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Inauspicious]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kua]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Package]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pattern]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PatternColor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pond]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Shape]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Transaction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Variety]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
