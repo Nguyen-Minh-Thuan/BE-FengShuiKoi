@@ -1,3 +1,4 @@
+
 using FSK.Repository;
 using FSK.Repository.Services;
 using System.Text.Json.Serialization;
@@ -11,17 +12,16 @@ namespace FSK.APIService
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
             builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Register your UnitOfWork and FengShuiService
             builder.Services.AddScoped<UnitOfWork>();
-            builder.Services.AddScoped<FengShuiService>(); // Add this line
+            builder.Services.AddScoped<FengShuiService>();
 
-            // Optional: Add JSON options for reference handling
-            builder.Services.AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             var app = builder.Build();
 
@@ -33,8 +33,12 @@ namespace FSK.APIService
             }
 
             app.UseHttpsRedirection();
+
             app.UseAuthorization();
+
+
             app.MapControllers();
+
             app.Run();
         }
     }

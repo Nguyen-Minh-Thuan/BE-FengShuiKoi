@@ -8,7 +8,7 @@ namespace FSK.Repository.Services
 {
     public class FengShuiService
     {
-        public string CalculateFengShui(DateTime birthday, string gender)
+        public int CalculateFengShui(DateTime birthday, string gender)
         {
             // Lấy năm sinh
             int year = birthday.Year;
@@ -34,7 +34,7 @@ namespace FSK.Repository.Services
             //string result = $"Thiên Can: {canValue}, Địa Chi: {chiValue}, Ngũ Hành: {element}";
 
             // Trả về kết quả
-            return $"Your Feng Shui elements are: {sum}";
+            return sum;
         }
 
         private int GetThienCanValue(int year)
@@ -94,12 +94,15 @@ namespace FSK.Repository.Services
         //    };
         //}
 
-        public string CalculateCungPhi(int year, string gender)
+        public int CalculateCungPhi(DateTime birthday, string gender)
         {
+            int year = birthday.Year;
+
             int lastTwoDigits = year % 100;
 
             // Step 1: Calculate the sum of the last two digits
             int sum = SumDigits(lastTwoDigits);
+            //sum = SumDigits(sum); // If sum > 9, sum the digits again
 
             // If born before 2000
             if (year < 2000)
@@ -107,13 +110,15 @@ namespace FSK.Repository.Services
                 if (gender.ToLower() == "male")
                 {
                     int b = 10 - sum;
-                    return GetCungPhi(b, gender);
+                    //return GetCungPhi(b, gender);
+                    return b;
                 }
                 else
                 {
                     
                     int c = 5 + sum;
-                    return GetCungPhi(c, gender);
+                    //return GetCungPhi(c, gender);
+                    return SumDigits(c);
                 }
             }
             // If born after or in 2000
@@ -122,12 +127,14 @@ namespace FSK.Repository.Services
                 if (gender.ToLower() == "male")
                 {
                     int b = 9 - sum;
-                    return GetCungPhi(b, gender);
+                    //return GetCungPhi(b, gender);
+                    return b;
                 }
                 else
                 {
                     int c = 6 + sum;
-                    return GetCungPhi(c, gender);
+                    //return GetCungPhi(c, gender);
+                    return SumDigits(c); ;
                 }
             }
         }

@@ -21,6 +21,12 @@ namespace FSK.Repository.Base
             //return _context.Set<T>().AsNoTracking().ToList();
         }
 
+        public List<T> GetPage(int pageIndex, int pageSize)
+        {
+            return _context.Set<T>().Skip(pageIndex*pageSize).Take(pageSize).ToList();
+            //return _context.Set<T>().AsNoTracking().ToList();
+        }
+
         public void Create(T entity)
         {
             _context.Add(entity);
@@ -61,6 +67,12 @@ namespace FSK.Repository.Base
         public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task<List<T>> GetPageAsync(int pageIndex, int pageSize)
+        {
+            return await _context.Set<T>().Skip(pageIndex * pageSize).Take(pageSize).ToListAsync();
+            //return _context.Set<T>().AsNoTracking().ToList();
         }
         public async Task<int> CreateAsync(T entity)
         {

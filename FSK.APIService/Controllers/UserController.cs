@@ -14,7 +14,7 @@ namespace FSK.APIService.Controllers
         public UserController(UnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<User>>> GetPageUser(int pageIndex = 0, int pageSize = 10)
         {
 
             BaseResponseModel response = new BaseResponseModel();
@@ -23,7 +23,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.UserRepository.GetAllAsync();
+                response.Data = await _unitOfWork.UserRepository.GetPageAsync(pageIndex,pageSize);
                 return Ok(response);
             }
             catch (Exception err)
@@ -62,7 +62,9 @@ namespace FSK.APIService.Controllers
         {
             try
             {
+
                 await _unitOfWork.UserRepository.CreateAsync(user);
+
             }
             catch (DbUpdateConcurrencyException)
             {
