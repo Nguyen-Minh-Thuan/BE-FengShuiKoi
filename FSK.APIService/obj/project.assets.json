@@ -1221,6 +1221,16 @@
         "runtime": {
           "bin/placeholder/FSK.Repository.dll": {}
         }
+      },
+      "FSK.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/FSK.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FSK.Service.dll": {}
+        }
       }
     }
   },
@@ -3628,11 +3638,17 @@
       "type": "project",
       "path": "../FSK.Repository/FSK.Repository.csproj",
       "msbuildProject": "../FSK.Repository/FSK.Repository.csproj"
+    },
+    "FSK.Service/1.0.0": {
+      "type": "project",
+      "path": "../FSK.Service/FSK.Service.csproj",
+      "msbuildProject": "../FSK.Service/FSK.Service.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "FSK.Repository >= 1.0.0",
+      "FSK.Service >= 1.0.0",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.21.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -3667,6 +3683,9 @@
           "projectReferences": {
             "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj": {
               "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj"
+            },
+            "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj"
             }
           }
         }
