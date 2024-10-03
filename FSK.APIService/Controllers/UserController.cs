@@ -58,38 +58,65 @@ namespace FSK.APIService.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754    
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [Route("Registration")]
+        public async Task<IActionResult> PostUser(UserRegistration userDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var existingUser = await _unitOfWork.UserRepository.FirstOrDefaultAsync(x => x.Email == userDto.Email);
+            if (existingUser != null)
+            {
+                return BadRequest("User already exists with the same email address.");
+            }
+
             try
             {
+                var user = new User
+                {
+                    UserName = userDto.UserName,
+                    Password = userDto.Password,
+                    Email = userDto.Email,
+                    Bio = userDto.Bio,
+                    ImageUrl = userDto.ImageUrl,
+                    IsActive = userDto.IsActive,
+                    Role = string.IsNullOrEmpty(userDto.Role) ? "User" : userDto.Role
+                };
 
                 await _unitOfWork.UserRepository.CreateAsync(user);
-
+                await _unitOfWork.SaveChangesAsync();
+                return CreatedAtAction("GetUser", new { id = user.UserId }, user);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-
+                // Log the exception
+                return BadRequest("An error occurred while registering the user.");
             }
-            return CreatedAtAction("GetUser", new { id = user.UserId }, User);
         }
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("UpdateRole/{id}")]
+        public async Task<IActionResult> UpdateUserRole(int id, string newRole)
         {
-            if (id != user.UserId)
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            if (user == null)
             {
-                return BadRequest();
+                return NotFound("User not found");
             }
+
+            user.Role = newRole;
 
             try
             {
-                _unitOfWork.UserRepository.UpdateAsync(user);
+                await _unitOfWork.UserRepository.UpdateAsync(user);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!await UserExists(id))
                 {
                     return NotFound();
                 }
@@ -99,7 +126,33 @@ namespace FSK.APIService.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok("User role updated successfully");
+        }
+
+        private async Task<bool> UserExists(int id)
+        {
+            return await _unitOfWork.UserRepository.GetByIdAsync(id) != null;
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(Login loginDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u =>
+                u.UserName == loginDto.UsernameOrEmail || u.Email == loginDto.UsernameOrEmail);
+
+            if (user == null || user.Password != loginDto.Password) // Note: In a real application, use proper password hashing and verification
+            {
+                return Unauthorized("Invalid username/email or password");
+            }
+
+            // Here you would typically generate and return a JWT token for authenticated requests
+            // For simplicity, we're just returning a success message
+            return Ok(new { message = "Login successful", userId = user.UserId });
         }
 
         // DELETE: api/Products/5
@@ -115,11 +168,6 @@ namespace FSK.APIService.Controllers
             await _unitOfWork.UserRepository.RemoveAsync(user);
 
             return NoContent();
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _unitOfWork.UserRepository.GetByIdAsync(id) != null;
         }
 
 
