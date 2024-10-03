@@ -161,29 +161,61 @@ namespace FSK.APIService.Controllers
             return Ok(response);
         }
 
-        [HttpGet("KoiPoint")]
-        public async Task<ActionResult<Element>> GetKoiPrice(DateTime birthday, string gender)
+        [HttpGet("Testing")]
+        public async Task<ActionResult<Element>> Testing()
         {
             BaseResponseModel response = new BaseResponseModel();
 
             response.Status = true;
             response.Message = "Success";
 
-            var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
 
-            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
+            var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
+            var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
+            //foreach (var n in variety)
+            //{
+            //    n.Patterns.Clear();
+            //}
+            var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+            var color = await _unitOfWork.ColorRepository.GetAllAsync();
+
+
+
+
+
+            var element = await _unitOfWork.ElementRepository.GetByIdAsync(2);
 
             var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
-
-            foreach (ElementColor n in elementColor)
+            foreach (var n in elementColor)
             {
-                n.Color = null;
                 n.Element = null;
             }
+
             
-            var point = element.ElementColors.Where(x => x.Values >= 2 || x.ElementId == elementID);
+            var test = variety.Select(x => new VarietyRespondModel
+            {
+                VarietyId = x.VarietyId,
+                VarietyName = x.VarietyName,
+                Description = x.Description,
+                Patterns = x.Patterns.Select(y => new PatternRespondModel
+                {
+                    PatternId = y.PatternId,
+                    PatternName = y.PatternName,
+                    ImageUrl = y.ImageUrl,
+                    VarietyId = y.VarietyId,
+                    PatternColors = y.PatternColors.Select(z => new PatternColorRespondModel
+                    {
+                        ColorId = z.ColorId,
+                        PatternId = z.PatternId,
+                        PcolorId = z.PatternId,
+                        Values = z.Values
+                    }).ToList(),
+                }).ToList(),
+                TotalPattern = x.Patterns.Count(),
+            }).ToList();
+            
 
-
+            response.Data = new { test };
 
 
             //var pond = await _unitOfWork.PondRepository.GetAllAsync();
@@ -192,7 +224,6 @@ namespace FSK.APIService.Controllers
             //{
             //    item.Ponds = null;
             //}
-            response.Data = point;
 
 
             if (response.Data == null)

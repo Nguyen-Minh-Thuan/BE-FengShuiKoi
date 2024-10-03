@@ -193,23 +193,12 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.FengShuiController",
-    "Method": "GetKoiPrice",
-    "RelativePath": "api/FengShui/KoiPoint",
+    "Method": "Testing",
+    "RelativePath": "api/FengShui/Testing",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "birthday",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "gender",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": [
       {
         "Type": "FSK.Repository.Models.Element",

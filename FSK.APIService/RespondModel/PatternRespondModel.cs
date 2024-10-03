@@ -13,6 +13,8 @@ namespace FSK.APIService.RespondModel
 
         public string ImageUrl { get; set; }
 
+        public double PatternPoint {  get; set; }
+
         public List<PatternColorRespondModel> PatternColors { get; set; } = new List<PatternColorRespondModel>();
 
         public List<VarietyRespondModel> Variety { get; set; } = new List<VarietyRespondModel>();

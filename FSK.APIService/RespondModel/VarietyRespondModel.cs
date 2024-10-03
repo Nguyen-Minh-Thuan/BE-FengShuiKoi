@@ -13,7 +13,7 @@ namespace FSK.APIService.RespondModel
 
         public string Description { get; set; }
 
-        public double TotalPoint { get; set; }
+        public double TotalPattern { get; set; }
 
         public List<PatternRespondModel> Patterns { get; set; } = new List<PatternRespondModel>();
 
