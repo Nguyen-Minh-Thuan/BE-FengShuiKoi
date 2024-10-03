@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using FSK.Repository;
 using FSK.Repository.Models;
 using FSK.APIService.RespondModel;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
 {
@@ -100,9 +101,109 @@ namespace FSK.APIService.Controllers
             return Ok(response);
         }
 
+        [HttpGet("Koi")]
+        public async Task<ActionResult<Element>> GetKoi(DateTime birthday, string gender)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            response.Status = true;
+            response.Message = "Success";
+
+            var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
+
+            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
+            var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
+
+            var color = await _unitOfWork.ColorRepository.GetAllAsync();
+            foreach (Color n in color)
+            {
+                n.ElementColors = null;
+            }
+            var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+            foreach (PatternColor n in patternColor)
+            {
+
+                n.Color = null;
+            }
+
+            var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
+            foreach (Pattern n in pattern)
+            {
+                n.PatternColors = null;
+                //foreach (PatternColor m in n.PatternColors)
+                //{
+                //    m.Color = await _unitOfWork.ColorRepository.GetByIdAsync(m.ColorId);
+                //}
+            }
+            var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
+            foreach (Variety n in variety)
+            {
+                n.Patterns = null;
+            }
+
+            //var pond = await _unitOfWork.PondRepository.GetAllAsync();
+            //var shape = await _unitOfWork.ShapeRepository.GetAllAsync();
+            //foreach (Shape item in shape)
+            //{
+            //    item.Ponds = null;
+            //}
+            var getData = element;
+            response.Data = element;
+
+
+            if (response.Data == null)
+            {
+                response.Status = false;
+                response.Message = "User not found";
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("KoiPoint")]
+        public async Task<ActionResult<Element>> GetKoiPrice(DateTime birthday, string gender)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            response.Status = true;
+            response.Message = "Success";
+
+            var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
+
+            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
+
+            var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
+
+            foreach (ElementColor n in elementColor)
+            {
+                n.Color = null;
+                n.Element = null;
+            }
+            
+            var point = element.ElementColors.Where(x => x.Values >= 2 || x.ElementId == elementID);
 
 
 
+
+            //var pond = await _unitOfWork.PondRepository.GetAllAsync();
+            //var shape = await _unitOfWork.ShapeRepository.GetAllAsync();
+            //foreach (Shape item in shape)
+            //{
+            //    item.Ponds = null;
+            //}
+            response.Data = point;
+
+
+            if (response.Data == null)
+            {
+                response.Status = false;
+                response.Message = "User not found";
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
 
     }
 

@@ -161,6 +161,68 @@
     ]
   },
   {
+    "ContainingType": "FSK.APIService.Controllers.FengShuiController",
+    "Method": "GetKoi",
+    "RelativePath": "api/FengShui/Koi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "birthday",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "gender",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FSK.Repository.Models.Element",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.FengShuiController",
+    "Method": "GetKoiPrice",
+    "RelativePath": "api/FengShui/KoiPoint",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "birthday",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "gender",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FSK.Repository.Models.Element",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.TestController",
     "Method": "CalculateDirection",
     "RelativePath": "api/Test/CalculateDir",
