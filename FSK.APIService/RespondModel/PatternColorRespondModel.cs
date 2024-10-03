@@ -10,6 +10,8 @@
 
         public double Values { get; set; }
 
+        public double? ComputeValues {  get; set; }
+
         public List<ColorRespondModel> Color {  get; set; } = new List<ColorRespondModel>();
 
         public List<PatternRespondModel> Pattern { get; set; } = new List<PatternRespondModel>();

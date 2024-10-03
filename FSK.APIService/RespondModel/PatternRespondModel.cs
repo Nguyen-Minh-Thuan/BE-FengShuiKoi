@@ -18,5 +18,6 @@ namespace FSK.APIService.RespondModel
         public List<PatternColorRespondModel> PatternColors { get; set; } = new List<PatternColorRespondModel>();
 
         public List<VarietyRespondModel> Variety { get; set; } = new List<VarietyRespondModel>();
+
     }
 }

@@ -5,6 +5,7 @@ using FSK.Repository;
 using FSK.Repository.Models;
 using FSK.APIService.RespondModel;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 namespace FSK.APIService.Controllers
 {
@@ -177,11 +178,7 @@ namespace FSK.APIService.Controllers
             //    n.Patterns.Clear();
             //}
             var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
-            var color = await _unitOfWork.ColorRepository.GetAllAsync();
-
-
-
-
+            //var color = await _unitOfWork.ColorRepository.GetAllAsync();
 
             var element = await _unitOfWork.ElementRepository.GetByIdAsync(2);
 
@@ -191,7 +188,7 @@ namespace FSK.APIService.Controllers
                 n.Element = null;
             }
 
-            
+
             var test = variety.Select(x => new VarietyRespondModel
             {
                 VarietyId = x.VarietyId,
@@ -208,14 +205,18 @@ namespace FSK.APIService.Controllers
                         ColorId = z.ColorId,
                         PatternId = z.PatternId,
                         PcolorId = z.PatternId,
-                        Values = z.Values
+                        Values = z.Values,
+                        ComputeValues = z.Values * Testing2(z.ColorId),
                     }).ToList(),
+                    PatternPoint = y.PatternColors.Sum(z => z.Values * Testing2(z.ColorId)),
                 }).ToList(),
                 TotalPattern = x.Patterns.Count(),
             }).ToList();
-            
 
-            response.Data = new { test };
+
+
+
+            response.Data = new { Variety = test , Element = elementColor };
 
 
             //var pond = await _unitOfWork.PondRepository.GetAllAsync();
@@ -234,6 +235,34 @@ namespace FSK.APIService.Controllers
             }
 
             return Ok(response);
+        }
+
+        private double TotalPoint(ICollection<PatternColor> patternColors)
+        {
+            double total = 0;
+
+            foreach (var item in patternColors)
+            {
+                total += item.Values;
+            }
+
+            return total;
+        }
+
+        [HttpGet("Testing2")]
+        public double Testing2(int id)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+            try
+            {
+                double test = _unitOfWork.ElementColorRepository.GetAll().Where(x => x.ElementId == 2 && x.ColorId == id).First().Values;
+                return test;
+            }
+            catch (Exception)
+            {
+                return 1;
+            }
+
         }
 
     }

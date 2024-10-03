@@ -7,12 +7,44 @@
       "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\controllers\\fengshuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\patternrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\patternrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\patterncolorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\patterncolorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\patternrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\patternrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\elementcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\elementcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\base\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\base\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\swp391fengshuikoisystemcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\swp391fengshuikoisystemcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\elementrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\elementrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\repository\\elementcolorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\repository\\elementcolorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\baseresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\baseresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\colorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\colorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\varietyrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,24 +63,8 @@
       "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\elementcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\elementcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\elementrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\elementrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\base\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\base\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\baseresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\baseresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\elementcolorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,16 +83,8 @@
       "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\direction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\databasecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.repository\\models\\pattern.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70FCF103-4811-4412-BA68-B1FC34690A50}|FSK.Repository\\FSK.Repository.csproj|solutionrelative:fsk.repository\\models\\pattern.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\respondmodel\\colorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|solutionrelative:fsk.apiservice\\respondmodel\\colorrespondmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AD1BF80-CB9E-4BD1-9A00-4DB8304C2A42}|FSK.APIService\\FSK.APIService.csproj|c:\\users\\admin\\source\\repos\\swp391.fengshuikoi.fa24\\fsk.apiservice\\controllers\\directioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -130,7 +138,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -142,33 +150,46 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SWP391FengShuiKoiSystemContext.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\SWP391FengShuiKoiSystemContext.cs",
+              "RelativeDocumentMoniker": "FSK.Repository\\Models\\SWP391FengShuiKoiSystemContext.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\SWP391FengShuiKoiSystemContext.cs",
+              "RelativeToolTip": "FSK.Repository\\Models\\SWP391FengShuiKoiSystemContext.cs",
+              "ViewState": "AgIAAI0BAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T17:32:33.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ElementColorRepository.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Repository\\ElementColorRepository.cs",
+              "RelativeDocumentMoniker": "FSK.Repository\\Repository\\ElementColorRepository.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Repository\\ElementColorRepository.cs",
+              "RelativeToolTip": "FSK.Repository\\Repository\\ElementColorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T17:29:41.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "FengShuiController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\FengShuiController.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\FengShuiController.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\FengShuiController.cs",
               "RelativeToolTip": "FSK.APIService\\Controllers\\FengShuiController.cs",
-              "ViewState": "AgIAAMEAAAAAAAAAAAAAANMAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAcwNIAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-29T19:40:41.335Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TestController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\TestController.cs",
-              "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\TestController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\TestController.cs",
-              "RelativeToolTip": "FSK.APIService\\Controllers\\TestController.cs",
-              "ViewState": "AgIAAJUAAAAAAAAAAAAAAJcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T19:42:07.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Variety.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\Variety.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\Variety.cs",
@@ -180,7 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "VarietyRespondModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\VarietyRespondModel.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\VarietyRespondModel.cs",
@@ -188,25 +209,24 @@
               "RelativeToolTip": "FSK.APIService\\RespondModel\\VarietyRespondModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T06:09:53.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-03T06:09:53.391Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "PatternRespondModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\PatternRespondModel.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\PatternRespondModel.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\PatternRespondModel.cs",
               "RelativeToolTip": "FSK.APIService\\RespondModel\\PatternRespondModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA8AAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA8AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-03T06:05:27.846Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "Element.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\Element.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\Element.cs",
@@ -214,38 +234,37 @@
               "RelativeToolTip": "FSK.Repository\\Models\\Element.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAABuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T06:35:06.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T06:35:06.775Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "ElementColor.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\ElementColor.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\ElementColor.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\ElementColor.cs",
               "RelativeToolTip": "FSK.Repository\\Models\\ElementColor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAcAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-30T06:37:45.503Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PatternColorRespondModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\PatternColorRespondModel.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\PatternColorRespondModel.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\PatternColorRespondModel.cs",
               "RelativeToolTip": "FSK.APIService\\RespondModel\\PatternColorRespondModel.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAkwAwAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-03T06:01:12.721Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\WeatherForecastController.cs",
@@ -253,12 +272,11 @@
               "RelativeToolTip": "FSK.APIService\\Controllers\\WeatherForecastController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T19:53:33.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-29T19:53:33.19Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "Color.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\Color.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\Color.cs",
@@ -266,12 +284,24 @@
               "RelativeToolTip": "FSK.Repository\\Models\\Color.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAWwA8AAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T21:17:20.663Z",
+              "WhenOpened": "2024-09-29T21:17:20.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BaseResponseModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\BaseResponseModel.cs",
+              "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\BaseResponseModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\BaseResponseModel.cs",
+              "RelativeToolTip": "FSK.APIService\\RespondModel\\BaseResponseModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T19:51:59.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "ElementColorRespondModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\ElementColorRespondModel.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\ElementColorRespondModel.cs",
@@ -283,7 +313,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
+              "Title": "ColorRespondModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\ColorRespondModel.cs",
+              "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\ColorRespondModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\ColorRespondModel.cs",
+              "RelativeToolTip": "FSK.APIService\\RespondModel\\ColorRespondModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T07:07:41.54Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\TestController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\TestController.cs",
+              "RelativeToolTip": "FSK.APIService\\Controllers\\TestController.cs",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAAAJcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-29T19:42:07.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ElementRespondModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\ElementRespondModel.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\ElementRespondModel.cs",
@@ -296,31 +350,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "BaseResponseModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\BaseResponseModel.cs",
-              "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\BaseResponseModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\BaseResponseModel.cs",
-              "RelativeToolTip": "FSK.APIService\\RespondModel\\BaseResponseModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T19:51:59.032Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Base\\GenericRepository.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Base\\GenericRepository.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Base\\GenericRepository.cs",
               "RelativeToolTip": "FSK.Repository\\Base\\GenericRepository.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAmwEIAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAmwDQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T07:33:36.019Z"
+              "WhenOpened": "2024-09-30T07:33:36.019Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "PatternColor.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\PatternColor.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\PatternColor.cs",
@@ -332,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "Direction.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\Direction.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\Direction.cs",
@@ -344,7 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Pattern.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\Pattern.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\Pattern.cs",
@@ -356,31 +399,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 5,
               "Title": "DatabaseContext.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\DatabaseContext.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Models\\DatabaseContext.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Models\\DatabaseContext.cs",
               "RelativeToolTip": "FSK.Repository\\Models\\DatabaseContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T06:20:29.568Z"
+              "WhenOpened": "2024-10-03T06:20:29.568Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ColorRespondModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\ColorRespondModel.cs",
-              "RelativeDocumentMoniker": "FSK.APIService\\RespondModel\\ColorRespondModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\RespondModel\\ColorRespondModel.cs",
-              "RelativeToolTip": "FSK.APIService\\RespondModel\\ColorRespondModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T07:07:41.54Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "DirectionController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\DirectionController.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\DirectionController.cs",
@@ -392,7 +424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "FSK.APIService.csproj",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\FSK.APIService.csproj",
               "RelativeDocumentMoniker": "FSK.APIService\\FSK.APIService.csproj",
@@ -404,7 +436,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "DirectionRepository.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\Repository\\DirectionRepository.cs",
               "RelativeDocumentMoniker": "FSK.Repository\\Repository\\DirectionRepository.cs",
@@ -416,7 +448,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "FSK.Service.csproj",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj",
               "RelativeDocumentMoniker": "FSK.Service\\FSK.Service.csproj",
@@ -428,7 +460,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\UserController.cs",
@@ -440,7 +472,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\appsettings.json",
               "RelativeDocumentMoniker": "FSK.APIService\\appsettings.json",
@@ -452,7 +484,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "AdvertisementController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Controllers\\AdvertisementController.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\Controllers\\AdvertisementController.cs",
@@ -464,7 +496,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Dockerfile",
               "RelativeDocumentMoniker": "FSK.APIService\\Dockerfile",
@@ -476,7 +508,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "FengShuiService.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\Services\\FengShuiService.cs",
               "RelativeDocumentMoniker": "FSK.Service\\Services\\FengShuiService.cs",
@@ -488,7 +520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\Program.cs",
               "RelativeDocumentMoniker": "FSK.APIService\\Program.cs",
@@ -500,7 +532,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "FSK.Repository",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj",
               "RelativeDocumentMoniker": "FSK.Repository\\FSK.Repository.csproj",
