@@ -1,6 +1,7 @@
-﻿using FSK.Repository;
+﻿using FSK.APIService.RespondModel;
+using FSK.Repository;
 using FSK.Repository.Models;
-using FSK.Repository.Services;
+using FSK.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,30 @@ namespace FSK.APIService.Controllers
         {
             _unitOfWork = unitOfWork;
             _fengShuiService = fengShuiService;
+        }
+
+        [HttpGet("TestFunc")]
+        public async Task<ActionResult<IEnumerable<Element>>> GetPoint(int elementID)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            response.Status = true;
+            response.Message = "Success";
+            
+            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
+            var output = await _unitOfWork.ElementColorRepository.GetAllAsync();
+            //var test = output.Select(Color => )
+            response.Data = element;
+
+
+            if (response.Data == null)
+            {
+                response.Status = false;
+                response.Message = "User not found";
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
 
         [HttpGet("GetShape")]
@@ -99,10 +124,7 @@ namespace FSK.APIService.Controllers
             }
 
             var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
-            foreach (Pattern n in pattern)
-            {
-                n.PatternColors = null;
-            }
+            
             var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
             foreach (Variety n in variety)
             {
@@ -167,6 +189,9 @@ namespace FSK.APIService.Controllers
 
             return Ok(response);
         }
+
+
+        //test Git
 
     }
 }

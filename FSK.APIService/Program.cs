@@ -1,6 +1,6 @@
 
 using FSK.Repository;
-using FSK.Repository.Services;
+using FSK.Service.Services;
 using System.Text.Json.Serialization;
 
 namespace FSK.APIService
