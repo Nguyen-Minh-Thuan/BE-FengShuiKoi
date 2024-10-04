@@ -6,6 +6,9 @@ using FSK.Repository.Models;
 using FSK.APIService.RespondModel;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using System.Reflection;
+using FSK.APIService.RequestModel;
+using Azure.Core;
 
 namespace FSK.APIService.Controllers
 {
@@ -15,6 +18,7 @@ namespace FSK.APIService.Controllers
     {
         private readonly FengShuiService _fengShuiService;
         private readonly UnitOfWork _unitOfWork;
+        private static Double _defaultPoint = 4;
 
         public FengShuiController(FengShuiService fengShuiService, UnitOfWork unitOfWork)
         {
@@ -59,7 +63,7 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("CalculateDir")]
-        public async Task<ActionResult<Element>> CalculateDirection( DateTime birthday,  string gender)
+        public async Task<ActionResult<Element>> CalculateDirection([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             BaseResponseModel response = new BaseResponseModel();
 
@@ -103,67 +107,46 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("Koi")]
-        public async Task<ActionResult<Element>> GetKoi(DateTime birthday, string gender)
+        public async Task<ActionResult<Element>> GetKoi()
         {
             BaseResponseModel response = new BaseResponseModel();
 
             response.Status = true;
             response.Message = "Success";
 
-            var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
 
-            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
-            var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
-
-            var color = await _unitOfWork.ColorRepository.GetAllAsync();
-            foreach (Color n in color)
+            
+            var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
+            var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
+            foreach( var item in pattern)
             {
-                n.ElementColors = null;
+                item.Variety = null;
             }
             var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
-            foreach (PatternColor n in patternColor)
+            foreach ( var item in patternColor)
             {
-
-                n.Color = null;
+                item.Pattern = null;
             }
-
-            var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
-            foreach (Pattern n in pattern)
+            var color = await _unitOfWork.ColorRepository.GetAllAsync();
+            foreach (var item in color)
             {
-                n.PatternColors = null;
-                //foreach (PatternColor m in n.PatternColors)
-                //{
-                //    m.Color = await _unitOfWork.ColorRepository.GetByIdAsync(m.ColorId);
-                //}
+                item.PatternColors = null;
             }
-            var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
-            foreach (Variety n in variety)
-            {
-                n.Patterns = null;
-            }
-
-            //var pond = await _unitOfWork.PondRepository.GetAllAsync();
-            //var shape = await _unitOfWork.ShapeRepository.GetAllAsync();
-            //foreach (Shape item in shape)
-            //{
-            //    item.Ponds = null;
-            //}
-            var getData = element;
-            response.Data = element;
+            response.Data = variety;
 
 
             if (response.Data == null)
             {
                 response.Status = false;
-                response.Message = "User not found";
+                response.Message = "Kois not found";
                 return BadRequest(response);
             }
 
             return Ok(response);
         }
 
-        [HttpGet("Testing")]
-        public async Task<ActionResult<Element>> Testing()
+        [HttpGet("RecKoi")]
+        public async Task<ActionResult<Element>> RecKoi([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             BaseResponseModel response = new BaseResponseModel();
 
@@ -180,7 +163,9 @@ namespace FSK.APIService.Controllers
             var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
             //var color = await _unitOfWork.ColorRepository.GetAllAsync();
 
-            var element = await _unitOfWork.ElementRepository.GetByIdAsync(2);
+            var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
+
+            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
 
             var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
             foreach (var n in elementColor)
@@ -206,17 +191,18 @@ namespace FSK.APIService.Controllers
                         PatternId = z.PatternId,
                         PcolorId = z.PatternId,
                         Values = z.Values,
-                        ComputeValues = z.Values * Testing2(z.ColorId),
+                        ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
                     }).ToList(),
-                    PatternPoint = y.PatternColors.Sum(z => z.Values * Testing2(z.ColorId)),
+                    PatternPoint = y.PatternColors.Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
                 }).ToList(),
                 TotalPattern = x.Patterns.Count(),
             }).ToList();
 
 
+            var recQuantity = await _unitOfWork.ElementQuantityRepository.GetAllAsync();
 
 
-            response.Data = new { Variety = test , Element = elementColor };
+            response.Data = new { Variety = test , RecQuantity = recQuantity.Where(x => x.ElementId == elementID) };
 
 
             //var pond = await _unitOfWork.PondRepository.GetAllAsync();
@@ -249,22 +235,152 @@ namespace FSK.APIService.Controllers
             return total;
         }
 
-        [HttpGet("Testing2")]
-        public double Testing2(int id)
+        private double Testing(int elementId, int shapeId)
+        {
+            try
+            {
+
+                var test = (_unitOfWork.PondRepository.GetAll()).Where(x => x.ElementId == elementId && x.ShapeId == shapeId).FirstOrDefault();
+
+                if (test != null)
+                    return 1;
+                else
+                    return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
+        }
+
+        private double Testing2(int elementId, int id)
+        {
+            try
+            {
+                double test = _unitOfWork.ElementColorRepository.GetAll().Where(x => x.ElementId == elementId && x.ColorId == id).First().Values;
+                return test+_defaultPoint;
+            }
+            catch (Exception)
+            {
+                return 1+ _defaultPoint;
+            }
+            //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
+        }
+
+        private double Testing3(int elementID ,int count)
+        {
+            try
+            {
+
+                var test = (_unitOfWork.ElementQuantityRepository.GetAll()).Where(x => x.ElementId == elementID && x.Quantity == count%10).FirstOrDefault();
+
+                if (test != null)
+                    return 1;
+                else 
+                    return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
+        }
+
+        private double Testing4(int kuaId, int dirId)
+        {
+            try
+            {
+
+                var test = (_unitOfWork.AuspiciousRepository.GetAll()).Where(x => x.KuaId == kuaId && x.DirectionId == dirId).FirstOrDefault();
+
+                return 1;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+            //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
+        }
+
+
+        [HttpPost("Pointing")]
+        public async Task<ActionResult<Element>> Pointing([FromQuery] DateTime birthday, [FromQuery] string gender, int shapeId, int dirId, List<PatternRequestModel> request)
         {
             BaseResponseModel response = new BaseResponseModel();
             try
             {
-                double test = _unitOfWork.ElementColorRepository.GetAll().Where(x => x.ElementId == 2 && x.ColorId == id).First().Values;
-                return test;
+                var elementId = _fengShuiService.CalculateFengShui(birthday, gender);
+
+                var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementId);
+
+                var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
+                foreach (var n in elementColor)
+                {
+                    n.Element = null;
+                }
+
+                var kuaId = _fengShuiService.CalculateCungPhi(birthday, gender);
+
+                //Pond Pointing
+
+                var bonusPond = Testing(elementId, shapeId);
+
+                var bonusDirection = Testing4(kuaId,dirId);
+
+
+                //Koi Pointing
+
+
+                List<Pattern> patterns = new List<Pattern>();
+                foreach (var item in request)
+                {
+                    patterns.Add(_unitOfWork.PatternRepository.GetById(item.PatternId));
+                }
+                var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+
+                var Bonus = Testing3(elementId, patterns.Count());
+                
+                
+
+                var test = patterns.Select(x => new PatternRespondModel
+                {
+                    PatternId = x.PatternId,
+                    PatternName = x.PatternName,
+                    ImageUrl = x.ImageUrl,
+                    PatternColors = x.PatternColors.Select(z => new PatternColorRespondModel
+                    {
+                        ColorId = z.ColorId,
+                        PatternId = z.PatternId,
+                        PcolorId = z.PatternId,
+                        Values = z.Values,
+                        ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
+                    }).ToList(),
+                    PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + Bonus + bonusPond + bonusDirection,
+                }).ToList();
+
+                double total = 0;
+                foreach (var pattern in test)
+                {
+                    total += pattern.PatternPoint;
+                }
+
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = new { KoiPoint = test , TotalPoint = total/test.Count };
+                return Ok(response);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return 1;
+                response.Status = false;
+                response.Message = ex.ToString();
+                return BadRequest(response);
             }
 
         }
 
+        
     }
 
 }

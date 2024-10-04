@@ -18,8 +18,4 @@
     <ProjectReference Include="..\FSK.Service\FSK.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RequestModel\" />
-  </ItemGroup>
-
 </Project>
