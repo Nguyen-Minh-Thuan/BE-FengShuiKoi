@@ -131,5 +131,9 @@ namespace FSK.Repository
             get { return _varietyRepository ??= new VarietyRepository(_context); }
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
     }
 }
