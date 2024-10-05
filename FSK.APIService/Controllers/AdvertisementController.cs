@@ -90,6 +90,29 @@ namespace FSK.APIService.Controllers
         }
 
 
+        [HttpGet("GetPackage")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetPackage()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.PackageRepository.GetAllAsync();
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
+
 
     }
 }
