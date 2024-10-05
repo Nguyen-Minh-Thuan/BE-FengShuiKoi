@@ -18,7 +18,7 @@ namespace FSK.APIService.Controllers
         //public AdvertisementController(DatabaseContext Dbcontext) => _Dbcontext = Dbcontext;
 
 
-        [HttpGet]
+        [HttpGet("AdsByPage")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetPageAds(int pageIndex = 0, int pageSize = 10)
         {
 
@@ -44,10 +44,50 @@ namespace FSK.APIService.Controllers
         }
 
 
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAds()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.AdvertisementRepository.GetAllAsync();
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
 
 
+        [HttpGet("GetAdsById")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsId(int id)
+        {
 
+            BaseResponseModel response = new BaseResponseModel();
 
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.AdvertisementRepository.GetByIdAsync(id);
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
 
 
 

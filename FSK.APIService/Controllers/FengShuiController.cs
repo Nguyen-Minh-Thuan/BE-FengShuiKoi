@@ -26,8 +26,8 @@ namespace FSK.APIService.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("calculate")]
-        public IActionResult CalculateFengShui([FromQuery] DateTime birthday, [FromQuery] string gender)
+        //[HttpGet("calculate")]
+        private IActionResult CalculateFengShui([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             try
             {
@@ -44,8 +44,8 @@ namespace FSK.APIService.Controllers
             }
         }
 
-        [HttpGet("calculate-cung-phi")]
-        public IActionResult CalculateCungPhi([FromQuery] DateTime birthday, [FromQuery] string gender)
+        //[HttpGet("calculate-cung-phi")]
+        private IActionResult CalculateCungPhi([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("CalculateDir")]
-        public async Task<ActionResult<Element>> CalculateDirection([FromQuery] DateTime birthday, [FromQuery] string gender)
+        public async Task<ActionResult<Direction>> CalculateDirection([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             BaseResponseModel response = new BaseResponseModel();
 
@@ -106,44 +106,6 @@ namespace FSK.APIService.Controllers
             return Ok(response);
         }
 
-        [HttpGet("Koi")]
-        public async Task<ActionResult<Element>> GetKoi()
-        {
-            BaseResponseModel response = new BaseResponseModel();
-
-            response.Status = true;
-            response.Message = "Success";
-
-
-            
-            var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
-            var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
-            foreach( var item in pattern)
-            {
-                item.Variety = null;
-            }
-            var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
-            foreach ( var item in patternColor)
-            {
-                item.Pattern = null;
-            }
-            var color = await _unitOfWork.ColorRepository.GetAllAsync();
-            foreach (var item in color)
-            {
-                item.PatternColors = null;
-            }
-            response.Data = variety;
-
-
-            if (response.Data == null)
-            {
-                response.Status = false;
-                response.Message = "Kois not found";
-                return BadRequest(response);
-            }
-
-            return Ok(response);
-        }
 
         [HttpGet("RecKoi")]
         public async Task<ActionResult<Element>> RecKoi([FromQuery] DateTime birthday, [FromQuery] string gender)
@@ -189,7 +151,7 @@ namespace FSK.APIService.Controllers
                     {
                         ColorId = z.ColorId,
                         PatternId = z.PatternId,
-                        PcolorId = z.PatternId,
+                        PcolorId = z.PcolorId,
                         Values = z.Values,
                         ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
                     }).ToList(),
@@ -352,7 +314,7 @@ namespace FSK.APIService.Controllers
                     {
                         ColorId = z.ColorId,
                         PatternId = z.PatternId,
-                        PcolorId = z.PatternId,
+                        PcolorId = z.PcolorId,
                         Values = z.Values,
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
                     }).ToList(),
@@ -380,7 +342,134 @@ namespace FSK.APIService.Controllers
 
         }
 
-        
+        [HttpGet("GetPondDir")]
+        public async Task<ActionResult<IEnumerable<Direction>>> GetAllDir()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.DirectionRepository.GetAllAsync();
+                
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+
+
+
+        }
+
+        [HttpGet("GetPondShape")]
+        public async Task<ActionResult<IEnumerable<Shape>>> GetAllShape()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.ShapeRepository.GetAllAsync();
+
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+
+
+
+        }
+
+
+        [HttpGet("GetKois")]
+        public async Task<ActionResult<Variety>> GetKois()
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+
+
+
+                var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
+                var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
+                //foreach (var item in pattern)
+                //{
+                //    item.Variety = null;
+                //}
+                var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+                //foreach(var item in patternColor)
+                //{
+                //    item.Pattern = null;
+                //}
+                var color = await _unitOfWork.ColorRepository.GetAllAsync();
+                //foreach (var item in color)
+                //{
+                //    item.PatternColors = null;
+                //    item.ElementColors = null;
+                //}
+
+                response.Data = variety.Select(x => new VarietyRespondModel
+                {
+                    VarietyId = x.VarietyId,
+                    VarietyName = x.VarietyName,
+                    ImageUrl = x.ImageUrl,
+                    Patterns = x.Patterns.Select(y => new PatternRespondModel
+                    {
+                        PatternId = y.PatternId,
+                        PatternName = y.PatternName,
+                        ImageUrl = y.ImageUrl,
+                        VarietyId = y.VarietyId,
+                        PatternColors = y.PatternColors.Select(z => new PatternColorRespondModel
+                        {
+                            ColorId = z.ColorId,
+                            PatternId = z.PatternId,
+                            PcolorId = z.PcolorId,
+                            ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
+                        }).ToList(),
+                    }).ToList(),
+                }).ToList();
+
+
+
+
+
+                if (response.Data == null)
+                {
+                    response.Status = false;
+                    response.Message = "Kois not found";
+                    return BadRequest(response);
+                }
+
+                return Ok(response);
+
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return BadRequest(response);
+            }
+
+            
+        }
+
     }
 
 }

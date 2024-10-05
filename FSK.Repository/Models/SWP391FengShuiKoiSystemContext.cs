@@ -55,7 +55,6 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Variety> Varieties { get; set; }
-
     public static string GetConnectionString(string connectionStringName)
     {
         var config = new ConfigurationBuilder()
@@ -63,13 +62,12 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             .AddJsonFile("appsettings.json")
             .Build();
 
-    string connectionString = config.GetConnectionString(connectionStringName);
+        string connectionString = config.GetConnectionString(connectionStringName);
         return connectionString;
     }
-
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -363,11 +361,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Transaction_Advertisement");
 
-            entity.HasOne(d => d.Package).WithMany(p => p.Transactions)
-                .HasForeignKey(d => d.PackageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Transaction_Package");
-
             entity.HasOne(d => d.User).WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -386,10 +379,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             entity.Property(e => e.Password)
                 .IsRequired()
                 .HasMaxLength(50);
-            entity.Property(e => e.Role)
-                .IsRequired()
-                .HasMaxLength(25)
-                .IsUnicode(false);
             entity.Property(e => e.UserName)
                 .IsRequired()
                 .HasMaxLength(50);
