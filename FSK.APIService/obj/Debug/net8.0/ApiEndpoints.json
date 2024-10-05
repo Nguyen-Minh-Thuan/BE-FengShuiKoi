@@ -556,7 +556,7 @@
       },
       {
         "Name": "newRole",
-        "Type": "System.String",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],

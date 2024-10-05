@@ -11,9 +11,9 @@ public partial class Package
 
     public string PackageName { get; set; }
 
+    public int Duration { get; set; }
+
     public decimal? Price { get; set; }
 
     public virtual ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
-
-    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

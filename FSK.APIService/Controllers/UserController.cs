@@ -83,7 +83,7 @@ namespace FSK.APIService.Controllers
                     Bio = userDto.Bio,
                     ImageUrl = userDto.ImageUrl,
                     IsActive = userDto.IsActive,
-                    Role = string.IsNullOrEmpty(userDto.Role) ? "User" : userDto.Role
+                    Role = 3
                 };
 
                 await _unitOfWork.UserRepository.CreateAsync(user);
@@ -100,7 +100,7 @@ namespace FSK.APIService.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("UpdateRole/{id}")]
-        public async Task<IActionResult> UpdateUserRole(int id, string newRole)
+        public async Task<IActionResult> UpdateUserRole(int id, int newRole)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user == null)
