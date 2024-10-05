@@ -409,21 +409,21 @@ namespace FSK.APIService.Controllers
 
                 var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
                 var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
-                foreach (var item in pattern)
-                {
-                    item.Variety = null;
-                }
+                //foreach (var item in pattern)
+                //{
+                //    item.Variety = null;
+                //}
                 var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
-                foreach(var item in patternColor)
-                {
-                    item.Pattern = null;
-                }
+                //foreach(var item in patternColor)
+                //{
+                //    item.Pattern = null;
+                //}
                 var color = await _unitOfWork.ColorRepository.GetAllAsync();
-                foreach (var item in color)
-                {
-                    item.PatternColors = null;
-                    item.ElementColors = null;
-                }
+                //foreach (var item in color)
+                //{
+                //    item.PatternColors = null;
+                //    item.ElementColors = null;
+                //}
 
                 response.Data = variety.Select(x => new VarietyRespondModel
                 {
