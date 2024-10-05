@@ -18,7 +18,7 @@ namespace FSK.APIService.Controllers
         //public AdvertisementController(DatabaseContext Dbcontext) => _Dbcontext = Dbcontext;
 
 
-        [HttpGet]
+        [HttpGet("AdsByPage")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetPageAds(int pageIndex = 0, int pageSize = 10)
         {
 
@@ -44,7 +44,7 @@ namespace FSK.APIService.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetAds()
         {
 
@@ -67,7 +67,7 @@ namespace FSK.APIService.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("GetAdsById")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsId(int id)
         {
 
