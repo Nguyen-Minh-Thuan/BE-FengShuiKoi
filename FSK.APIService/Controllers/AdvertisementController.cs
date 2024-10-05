@@ -44,10 +44,50 @@ namespace FSK.APIService.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAds()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.AdvertisementRepository.GetAllAsync();
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
 
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsId(int id)
+        {
 
+            BaseResponseModel response = new BaseResponseModel();
 
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = await _unitOfWork.AdvertisementRepository.GetByIdAsync(id);
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
 
 
 
