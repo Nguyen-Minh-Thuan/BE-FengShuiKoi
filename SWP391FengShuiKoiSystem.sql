@@ -1,9 +1,9 @@
 ﻿USE [master]
 GO
 
+--DROP DATABASE [SWP391FengShuiKoiSystem]
 
 /****** Object:  Database [SWP391FengShuiKoiSystem]    Script Date: 24/09/24 7:10PM  ******/
---DROP DATABASE [SWP391FengShuiKoiSystem]
 CREATE DATABASE [SWP391FengShuiKoiSystem]
 GO
 
@@ -61,7 +61,6 @@ GO
 CREATE TABLE [dbo].[Package](
 	[PackageID] [int] IDENTITY(1,1) NOT NULL,
 	[PackageName] [nvarchar](50) NULL,
-	[Duration] [int] NOT NULL,
 	[Price] [decimal](18, 2) NULL,
  CONSTRAINT [PK_PackageID] PRIMARY KEY CLUSTERED 
 (
@@ -69,7 +68,7 @@ CREATE TABLE [dbo].[Package](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Transaction]    Script Date: 24/09/24 7:10PM  ******/
+/****** Object:  Table [dbo].[Package]    Script Date: 24/09/24 7:10PM  ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,287 +89,7 @@ CREATE TABLE [dbo].[Transaction](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Element]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Element](
-	[ElementID] [int] IDENTITY(1,1) NOT NULL,
-	[Element] [nvarchar] (25) NOT NULL,
-	[Description] [nvarchar] (500)  NULL,
-	[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Element] PRIMARY KEY CLUSTERED 
-(
-	[ElementID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[General]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[General](
-	[GeneralID] [int] IDENTITY(1,1) NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[KuaID] [int] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_General] PRIMARY KEY CLUSTERED 
-(
-	[GeneralID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Kua]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Kua](
-	[KuaID] [int] IDENTITY(1,1) NOT NULL,
-	[KuaName] [nvarchar] (25) NOT NULL,
-	[Description] [nvarchar] (500) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Kua] PRIMARY KEY CLUSTERED 
-(
-	[KuaID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Auspicious]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Auspicious](
-	[AuspiciousID] [int] IDENTITY(1,1) NOT NULL,
-	[DirectionID] [int] NOT NULL,
-	[KuaID] [int] NOT NULL,
-	[Description] [nvarchar] (300) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Auspicious] PRIMARY KEY CLUSTERED 
-(
-	[AuspiciousID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Inauspicious]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Inauspicious](
-	[InauspiciousID] [int] IDENTITY(1,1) NOT NULL,
-	[DirectionID] [int] NOT NULL,
-	[KuaID] [int] NOT NULL,
-	[Description] [nvarchar] (300) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Inauspicious] PRIMARY KEY CLUSTERED 
-(
-	[InauspiciousID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Direction]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Direction](
-	[DirectionID] [int] IDENTITY(1,1) NOT NULL,
-	[GroupID] [int] NOT NULL,
-	[DirectionName] [nvarchar] (25) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Direction] PRIMARY KEY CLUSTERED 
-(
-	[DirectionID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[DirectionGroup]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[DirectionGroup](
-	[GroupID] [int] IDENTITY(1,1) NOT NULL,
-	[GroupName] [nvarchar] (25) NOT NULL,
-	[Description] [nvarchar] (300) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_DirectionGroup] PRIMARY KEY CLUSTERED 
-(
-	[GroupID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Pond]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Pond](
-	[PondID] [int] IDENTITY(1,1) NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[ShapeID] [int] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Pond] PRIMARY KEY CLUSTERED 
-(
-	[PondID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Shape]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Shape](
-	[ShapeID] [int] IDENTITY(1,1) NOT NULL,
-	[Shape] [nvarchar] (25) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Shape] PRIMARY KEY CLUSTERED 
-(
-	[ShapeID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ElementColor]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ElementColor](
-	[ElementColorID] [int] IDENTITY(1,1) NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[ColorID] [int] NOT NULL,
-	[Values] [float] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_ElementColor] PRIMARY KEY CLUSTERED 
-(
-	[ElementColorID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Color]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Color](
-	[ColorID] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar] (25) NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Color] PRIMARY KEY CLUSTERED 
-(
-	[ColorID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[PatternColor]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[PatternColor](
-	[PColorID] [int] IDENTITY(1,1) NOT NULL,
-	[PatternID] [int] NOT NULL,
-	[ColorID] [int] NOT NULL,
-	[Values] [float] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_PatternColor] PRIMARY KEY CLUSTERED 
-(
-	[PColorID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Pattern]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Pattern](
-	[PatternID] [int] IDENTITY(1,1) NOT NULL,
-	[VarietyID] [int] NOT NULL,
-	[PatternName] [nvarchar] (25) NOT NULL,
-	[ImageURL] [nvarchar] (250) NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Pattern] PRIMARY KEY CLUSTERED 
-(
-	[PatternID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Variety]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Variety](
-	[VarietyID] [int] IDENTITY(1,1) NOT NULL,
-	[VarietyName] [nvarchar] (50) NOT NULL,
-	[ImageURL] [nvarchar] (250) NULL,
-	[Description] [nvarchar] (1500) NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_Variety] PRIMARY KEY CLUSTERED 
-(
-	[VarietyID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ElementQuantity]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ElementQuantity](
-	[RecID] [int] IDENTITY(1,1) NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[Quantity] [int] NOT NULL,
-	[Bonus] [float] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_ElementQuantity] PRIMARY KEY CLUSTERED 
-(
-	[RecID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[KoiElement]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[KoiElement](
-	[KoiID] [int] IDENTITY(1,1) NOT NULL,
-	[PatternID] [int] NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[Point] [float] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_KoiElement] PRIMARY KEY CLUSTERED 
-(
-	[KoiID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
 
-/****** Object:  Table [dbo].[QuantityBuff]    Script Date:   ******/
-/*
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-Drop TABLE [dbo].[QuantityBuff](
-	[BuffID] [int] IDENTITY(1,1) NOT NULL,
-	[Description] [nvarchar] (250) NULL,
- CONSTRAINT [PK_QuantityBuff] PRIMARY KEY CLUSTERED 
-(
-	[BuffID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-*/
-/****** ========================================================================================================================================================================================================================================================================================================================================================================  ******/
-/****** Insert  ******/
 SET IDENTITY_INSERT [dbo].[User] ON 
 
 INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[Role]) VALUES (1, N'Admin', N'1', N'None', N'This is an Admin account', N'None', 1, 'Admin')
@@ -392,8 +111,8 @@ SET IDENTITY_INSERT [dbo].[Advertisement] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Package] ON 
 
-INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (1,N'Normal Package',3 ,30000)
-INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (2,N'Exclusive Package',7 ,60000)
+INSERT [dbo].[Package] ([PackageID],[PackageName],[Price]) VALUES (1,N'Normal Package',20000)
+INSERT [dbo].[Package] ([PackageID],[PackageName],[Price]) VALUES (2,N'Exclusive Package',50000)
 
 SET IDENTITY_INSERT [dbo].[Package] OFF
 GO
@@ -407,6 +126,8 @@ INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDa
 SET IDENTITY_INSERT [dbo].[Transaction] OFF
 GO
 
+<<<<<<< Updated upstream
+=======
 SET IDENTITY_INSERT [dbo].[Element] ON 
 
 INSERT [dbo].[Element] ([ElementID], [Element], [Description], [Status]) VALUES (1, N'Kim', N'Hành Kim tượng trưng cho sức mạnh, tính cách kiên định và nghiêm túc.', 1)
@@ -635,14 +356,14 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, 3);  -- Bạc
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, 3);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 7, 2);  -- Vàng nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 8, 2);  -- Vàng đậm
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, 2); -- Nâu nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 13, 2); -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 6, 2);  -- Vàng nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 7, 2);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 14, 2); -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 15, 2); -- Nâu đậm
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 10, -2); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, -2); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 11, -2); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, -2); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 13, -2); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 9, -2);  -- Cam
 
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, -3);  -- Trắng
@@ -652,14 +373,14 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, -3);  -- Vàng ánh kim
 
 -- Mệnh Mộc (ElementID = 5)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 14, 3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 15, 3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 16, 3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 17, 3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 29, 3); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 20, 3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 27, 3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 28, 3); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 18, 2); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 19, 2); -- Xanh lục
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 20, 2); -- Xanh cỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 17, 2); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 18, 2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 19, 2); -- Xanh cỏ
 
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 1, -2);  -- Trắng
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 2, -2);  -- Xám
@@ -667,10 +388,10 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 3
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 4, -2);  -- Bạc
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 5, -2);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 14, -3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 15, -3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 16, -3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 17, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 29, -3); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 20, -3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 27, -3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 28, -3); -- Xanh da trời
 
 -- Mệnh Thủy (ElementID = 2)
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 1, 3);  -- Trắng
@@ -679,53 +400,53 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 3
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 4, 3);  -- Bạc
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 5, 3);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 14, 2); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 15, 2); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 16, 2); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 17, 2); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 29, 2); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 20, 2); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 27, 2); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 28, 2); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 6, -2);  -- Vàng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 7, -2);  -- Nâu
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 8, -2);  -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 6, -2);  -- Vàng?
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 7, -2);  -- Nâu?
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 15, -2);  -- Nâu đậm
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 10, -3); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 12, -3); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 11, -3); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 12, -3); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 13, -3); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 9, -3);  -- Cam
 
 -- Mệnh Hỏa (ElementID = 3)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, 3); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 20, 3); -- Xanh cỏ
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 19, 3); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 17, 3); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 19, 3); -- Xanh cỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, 3); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 10, 2); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 12, 2); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 11, 2); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 12, 2); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 13, 2); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 9, 2);  -- Cam
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, -2); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 19, -2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 17, -2); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, -2); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 14, -3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 15, -3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 16, -3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 17, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 29, -3); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 20, -3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 27, -3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 28, -3); -- Xanh da trời
 
 -- Mệnh Thổ (ElementID = 5)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 7, 3);  -- Vàng nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 8, 3);  -- Vàng đậm
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, 3); -- Nâu nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 13, 3); -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 6, 3);  -- Vàng nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 7, 3);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 14, 3); -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 15, 3); -- Nâu đậm
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, 2);  -- Vàng đất
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, 2); -- Nâu đất
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 8, 2);  -- Vàng đất
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 16, 2); -- Nâu đất
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 18, -2); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 19, -2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 17, -2); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 18, -2); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 10, -3); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, -3); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 11, -3); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, -3); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 13, -3); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, -3);  -- Cam
 
 INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Trắng');
@@ -754,7 +475,6 @@ INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Xanh cỏ');
 
 SET IDENTITY_INSERT [dbo].[Color] ON;
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (20, N'Xanh dương');
-INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (26, N'Xanh dương');
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (27, N'Xanh biển');
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (28, N'Xanh da trời');
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (29, N'Đen');
@@ -787,13 +507,13 @@ INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (10, 
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (10, 12, 0.6);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (11, 29, 0.4);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (11, 7, 0.6);
-INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 26, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 20, 0.5);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 1, 0.4);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 12, 0.1);
-INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 26, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 20, 0.5);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 1, 0.3);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 12, 0.2);
-INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 26, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 20, 0.6);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 1, 0.3);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 12, 0.1);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (15, 12, 0.7);
@@ -905,6 +625,7 @@ INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Shiro Be
 
 
 /****** ========================================================================================================================================================================================================================================================================================================================================================================  ******/
+>>>>>>> Stashed changes
 /****** Object:  Table [dbo].[[Advertisement]]    Script Date: 24/09/24 7:10PM  ******/
 
 ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_User] FOREIGN KEY([UserId])
@@ -934,143 +655,14 @@ GO
 ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Advertisement]
 GO
 
-/*
 ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Package] FOREIGN KEY([PackageID])
 REFERENCES [dbo].[Package] ([PackageID])
 GO
 ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Package]
 GO
-*/
 
 
-/****** Object:  Table [dbo].[Pond]    Script Date:   ******/
-
-ALTER TABLE [dbo].[Pond]  WITH CHECK ADD  CONSTRAINT [FK_Pond_Element] FOREIGN KEY([ElementID])
-REFERENCES [dbo].[Element] ([ElementID])
-GO
-ALTER TABLE [dbo].[Pond] CHECK CONSTRAINT [FK_Pond_Element]
-GO
-
-ALTER TABLE [dbo].[Pond]  WITH CHECK ADD  CONSTRAINT [FK_Pond_Shape] FOREIGN KEY([ShapeID])
-REFERENCES [dbo].[Shape] ([ShapeID])
-GO
-ALTER TABLE [dbo].[Pond] CHECK CONSTRAINT [FK_Pond_Shape]
-GO
-
-/****** Object:  Table [dbo].[ElementQuantity]    Script Date:   ******/
-
-ALTER TABLE [dbo].[ElementQuantity]  WITH CHECK ADD  CONSTRAINT [FK_ElementQuantity_Element] FOREIGN KEY([ElementID])
-REFERENCES [dbo].[Element] ([ElementID])
-GO
-ALTER TABLE [dbo].[ElementQuantity] CHECK CONSTRAINT [FK_ElementQuantity_Element]
-GO
-
-/****** Object:  Table [dbo].[Direction]    Script Date:   ******/
-
-ALTER TABLE [dbo].[Direction]  WITH CHECK ADD  CONSTRAINT [FK_Direction_DirectionGroup] FOREIGN KEY([GroupID])
-REFERENCES [dbo].[DirectionGroup] ([GroupID])
-GO
-ALTER TABLE [dbo].[Direction] CHECK CONSTRAINT [FK_Direction_DirectionGroup]
-GO
-
-/****** Object:  Table [dbo].[General]    Script Date:   ******/
-
-ALTER TABLE [dbo].[General]  WITH CHECK ADD  CONSTRAINT [FK_General_Kua] FOREIGN KEY([KuaID])
-REFERENCES [dbo].[Kua] ([KuaID])
-GO
-ALTER TABLE [dbo].[General] CHECK CONSTRAINT [FK_General_Kua]
-GO
-
-ALTER TABLE [dbo].[General]  WITH CHECK ADD  CONSTRAINT [FK_General_Element] FOREIGN KEY([ElementID])
-REFERENCES [dbo].[Element] ([ElementID])
-GO
-ALTER TABLE [dbo].[General] CHECK CONSTRAINT [FK_General_Element]
-GO
-
-/****** Object:  Table [dbo].[Auspicious]    Script Date:   ******/
-
-ALTER TABLE [dbo].[Auspicious]  WITH CHECK ADD  CONSTRAINT [FK_Auspicious_Kua] FOREIGN KEY([KuaID])
-REFERENCES [dbo].[Kua] ([KuaID])
-GO
-ALTER TABLE [dbo].[Auspicious] CHECK CONSTRAINT [FK_Auspicious_Kua]
-GO
-
-ALTER TABLE [dbo].[Auspicious]  WITH CHECK ADD  CONSTRAINT [FK_Auspicious_Direction] FOREIGN KEY([DirectionID])
-REFERENCES [dbo].[Direction] ([DirectionID])
-GO
-ALTER TABLE [dbo].[Auspicious] CHECK CONSTRAINT [FK_Auspicious_Direction]
-GO
-
-/****** Object:  Table [dbo].[Inauspicious]    Script Date:   ******/
-
-ALTER TABLE [dbo].[Inauspicious]  WITH CHECK ADD  CONSTRAINT [FK_Inauspicious_Kua] FOREIGN KEY([KuaID])
-REFERENCES [dbo].[Kua] ([KuaID])
-GO
-ALTER TABLE [dbo].[Inauspicious] CHECK CONSTRAINT [FK_Inauspicious_Kua]
-GO
-
-ALTER TABLE [dbo].[Inauspicious]  WITH CHECK ADD  CONSTRAINT [FK_Inauspicious_Direction] FOREIGN KEY([DirectionID])
-REFERENCES [dbo].[Direction] ([DirectionID])
-GO
-ALTER TABLE [dbo].[Inauspicious] CHECK CONSTRAINT [FK_Inauspicious_Direction]
-GO
-
-/****** Object:  Table [dbo].[Pattern]    Script Date:   ******/
-
-ALTER TABLE [dbo].[Pattern]  WITH CHECK ADD  CONSTRAINT [FK_Pattern_Variety] FOREIGN KEY([VarietyID])
-REFERENCES [dbo].[Variety] ([VarietyID])
-GO
-ALTER TABLE [dbo].[Pattern] CHECK CONSTRAINT [FK_Pattern_Variety]
-GO
-
-/****** Object:  Table [dbo].[PatternColor]    Script Date:   ******/
-
-ALTER TABLE [dbo].[PatternColor]  WITH CHECK ADD  CONSTRAINT [FK_PatternColor_Pattern] FOREIGN KEY([PatternID])
-REFERENCES [dbo].[Pattern] ([PatternID])
-GO
-ALTER TABLE [dbo].[PatternColor] CHECK CONSTRAINT [FK_PatternColor_Pattern]
-GO
-
-ALTER TABLE [dbo].[PatternColor]  WITH CHECK ADD  CONSTRAINT [FK_PatternColor_Color] FOREIGN KEY([ColorID])
-REFERENCES [dbo].[Color] ([ColorID])
-GO
-ALTER TABLE [dbo].[PatternColor] CHECK CONSTRAINT [FK_PatternColor_Color]
-GO
-
-/****** Object:  Table [dbo].[ElementColor]    Script Date:   ******/
-
-ALTER TABLE [dbo].[ElementColor]  WITH CHECK ADD  CONSTRAINT [FK_ElementColor_Color] FOREIGN KEY([ColorID])
-REFERENCES [dbo].[Color] ([ColorID])
-GO
-ALTER TABLE [dbo].[ElementColor] CHECK CONSTRAINT [FK_ElementColor_Color]
-GO
-
-ALTER TABLE [dbo].[ElementColor]  WITH CHECK ADD  CONSTRAINT [FK_ElementColor_Element] FOREIGN KEY([ElementID])
-REFERENCES [dbo].[Element] ([ElementID])
-GO
-ALTER TABLE [dbo].[ElementColor] CHECK CONSTRAINT [FK_ElementColor_Element]
-GO
-
-/****** Object:  Table [dbo].[KoiElement]    Script Date:   ******/
-
-ALTER TABLE [dbo].[KoiElement]  WITH CHECK ADD  CONSTRAINT [FK_KoiElement_Pattern] FOREIGN KEY([PatternID])
-REFERENCES [dbo].[Pattern] ([PatternID])
-GO
-ALTER TABLE [dbo].[KoiElement] CHECK CONSTRAINT [FK_KoiElement_Pattern]
-GO
-
-ALTER TABLE [dbo].[KoiElement]  WITH CHECK ADD  CONSTRAINT [FK_KoiElement_Element] FOREIGN KEY([ElementID])
-REFERENCES [dbo].[Element] ([ElementID])
-GO
-ALTER TABLE [dbo].[KoiElement] CHECK CONSTRAINT [FK_KoiElement_Element]
-GO
-
-/**** 
-
-
-Remember to fix Transaction -> Advertisement Only
-
-
-****/
-
-
+select * from [dbo].[User]
+select * from [dbo].[Package]
+select * from [dbo].[Advertisement]
+select * from [dbo].[Transaction]
