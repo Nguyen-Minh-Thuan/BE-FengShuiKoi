@@ -15,13 +15,13 @@ public partial class User
 
     public string Email { get; set; }
 
-    public string Bio { get; set; }
+    public string? Bio { get; set; }
 
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
 
     public bool? IsActive { get; set; }
 
-    public string Role { get; set; }
+    public int Role { get; set; }
 
     public virtual ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
 
