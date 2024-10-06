@@ -11,3 +11,16 @@ C:\Users\MINH THUAN\Documents\Projects\SWP391.FengShuiKoi.FA24\FSK.Service\obj\D
 C:\Users\MINH THUAN\Documents\Projects\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.pdb
 C:\Users\MINH THUAN\Documents\Projects\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\ref\FSK.Service.dll
 C:\Users\MINH THUAN\Documents\Projects\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.csproj.AssemblyReference.cache
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\bin\Debug\net8.0\FSK.Service.deps.json
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\bin\Debug\net8.0\FSK.Service.dll
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\bin\Debug\net8.0\FSK.Service.pdb
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.csproj.AssemblyReference.cache
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.AssemblyInfoInputs.cache
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.AssemblyInfo.cs
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.sourcelink.json
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.dll
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\refint\FSK.Service.dll
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\FSK.Service.pdb
+C:\Users\ADMIN\source\repos\SWP391.FengShuiKoi.FA24\FSK.Service\obj\Debug\net8.0\ref\FSK.Service.dll
