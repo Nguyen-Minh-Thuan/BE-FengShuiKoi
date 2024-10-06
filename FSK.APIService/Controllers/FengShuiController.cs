@@ -225,7 +225,7 @@ namespace FSK.APIService.Controllers
             }
             catch (Exception)
             {
-                return 1+ _defaultPoint;
+                return 1+_defaultPoint;
             }
             //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
         }

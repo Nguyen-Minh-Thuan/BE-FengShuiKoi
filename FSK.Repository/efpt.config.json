@@ -15,6 +15,10 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[AdsTypes]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Advertisement]",
          "ObjectType": 0
       },
@@ -72,6 +76,10 @@
       },
       {
          "Name": "[dbo].[Pond]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Role]",
          "ObjectType": 0
       },
       {
