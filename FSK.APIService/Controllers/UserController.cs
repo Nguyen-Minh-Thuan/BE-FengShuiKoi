@@ -38,7 +38,7 @@ namespace FSK.APIService.Controllers
 
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             BaseResponseModel response = new BaseResponseModel();

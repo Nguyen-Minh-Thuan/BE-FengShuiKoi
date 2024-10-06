@@ -13,7 +13,22 @@ namespace FSK.APIService
 
             var builder = WebApplication.CreateBuilder(args);
 
-            
+
+            // Define CORS policy
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      // Allow requests from Vercel and localhost for testing
+                                      policy.WithOrigins("https://koi-feng-shui.vercel.app", "http://localhost:5173")
+                                            .AllowAnyHeader()    // Allow any header (like Authorization)
+                                            .AllowAnyMethod();   // Allow any HTTP method (GET, POST, PUT, DELETE)
+                                  });
+            });
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -39,6 +54,7 @@ namespace FSK.APIService
 
             app.UseHttpsRedirection();
 
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
