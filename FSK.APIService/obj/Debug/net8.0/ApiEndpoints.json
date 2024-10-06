@@ -1,5 +1,42 @@
 [
   {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "ApproveAdvertisement",
+    "RelativePath": "api/Admin/ApproveAdvertisement/{advertisementId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "advertisementId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "DeclineAdvertisement",
+    "RelativePath": "api/Admin/DeclineAdvertisement/{advertisementId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "advertisementId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "GetPageAds",
     "RelativePath": "api/Advertisement/AdsByPage",
