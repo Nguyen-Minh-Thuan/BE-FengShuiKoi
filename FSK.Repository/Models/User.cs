@@ -21,9 +21,11 @@ public partial class User
 
     public bool? IsActive { get; set; }
 
-    public int Role { get; set; }
+    public int RoleId { get; set; }
 
     public virtual ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
+
+    public virtual Role Role { get; set; }
 
     public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

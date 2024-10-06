@@ -9,6 +9,8 @@ public partial class Advertisement
 {
     public int AdsId { get; set; }
 
+    public int AdsTypeId { get; set; }
+
     public int UserId { get; set; }
 
     public int PackageId { get; set; }
@@ -21,11 +23,17 @@ public partial class Advertisement
 
     public int ElementId { get; set; }
 
+    public int? VarietyId { get; set; }
+
+    public DateTime StartedDate { get; set; }
+
     public DateTime ExpiredDate { get; set; }
 
     public string ImageUrl { get; set; }
 
     public bool? PaymentStatus { get; set; }
+
+    public virtual AdsType AdsType { get; set; }
 
     public virtual Package Package { get; set; }
 
