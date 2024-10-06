@@ -10,24 +10,16 @@ namespace FSK.APIService
         public static void Main(string[] args)
         {
 
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  policy =>
-                                  {
-                                  policy.WithOrigins("https://koi-feng-shui.vercel.app")
-                                  .AllowAnyHeader()
-                                  .AllowAnyMethod();
-                                  });
-            });
+            
             // Add services to the container.
 
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -47,7 +39,6 @@ namespace FSK.APIService
 
             app.UseHttpsRedirection();
 
-            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

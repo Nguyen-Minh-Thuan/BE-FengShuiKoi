@@ -322,6 +322,38 @@
     ]
   },
   {
+    "ContainingType": "FSK.APIService.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "FSK.APIService.RequestModel.LoginRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.RegistrationController",
+    "Method": "PostUser",
+    "RelativePath": "api/Registration/Registration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FSK.APIService.RequestModel.RegistrationRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.TestController",
     "Method": "CalculateDirection",
     "RelativePath": "api/Test/CalculateDir",
