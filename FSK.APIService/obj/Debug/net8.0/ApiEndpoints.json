@@ -391,6 +391,7 @@
     "ReturnTypes": []
   },
   {
+
     "ContainingType": "FSK.APIService.Controllers.PaymentController",
     "Method": "ProcessPayment",
     "RelativePath": "api/Payment/ProcessPayment/{advertisementId}",
