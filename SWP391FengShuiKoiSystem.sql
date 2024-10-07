@@ -52,21 +52,35 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Advertisement](
 	[AdsId] [int] IDENTITY(1,1) NOT NULL,
-	[AdsTypeId] [int] NOT NULL,
+	[AdsTypeId] [int] NULL,
 	[UserId] [int] NOT NULL,
-	[PackageID] [int] NOT NULL,
-	[Title] [nvarchar](50) NULL,
+	[PackageID] [int] NULL,
+	[Title] [nvarchar](50) NOT NULL,
 	[Content] [nvarchar](3000) NULL,
-	[Status] [nvarchar] (50) NOT NULL,
-	[ElementID] [int] NOT NULL,
+	[StatusId] [int]  NOT NULL,
+	[ElementID] [int] NULL,
 	[VarietyID] [int] NULL,
-	[StartedDate] [datetime] NOT NULL,
-	[ExpiredDate] [datetime] NOT NULL,
+	[StartedDate] [datetime] NULL,
+	[ExpiredDate] [datetime] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
 	[PaymentStatus] [bit] NULL,
  CONSTRAINT [PK_Advertisement] PRIMARY KEY CLUSTERED 
 (
 	[AdsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 24/09/24 7:10PM  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[StatusId] [int] IDENTITY(1,1) NOT NULL,
+	[Status] [nvarchar](50) NOT NULL
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[StatusId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -414,18 +428,18 @@ INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 3);
 INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
 
 --Add đồ phong thủy
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',N'Approve',1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,1,N'Tiêu đề Quảng cáo #2',N'Nội dung quảng cáo #2',N'Deploying',2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,2,N'Tiêu đề Quảng cáo #3',N'Nội dung quảng cáo #3',N'Waiting',3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,5,2,N'Tiêu đề Quảng cáo #4',N'Nội dung quảng cáo #4',N'Expired',4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',4,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,1,N'Tiêu đề Quảng cáo #2',N'Nội dung quảng cáo #2',5,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,2,N'Tiêu đề Quảng cáo #3',N'Nội dung quảng cáo #3',2,3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,5,2,N'Tiêu đề Quảng cáo #4',N'Nội dung quảng cáo #4',6,4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
 
 --Add Koi
 SET IDENTITY_INSERT [dbo].[Advertisement] ON 
 
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (5,2,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',N'Approve',1,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (6,2,4,1,N'Tiêu đề Quảng cáo #2',N'Nội dung quảng cáo #2',N'Deploying',2,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (7,2,4,2,N'Tiêu đề Quảng cáo #3',N'Nội dung quảng cáo #3',N'Waiting',3,5,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (8,2,5,2,N'Tiêu đề Quảng cáo #4',N'Nội dung quảng cáo #4',N'Expired',4,9,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (5,2,3,1,N'Tiêu đề Quảng cáo #5',N'Nội dung quảng cáo #1',4,1,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (6,2,4,1,N'Tiêu đề Quảng cáo #6',N'Nội dung quảng cáo #2',5,2,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (7,2,4,2,N'Tiêu đề Quảng cáo #7',N'Nội dung quảng cáo #3',1,3,5,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (8,2,5,2,N'Tiêu đề Quảng cáo #8',N'Nội dung quảng cáo #4',6,4,9,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
 
 SET IDENTITY_INSERT [dbo].[Advertisement] OFF
 GO
@@ -434,6 +448,17 @@ SET IDENTITY_INSERT [dbo].[AdsTypes] ON;
 INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (1, N'Cá Koi');
 INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (2, N'Đồ Phong Thủy');
 SET IDENTITY_INSERT [dbo].[AdsTypes] OFF;
+GO
+
+SET IDENTITY_INSERT [dbo].[Status] ON;
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (1, N'Drafted');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (2, N'Pending');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (3, N'Cancelled');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (4, N'Approved');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (5, N'Deploying');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (6, N'Expired');
+SET IDENTITY_INSERT [dbo].[Status] OFF;
+GO
 
 SET IDENTITY_INSERT [dbo].[Package] ON 
 
@@ -967,6 +992,12 @@ ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_
 REFERENCES [dbo].[AdsTypes] ([AdsTypeId])
 GO
 ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_AdsTypes]
+GO
+
+ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_Status] FOREIGN KEY([StatusId])
+REFERENCES [dbo].[Status] ([StatusId])
+GO
+ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_Status]
 GO
 
 /****** Object:  Table [dbo].[User]    Script Date: 24/09/24 7:10PM  ******/

@@ -17,7 +17,7 @@ public partial class Transaction
 
     public DateTime FromDate { get; set; }
 
-    public DateTime ToDate { get; set; }
+    public DateTime? ToDate { get; set; }
 
     public string PaymentMethod { get; set; }
 
