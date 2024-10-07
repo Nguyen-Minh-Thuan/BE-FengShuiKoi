@@ -147,7 +147,7 @@ namespace FSK.APIService.Controllers
                     PackageId = model.PackageId,
                     Title = model.Title,
                     Content = model.Content,
-                    Status = "Pending",
+                    StatusId = 2,
                     ElementId = model.ElementId,
                     StartedDate = currentDate,
                     ExpiredDate = currentDate.AddDays(30), // Assuming a 30-day duration for easier to debug
