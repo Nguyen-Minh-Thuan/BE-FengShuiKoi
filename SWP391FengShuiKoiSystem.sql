@@ -56,7 +56,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[UserId] [int] NOT NULL,
 	[PackageID] [int] NOT NULL,
 	[Title] [nvarchar](50) NULL,
-	[Content] [nvarchar](500) NULL,
+	[Content] [nvarchar](3000) NULL,
 	[Status] [nvarchar] (50) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[VarietyID] [int] NULL,
@@ -358,7 +358,6 @@ CREATE TABLE [dbo].[ElementQuantity](
 	[RecID] [int] IDENTITY(1,1) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[Quantity] [int] NOT NULL,
-	[Bonus] [float] NOT NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_ElementQuantity] PRIMARY KEY CLUSTERED 
 (
@@ -402,6 +401,17 @@ INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (2, N'Staff');
 INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (3, N'Member');
 SET IDENTITY_INSERT [dbo].[Role] OFF;
 GO 
+
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (1, 4);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (1, 9);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (2, 1);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (2, 6);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (3, 2);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (3, 7);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (4, 10);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (4, 5);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 3);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
 
 --Add đồ phong thủy
 INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',N'Approve',1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
