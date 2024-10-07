@@ -26,11 +26,11 @@ namespace FSK.APIService.Controllers
 
             response.Status = true;
             response.Message = "Success";
-            
-            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
-            var output = await _unitOfWork.ElementColorRepository.GetAllAsync();
+
+            var element = await _unitOfWork.ElementColorRepository.GetAllAsync();
+            var getdata = element.Where(x => x.ElementId == elementID);
             //var test = output.Select(Color => )
-            response.Data = element;
+            response.Data = getdata;
 
 
             if (response.Data == null)

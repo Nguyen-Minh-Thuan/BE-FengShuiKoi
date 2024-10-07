@@ -11,7 +11,8 @@
 
         public double Values { get; set; }
 
-        public List<ElementColorRespondModel> Color { get; set; } = new List<ElementColorRespondModel>();
+        public string ColorName { get; set; }
+        public ElementColorRespondModel Color { get; set; } = new ElementColorRespondModel();
 
         public List<ElementRespondModel> Element {get; set; } = new List<ElementRespondModel>();
 

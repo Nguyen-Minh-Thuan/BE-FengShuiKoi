@@ -207,7 +207,7 @@ namespace FSK.APIService.Controllers
                 if (test != null)
                     return 1;
                 else
-                    return 0;
+                    return -1;
             }
             catch (Exception)
             {
@@ -235,7 +235,7 @@ namespace FSK.APIService.Controllers
             try
             {
 
-                var test = (_unitOfWork.ElementQuantityRepository.GetAll()).Where(x => x.ElementId == elementID && x.Quantity == count%10).FirstOrDefault();
+                var test = (_unitOfWork.ElementQuantityRepository.GetAll()).Where(x => x.ElementId == elementID && x.Quantity%10 == count%10).FirstOrDefault();
 
                 if (test != null)
                     return 1;
@@ -288,7 +288,7 @@ namespace FSK.APIService.Controllers
 
                 var bonusPond = Testing(elementId, shapeId);
 
-                var bonusDirection = Testing4(kuaId,dirId);
+                var bonusDirection = Testing4(kuaId, dirId);
 
 
                 //Koi Pointing
@@ -302,8 +302,8 @@ namespace FSK.APIService.Controllers
                 var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
 
                 var Bonus = Testing3(elementId, patterns.Count());
-                
-                
+
+
 
                 var test = patterns.Select(x => new PatternRespondModel
                 {
@@ -328,9 +328,13 @@ namespace FSK.APIService.Controllers
                 }
 
 
+                element.Ponds = null;
+                element.ElementQuantities = null;
+                element.Generals = null;
+
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { KoiPoint = test , TotalPoint = total/test.Count };
+                response.Data = new { Element = element, KoiPoint = test , TotalPoint = total/test.Count };
                 return Ok(response);
             }
             catch (Exception ex)
