@@ -281,6 +281,7 @@ namespace FSK.APIService.Controllers
                 {
                     n.Element = null;
                 }
+                
 
                 var kuaId = _fengShuiService.CalculateCungPhi(birthday, gender);
 
@@ -331,6 +332,13 @@ namespace FSK.APIService.Controllers
                 element.Ponds = null;
                 element.ElementQuantities = null;
                 element.Generals = null;
+
+                var color = await _unitOfWork.ColorRepository.GetAllAsync();
+                foreach (var item in color)
+                {
+                    item.ElementColors = null;
+                    item.PatternColors = null;
+                }
 
                 response.Status = true;
                 response.Message = "Success";

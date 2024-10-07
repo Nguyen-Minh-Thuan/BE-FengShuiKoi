@@ -56,7 +56,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[UserId] [int] NOT NULL,
 	[PackageID] [int] NOT NULL,
 	[Title] [nvarchar](50) NULL,
-	[Content] [nvarchar](500) NULL,
+	[Content] [nvarchar](3000) NULL,
 	[Status] [nvarchar] (50) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[VarietyID] [int] NULL,
