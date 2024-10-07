@@ -25,6 +25,7 @@ namespace FSK.APIService.Controllers
 
             BaseResponseModel response = new BaseResponseModel();
 
+
             try
             {
                 response.Status = true;
@@ -116,59 +117,70 @@ namespace FSK.APIService.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> CreateAdvertisement([FromBody] CreateAdvertisementRequestModel model)
         {
-            if (model == null || model.UserId == 0)
-            {
-                return BadRequest("Invalid request data");
-            }
+            //try
+            //{
+                    if (model == null || model.UserId == 0)
+                    {
+                        return BadRequest("Invalid request data");
+                    }
 
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
-            
-            //Putting this for checking user's role, should be the authentication's work but cant implement that right now
-            //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
-            if (user == null || user.RoleId != 3)
-            {
-                return BadRequest("Invalid user or user is not a member");
-            }
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+                var currentDate = DateTime.UtcNow;
 
-            var package = await _unitOfWork.PackageRepository.GetByIdAsync(model.PackageId);
-            if (package == null)
-            {
-                return BadRequest("Invalid package selected");
-            }
+                //Putting this for checking user's role, should be the authentication's work but cant implement that right now
+                //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
+                if (user == null || user.RoleId != 3)
+                {
+                    return BadRequest("Invalid user or user is not a member");
+                }
 
-            var advertisement = new Advertisement
-            {
-                UserId = model.UserId,
-                PackageId = model.PackageId,
-                Title = model.Title,
-                Content = model.Content,
-                Status = "Pending",
-                ElementId = model.ElementId,
-                ExpiredDate = DateTime.Now.AddDays(30), // Assuming a 30-day duration for easier to debug
-                ImageUrl = model.ImageUrl,
-                PaymentStatus = true
-            };
+                var package = await _unitOfWork.PackageRepository.GetByIdAsync(model.PackageId);
+                if (package == null)
+                {
+                    return BadRequest("Invalid package selected");
+                }
 
-            await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
-            await _unitOfWork.SaveChangesAsync();
+                var advertisement = new Advertisement
+                {
+                    UserId = model.UserId,
+                    AdsTypeId = model.AdsTypeId,
+                    PackageId = model.PackageId,
+                    Title = model.Title,
+                    Content = model.Content,
+                    Status = "Pending",
+                    ElementId = model.ElementId,
+                    StartedDate = currentDate,
+                    ExpiredDate = currentDate.AddDays(30), // Assuming a 30-day duration for easier to debug
+                    ImageUrl = model.ImageUrl,
+                    PaymentStatus = true
+                };
 
-            // Create a transaction for the advertisement
-            var transaction = new Transaction
-            {
-                UserId = model.UserId,
-                AdsId = advertisement.AdsId,
-                PackageId = model.PackageId,
-                FromDate = DateTime.Now,
-                ToDate = advertisement.ExpiredDate,
-                PaymentMethod = "QR Pay",
-                TransactionDate = DateTime.Now,
-                TotalPrice = package.Price
-            };
+                await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
+                await _unitOfWork.SaveChangesAsync();
 
-            await _unitOfWork.TransactionRepository.CreateAsync(transaction);
-            await _unitOfWork.SaveChangesAsync();
+                // Create a transaction for the advertisement
+                var transaction = new Transaction
+                {
+                    UserId = model.UserId,
+                    AdsId = advertisement.AdsId,
+                    PackageId = model.PackageId,
+                    FromDate = currentDate,
+                    ToDate = advertisement.ExpiredDate,
+                    TransactionDate = currentDate,
+                    PaymentMethod = "QR Pay",
+                    TotalPrice = package.Price
+                };
 
-            return Ok(new { message = "Advertisement created and pending approval", advertisementId = advertisement.AdsId });
+                await _unitOfWork.TransactionRepository.CreateAsync(transaction);
+                await _unitOfWork.SaveChangesAsync();
+
+                return Ok(new { message = "Advertisement created and pending approval", advertisementId = advertisement.AdsId });
+             
+            //catch (Exception ex)
+            //{
+            //    // Log the exception details
+            //    return StatusCode(500, "An error occurred while creating the advertisement. Please try again later.");
+            //}
         }
 
     }

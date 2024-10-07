@@ -38,7 +38,7 @@ namespace FSK.APIService.Controllers
                     UserName = userDto.UserName,
                     Password = userDto.Password,
                     Email = userDto.Email,
-                    //Role = 3
+                    RoleId = 3
                 };
 
                 await _unitOfWork.UserRepository.CreateAsync(user);

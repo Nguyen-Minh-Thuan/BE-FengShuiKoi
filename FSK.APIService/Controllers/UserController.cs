@@ -69,7 +69,7 @@ namespace FSK.APIService.Controllers
                 return NotFound("User not found");
             }
 
-            //user.Role = newRole;
+            user.RoleId = newRole;
 
             try
             {
