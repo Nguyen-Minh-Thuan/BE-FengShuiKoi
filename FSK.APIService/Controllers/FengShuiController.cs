@@ -317,6 +317,7 @@ namespace FSK.APIService.Controllers
                         PatternId = z.PatternId,
                         PcolorId = z.PcolorId,
                         Values = z.Values,
+                        ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
                     }).ToList(),
                     PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + Bonus + bonusPond + bonusDirection,
@@ -339,10 +340,13 @@ namespace FSK.APIService.Controllers
                     item.ElementColors = null;
                     item.PatternColors = null;
                 }
+                
+                var direction = await _unitOfWork.DirectionRepository.GetByIdAsync(dirId);
+                var TotalPoint = total / test.Count;
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, KoiPoint = test , TotalPoint = total/test.Count };
+                response.Data = new { Element = element, Direction = direction.DirectionName, KoiPoint = test , TotalPoint = TotalPoint };
                 return Ok(response);
             }
             catch (Exception ex)
