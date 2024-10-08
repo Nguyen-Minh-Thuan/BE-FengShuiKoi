@@ -340,10 +340,14 @@ namespace FSK.APIService.Controllers
                     item.ElementColors = null;
                     item.PatternColors = null;
                 }
+                
+                var direction = await _unitOfWork.DirectionRepository.GetByIdAsync(dirId);
+                direction.Auspicious = null;
+                direction.Inauspicious = null;
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, KoiPoint = test , TotalPoint = total/test.Count };
+                response.Data = new { Element = element, Direction = direction, KoiPoint = test , TotalPoint = total/test.Count };
                 return Ok(response);
             }
             catch (Exception ex)
