@@ -342,12 +342,11 @@ namespace FSK.APIService.Controllers
                 }
                 
                 var direction = await _unitOfWork.DirectionRepository.GetByIdAsync(dirId);
-                direction.Auspicious = null;
-                direction.Inauspicious = null;
+                var TotalPoint = total / test.Count;
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, Direction = direction, KoiPoint = test , TotalPoint = total/test.Count };
+                response.Data = new { Element = element, Direction = direction.DirectionName, KoiPoint = test , TotalPoint = TotalPoint };
                 return Ok(response);
             }
             catch (Exception ex)
