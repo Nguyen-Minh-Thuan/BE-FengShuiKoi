@@ -150,6 +150,26 @@
     ]
   },
   {
+    "ContainingType": "FSK.APIService.Controllers.ColorController",
+    "Method": "GetColor",
+    "RelativePath": "api/Color/GetColor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Element, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.DirectionController",
     "Method": "GetPageDir",
     "RelativePath": "api/Direction",
@@ -197,6 +217,26 @@
     "ReturnTypes": [
       {
         "Type": "FSK.Repository.Models.Direction",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.ElementController",
+    "Method": "GetElement",
+    "RelativePath": "api/Element/GetElement",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Element, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -389,6 +429,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.PackageController",
+    "Method": "GetPackage",
+    "RelativePath": "api/Package/GetPackage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Package, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "FSK.APIService.Controllers.PaymentController",

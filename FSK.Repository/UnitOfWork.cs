@@ -30,6 +30,9 @@ namespace FSK.Repository
         private PondRepository _pondRepository;
         private ShapeRepository _shapeRepository;
         private VarietyRepository _varietyRepository;
+        private StatusRepository _statusRepository;
+        private RoleRepository _roleRepository;
+        private AdsTypeRepository _adsTypeRepository;
 
         public UnitOfWork() => _context ??= new SWP391FengShuiKoiSystemContext();
 
@@ -129,6 +132,21 @@ namespace FSK.Repository
         public VarietyRepository VarietyRepository
         {
             get { return _varietyRepository ??= new VarietyRepository(_context); }
+        }
+
+        public StatusRepository StatusRepository
+        {
+            get { return _statusRepository ??= new StatusRepository(_context); }
+        }
+
+        public RoleRepository RoleRepository
+        {
+            get { return _roleRepository ??= new RoleRepository(_context); }
+        }
+
+        public AdsTypeRepository AdsTypeRepository
+        {
+            get { return _adsTypeRepository ??= new AdsTypeRepository(_context); }
         }
 
         public async Task<int> SaveChangesAsync()
