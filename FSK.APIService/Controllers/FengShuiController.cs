@@ -317,6 +317,7 @@ namespace FSK.APIService.Controllers
                         PatternId = z.PatternId,
                         PcolorId = z.PcolorId,
                         Values = z.Values,
+                        ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
                     }).ToList(),
                     PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + Bonus + bonusPond + bonusDirection,
