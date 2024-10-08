@@ -30,7 +30,20 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize);
+                var ads = await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize);
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+
+                response.Data = ads;
+
                 return Ok(response);
             }
             catch (Exception err)
@@ -56,7 +69,19 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.AdvertisementRepository.GetAllAsync();
+                var ads = await _unitOfWork.AdvertisementRepository.GetAllAsync();
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+
+                response.Data = ads;
                 return Ok(response);
             }
             catch (Exception err)
@@ -79,7 +104,21 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.AdvertisementRepository.GetByIdAsync(id);
+                var ads = await _unitOfWork.AdvertisementRepository.GetByIdAsync(id);
+
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+
+                response.Data = ads;
+
                 return Ok(response);
             }
             catch (Exception err)
