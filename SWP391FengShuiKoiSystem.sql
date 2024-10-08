@@ -699,27 +699,25 @@ SET IDENTITY_INSERT [dbo].[Shape] OFF
 GO
 
 -- Mệnh Kim (ElementID = 1)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, 3);  -- Trắng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 2, 3);  -- Xám
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3, 3);  -- Ghi
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, 3);  -- Bạc
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, 3);  -- Vàng ánh kim
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 6, 3);  -- Vàng nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 7, 3);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 14, 3); -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 15, 3); -- Nâu đậm
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 6, 2);  -- Vàng nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 7, 2);  -- Vàng đậm
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 14, 2); -- Nâu nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 15, 2); -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, 2);  -- Trắng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 2, 2);  -- Xám
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3, 2);  -- Ghi
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, 2);  -- Bạc
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, 2);  -- Vàng ánh kim
 
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, -2); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 11, -2); -- Hồng
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 13, -2); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 9, -2);  -- Cam
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, -3);  -- Trắng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 2, -3);  -- Xám
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3, -3);  -- Ghi
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, -3);  -- Bạc
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, -3);  -- Vàng ánh kim
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 17, -3);  -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 18, -3);  -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 19, -3);  -- Xanh cỏ
 
 -- Mệnh Mộc (ElementID = 5)
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 29, 3); -- Đen
@@ -737,10 +735,10 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 3
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 4, -2);  -- Bạc
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 5, -2);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 29, -3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 20, -3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 27, -3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 28, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 7, -3); -- Vàng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 15, -3); -- Nâu Đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 16, -3); -- Nâu đất
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 6, -3); -- Vàng nhạt
 
 -- Mệnh Thủy (ElementID = 2)
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 1, 3);  -- Trắng
@@ -754,9 +752,10 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 2
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 27, 2); -- Xanh biển
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 28, 2); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 6, -2);  -- Vàng?
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 7, -2);  -- Nâu?
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 7, -2);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 14, -2);  -- Nâu nhạt
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 15, -2);  -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 16, -2);  -- Nâu đất
 
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 12, -3); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 11, -3); -- Hồng
@@ -773,30 +772,39 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 1
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 13, 2); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 9, 2);  -- Cam
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 17, -2); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, -2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 29, -2); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 20, -2); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 27, -2); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 28, -2); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 29, -3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 20, -3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 27, -3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 28, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 1, -3); -- Trắng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 2, -3); -- Xám
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 3, -3); -- Bạc
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 4, -3); -- Bạc
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 5, -3); -- Vàng ánh kim
 
--- Mệnh Thổ (ElementID = 5)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 6, 3);  -- Vàng nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 7, 3);  -- Vàng đậm
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 14, 3); -- Nâu nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 15, 3); -- Nâu đậm
+-- Mệnh Thổ (ElementID = 4)
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, 3); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 11, 3); -- Hồng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 13, 3); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, 3);  -- Cam
 
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 6, 2);  -- Vàng nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 7, 2);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 14, 2); -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 15, 2); -- Nâu đậm
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 8, 2);  -- Vàng đất
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 16, 2); -- Nâu đất
 
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 17, -2); -- Xanh lá cây
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 18, -2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 19, -2); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, -3); -- Đỏ
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 11, -3); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 13, -3); -- Tím
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, -3);  -- Cam
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 20, 3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 27, 3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 28, 3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 29, 3);  -- Đen
+
 
 INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Trắng');
 INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Xám');
