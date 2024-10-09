@@ -800,10 +800,10 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 1
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 18, -2); -- Xanh lục
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 19, -2); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 20, 3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 27, 3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 28, 3); -- Xanh da trời
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 29, 3);  -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 20, -3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 27, -3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 28, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 29, -3);  -- Đen
 
 
 INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Trắng');
