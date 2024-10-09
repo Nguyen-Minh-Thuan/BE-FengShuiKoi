@@ -156,7 +156,7 @@ namespace FSK.APIService.Controllers
                         ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
                     }).ToList(),
                     PatternPoint = y.PatternColors.Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
-                }).Where(x => x.PatternPoint >= 5).ToList(),
+                }).ToList(),
                 TotalPattern = x.Patterns.Count(),
             }).ToList();
 
