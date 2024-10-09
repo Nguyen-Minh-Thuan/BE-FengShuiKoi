@@ -44,8 +44,8 @@ namespace FSK.APIService.Controllers
             }
         }
 
-        //[HttpGet("calculate-cung-phi")]
-        private IActionResult CalculateCungPhi([FromQuery] DateTime birthday, [FromQuery] string gender)
+        [HttpGet("calculate-cung-phi")]
+        public IActionResult CalculateCungPhi([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             try
             {
@@ -162,9 +162,15 @@ namespace FSK.APIService.Controllers
 
 
             var recQuantity = await _unitOfWork.ElementQuantityRepository.GetAllAsync();
+            foreach (var item in recQuantity)
+            {
+                item.Element = null;
+            }
 
 
-            response.Data = new { Variety = test , RecQuantity = recQuantity.Where(x => x.ElementId == elementID) };
+
+
+            response.Data = new { Variety = test, RecQuantity = recQuantity.Where(x => x.ElementId == elementID) , Element = element.Element1 };
 
 
             //var pond = await _unitOfWork.PondRepository.GetAllAsync();
