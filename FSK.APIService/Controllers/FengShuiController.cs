@@ -83,7 +83,7 @@ namespace FSK.APIService.Controllers
 
             var kuaID = _fengShuiService.CalculateCungPhi(birthday, gender);
 
-            var kua = await _unitOfWork.KuaRepository.GetByIdAsync(elementID);
+            var kua = await _unitOfWork.KuaRepository.GetByIdAsync(kuaID);
             var auspicious = await _unitOfWork.AuspiciousRepository.GetAllAsync();
             var inauspicoous = await _unitOfWork.InauspiciousRepository.GetAllAsync();
             var direction = await _unitOfWork.DirectionRepository.GetAllAsync();
@@ -213,7 +213,7 @@ namespace FSK.APIService.Controllers
                 if (test != null)
                     return 1;
                 else
-                    return -1;
+                    return 0;
             }
             catch (Exception)
             {
@@ -231,7 +231,7 @@ namespace FSK.APIService.Controllers
             }
             catch (Exception)
             {
-                return 1+_defaultPoint;
+                return _defaultPoint;
             }
             //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
         }
@@ -261,8 +261,10 @@ namespace FSK.APIService.Controllers
             {
 
                 var test = (_unitOfWork.AuspiciousRepository.GetAll()).Where(x => x.KuaId == kuaId && x.DirectionId == dirId).FirstOrDefault();
-
-                return 1;
+                if (test != null)
+                    return 1;
+                else
+                    return -1;
             }
             catch (Exception)
             {
@@ -314,6 +316,7 @@ namespace FSK.APIService.Controllers
 
                 var test = patterns.Select(x => new PatternRespondModel
                 {
+                    VarietyId = x.VarietyId,
                     PatternId = x.PatternId,
                     PatternName = x.PatternName,
                     ImageUrl = x.ImageUrl,
@@ -346,13 +349,24 @@ namespace FSK.APIService.Controllers
                     item.ElementColors = null;
                     item.PatternColors = null;
                 }
-                
-                var direction = await _unitOfWork.DirectionRepository.GetByIdAsync(dirId);
+
+                var direction = await _unitOfWork.DirectionRepository.GetAllAsync();
+                foreach(var item in direction)
+                {
+                    item.Auspicious = null;
+                    item.Inauspicious = null;
+                }
+                var auspicious = await _unitOfWork.AuspiciousRepository.GetAllAsync();
+                var kuaAuspicious = auspicious.Where(x => x.KuaId == kuaId).ToList();
+                var recDir = kuaAuspicious.Select(x => x.Direction).ToList().Select(x => x.DirectionName).ToList();
+
+                var selectDir = (await _unitOfWork.DirectionRepository.GetByIdAsync(dirId)).DirectionName;
+
                 var TotalPoint = total / test.Count;
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, Direction = direction.DirectionName, KoiPoint = test , TotalPoint = TotalPoint };
+                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint };
                 return Ok(response);
             }
             catch (Exception ex)

@@ -45,7 +45,13 @@ namespace FSK.APIService.Controllers
 
             response.Status = true;
             response.Message = "Success";
-            response.Data = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            var role = await _unitOfWork.RoleRepository.GetAllAsync();
+            foreach (var item in role)
+            {
+                item.Users = null;
+            }
+            response.Data = user;
 
             if (response.Data == null)
             {
@@ -112,6 +118,62 @@ namespace FSK.APIService.Controllers
             return NoContent();
         }
 
+        [HttpPut("UpdateInfo/{id}")]
+        public async Task<IActionResult> UpdateUserInfo(int id, string newName, string newBio, string newImageURL)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+            try
+            {
+                //Get user.
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+                if (user == null)
+                {
+                    response.Status = false;
+                    response.Message = "User not found";
+                    return NotFound(response);
+                }
+                //Trying to save data.
+                try
+                {
+                    user.UserName = newName;
+                    user.Bio = newBio;
+                    user.ImageUrl = newImageURL;
+                    await _unitOfWork.UserRepository.UpdateAsync(user);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException db_err)
+                {
+                    if (!await UserExists(id))
+                    {
+                        response.Status = false;
+                        response.Message = "User not found while inserting";
+                        return NotFound(response);
+                    }
+                    else
+                    {
+                        response.Status = false;
+                        response.Message = db_err.ToString();
+                        return BadRequest(response);
+                    }
+                }
+                response.Status = true;
+                response.Message = "User role updated successfully";
+                response.Data = user;
+                return Ok(response);
+
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return BadRequest(response);
+            }
+
+            
+
+
+            
+        }
 
     }
 }
