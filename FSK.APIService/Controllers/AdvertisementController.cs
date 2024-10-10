@@ -4,6 +4,7 @@ using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
 {
@@ -79,6 +80,17 @@ namespace FSK.APIService.Controllers
                 foreach (var item in type)
                 {
                     item.Advertisements = null;
+                }
+                var user = await _unitOfWork.UserRepository.GetAllAsync();
+                foreach (var item in user)
+                {
+                    item.Advertisements = null;
+                    item.Transactions = null;
+                }
+                var role = await _unitOfWork.RoleRepository.GetAllAsync();
+                foreach (var item in role)
+                {
+                    item.Users = null;
                 }
 
                 response.Data = ads;
@@ -222,5 +234,58 @@ namespace FSK.APIService.Controllers
             //}
         }
 
+        [HttpGet("GetAdsByUser")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsUser(int userid)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var listUser = (await _unitOfWork.UserRepository.GetAllAsync()).Select(x => x.UserId).ToList();
+                if (!listUser.Contains(userid))
+                {
+                    response.Status = false;
+                    response.Message = "This user is invalid.";
+                    return BadRequest(response);
+                }
+
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == userid).ToList();
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+
+                if(ads.IsNullOrEmpty())
+                {
+                    response.Status = false;
+                    response.Message = "There is nothing to return.";
+                    return BadRequest(response);
+                }
+                else
+                {
+                    response.Status = true;
+                    response.Message = "Success";
+                    response.Data = ads;
+                }
+
+                
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+        }
+    
+        
+    
     }
 }
