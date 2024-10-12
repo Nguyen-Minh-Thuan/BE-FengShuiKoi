@@ -216,7 +216,7 @@ namespace FSK.APIService.Controllers
                     AdsId = advertisement.AdsId,
                     PackageId = model.PackageId,
                     FromDate = currentDate,
-                    ToDate = advertisement.ExpiredDate,
+                    ToDate = advertisement.ExpiredDate.Value,
                     TransactionDate = currentDate,
                     PaymentMethod = "QR Pay",
                     TotalPrice = package.Price

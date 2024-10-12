@@ -23,8 +23,6 @@ public partial class Advertisement
 
     public int? ElementId { get; set; }
 
-    public int? VarietyId { get; set; }
-
     public DateTime? StartedDate { get; set; }
 
     public DateTime? ExpiredDate { get; set; }
