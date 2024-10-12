@@ -59,7 +59,6 @@ CREATE TABLE [dbo].[Advertisement](
 	[Content] [nvarchar](3000) NULL,
 	[StatusId] [int]  NOT NULL,
 	[ElementID] [int] NULL,
-	[VarietyID] [int] NULL,
 	[StartedDate] [datetime] NULL,
 	[ExpiredDate] [datetime] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
@@ -436,10 +435,10 @@ INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content]
 --Add Koi
 SET IDENTITY_INSERT [dbo].[Advertisement] ON 
 
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (5,2,3,1,N'Tiêu đề Quảng cáo #5',N'Nội dung quảng cáo #1',4,1,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (6,2,4,1,N'Tiêu đề Quảng cáo #6',N'Nội dung quảng cáo #2',5,2,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (7,2,4,2,N'Tiêu đề Quảng cáo #7',N'Nội dung quảng cáo #3',1,3,5,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[VarietyID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (8,2,5,2,N'Tiêu đề Quảng cáo #8',N'Nội dung quảng cáo #4',6,4,9,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (5,2,3,1,N'Tiêu đề Quảng cáo #5',N'Nội dung quảng cáo #1',4,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (6,2,4,1,N'Tiêu đề Quảng cáo #6',N'Nội dung quảng cáo #2',5,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (7,2,4,2,N'Tiêu đề Quảng cáo #7',N'Nội dung quảng cáo #3',1,3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (8,2,5,2,N'Tiêu đề Quảng cáo #8',N'Nội dung quảng cáo #4',6,4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
 
 SET IDENTITY_INSERT [dbo].[Advertisement] OFF
 GO

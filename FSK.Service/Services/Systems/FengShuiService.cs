@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSK.Service.Services
+namespace FSK.Service.Services.Systems
 {
     public class FengShuiService
     {
@@ -115,7 +115,7 @@ namespace FSK.Service.Services
                 }
                 else
                 {
-                    
+
                     int c = 5 + sum;
                     //return GetCungPhi(c, gender);
                     return SumDigits(c);
@@ -144,7 +144,7 @@ namespace FSK.Service.Services
         {
             while (number > 9)
             {
-                number = (number / 10) + (number % 10);
+                number = number / 10 + number % 10;
             }
             return number;
         }
