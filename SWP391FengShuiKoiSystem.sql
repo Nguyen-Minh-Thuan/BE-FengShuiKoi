@@ -52,13 +52,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Advertisement](
 	[AdsId] [int] IDENTITY(1,1) NOT NULL,
-	[AdsTypeId] [int] NULL,
+	[AdsTypeId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
 	[PackageID] [int] NULL,
 	[Title] [nvarchar](50) NOT NULL,
 	[Content] [nvarchar](3000) NULL,
 	[StatusId] [int]  NOT NULL,
-	[ElementID] [int] NULL,
+	[ElementID] [int] NOT NULL,
 	[StartedDate] [datetime] NULL,
 	[ExpiredDate] [datetime] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
