@@ -1,7 +1,7 @@
 ﻿using FSK.APIService.Payment;
 using FSK.APIService.Payment.Models;
 using FSK.APIService.RequestModel;
-using FSK.APIService.RespondModel;
+using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
 using FSK.Service.Services.Systems;
