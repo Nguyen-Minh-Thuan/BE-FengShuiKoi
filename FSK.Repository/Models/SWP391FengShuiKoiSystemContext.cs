@@ -54,11 +54,17 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
     public virtual DbSet<Shape> Shapes { get; set; }
 
+    public virtual DbSet<Status> Statuses { get; set; }
+
     public virtual DbSet<Transaction> Transactions { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Variety> Varieties { get; set; }
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     public static string GetConnectionString(string connectionStringName)
     {
@@ -71,9 +77,6 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
         return connectionString;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -88,27 +91,28 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
             entity.ToTable("Advertisement");
 
-            entity.Property(e => e.Content).HasMaxLength(500);
+            entity.Property(e => e.Content).HasMaxLength(3000);
             entity.Property(e => e.ElementId).HasColumnName("ElementID");
             entity.Property(e => e.ExpiredDate).HasColumnType("datetime");
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
             entity.Property(e => e.PackageId).HasColumnName("PackageID");
             entity.Property(e => e.StartedDate).HasColumnType("datetime");
-            entity.Property(e => e.Status)
+            entity.Property(e => e.Title)
                 .IsRequired()
                 .HasMaxLength(50);
-            entity.Property(e => e.Title).HasMaxLength(50);
-            entity.Property(e => e.VarietyId).HasColumnName("VarietyID");
 
             entity.HasOne(d => d.AdsType).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.AdsTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Advertisement_AdsTypes");
 
             entity.HasOne(d => d.Package).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.PackageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Advertisement_Package");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.Advertisements)
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Advertisement_Status");
 
             entity.HasOne(d => d.User).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.UserId)
@@ -368,6 +372,16 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .IsRequired()
                 .HasMaxLength(25)
                 .HasColumnName("Shape");
+        });
+
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.ToTable("Status");
+
+            entity.Property(e => e.StatusName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnName("Status");
         });
 
         modelBuilder.Entity<Transaction>(entity =>
