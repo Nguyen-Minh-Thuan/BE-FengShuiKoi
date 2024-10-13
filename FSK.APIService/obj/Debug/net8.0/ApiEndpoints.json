@@ -77,7 +77,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "FSK.APIService.RequestModel.CreateAdvertisementRequestModel",
+        "Type": "FSK.APIService.RequestModel.AdvertisementRequestModel",
         "IsRequired": true
       }
     ],

@@ -185,7 +185,8 @@ namespace FSK.APIService.Controllers
                     return BadRequest("Invalid user or user is not a member");
                 }
 
-                var package = await _unitOfWork.PackageRepository.GetByIdAsync(model.PackageId);
+                int packageId = model.PackageId.Value;
+                var package = await _unitOfWork.PackageRepository.GetByIdAsync(packageId);
                 if (package == null)
                 {
                     return BadRequest("Invalid package selected");
