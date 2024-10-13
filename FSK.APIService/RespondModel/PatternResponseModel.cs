@@ -2,7 +2,7 @@
 
 namespace FSK.APIService.RespondModel
 {
-    public class PatternRespondModel
+    public class PatternResponseModel
     {
 
         public int PatternId { get; set; }
@@ -15,9 +15,9 @@ namespace FSK.APIService.RespondModel
 
         public double PatternPoint {  get; set; }
 
-        public List<PatternColorRespondModel> PatternColors { get; set; } = new List<PatternColorRespondModel>();
+        public List<PatternColorResponseModel> PatternColors { get; set; } = new List<PatternColorResponseModel>();
 
-        public List<VarietyRespondModel> Variety { get; set; } = new List<VarietyRespondModel>();
+        public List<VarietyResponseModel> Variety { get; set; } = new List<VarietyResponseModel>();
 
     }
 }

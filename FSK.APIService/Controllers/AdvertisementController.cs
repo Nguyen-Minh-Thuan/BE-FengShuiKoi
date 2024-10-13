@@ -210,20 +210,20 @@ namespace FSK.APIService.Controllers
                 await _unitOfWork.SaveChangesAsync();
 
                 // Create a transaction for the advertisement
-                var transaction = new Transaction
-                {
-                    UserId = model.UserId,
-                    AdsId = advertisement.AdsId,
-                    PackageId = model.PackageId,
-                    FromDate = currentDate,
-                    ToDate = advertisement.ExpiredDate.Value,
-                    TransactionDate = currentDate,
-                    PaymentMethod = "QR Pay",
-                    TotalPrice = package.Price
-                };
+                //var transaction = new Transaction
+                //{
+                //    UserId = model.UserId,
+                //    AdsId = advertisement.AdsId,
+                //    PackageId = model.PackageId,
+                //    FromDate = currentDate,
+                //    ToDate = advertisement.ExpiredDate.Value,
+                //    TransactionDate = currentDate,
+                //    PaymentMethod = "QR Pay",
+                //    TotalPrice = package.Price
+                //};
 
-                await _unitOfWork.TransactionRepository.CreateAsync(transaction);
-                await _unitOfWork.SaveChangesAsync();
+                //await _unitOfWork.TransactionRepository.CreateAsync(transaction);
+                //await _unitOfWork.SaveChangesAsync();
 
                 return Ok(new { message = "Advertisement created and pending approval", advertisementId = advertisement.AdsId });
              

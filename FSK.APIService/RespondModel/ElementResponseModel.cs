@@ -1,6 +1,6 @@
 ﻿namespace FSK.APIService.RespondModel
 {
-    public class ElementRespondModel
+    public class ElementResponseModel
     {
 
         public int ElementId { get; set; }
@@ -9,7 +9,7 @@
 
         public string Description { get; set; }
 
-        public List<ElementColorRespondModel> ElementsColor { get; set; } = new List<ElementColorRespondModel>();
+        public List<ElementColorResponseModel> ElementsColor { get; set; } = new List<ElementColorResponseModel>();
 
     }
 }
