@@ -1,8 +1,9 @@
 ﻿using FSK.Repository;
 using FSK.Repository.Models;
-using FSK.APIService.RespondModel;
+using FSK.APIService.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using FSK.APIService.RequestModel;
 
 namespace FSK.APIService.Controllers
 {
@@ -44,7 +45,13 @@ namespace FSK.APIService.Controllers
 
             response.Status = true;
             response.Message = "Success";
-            response.Data = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            var role = await _unitOfWork.RoleRepository.GetAllAsync();
+            foreach (var item in role)
+            {
+                item.Users = null;
+            }
+            response.Data = user;
 
             if (response.Data == null)
             {
@@ -56,51 +63,11 @@ namespace FSK.APIService.Controllers
             return Ok(response);
         }
 
-        // POST: api/Products
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754    
-        [HttpPost]
-        [Route("Registration")]
-        public async Task<IActionResult> PostUser(UserRegistration userDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var existingUser = await _unitOfWork.UserRepository.FirstOrDefaultAsync(x => x.Email == userDto.Email);
-            if (existingUser != null)
-            {
-                return BadRequest("User already exists with the same email address.");
-            }
-
-            try
-            {
-                var user = new User
-                {
-                    UserName = userDto.UserName,
-                    Password = userDto.Password,
-                    Email = userDto.Email,
-                    Bio = userDto.Bio,
-                    ImageUrl = userDto.ImageUrl,
-                    IsActive = userDto.IsActive,
-                    Role = string.IsNullOrEmpty(userDto.Role) ? "User" : userDto.Role
-                };
-
-                await _unitOfWork.UserRepository.CreateAsync(user);
-                await _unitOfWork.SaveChangesAsync();
-                return CreatedAtAction("GetUser", new { id = user.UserId }, user);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return BadRequest("An error occurred while registering the user.");
-            }
-        }
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("UpdateRole/{id}")]
-        public async Task<IActionResult> UpdateUserRole(int id, string newRole)
+        public async Task<IActionResult> UpdateUserRole(int id, int newRole)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user == null)
@@ -108,7 +75,7 @@ namespace FSK.APIService.Controllers
                 return NotFound("User not found");
             }
 
-            user.Role = newRole;
+            user.RoleId = newRole;
 
             try
             {
@@ -135,26 +102,6 @@ namespace FSK.APIService.Controllers
             return await _unitOfWork.UserRepository.GetByIdAsync(id) != null;
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login(Login loginDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u =>
-                u.UserName == loginDto.UsernameOrEmail || u.Email == loginDto.UsernameOrEmail);
-
-            if (user == null || user.Password != loginDto.Password) // Note: In a real application, use proper password hashing and verification
-            {
-                return Unauthorized("Invalid username/email or password");
-            }
-
-            // Here you would typically generate and return a JWT token for authenticated requests
-            // For simplicity, we're just returning a success message
-            return Ok(new { message = "Login successful", userId = user.UserId });
-        }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
@@ -171,6 +118,62 @@ namespace FSK.APIService.Controllers
             return NoContent();
         }
 
+        [HttpPut("UpdateInfo/{id}")]
+        public async Task<IActionResult> UpdateUserInfo(int id, string newName, string newBio, string newImageURL)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+            try
+            {
+                //Get user.
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+                if (user == null)
+                {
+                    response.Status = false;
+                    response.Message = "User not found";
+                    return NotFound(response);
+                }
+                //Trying to save data.
+                try
+                {
+                    user.UserName = newName;
+                    user.Bio = newBio;
+                    user.ImageUrl = newImageURL;
+                    await _unitOfWork.UserRepository.UpdateAsync(user);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException db_err)
+                {
+                    if (!await UserExists(id))
+                    {
+                        response.Status = false;
+                        response.Message = "User not found while inserting";
+                        return NotFound(response);
+                    }
+                    else
+                    {
+                        response.Status = false;
+                        response.Message = db_err.ToString();
+                        return BadRequest(response);
+                    }
+                }
+                response.Status = true;
+                response.Message = "User role updated successfully";
+                response.Data = user;
+                return Ok(response);
+
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return BadRequest(response);
+            }
+
+            
+
+
+            
+        }
 
     }
 }

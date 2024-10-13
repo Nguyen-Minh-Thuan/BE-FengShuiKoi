@@ -23,10 +23,24 @@ CREATE TABLE [dbo].[User](
 	[Bio] [nvarchar](250) NULL,
 	[ImageUrl] [nvarchar](250) NULL,
 	[IsActive] [bit] NULL,
-	[Role] [varchar](25) NOT NULL,
+	[RoleID] [int] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 24/09/24 7:10PM  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[RoleID] [int] IDENTITY(1,1) NOT NULL,
+	[RoleName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[RoleID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -38,18 +52,48 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Advertisement](
 	[AdsId] [int] IDENTITY(1,1) NOT NULL,
+	[AdsTypeId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
-	[PackageID] [int] NOT NULL,
-	[Title] [nvarchar](50) NULL,
-	[Content] [nvarchar](500) NULL,
-	[Status] [nvarchar] (50) NOT NULL,
+	[PackageID] [int] NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Content] [nvarchar](3000) NULL,
+	[StatusId] [int]  NOT NULL,
 	[ElementID] [int] NOT NULL,
-	[ExpiredDate] [datetime] NOT NULL,
+	[StartedDate] [datetime] NULL,
+	[ExpiredDate] [datetime] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
 	[PaymentStatus] [bit] NULL,
  CONSTRAINT [PK_Advertisement] PRIMARY KEY CLUSTERED 
 (
 	[AdsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 24/09/24 7:10PM  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[StatusId] [int] IDENTITY(1,1) NOT NULL,
+	[Status] [nvarchar](50) NOT NULL
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[StatusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AdsTypes]    Script Date: 24/09/24 7:10PM  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AdsTypes](
+	[AdsTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[TypeName] [nvarchar](100) NULL,
+ CONSTRAINT [PK_AdsTypes] PRIMARY KEY CLUSTERED 
+(
+	[AdsTypeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -327,7 +371,6 @@ CREATE TABLE [dbo].[ElementQuantity](
 	[RecID] [int] IDENTITY(1,1) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[Quantity] [int] NOT NULL,
-	[Bonus] [float] NOT NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_ElementQuantity] PRIMARY KEY CLUSTERED 
 (
@@ -335,24 +378,6 @@ CREATE TABLE [dbo].[ElementQuantity](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[KoiElement]    Script Date:   ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[KoiElement](
-	[KoiID] [int] IDENTITY(1,1) NOT NULL,
-	[PatternID] [int] NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[Point] [float] NOT NULL,
-	--[Status] [bit] NOT NULL,
- CONSTRAINT [PK_KoiElement] PRIMARY KEY CLUSTERED 
-(
-	[KoiID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
 /****** Object:  Table [dbo].[QuantityBuff]    Script Date:   ******/
 /*
 SET ANSI_NULLS ON
@@ -373,23 +398,67 @@ GO
 /****** Insert  ******/
 SET IDENTITY_INSERT [dbo].[User] ON 
 
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[Role]) VALUES (1, N'Admin', N'1', N'None', N'This is an Admin account', N'None', 1, 'Admin')
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[Role]) VALUES (2, N'Laazy', N'1', N'None', N'HungDepTrai', N'None', 1, 'Admin')
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[Role]) VALUES (3, N'User1', N'1', N'None', N'This is an User account', N'None', 1, 'User')
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[Role]) VALUES (4, N'User2', N'2', N'None', N'This is an User account', N'None', 1, 'User')
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[Role]) VALUES (5, N'User3', N'3', N'None', N'This is an User account', N'None', 1, 'User')
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (1, N'Admin', N'1', N'None', N'This is an Admin account', N'None', 1, 1)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (2, N'Laazy', N'1', N'None', N'HungDepTrai', N'None', 1, 2)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (3, N'User1', N'1', N'None', N'This is an User account', N'None', 1, 3)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (4, N'User2', N'2', N'None', N'This is an User account', N'None', 1, 3)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (5, N'User3', N'3', N'None', N'This is an User account', N'None', 1, 3)
 
 SET IDENTITY_INSERT [dbo].[User] OFF
 GO
+
+
+SET IDENTITY_INSERT [dbo].[Role] ON;
+INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (1, N'Admin');
+INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (2, N'Staff');
+INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (3, N'Member');
+SET IDENTITY_INSERT [dbo].[Role] OFF;
+GO 
+
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (1, 4);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (1, 9);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (2, 1);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (2, 6);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (3, 2);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (3, 7);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (4, 10);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (4, 5);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 3);
+INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
+
+--Add đồ phong thủy
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',4,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,1,N'Tiêu đề Quảng cáo #2',N'Nội dung quảng cáo #2',5,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,2,N'Tiêu đề Quảng cáo #3',N'Nội dung quảng cáo #3',2,3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,5,2,N'Tiêu đề Quảng cáo #4',N'Nội dung quảng cáo #4',6,4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
+
+--Add Koi
 SET IDENTITY_INSERT [dbo].[Advertisement] ON 
 
-INSERT [dbo].[Advertisement] ([AdsId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',N'Approve',1,CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
-INSERT [dbo].[Advertisement] ([AdsId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (2,4,1,N'Tiêu đề Quảng cáo #2',N'Nội dung quảng cáo #2',N'Deploying',2,CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (3,4,2,N'Tiêu đề Quảng cáo #3',N'Nội dung quảng cáo #3',N'Waiting',3,CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[UserId],[PackageID],[Title],[Content],[Status],[ElementID],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (4,5,2,N'Tiêu đề Quảng cáo #4',N'Nội dung quảng cáo #4',N'Expired',4,CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (5,2,3,1,N'Tiêu đề Quảng cáo #5',N'Nội dung quảng cáo #1',4,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (6,2,4,1,N'Tiêu đề Quảng cáo #6',N'Nội dung quảng cáo #2',5,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (7,2,4,2,N'Tiêu đề Quảng cáo #7',N'Nội dung quảng cáo #3',1,3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
+INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (8,2,5,2,N'Tiêu đề Quảng cáo #8',N'Nội dung quảng cáo #4',6,4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
 
 SET IDENTITY_INSERT [dbo].[Advertisement] OFF
 GO
+
+SET IDENTITY_INSERT [dbo].[AdsTypes] ON;
+INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (1, N'Cá Koi');
+INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (2, N'Đồ Phong Thủy');
+SET IDENTITY_INSERT [dbo].[AdsTypes] OFF;
+GO
+
+SET IDENTITY_INSERT [dbo].[Status] ON;
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (1, N'Drafted');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (2, N'Pending');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (3, N'Cancelled');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (4, N'Approved');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (5, N'Deploying');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (6, N'Expired');
+SET IDENTITY_INSERT [dbo].[Status] OFF;
+GO
+
 SET IDENTITY_INSERT [dbo].[Package] ON 
 
 INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (1,N'Normal Package',3 ,30000)
@@ -629,37 +698,35 @@ SET IDENTITY_INSERT [dbo].[Shape] OFF
 GO
 
 -- Mệnh Kim (ElementID = 1)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, 3);  -- Trắng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 2, 3);  -- Xám
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3, 3);  -- Ghi
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, 3);  -- Bạc
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, 3);  -- Vàng ánh kim
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 6, 3);  -- Vàng nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 7, 3);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 14, 3); -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 15, 3); -- Nâu đậm
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 7, 2);  -- Vàng nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 8, 2);  -- Vàng đậm
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, 2); -- Nâu nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 13, 2); -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, 2);  -- Trắng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 2, 2);  -- Xám
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3, 2);  -- Ghi
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, 2);  -- Bạc
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, 2);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 10, -2); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, -2); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 11, -2); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 12, -2); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 13, -2); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 9, -2);  -- Cam
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 1, -3);  -- Trắng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 2, -3);  -- Xám
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 3, -3);  -- Ghi
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 4, -3);  -- Bạc
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 5, -3);  -- Vàng ánh kim
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 17, -3);  -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 18, -3);  -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (1, 19, -3);  -- Xanh cỏ
 
 -- Mệnh Mộc (ElementID = 5)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 14, 3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 15, 3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 16, 3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 17, 3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 29, 3); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 20, 3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 27, 3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 28, 3); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 18, 2); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 19, 2); -- Xanh lục
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 20, 2); -- Xanh cỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 17, 2); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 18, 2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 19, 2); -- Xanh cỏ
 
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 1, -2);  -- Trắng
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 2, -2);  -- Xám
@@ -667,10 +734,10 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 3
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 4, -2);  -- Bạc
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 5, -2);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 14, -3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 15, -3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 16, -3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 17, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 7, -3); -- Vàng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 15, -3); -- Nâu Đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 16, -3); -- Nâu đất
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (5, 6, -3); -- Vàng nhạt
 
 -- Mệnh Thủy (ElementID = 2)
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 1, 3);  -- Trắng
@@ -679,54 +746,64 @@ INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 3
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 4, 3);  -- Bạc
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 5, 3);  -- Vàng ánh kim
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 14, 2); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 15, 2); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 16, 2); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 17, 2); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 29, 2); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 20, 2); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 27, 2); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 28, 2); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 6, -2);  -- Vàng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 7, -2);  -- Nâu
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 8, -2);  -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 7, -2);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 14, -2);  -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 15, -2);  -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 16, -2);  -- Nâu đất
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 10, -3); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 12, -3); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 11, -3); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 12, -3); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 13, -3); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (2, 9, -3);  -- Cam
 
 -- Mệnh Hỏa (ElementID = 3)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, 3); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 20, 3); -- Xanh cỏ
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 19, 3); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 17, 3); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 19, 3); -- Xanh cỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, 3); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 10, 2); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 12, 2); -- Đỏ
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 11, 2); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 12, 2); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 13, 2); -- Tím
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 9, 2);  -- Cam
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 18, -2); -- Xanh lá cây
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 19, -2); -- Xanh lục
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 29, -2); -- Đen
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 20, -2); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 27, -2); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 28, -2); -- Xanh da trời
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 14, -3); -- Đen
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 15, -3); -- Xanh dương
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 16, -3); -- Xanh biển
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 17, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 1, -3); -- Trắng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 2, -3); -- Xám
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 3, -3); -- Bạc
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 4, -3); -- Bạc
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (3, 5, -3); -- Vàng ánh kim
 
--- Mệnh Thổ (ElementID = 5)
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 7, 3);  -- Vàng nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 8, 3);  -- Vàng đậm
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, 3); -- Nâu nhạt
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 13, 3); -- Nâu đậm
+-- Mệnh Thổ (ElementID = 4)
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, 3); -- Đỏ
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 11, 3); -- Hồng
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 13, 3); -- Tím
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, 3);  -- Cam
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, 2);  -- Vàng đất
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, 2); -- Nâu đất
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 6, 2);  -- Vàng nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 7, 2);  -- Vàng đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 14, 2); -- Nâu nhạt
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 15, 2); -- Nâu đậm
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 8, 2);  -- Vàng đất
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 16, 2); -- Nâu đất
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 18, -2); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 17, -2); -- Xanh lá cây
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 18, -2); -- Xanh lục
 INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 19, -2); -- Xanh lục
 
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 10, -3); -- Đỏ
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 11, -3); -- Hồng
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 12, -3); -- Tím
-INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 9, -3);  -- Cam
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 20, -3); -- Xanh dương
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 27, -3); -- Xanh biển
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 28, -3); -- Xanh da trời
+INSERT INTO [dbo].[ElementColor] ([ElementID], [ColorID], [Values]) VALUES (4, 29, -3);  -- Đen
+
 
 INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Trắng');
 INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Xám');
@@ -754,7 +831,6 @@ INSERT INTO [dbo].[Color] ([Name]) VALUES (N'Xanh cỏ');
 
 SET IDENTITY_INSERT [dbo].[Color] ON;
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (20, N'Xanh dương');
-INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (26, N'Xanh dương');
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (27, N'Xanh biển');
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (28, N'Xanh da trời');
 INSERT INTO [dbo].[Color] ([ColorID], [Name]) VALUES (29, N'Đen');
@@ -787,13 +863,13 @@ INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (10, 
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (10, 12, 0.6);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (11, 29, 0.4);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (11, 7, 0.6);
-INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 26, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 20, 0.5);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 1, 0.4);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (12, 12, 0.1);
-INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 26, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 20, 0.5);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 1, 0.3);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (13, 12, 0.2);
-INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 26, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 20, 0.6);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 1, 0.3);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (14, 12, 0.1);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (15, 12, 0.7);
@@ -905,7 +981,7 @@ INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Shiro Be
 
 
 /****** ========================================================================================================================================================================================================================================================================================================================================================================  ******/
-/****** Object:  Table [dbo].[[Advertisement]]    Script Date: 24/09/24 7:10PM  ******/
+/****** Object:  Table [dbo].[Advertisement]    Script Date: 24/09/24 7:10PM  ******/
 
 ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_User] FOREIGN KEY([UserId])
 REFERENCES [dbo].[User] ([UserId])
@@ -919,14 +995,36 @@ GO
 ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_Package]
 GO
 
+ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_AdsTypes] FOREIGN KEY([AdsTypeId])
+REFERENCES [dbo].[AdsTypes] ([AdsTypeId])
+GO
+ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_AdsTypes]
+GO
+
+ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_Status] FOREIGN KEY([StatusId])
+REFERENCES [dbo].[Status] ([StatusId])
+GO
+ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_Status]
+GO
+
+/****** Object:  Table [dbo].[User]    Script Date: 24/09/24 7:10PM  ******/
+
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Role] FOREIGN KEY([RoleID])
+REFERENCES [dbo].[Role] ([RoleID])
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Role]
+GO
+
 /****** Object:  Table [dbo].[Transaction]    Script Date: 24/09/24 7:10PM  ******/
 --Hasn't Constraint to Element Table due to unavailable.
+
 
 ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_User] FOREIGN KEY([UserId])
 REFERENCES [dbo].[User] ([UserId])
 GO
 ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_User]
 GO
+
 
 ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Advertisement] FOREIGN KEY([AdsId])
 REFERENCES [dbo].[Advertisement] ([AdsId])
@@ -1051,19 +1149,6 @@ GO
 ALTER TABLE [dbo].[ElementColor] CHECK CONSTRAINT [FK_ElementColor_Element]
 GO
 
-/****** Object:  Table [dbo].[KoiElement]    Script Date:   ******/
-
-ALTER TABLE [dbo].[KoiElement]  WITH CHECK ADD  CONSTRAINT [FK_KoiElement_Pattern] FOREIGN KEY([PatternID])
-REFERENCES [dbo].[Pattern] ([PatternID])
-GO
-ALTER TABLE [dbo].[KoiElement] CHECK CONSTRAINT [FK_KoiElement_Pattern]
-GO
-
-ALTER TABLE [dbo].[KoiElement]  WITH CHECK ADD  CONSTRAINT [FK_KoiElement_Element] FOREIGN KEY([ElementID])
-REFERENCES [dbo].[Element] ([ElementID])
-GO
-ALTER TABLE [dbo].[KoiElement] CHECK CONSTRAINT [FK_KoiElement_Element]
-GO
 
 /**** 
 
@@ -1072,5 +1157,3 @@ Remember to fix Transaction -> Advertisement Only
 
 
 ****/
-
-

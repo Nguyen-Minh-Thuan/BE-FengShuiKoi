@@ -1,8 +1,45 @@
 [
   {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "ApproveAdvertisement",
+    "RelativePath": "api/Admin/ApproveAdvertisement/{advertisementId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "advertisementId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "DeclineAdvertisement",
+    "RelativePath": "api/Admin/DeclineAdvertisement/{advertisementId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "advertisementId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "GetPageAds",
-    "RelativePath": "api/Advertisement",
+    "RelativePath": "api/Advertisement/AdsByPage",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -21,6 +58,150 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "CreateDraftedAd",
+    "RelativePath": "api/Advertisement/CreateDraftedAd",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "FSK.APIService.RequestModel.AdvertisementRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetAdsId",
+    "RelativePath": "api/Advertisement/GetAdsById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetAdsUser",
+    "RelativePath": "api/Advertisement/GetAdsByUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetAds",
+    "RelativePath": "api/Advertisement/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetPackage",
+    "RelativePath": "api/Advertisement/GetPackage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "UpdateAd",
+    "RelativePath": "api/Advertisement/UpdateAd",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "FSK.APIService.RequestModel.UpdateAdvertisementRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.ColorController",
+    "Method": "GetColor",
+    "RelativePath": "api/Color/GetColor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Element, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -88,25 +269,24 @@
     ]
   },
   {
-    "ContainingType": "FSK.APIService.Controllers.FengShuiController",
-    "Method": "CalculateFengShui",
-    "RelativePath": "api/FengShui/calculate",
+    "ContainingType": "FSK.APIService.Controllers.ElementController",
+    "Method": "GetElement",
+    "RelativePath": "api/Element/GetElement",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
+    "Parameters": [],
+    "ReturnTypes": [
       {
-        "Name": "birthday",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "gender",
-        "Type": "System.String",
-        "IsRequired": false
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Element, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   },
   {
     "ContainingType": "FSK.APIService.Controllers.FengShuiController",
@@ -150,7 +330,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "FSK.Repository.Models.Element",
+        "Type": "FSK.Repository.Models.Direction",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -162,15 +342,55 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.FengShuiController",
-    "Method": "GetKoi",
-    "RelativePath": "api/FengShui/Koi",
+    "Method": "GetKois",
+    "RelativePath": "api/FengShui/GetKois",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "FSK.Repository.Models.Element",
+        "Type": "FSK.Repository.Models.Variety",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.FengShuiController",
+    "Method": "GetAllDir",
+    "RelativePath": "api/FengShui/GetPondDir",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Direction, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.FengShuiController",
+    "Method": "GetAllShape",
+    "RelativePath": "api/FengShui/GetPondShape",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Shape, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -258,27 +478,32 @@
     ]
   },
   {
-    "ContainingType": "FSK.APIService.Controllers.TestController",
-    "Method": "CalculateDirection",
-    "RelativePath": "api/Test/CalculateDir",
-    "HttpMethod": "GET",
+    "ContainingType": "FSK.APIService.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login/Login",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "elementID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "kuaID",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "loginDto",
+        "Type": "FSK.APIService.RequestModel.LoginRequestModel",
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.PackageController",
+    "Method": "GetPackage",
+    "RelativePath": "api/Package/GetPackage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "FSK.Repository.Models.Element",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Package, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -289,108 +514,56 @@
     ]
   },
   {
-    "ContainingType": "FSK.APIService.Controllers.TestController",
-    "Method": "GetDirection",
-    "RelativePath": "api/Test/GetDirection",
-    "HttpMethod": "GET",
+    "ContainingType": "FSK.APIService.Controllers.PaymentController",
+    "Method": "ProcessPayment",
+    "RelativePath": "api/Payment/ProcessPayment/{advertisementId}",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "advertisementId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "FSK.Repository.Models.Element",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "FSK.APIService.Controllers.TestController",
-    "Method": "GetPondShape",
-    "RelativePath": "api/Test/GetShape",
-    "HttpMethod": "GET",
+    "ContainingType": "FSK.APIService.Controllers.RegistrationController",
+    "Method": "PostUser",
+    "RelativePath": "api/Registration/Registration",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "userDto",
+        "Type": "FSK.APIService.RequestModel.RegistrationRequestModel",
+        "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "FSK.Repository.Models.Element",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "FSK.APIService.Controllers.TestController",
-    "Method": "GetKoi",
-    "RelativePath": "api/Test/Koi",
+    "Method": "PaymentCallback",
+    "RelativePath": "api/Test/CheckData",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "FSK.Repository.Models.Element",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "FSK.APIService.Controllers.TestController",
-    "Method": "GetPoint",
+    "Method": "CreatePaymentUrl",
     "RelativePath": "api/Test/TestFunc",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "elementID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Element, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "FSK.APIService.Controllers.UserController",
@@ -414,32 +587,6 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.User, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "PostUser",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "FSK.Repository.Models.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "FSK.Repository.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -477,27 +624,6 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "PutUser",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "user",
-        "Type": "FSK.Repository.Models.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FSK.APIService.Controllers.UserController",
     "Method": "DeleteUser",
     "RelativePath": "api/User/{id}",
     "HttpMethod": "DELETE",
@@ -508,6 +634,58 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.UserController",
+    "Method": "UpdateUserInfo",
+    "RelativePath": "api/User/UpdateInfo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newBio",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newImageURL",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.UserController",
+    "Method": "UpdateUserRole",
+    "RelativePath": "api/User/UpdateRole/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newRole",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
