@@ -1,5 +1,5 @@
 ﻿using FSK.APIService.RequestModel;
-using FSK.APIService.RespondModel;
+using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Http;
@@ -166,7 +166,7 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateAdvertisement([FromBody] CreateAdvertisementRequestModel model)
+        public async Task<IActionResult> CreateAdvertisement([FromBody] AdvertisementRequestModel model)
         {
             //try
             //{

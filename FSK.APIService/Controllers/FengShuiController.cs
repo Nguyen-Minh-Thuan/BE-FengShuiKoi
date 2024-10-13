@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FSK.Repository;
 using FSK.Repository.Models;
-using FSK.APIService.RespondModel;
+using FSK.APIService.ResponseModel;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Reflection;

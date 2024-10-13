@@ -1,4 +1,4 @@
-﻿namespace FSK.APIService.RespondModel
+﻿namespace FSK.APIService.ResponseModel
 {
     public class ColorResponseModel
     {
