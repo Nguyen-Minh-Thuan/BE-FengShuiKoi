@@ -277,7 +277,3 @@ __pycache__/
 /.vs
 /.vs
 
-
-FSK.APIService/obj/Debug/net8.0/apphost.exe
-FSK.APIService/obj/Debug/net8.0/FSK.APIService.assets.cache
-FSK.Service/obj/Debug/net8.0/FSK.Service.assets.cache
