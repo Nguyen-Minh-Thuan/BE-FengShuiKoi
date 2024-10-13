@@ -1,6 +1,5 @@
 ﻿using FSK.APIService.Payment;
 using FSK.APIService.Payment.Models;
-using FSK.APIService.RequestModel;
 using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
@@ -29,7 +28,6 @@ namespace FSK.APIService.Controllers
         [HttpPost("TestFunc")]
         public IActionResult CreatePaymentUrl()
         {
-
 
             PaymentInformationModel model = new PaymentInformationModel { Name = "Testing Product", Amount = 100000, OrderDescription = "This is a testing product", OrderType = "FengShui Shit" };
 
