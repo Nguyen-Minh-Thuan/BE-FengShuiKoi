@@ -1,6 +1,6 @@
 ﻿using FSK.Repository;
 using FSK.Repository.Models;
-using FSK.APIService.RespondModel;
+using FSK.APIService.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FSK.APIService.RequestModel;
