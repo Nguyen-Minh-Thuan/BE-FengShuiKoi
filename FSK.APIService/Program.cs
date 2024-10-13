@@ -1,6 +1,7 @@
 
+using FSK.APIService.Payment;
 using FSK.Repository;
-using FSK.Service.Services;
+using FSK.Service.Services.Systems;
 using System.Text.Json.Serialization;
 
 namespace FSK.APIService
@@ -23,7 +24,7 @@ namespace FSK.APIService
                                   policy =>
                                   {
                                       // Allow requests from Vercel and localhost for testing
-                                      policy.WithOrigins("https://koi-feng-shui.vercel.app", "http://localhost:5173")
+                                      policy.WithOrigins("https://koi-feng-shui.vercel.app", "http://localhost:5173", "http://localhost:5174", "https://sandbox.vnpayment.vn")
                                             .AllowAnyHeader()    // Allow any header (like Authorization)
                                             .AllowAnyMethod();   // Allow any HTTP method (GET, POST, PUT, DELETE)
                                   });
@@ -40,6 +41,7 @@ namespace FSK.APIService
 
             builder.Services.AddScoped<UnitOfWork>();
             builder.Services.AddScoped<FengShuiService>();
+            builder.Services.AddScoped<IVnPayService, VnPayService>();
 
             builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

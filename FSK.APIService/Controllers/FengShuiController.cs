@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using FSK.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using FSK.Repository;
 using FSK.Repository.Models;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Reflection;
 using FSK.APIService.RequestModel;
 using Azure.Core;
+using FSK.Service.Services.Systems;
 
 namespace FSK.APIService.Controllers
 {
@@ -44,8 +44,8 @@ namespace FSK.APIService.Controllers
             }
         }
 
-        //[HttpGet("calculate-cung-phi")]
-        private IActionResult CalculateCungPhi([FromQuery] DateTime birthday, [FromQuery] string gender)
+        [HttpGet("calculate-cung-phi")]
+        public IActionResult CalculateCungPhi([FromQuery] DateTime birthday, [FromQuery] string gender)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace FSK.APIService.Controllers
 
             var kuaID = _fengShuiService.CalculateCungPhi(birthday, gender);
 
-            var kua = await _unitOfWork.KuaRepository.GetByIdAsync(elementID);
+            var kua = await _unitOfWork.KuaRepository.GetByIdAsync(kuaID);
             var auspicious = await _unitOfWork.AuspiciousRepository.GetAllAsync();
             var inauspicoous = await _unitOfWork.InauspiciousRepository.GetAllAsync();
             var direction = await _unitOfWork.DirectionRepository.GetAllAsync();
@@ -162,9 +162,15 @@ namespace FSK.APIService.Controllers
 
 
             var recQuantity = await _unitOfWork.ElementQuantityRepository.GetAllAsync();
+            foreach (var item in recQuantity)
+            {
+                item.Element = null;
+            }
 
 
-            response.Data = new { Variety = test , RecQuantity = recQuantity.Where(x => x.ElementId == elementID) };
+
+
+            response.Data = new { Variety = test, RecQuantity = recQuantity.Where(x => x.ElementId == elementID) , Element = element.Element1 };
 
 
             //var pond = await _unitOfWork.PondRepository.GetAllAsync();
@@ -225,7 +231,7 @@ namespace FSK.APIService.Controllers
             }
             catch (Exception)
             {
-                return 1+_defaultPoint;
+                return _defaultPoint;
             }
             //(await _unitOfWork.ElementQuantityRepository.GetAllAsync()).Where(x => x.ElementId == elementID && x.Quantity == patterns.Count()).ToList();
         }
@@ -235,7 +241,7 @@ namespace FSK.APIService.Controllers
             try
             {
 
-                var test = (_unitOfWork.ElementQuantityRepository.GetAll()).Where(x => x.ElementId == elementID && x.Quantity == count%10).FirstOrDefault();
+                var test = (_unitOfWork.ElementQuantityRepository.GetAll()).Where(x => x.ElementId == elementID && x.Quantity%10 == count%10).FirstOrDefault();
 
                 if (test != null)
                     return 1;
@@ -255,8 +261,10 @@ namespace FSK.APIService.Controllers
             {
 
                 var test = (_unitOfWork.AuspiciousRepository.GetAll()).Where(x => x.KuaId == kuaId && x.DirectionId == dirId).FirstOrDefault();
-
-                return 1;
+                if (test != null)
+                    return 1;
+                else
+                    return -1;
             }
             catch (Exception)
             {
@@ -281,6 +289,7 @@ namespace FSK.APIService.Controllers
                 {
                     n.Element = null;
                 }
+                
 
                 var kuaId = _fengShuiService.CalculateCungPhi(birthday, gender);
 
@@ -288,7 +297,7 @@ namespace FSK.APIService.Controllers
 
                 var bonusPond = Testing(elementId, shapeId);
 
-                var bonusDirection = Testing4(kuaId,dirId);
+                var bonusDirection = Testing4(kuaId, dirId);
 
 
                 //Koi Pointing
@@ -302,11 +311,12 @@ namespace FSK.APIService.Controllers
                 var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
 
                 var Bonus = Testing3(elementId, patterns.Count());
-                
-                
+
+
 
                 var test = patterns.Select(x => new PatternResponseModel
                 {
+                    VarietyId = x.VarietyId,
                     PatternId = x.PatternId,
                     PatternName = x.PatternName,
                     ImageUrl = x.ImageUrl,
@@ -316,6 +326,7 @@ namespace FSK.APIService.Controllers
                         PatternId = z.PatternId,
                         PcolorId = z.PcolorId,
                         Values = z.Values,
+                        ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
                     }).ToList(),
                     PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + Bonus + bonusPond + bonusDirection,
@@ -328,9 +339,34 @@ namespace FSK.APIService.Controllers
                 }
 
 
+                element.Ponds = null;
+                element.ElementQuantities = null;
+                element.Generals = null;
+
+                var color = await _unitOfWork.ColorRepository.GetAllAsync();
+                foreach (var item in color)
+                {
+                    item.ElementColors = null;
+                    item.PatternColors = null;
+                }
+
+                var direction = await _unitOfWork.DirectionRepository.GetAllAsync();
+                foreach(var item in direction)
+                {
+                    item.Auspicious = null;
+                    item.Inauspicious = null;
+                }
+                var auspicious = await _unitOfWork.AuspiciousRepository.GetAllAsync();
+                var kuaAuspicious = auspicious.Where(x => x.KuaId == kuaId).ToList();
+                var recDir = kuaAuspicious.Select(x => x.Direction).ToList().Select(x => x.DirectionName).ToList();
+
+                var selectDir = (await _unitOfWork.DirectionRepository.GetByIdAsync(dirId)).DirectionName;
+
+                var TotalPoint = total / test.Count;
+
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { KoiPoint = test , TotalPoint = total/test.Count };
+                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint };
                 return Ok(response);
             }
             catch (Exception ex)

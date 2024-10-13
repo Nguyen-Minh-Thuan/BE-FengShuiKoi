@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
+=======
+>>>>>>> main
 
 namespace FSK.Repository.Repository
 {
@@ -14,6 +17,9 @@ namespace FSK.Repository.Repository
 
         public StatusRepository(SWP391FengShuiKoiSystemContext context) => _context = context;
 
+<<<<<<< HEAD
         
+=======
+>>>>>>> main
     }
 }

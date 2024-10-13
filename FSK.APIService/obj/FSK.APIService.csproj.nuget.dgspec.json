@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj": {}
+    "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj": {
+    "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj",
+        "projectUniqueName": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj",
         "projectName": "FSK.APIService",
-        "projectPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj",
+        "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj",
         "packagesPath": "C:\\Users\\MINH THUAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.APIService\\obj\\",
+        "outputPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MINH THUAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,11 +29,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj": {
-                "projectPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj"
+              "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj": {
+                "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj"
               },
-              "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {
-                "projectPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj"
+              "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {
+                "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj"
               }
             }
           }
@@ -53,7 +53,7 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.8, )"
             },
@@ -63,7 +63,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.8.1, )"
             }
           },
           "imports": [
@@ -89,14 +89,14 @@
         }
       }
     },
-    "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj": {
+    "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj",
         "projectName": "FSK.Repository",
-        "projectPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj",
+        "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj",
         "packagesPath": "C:\\Users\\MINH THUAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Repository\\obj\\",
+        "outputPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MINH THUAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -131,6 +131,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -170,14 +174,14 @@
         }
       }
     },
-    "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {
+    "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj",
+        "projectUniqueName": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj",
         "projectName": "FSK.Service",
-        "projectPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj",
+        "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj",
         "packagesPath": "C:\\Users\\MINH THUAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\obj\\",
+        "outputPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MINH THUAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -212,6 +216,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.8, )"
