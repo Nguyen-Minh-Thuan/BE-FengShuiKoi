@@ -356,7 +356,7 @@ namespace FSK.APIService.Controllers
             if (model.AdsTypeId != null && model.AdsTypeId != advertisement.AdsTypeId)
             {
                 advertisement.AdsTypeId = model.AdsTypeId;
-                hasChanges = true; 
+                hasChanges = true;
             }
             if (model.Content != null && model.Content != advertisement.Content)
             {
