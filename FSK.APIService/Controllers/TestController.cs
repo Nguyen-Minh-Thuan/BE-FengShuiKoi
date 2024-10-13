@@ -70,7 +70,9 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = _vnPayService.PaymentExecute(Request.Query);
+                var test = _vnPayService.PaymentExecute(Request.Query);
+                
+                response.Data = test;
                 return Ok(response);
             }
             catch (Exception err)
