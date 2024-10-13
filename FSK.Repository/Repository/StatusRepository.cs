@@ -14,6 +14,10 @@ namespace FSK.Repository.Repository
 
         public StatusRepository(SWP391FengShuiKoiSystemContext context) => _context = context;
 
-        
+        public async Task<int> GetStatusIdByName(string statusName)
+        {
+            var status = await _context.Statuses.FirstOrDefaultAsync(s => s.StatusName == statusName);
+            return status?.StatusId ?? 0;
+        }
     }
 }

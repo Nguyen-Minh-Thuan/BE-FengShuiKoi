@@ -64,7 +64,8 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=MINHTHUAN\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
+    //        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
+
     public static string GetConnectionString(string connectionStringName)
     {
         var config = new ConfigurationBuilder()
@@ -377,7 +378,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
         {
             entity.ToTable("Status");
 
-            entity.Property(e => e.Status1)
+            entity.Property(e => e.StatusName)
                 .IsRequired()
                 .HasMaxLength(50)
                 .HasColumnName("Status");

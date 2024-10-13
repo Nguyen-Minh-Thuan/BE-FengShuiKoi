@@ -9,23 +9,25 @@ public partial class Advertisement
 {
     public int AdsId { get; set; }
 
-    public int? AdsTypeId { get; set; }
+    public int AdsTypeId { get; set; }
 
     public int UserId { get; set; }
 
-    public int? PackageId { get; set; }
+    public int PackageId { get; set; }
 
     public string Title { get; set; }
 
     public string Content { get; set; }
 
-    public int StatusId { get; set; }
+    public string Status { get; set; }
 
-    public int? ElementId { get; set; }
+    public int ElementId { get; set; }
 
-    public DateTime? StartedDate { get; set; }
+    public int? VarietyId { get; set; }
 
-    public DateTime? ExpiredDate { get; set; }
+    public DateTime StartedDate { get; set; }
+
+    public DateTime ExpiredDate { get; set; }
 
     public string ImageUrl { get; set; }
 
@@ -34,8 +36,6 @@ public partial class Advertisement
     public virtual AdsType AdsType { get; set; }
 
     public virtual Package Package { get; set; }
-
-    public virtual Status Status { get; set; }
 
     public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 

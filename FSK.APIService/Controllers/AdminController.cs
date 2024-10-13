@@ -31,7 +31,7 @@ namespace FSK.APIService.Controllers
                 return BadRequest("Payment must be completed before approval");
             }
 
-            advertisement.StatusId = 4;
+            advertisement.Status = "Approved";
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -48,7 +48,7 @@ namespace FSK.APIService.Controllers
                 return NotFound("Advertisement not found");
             }
 
-            advertisement.StatusId = 3;
+            advertisement.Status = "Declined";
 
             // add a new property to the Advertisement model to store the decline reason, or not?
             // advertisement.DeclineReason = reason;

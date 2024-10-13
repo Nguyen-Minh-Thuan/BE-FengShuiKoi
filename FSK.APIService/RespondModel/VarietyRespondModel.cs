@@ -1,8 +1,8 @@
 ﻿using FSK.Repository.Models;
 
-namespace FSK.APIService.ResponseModel
+namespace FSK.APIService.RespondModel
 {
-    public class VarietyResponseModel
+    public class VarietyRespondModel
     {
 
         public int VarietyId { get; set; }
@@ -15,7 +15,7 @@ namespace FSK.APIService.ResponseModel
 
         public double TotalPattern { get; set; }
 
-        public List<PatternResponseModel> Patterns { get; set; } = new List<PatternResponseModel>();
+        public List<PatternRespondModel> Patterns { get; set; } = new List<PatternRespondModel>();
 
     }
 }

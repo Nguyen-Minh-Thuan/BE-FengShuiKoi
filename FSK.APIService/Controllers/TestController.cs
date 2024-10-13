@@ -1,4 +1,4 @@
-﻿using FSK.APIService.ResponseModel;
+﻿using FSK.APIService.RespondModel;
 using FSK.Repository;
 using FSK.Repository.Models;
 using FSK.Service.Services;

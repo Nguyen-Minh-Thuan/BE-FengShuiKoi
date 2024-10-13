@@ -297,4 +297,3 @@ C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.APIService\obj\Debug\net
 C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.APIService\obj\Debug\net8.0\FSK.APIService.pdb
 C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.APIService\obj\Debug\net8.0\FSK.APIService.genruntimeconfig.cache
 C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.APIService\obj\Debug\net8.0\ref\FSK.APIService.dll
-C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.APIService\obj\Debug\net8.0\FSK.APIService.MvcApplicationPartsAssemblyInfo.cs

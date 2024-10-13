@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj": {}
+    "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj": {
+    "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj",
+        "projectUniqueName": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj",
         "projectName": "FSK.Service",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\obj\\",
+        "projectPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj",
+        "packagesPath": "C:\\Users\\MINH THUAN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MINH THUAN\\Source\\Repos\\BE-FengShuiKoi\\FSK.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MINH THUAN\\AppData\\Roaming\\NuGet\\NuGet.Config",

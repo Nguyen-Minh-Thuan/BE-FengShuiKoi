@@ -3,7 +3,7 @@ using FSK.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using FSK.Repository;
 using FSK.Repository.Models;
-using FSK.APIService.ResponseModel;
+using FSK.APIService.RespondModel;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Reflection;
@@ -136,18 +136,18 @@ namespace FSK.APIService.Controllers
             }
 
 
-            var test = variety.Select(x => new VarietyResponseModel
+            var test = variety.Select(x => new VarietyRespondModel
             {
                 VarietyId = x.VarietyId,
                 VarietyName = x.VarietyName,
                 Description = x.Description,
-                Patterns = x.Patterns.Select(y => new PatternResponseModel
+                Patterns = x.Patterns.Select(y => new PatternRespondModel
                 {
                     PatternId = y.PatternId,
                     PatternName = y.PatternName,
                     ImageUrl = y.ImageUrl,
                     VarietyId = y.VarietyId,
-                    PatternColors = y.PatternColors.Select(z => new PatternColorResponseModel
+                    PatternColors = y.PatternColors.Select(z => new PatternColorRespondModel
                     {
                         ColorId = z.ColorId,
                         PatternId = z.PatternId,
@@ -305,12 +305,12 @@ namespace FSK.APIService.Controllers
                 
                 
 
-                var test = patterns.Select(x => new PatternResponseModel
+                var test = patterns.Select(x => new PatternRespondModel
                 {
                     PatternId = x.PatternId,
                     PatternName = x.PatternName,
                     ImageUrl = x.ImageUrl,
-                    PatternColors = x.PatternColors.Select(z => new PatternColorResponseModel
+                    PatternColors = x.PatternColors.Select(z => new PatternColorRespondModel
                     {
                         ColorId = z.ColorId,
                         PatternId = z.PatternId,
@@ -425,18 +425,18 @@ namespace FSK.APIService.Controllers
                 //    item.ElementColors = null;
                 //}
 
-                response.Data = variety.Select(x => new VarietyResponseModel
+                response.Data = variety.Select(x => new VarietyRespondModel
                 {
                     VarietyId = x.VarietyId,
                     VarietyName = x.VarietyName,
                     ImageUrl = x.ImageUrl,
-                    Patterns = x.Patterns.Select(y => new PatternResponseModel
+                    Patterns = x.Patterns.Select(y => new PatternRespondModel
                     {
                         PatternId = y.PatternId,
                         PatternName = y.PatternName,
                         ImageUrl = y.ImageUrl,
                         VarietyId = y.VarietyId,
-                        PatternColors = y.PatternColors.Select(z => new PatternColorResponseModel
+                        PatternColors = y.PatternColors.Select(z => new PatternColorRespondModel
                         {
                             ColorId = z.ColorId,
                             PatternId = z.PatternId,

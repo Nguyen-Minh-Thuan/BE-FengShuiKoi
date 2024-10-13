@@ -1,6 +1,6 @@
-﻿namespace FSK.APIService.ResponseModel
+﻿namespace FSK.APIService.RespondModel
 {
-    public class PatternColorResponseModel
+    public class PatternColorRespondModel
     {
         public int PcolorId { get; set; }
 
@@ -14,9 +14,9 @@
 
         public double? ComputeValues {  get; set; }
 
-        public List<ColorResponseModel> Color {  get; set; } = new List<ColorResponseModel>();
+        public List<ColorRespondModel> Color {  get; set; } = new List<ColorRespondModel>();
 
-        public List<PatternResponseModel> Pattern { get; set; } = new List<PatternResponseModel>();
+        public List<PatternRespondModel> Pattern { get; set; } = new List<PatternRespondModel>();
 
     }
 }

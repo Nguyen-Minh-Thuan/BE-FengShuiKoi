@@ -13,5 +13,7 @@ public partial class ElementQuantity
 
     public int Quantity { get; set; }
 
+    public double Bonus { get; set; }
+
     public virtual Element Element { get; set; }
 }
