@@ -312,8 +312,6 @@ namespace FSK.APIService.Controllers
 
                 var Bonus = Testing3(elementId, patterns.Count());
 
-
-
                 var test = patterns.Select(x => new PatternResponseModel
                 {
                     VarietyId = x.VarietyId,
