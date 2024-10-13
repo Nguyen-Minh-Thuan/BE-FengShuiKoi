@@ -1,5 +1,5 @@
 ﻿using FSK.APIService.RequestModel;
-using FSK.APIService.RespondModel;
+using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Http;
@@ -166,7 +166,7 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateAdvertisement([FromBody] CreateAdvertisementRequestModel model)
+        public async Task<IActionResult> CreateAdvertisement([FromBody] AdvertisementRequestModel model)
         {
             //try
             //{
@@ -185,7 +185,8 @@ namespace FSK.APIService.Controllers
                     return BadRequest("Invalid user or user is not a member");
                 }
 
-                var package = await _unitOfWork.PackageRepository.GetByIdAsync(model.PackageId);
+                int packageId = model.PackageId.Value;
+                var package = await _unitOfWork.PackageRepository.GetByIdAsync(packageId);
                 if (package == null)
                 {
                     return BadRequest("Invalid package selected");
@@ -210,20 +211,20 @@ namespace FSK.APIService.Controllers
                 await _unitOfWork.SaveChangesAsync();
 
                 // Create a transaction for the advertisement
-                var transaction = new Transaction
-                {
-                    UserId = model.UserId,
-                    AdsId = advertisement.AdsId,
-                    PackageId = model.PackageId,
-                    FromDate = currentDate,
-                    ToDate = advertisement.ExpiredDate.Value,
-                    TransactionDate = currentDate,
-                    PaymentMethod = "QR Pay",
-                    TotalPrice = package.Price
-                };
+                //var transaction = new Transaction
+                //{
+                //    UserId = model.UserId,
+                //    AdsId = advertisement.AdsId,
+                //    PackageId = model.PackageId,
+                //    FromDate = currentDate,
+                //    ToDate = advertisement.ExpiredDate.Value,
+                //    TransactionDate = currentDate,
+                //    PaymentMethod = "QR Pay",
+                //    TotalPrice = package.Price
+                //};
 
-                await _unitOfWork.TransactionRepository.CreateAsync(transaction);
-                await _unitOfWork.SaveChangesAsync();
+                //await _unitOfWork.TransactionRepository.CreateAsync(transaction);
+                //await _unitOfWork.SaveChangesAsync();
 
                 return Ok(new { message = "Advertisement created and pending approval", advertisementId = advertisement.AdsId });
              

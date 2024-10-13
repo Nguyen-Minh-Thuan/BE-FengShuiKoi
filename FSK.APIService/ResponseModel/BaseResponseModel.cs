@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSK.APIService.RespondModel
+namespace FSK.APIService.ResponseModel
 {
     public class BaseResponseModel
     {

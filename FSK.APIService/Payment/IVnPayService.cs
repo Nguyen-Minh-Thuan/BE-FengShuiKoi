@@ -1,12 +1,14 @@
-﻿using System;
+﻿
+using FSK.APIService.Payment.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSK.Service.Services.Payment
+namespace FSK.APIService.Payment
 {
-    public interface IVNPayService
+    public interface IVnPayService
     {
 
         string CreatePaymentUrl(PaymentInformationModel model, HttpContext context);

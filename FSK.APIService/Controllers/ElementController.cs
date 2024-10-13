@@ -1,4 +1,4 @@
-﻿using FSK.APIService.RespondModel;
+﻿using FSK.APIService.ResponseModel;
 using FSK.Repository.Models;
 using FSK.Repository;
 using Microsoft.AspNetCore.Http;
