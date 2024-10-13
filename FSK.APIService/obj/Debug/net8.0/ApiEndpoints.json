@@ -69,8 +69,8 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
-    "Method": "CreateAdvertisement",
-    "RelativePath": "api/Advertisement/Create",
+    "Method": "CreateDraftedAd",
+    "RelativePath": "api/Advertisement/CreateDraftedAd",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -174,6 +174,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "UpdateAd",
+    "RelativePath": "api/Advertisement/UpdateAd",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "FSK.APIService.RequestModel.UpdateAdvertisementRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "FSK.APIService.Controllers.ColorController",

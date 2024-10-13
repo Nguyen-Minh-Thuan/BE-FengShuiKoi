@@ -167,7 +167,7 @@ namespace FSK.APIService.Controllers
 
 
         [HttpPost("CreateDraftedAd")]
-        public async Task<IActionResult> CreateDraftedAd([FromBody] CreateAdvertisementRequestModel model)
+        public async Task<IActionResult> CreateDraftedAd([FromBody] AdvertisementRequestModel model)
         {
             if (model == null || model.UserId == 0)
             {
