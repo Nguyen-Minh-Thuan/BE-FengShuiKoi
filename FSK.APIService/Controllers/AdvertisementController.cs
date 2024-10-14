@@ -4,7 +4,7 @@ using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
 {
@@ -169,18 +169,22 @@ namespace FSK.APIService.Controllers
         [HttpPost("CreateDraftedAd")]
         public async Task<IActionResult> CreateDraftedAd([FromBody] AdvertisementRequestModel model)
         {
-            if (model == null || model.UserId == 0)
-            {
-                return BadRequest("Invalid request data");
-            }
+            //try
+            //{
+                    if (model == null || model.UserId == 0)
+                    {
+                        return BadRequest("Invalid request data");
+                    }
 
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
-            var currentDate = DateTime.UtcNow;
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+                var currentDate = DateTime.UtcNow;
 
-            if (user == null || user.RoleId != 3)
-            {
-                return BadRequest("Invalid user or user is not a member");
-            }
+                //Putting this for checking user's role, should be the authentication's work but cant implement that right now
+                //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
+                if (user == null || user.RoleId != 3)
+                {
+                    return BadRequest("Invalid user or user is not a member");
+                }
 
             var draftId = _unitOfWork.StatusRepository.GetAll().Where(x => x.Status1 == "Drafted").First().StatusId;
             // Check the number of existing drafted ads for this user
@@ -413,7 +417,7 @@ namespace FSK.APIService.Controllers
                     item.Advertisements = null;
                 }
 
-                if (ads.IsNullOrEmpty())
+                if (ads == null)
                 {
                     response.Status = false;
                     response.Message = "There is nothing to return.";
