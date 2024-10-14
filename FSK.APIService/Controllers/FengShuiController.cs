@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using FSK.Repository;
 using FSK.Repository.Models;
 using FSK.APIService.ResponseModel;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.Reflection;
 using FSK.APIService.RequestModel;
-using Azure.Core;
+//using Azure.Core;
 using FSK.Service.Services.Systems;
 
 namespace FSK.APIService.Controllers

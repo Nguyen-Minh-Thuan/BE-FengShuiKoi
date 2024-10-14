@@ -4,7 +4,7 @@ using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
 {
@@ -417,7 +417,7 @@ namespace FSK.APIService.Controllers
                     item.Advertisements = null;
                 }
 
-                if (ads.IsNullOrEmpty())
+                if (ads == null)
                 {
                     response.Status = false;
                     response.Message = "There is nothing to return.";
