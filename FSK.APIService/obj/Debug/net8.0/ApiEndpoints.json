@@ -69,6 +69,16 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "PaymentCallback",
+    "RelativePath": "api/Advertisement/CheckData",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "CreateDraftedAd",
     "RelativePath": "api/Advertisement/CreateDraftedAd",
     "HttpMethod": "POST",
@@ -78,6 +88,22 @@
       {
         "Name": "model",
         "Type": "FSK.APIService.RequestModel.AdvertisementRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "CreatePaymentUrl",
+    "RelativePath": "api/Advertisement/CreatePayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ads",
+        "Type": "FSK.APIService.Payment.Models.AdsPaymentModel",
         "IsRequired": true
       }
     ],

@@ -2,6 +2,8 @@
 {
     public class AdvertisementRequestModel
     {
+        //lấy để update content
+
         public int UserId { get; set; }
         public int AdsTypeId { get; set; }
         public string Title { get; set; }
