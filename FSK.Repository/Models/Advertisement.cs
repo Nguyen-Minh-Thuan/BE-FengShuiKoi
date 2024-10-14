@@ -27,6 +27,8 @@ public partial class Advertisement
 
     public DateTime? ExpiredDate { get; set; }
 
+    public int? Duration { get; set; }
+
     public string ImageUrl { get; set; }
 
     public bool? PaymentStatus { get; set; }

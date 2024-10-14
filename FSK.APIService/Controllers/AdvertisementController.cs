@@ -339,12 +339,9 @@ namespace FSK.APIService.Controllers
             }
 
             // Check if the advertisement is in a state that allows updates (e.g., 'Drafted' or 'Declined')
-            var allowedStatusIds = new[] {
-                 _unitOfWork.StatusRepository.GetByIdAsync(1).Id,
-                 _unitOfWork.StatusRepository.GetByIdAsync(3).Id
-            };
+            var allowedStatusIds = await _unitOfWork.StatusRepository.GetByIdAsync(1);
 
-            if (!allowedStatusIds.Contains(advertisement.StatusId))
+            if (allowedStatusIds.StatusId != advertisement.StatusId)
             {
                 return BadRequest("This advertisement cannot be updated in its current state");
             }
@@ -359,7 +356,7 @@ namespace FSK.APIService.Controllers
             }
             if (model.AdsTypeId != null && model.AdsTypeId != advertisement.AdsTypeId)
             {
-                advertisement.AdsTypeId = model.AdsTypeId;
+                advertisement.AdsTypeId = model.AdsTypeId.Value;
                 hasChanges = true;
             }
             if (model.Content != null && model.Content != advertisement.Content)
@@ -367,7 +364,7 @@ namespace FSK.APIService.Controllers
                 advertisement.Content = model.Content;
                 hasChanges = true;
             }
-            if (model.ElementId.HasValue && model.ElementId != advertisement.ElementId)
+            if (model.ElementId != null && model.ElementId != advertisement.ElementId)
             {
                 advertisement.ElementId = model.ElementId.Value;
                 hasChanges = true;

@@ -17,9 +17,7 @@ public partial class Transaction
 
     public string TransactionDetail { get; set; }
 
-    public DateTime FromDate { get; set; }
-
-    public DateTime ToDate { get; set; }
+    public int Duration { get; set; }
 
     public string PaymentMethod { get; set; }
 
