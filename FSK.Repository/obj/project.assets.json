@@ -4343,19 +4343,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+    "C:\\Users\\MINH THUAN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj",
+      "projectUniqueName": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj",
       "projectName": "FSK.Repository",
-      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\obj\\",
+      "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj",
+      "packagesPath": "C:\\Users\\MINH THUAN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MINH THUAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

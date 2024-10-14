@@ -157,7 +157,7 @@ namespace FSK.APIService.Controllers
                     }
                 }
                 response.Status = true;
-                response.Message = "User role updated successfully";
+                response.Message = "User info updated successfully";
                 response.Data = user;
                 return Ok(response);
 
