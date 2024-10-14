@@ -103,6 +103,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
             entity.HasOne(d => d.AdsType).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.AdsTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Advertisement_AdsTypes");
 
             entity.HasOne(d => d.Package).WithMany(p => p.Advertisements)
@@ -397,6 +398,9 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.ToDate).HasColumnType("datetime");
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TransactionDate).HasColumnType("datetime");
+            entity.Property(e => e.TransactionDetail)
+                .IsRequired()
+                .HasMaxLength(3000);
 
             entity.HasOne(d => d.Ads).WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.AdsId)

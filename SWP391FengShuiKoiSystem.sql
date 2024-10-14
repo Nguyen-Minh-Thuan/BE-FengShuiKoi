@@ -123,11 +123,12 @@ CREATE TABLE [dbo].[Transaction](
 	[UserId] [int] NOT NULL,
 	[AdsId] [int] NOT NULL,
 	[PackageID] [int] NOT NULL,
+	[TransactionDetail] [nvarchar] (3000) NOT NULL,
 	[FromDate] [datetime] NOT NULL,
 	[ToDate] [datetime] NOT NULL,
 	[PaymentMethod] [nvarchar] (50) NOT NULL,
 	[TransactionDate] [datetime] NOT NULL,
-	[TotalPrice] [decimal](18, 2) NULL,
+	[TotalPrice] [decimal](18, 2) NOT NULL,
  CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
 (
 	[TransactionID] ASC
@@ -468,10 +469,10 @@ SET IDENTITY_INSERT [dbo].[Package] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Transaction] ON 
 
-INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice]) VALUES (1,3,1,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-30T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),250000)
-INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice]) VALUES (2,4,2,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-29T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),300000)
-INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice]) VALUES (3,4,3,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-29T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),600000)
-INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice]) VALUES (4,5,4,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-30T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),500000)
+INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice],[TransactionDetail]) VALUES (1,3,1,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-30T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),250000,N'None')
+INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice],[TransactionDetail]) VALUES (2,4,2,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-29T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),300000,N'None')
+INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice],[TransactionDetail]) VALUES (3,4,3,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-29T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),600000,N'None')
+INSERT [dbo].[Transaction] ([TransactionID],[UserId],[AdsId],[PackageID],[FromDate],[ToDate],[PaymentMethod],[TransactionDate],[TotalPrice],[TransactionDetail]) VALUES (4,5,4,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-30T00:00:00.000' AS DateTime),N'QRCODE',CAST(N'2024-09-19T00:00:00.000' AS DateTime),500000,N'None')
 
 SET IDENTITY_INSERT [dbo].[Transaction] OFF
 GO

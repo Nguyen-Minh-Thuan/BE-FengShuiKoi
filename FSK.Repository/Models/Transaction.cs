@@ -15,6 +15,8 @@ public partial class Transaction
 
     public int PackageId { get; set; }
 
+    public string TransactionDetail { get; set; }
+
     public DateTime FromDate { get; set; }
 
     public DateTime ToDate { get; set; }
@@ -23,7 +25,7 @@ public partial class Transaction
 
     public DateTime TransactionDate { get; set; }
 
-    public decimal? TotalPrice { get; set; }
+    public decimal TotalPrice { get; set; }
 
     public virtual Advertisement Ads { get; set; }
 

@@ -6,7 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
+=======
+>>>>>>> main
 =======
 >>>>>>> main
 
@@ -18,7 +21,10 @@ namespace FSK.Repository.Repository
         public StatusRepository(SWP391FengShuiKoiSystemContext context) => _context = context;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     }

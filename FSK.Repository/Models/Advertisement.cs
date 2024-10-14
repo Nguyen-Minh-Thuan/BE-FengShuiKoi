@@ -9,7 +9,7 @@ public partial class Advertisement
 {
     public int AdsId { get; set; }
 
-    public int? AdsTypeId { get; set; }
+    public int AdsTypeId { get; set; }
 
     public int UserId { get; set; }
 
@@ -21,7 +21,7 @@ public partial class Advertisement
 
     public int StatusId { get; set; }
 
-    public int? ElementId { get; set; }
+    public int ElementId { get; set; }
 
     public DateTime? StartedDate { get; set; }
 
