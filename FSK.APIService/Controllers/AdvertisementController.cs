@@ -1,10 +1,13 @@
-﻿using FSK.APIService.RequestModel;
+﻿using FSK.APIService.Payment;
+using FSK.APIService.Payment.Models;
+using FSK.APIService.RequestModel;
 using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
+using FSK.Service.Services.Systems;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
 {
@@ -14,10 +17,14 @@ namespace FSK.APIService.Controllers
     {
 
         private readonly UnitOfWork _unitOfWork;
+        private readonly IVnPayService _vnPayService;
         //private readonly DatabaseContext _Dbcontext;
 
-        public AdvertisementController(UnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
-        //public AdvertisementController(DatabaseContext Dbcontext) => _Dbcontext = Dbcontext;
+        public AdvertisementController(UnitOfWork unitOfWork, IVnPayService vnPayService)
+        {
+            _unitOfWork = unitOfWork;
+            _vnPayService = vnPayService;
+        }
 
 
         [HttpGet("AdsByPage")]
@@ -169,18 +176,22 @@ namespace FSK.APIService.Controllers
         [HttpPost("CreateDraftedAd")]
         public async Task<IActionResult> CreateDraftedAd([FromBody] AdvertisementRequestModel model)
         {
-            if (model == null || model.UserId == 0)
-            {
-                return BadRequest("Invalid request data");
-            }
+            //try
+            //{
+                    if (model == null || model.UserId == 0)
+                    {
+                        return BadRequest("Invalid request data");
+                    }
 
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
-            var currentDate = DateTime.UtcNow;
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+                var currentDate = DateTime.UtcNow;
 
-            if (user == null || user.RoleId != 3)
-            {
-                return BadRequest("Invalid user or user is not a member");
-            }
+                //Putting this for checking user's role, should be the authentication's work but cant implement that right now
+                //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
+                if (user == null || user.RoleId != 3)
+                {
+                    return BadRequest("Invalid user or user is not a member");
+                }
 
             var draftId = _unitOfWork.StatusRepository.GetAll().Where(x => x.Status1 == "Drafted").First().StatusId;
             // Check the number of existing drafted ads for this user
@@ -316,74 +327,97 @@ namespace FSK.APIService.Controllers
         [HttpPut("UpdateAd")]
         public async Task<IActionResult> UpdateAd([FromBody] UpdateAdvertisementRequestModel model)
         {
-            if (model == null || model.AdvertisementId == 0 || model.UserId == 0)
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
             {
-                return BadRequest("Invalid request data");
+                if (model == null || model.AdvertisementId == 0 || model.UserId == 0)
+                {
+                    response.Status = false;
+                    response.Message = "Invalid request data";
+                    return BadRequest(response);
+                }
+
+                var advertisement = await _unitOfWork.AdvertisementRepository.GetByIdAsync(model.AdvertisementId);
+
+                if (advertisement == null)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found";
+                    return NotFound(response);
+                }
+
+                // Check if the user is the owner of the advertisement
+                if (advertisement.UserId != model.UserId)
+                {
+                    response.Status = false;
+                    response.Message = "You don't have permission to update this advertisement";
+                    return Forbid(response.Message);
+                }
+
+                // Check if the advertisement is in a state that allows updates (e.g., 'Drafted')
+                var allowedStatusIds = await _unitOfWork.StatusRepository.GetByIdAsync(1);
+
+                if (allowedStatusIds.StatusId != advertisement.StatusId)
+                {
+                    response.Status = false;
+                    response.Message = "This advertisement cannot be updated in its current state";
+                    return BadRequest(response);
+                }
+
+                bool hasChanges = false;
+
+                // Update fields if they are provided and different from current values
+                if (model.Title != null && model.Title != advertisement.Title)
+                {
+                    advertisement.Title = model.Title;
+                    hasChanges = true;
+                }
+                if (model.AdsTypeId != null && model.AdsTypeId != advertisement.AdsTypeId)
+                {
+                    advertisement.AdsTypeId = model.AdsTypeId.Value;
+                    hasChanges = true;
+                }
+                if (model.Content != null && model.Content != advertisement.Content)
+                {
+                    advertisement.Content = model.Content;
+                    hasChanges = true;
+                }
+                if (model.ElementId != null && model.ElementId != advertisement.ElementId)
+                {
+                    advertisement.ElementId = model.ElementId.Value;
+                    hasChanges = true;
+                }
+                if (model.ImageUrl != null && model.ImageUrl != advertisement.ImageUrl)
+                {
+                    advertisement.ImageUrl = model.ImageUrl;
+                    hasChanges = true;
+                }
+
+                if (hasChanges)
+                {
+                    await _unitOfWork.AdvertisementRepository.UpdateAsync(advertisement);
+                    await _unitOfWork.SaveChangesAsync();
+                    response.Status = true;
+                    response.Message = "Advertisement updated successfully";
+                    response.Data = advertisement;
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Status = true;
+                    response.Message = "No changes detected";
+                    response.Data = advertisement;
+                    return Ok(response);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            var advertisement = await _unitOfWork.AdvertisementRepository.GetByIdAsync(model.AdvertisementId);
-
-            if (advertisement == null)
-            {
-                return NotFound("Advertisement not found");
-            }
-
-            // Check if the user is the owner of the advertisement
-            if (advertisement.UserId != model.UserId)
-            {
-                return Forbid("You don't have permission to update this advertisement");
-            }
-
-            // Check if the advertisement is in a state that allows updates (e.g., 'Drafted' or 'Declined')
-            var allowedStatusIds = new[] {
-                 _unitOfWork.StatusRepository.GetByIdAsync(1).Id,
-                 _unitOfWork.StatusRepository.GetByIdAsync(3).Id
-            };
-
-            if (!allowedStatusIds.Contains(advertisement.StatusId))
-            {
-                return BadRequest("This advertisement cannot be updated in its current state");
-            }
-
-            bool hasChanges = false;
-
-            // Update fields if they are provided and different from current values
-            if (model.Title != null && model.Title != advertisement.Title)
-            {
-                advertisement.Title = model.Title;
-                hasChanges = true;
-            }
-            if (model.AdsTypeId != null && model.AdsTypeId != advertisement.AdsTypeId)
-            {
-                advertisement.AdsTypeId = model.AdsTypeId;
-                hasChanges = true; 
-            }
-            if (model.Content != null && model.Content != advertisement.Content)
-            {
-                advertisement.Content = model.Content;
-                hasChanges = true;
-            }
-            if (model.ElementId.HasValue && model.ElementId != advertisement.ElementId)
-            {
-                advertisement.ElementId = model.ElementId.Value;
-                hasChanges = true;
-            }
-            if (model.ImageUrl != null && model.ImageUrl != advertisement.ImageUrl)
-            {
-                advertisement.ImageUrl = model.ImageUrl;
-                hasChanges = true;
-            }
-
-            if (hasChanges)
-            {
-                await _unitOfWork.AdvertisementRepository.UpdateAsync(advertisement);
-                await _unitOfWork.SaveChangesAsync();
-                return Ok(new { message = "Advertisement updated successfully", advertisementId = advertisement.AdsId });
-            }
-            else
-            {
-                return Ok(new { message = "No changes detected", advertisementId = advertisement.AdsId });
-            }
+            
         }
 
         [HttpGet("GetAdsByUser")]
@@ -413,7 +447,7 @@ namespace FSK.APIService.Controllers
                     item.Advertisements = null;
                 }
 
-                if (ads.IsNullOrEmpty())
+                if (ads == null)
                 {
                     response.Status = false;
                     response.Message = "There is nothing to return.";
@@ -436,6 +470,62 @@ namespace FSK.APIService.Controllers
             }
         }
 
+        [HttpPost("CreatePayment")]
+        public IActionResult CreatePaymentUrl(AdsPaymentModel ads)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            UpdateAdvertisementRequestModel updateContent = new UpdateAdvertisementRequestModel {
+                AdvertisementId = ads.AdsId, 
+                AdsTypeId = ads.AdsTypeId,
+                Content = ads.Content,
+                ElementId = ads.ElementId,
+                ImageUrl = ads.ImageUrl,
+                Title = ads.Title,
+                UserId = ads.UserId
+            };
+
+            var checkUpdate = UpdateAd(updateContent);
+
+            
+
+            PaymentInformationModel model = new PaymentInformationModel { Name = "Testing Product", Amount = 100000, OrderDescription = "This is a testing product", OrderType = "FengShui Shit" };
+
+            var url = _vnPayService.CreatePaymentUrl(model, HttpContext);
+
+            
+
+            response.Status = true;
+            response.Message = "Success";
+            response.Data = url;
+
+
+            return Ok(response);
+        }
+
+        [HttpGet("CheckData")]
+        public IActionResult PaymentCallback()
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                var test = _vnPayService.PaymentExecute(Request.Query);
+
+                response.Data = test;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+
+                response.Status = false;
+                response.Message = err.ToString();
+                return BadRequest(response);
+            }
+
+        }
 
 
     }

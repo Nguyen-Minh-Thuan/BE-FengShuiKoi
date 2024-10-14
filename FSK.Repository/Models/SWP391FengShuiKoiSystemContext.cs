@@ -65,6 +65,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
     //        => optionsBuilder.UseSqlServer("Data Source=MINHTHUAN\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
+
     public static string GetConnectionString(string connectionStringName)
     {
         var config = new ConfigurationBuilder()
@@ -102,6 +103,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
             entity.HasOne(d => d.AdsType).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.AdsTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Advertisement_AdsTypes");
 
             entity.HasOne(d => d.Package).WithMany(p => p.Advertisements)
@@ -388,14 +390,15 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.ToTable("Transaction");
 
             entity.Property(e => e.TransactionId).HasColumnName("TransactionID");
-            entity.Property(e => e.FromDate).HasColumnType("datetime");
             entity.Property(e => e.PackageId).HasColumnName("PackageID");
             entity.Property(e => e.PaymentMethod)
                 .IsRequired()
                 .HasMaxLength(50);
-            entity.Property(e => e.ToDate).HasColumnType("datetime");
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TransactionDate).HasColumnType("datetime");
+            entity.Property(e => e.TransactionDetail)
+                .IsRequired()
+                .HasMaxLength(3000);
 
             entity.HasOne(d => d.Ads).WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.AdsId)

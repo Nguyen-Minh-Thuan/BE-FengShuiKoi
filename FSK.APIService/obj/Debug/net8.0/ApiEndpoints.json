@@ -69,6 +69,16 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "PaymentCallback",
+    "RelativePath": "api/Advertisement/CheckData",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "CreateDraftedAd",
     "RelativePath": "api/Advertisement/CreateDraftedAd",
     "HttpMethod": "POST",
@@ -78,6 +88,22 @@
       {
         "Name": "model",
         "Type": "FSK.APIService.RequestModel.AdvertisementRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "CreatePaymentUrl",
+    "RelativePath": "api/Advertisement/CreatePayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ads",
+        "Type": "FSK.APIService.Payment.Models.AdsPaymentModel",
         "IsRequired": true
       }
     ],
@@ -504,6 +530,37 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Package, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.PackageController",
+    "Method": "UpdatePackage",
+    "RelativePath": "api/Package/UpdatePackage/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPackage",
+        "Type": "FSK.APIService.RequestModel.UpdatePackageRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FSK.Repository.Models.Package",
         "MediaTypes": [
           "text/plain",
           "application/json",

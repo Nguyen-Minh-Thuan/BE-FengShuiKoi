@@ -15,15 +15,15 @@ public partial class Transaction
 
     public int PackageId { get; set; }
 
-    public DateTime FromDate { get; set; }
+    public string TransactionDetail { get; set; }
 
-    public DateTime ToDate { get; set; }
+    public int Duration { get; set; }
 
     public string PaymentMethod { get; set; }
 
     public DateTime TransactionDate { get; set; }
 
-    public decimal? TotalPrice { get; set; }
+    public decimal TotalPrice { get; set; }
 
     public virtual Advertisement Ads { get; set; }
 
