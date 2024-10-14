@@ -355,7 +355,7 @@ namespace FSK.APIService.Controllers
                     return Forbid(response.Message);
                 }
 
-                // Check if the advertisement is in a state that allows updates (e.g., 'Drafted' or 'Declined')
+                // Check if the advertisement is in a state that allows updates (e.g., 'Drafted')
                 var allowedStatusIds = await _unitOfWork.StatusRepository.GetByIdAsync(1);
 
                 if (allowedStatusIds.StatusId != advertisement.StatusId)
@@ -485,7 +485,7 @@ namespace FSK.APIService.Controllers
                 UserId = ads.UserId
             };
 
-            //var checkUpdate = UpdateAd(updateContent);
+            var checkUpdate = UpdateAd(updateContent);
 
             
 
