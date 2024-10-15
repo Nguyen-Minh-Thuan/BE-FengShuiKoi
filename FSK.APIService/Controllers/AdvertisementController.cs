@@ -7,6 +7,7 @@ using FSK.Repository.Models;
 using FSK.Service.Services.Systems;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 //using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
@@ -324,6 +325,54 @@ namespace FSK.APIService.Controllers
         //    return true;
         //}
 
+        private async Task<int> CreateDraftedAdV2([FromBody] AdvertisementRequestModel model)
+        {
+            //try
+            //{
+            if (model == null || model.UserId == 0)
+            {
+                return 0;
+            }
+
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+
+            //Putting this for checking user's role, should be the authentication's work but cant implement that right now
+            //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
+            if (user == null || user.RoleId != 3)
+            {
+                return 0;
+            }
+
+            var draftId = _unitOfWork.StatusRepository.GetAll().Where(x => x.Status1 == "Drafted").First().StatusId;
+            // Check the number of existing drafted ads for this user
+            var existingDraftedAdsCount = await _unitOfWork.AdvertisementRepository.CountAsync(
+                a => a.UserId == model.UserId && a.StatusId == draftId);
+
+            if (existingDraftedAdsCount >= 3)
+            {
+                return 0;
+            }
+
+            var advertisement = new Advertisement
+            {
+                UserId = model.UserId,
+                AdsTypeId = model.AdsTypeId,
+                Title = model.Title,
+                Content = model.Content,
+                StatusId = draftId,
+                ElementId = model.ElementId,
+                ImageUrl = model.ImageUrl,
+                PaymentStatus = false
+            };
+
+            await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
+            var newAds = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == model.UserId).Last();
+            await _unitOfWork.SaveChangesAsync();
+
+            return newAds.AdsId;
+        }
+
+
         [HttpPut("UpdateAd")]
         public async Task<IActionResult> UpdateAd([FromBody] UpdateAdvertisementRequestModel model)
         {
@@ -420,6 +469,86 @@ namespace FSK.APIService.Controllers
             
         }
 
+        private async Task<Boolean> UpdateAdv2([FromBody] UpdateAdvertisementRequestModel model)
+        {
+
+            try
+            {
+                if (model == null || model.AdvertisementId == 0 || model.UserId == 0)
+                {
+                    return false;
+                }
+
+                var advertisement = await _unitOfWork.AdvertisementRepository.GetByIdAsync(model.AdvertisementId);
+
+                if (advertisement == null)
+                {
+                    return false;
+                }
+
+                // Check if the user is the owner of the advertisement
+                if (advertisement.UserId != model.UserId)
+                {
+                    return false;
+                }
+
+                // Check if the advertisement is in a state that allows updates (e.g., 'Drafted')
+                var allowedStatusIds = await _unitOfWork.StatusRepository.GetByIdAsync(1);
+
+                if (allowedStatusIds.StatusId != advertisement.StatusId)
+                {
+                    return false;
+                }
+
+                bool hasChanges = false;
+
+                // Update fields if they are provided and different from current values
+                if (model.Title != null && model.Title != advertisement.Title)
+                {
+                    advertisement.Title = model.Title;
+                    hasChanges = true;
+                }
+                if (model.AdsTypeId != 0 && model.AdsTypeId != advertisement.AdsTypeId)
+                {
+                    advertisement.AdsTypeId = model.AdsTypeId.Value;
+                    hasChanges = true;
+                }
+                if (model.Content != null && model.Content != advertisement.Content)
+                {
+                    advertisement.Content = model.Content;
+                    hasChanges = true;
+                }
+                if (model.ElementId != 0 && model.ElementId != advertisement.ElementId)
+                {
+                    advertisement.ElementId = model.ElementId.Value;
+                    hasChanges = true;
+                }
+                if (model.ImageUrl != null && model.ImageUrl != advertisement.ImageUrl)
+                {
+                    advertisement.ImageUrl = model.ImageUrl;
+                    hasChanges = true;
+                }
+
+                if (hasChanges)
+                {
+                    await _unitOfWork.AdvertisementRepository.UpdateAsync(advertisement);
+                    await _unitOfWork.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception err)
+            {
+
+                return false;
+            }
+
+
+        }
+
         [HttpGet("GetAdsByUser")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsUser(int userid)
         {
@@ -471,29 +600,89 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpPost("CreatePayment")]
-        public IActionResult CreatePaymentUrl(AdsPaymentModel ads)
+        public async Task<IActionResult> CreatePaymentUrl(AdsPaymentModel ads)
         {
             BaseResponseModel response = new BaseResponseModel();
 
-            UpdateAdvertisementRequestModel updateContent = new UpdateAdvertisementRequestModel {
-                AdvertisementId = ads.AdsId, 
-                AdsTypeId = ads.AdsTypeId,
-                Content = ads.Content,
-                ElementId = ads.ElementId,
-                ImageUrl = ads.ImageUrl,
-                Title = ads.Title,
-                UserId = ads.UserId
+            Advertisement item;
+
+            if (ads.AdsId.Value == 0)
+            {
+                AdvertisementRequestModel createModel = new AdvertisementRequestModel
+                {
+                    AdsTypeId = ads.AdsTypeId,
+                    ElementId = ads.ElementId,
+                    Content = ads.Content,
+                    Title = ads.Title,
+                    UserId = ads.UserId,
+                    ImageUrl = ads.ImageUrl
+                };
+
+                var checkCreate = CreateDraftedAdV2(createModel).Result;
+
+                if (checkCreate == 0)
+                {
+                    response.Status = false;
+                    response.Message = "Create failed.";
+                    return BadRequest(response);
+                }
+
+                item = await _unitOfWork.AdvertisementRepository.GetByIdAsync(checkCreate);
+
+            }
+            else
+            {
+                UpdateAdvertisementRequestModel updateContent = new UpdateAdvertisementRequestModel {
+                    AdvertisementId = ads.AdsId.Value, 
+                    AdsTypeId = ads.AdsTypeId,
+                    Content = ads.Content,
+                    ElementId = ads.ElementId,
+                    ImageUrl = ads.ImageUrl,
+                    Title = ads.Title,
+                    UserId = ads.UserId
+                };
+
+                var checkUpdate = UpdateAdv2(updateContent).Result;
+
+                 if (checkUpdate == false)
+                 {
+                     response.Status = false;
+                     response.Message = "Update failed.";
+                     return BadRequest(response);
+                 }
+
+                item = await _unitOfWork.AdvertisementRepository.GetByIdAsync(ads.AdsId.Value);
+
+            }
+
+            // Update + Calculate to create Payment
+
+            if (item == null)
+            {
+                response.Status = false;
+                response.Message = "Item didn't found";
+                return BadRequest(response);
+            }
+
+            item.PackageId = ads.PackageId;
+
+            await _unitOfWork.AdvertisementRepository.UpdateAsync(item);
+
+            item.Package = await _unitOfWork.PackageRepository.GetByIdAsync(item.PackageId.Value);
+
+            item.AdsType = await _unitOfWork.AdsTypeRepository.GetByIdAsync(item.AdsTypeId);
+
+            PaymentInformationModel model = new PaymentInformationModel
+            {
+                Name = $"Ad's Title: {item.Title}.",
+                Amount = item.Package.Price.Value * ads.Quantity,
+                OrderDescription = $"PackageType: {item.Package.PackageName}, Price: {item.Package.Price}, Quantity: {ads.Quantity}. Duration: {ads.Quantity*item.Package.Duration}. Id: {item.AdsId},{ads.Quantity}",
+                OrderType = item.AdsType.TypeName
             };
-
-            var checkUpdate = UpdateAd(updateContent);
-
-            
-
-            PaymentInformationModel model = new PaymentInformationModel { Name = "Testing Product", Amount = 100000, OrderDescription = "This is a testing product", OrderType = "FengShui Shit" };
 
             var url = _vnPayService.CreatePaymentUrl(model, HttpContext);
 
-            
+
 
             response.Status = true;
             response.Message = "Success";
@@ -504,7 +693,7 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("CheckData")]
-        public IActionResult PaymentCallback()
+        public async Task<IActionResult> PaymentCallback()
         {
             BaseResponseModel response = new BaseResponseModel();
 
@@ -512,10 +701,50 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var test = _vnPayService.PaymentExecute(Request.Query);
+                var paymentStatus = _vnPayService.PaymentExecute(Request.Query);
 
-                response.Data = test;
+                var lastIndex = paymentStatus.OrderDescription.Split(": ").Last();
+                var listIndex = lastIndex.Split(",");
+
+                int AdsId = int.Parse(listIndex.First());
+                int Quantity = int.Parse(listIndex.Last());
+
+
+                var Ads = await _unitOfWork.AdvertisementRepository.GetByIdAsync(AdsId);
+                var Package = await _unitOfWork.PackageRepository.GetByIdAsync(Ads.PackageId.Value);
+
+
+                await _unitOfWork.TransactionRepository.CreateIdentityAsync(new Transaction
+                {
+                    TransactionId = int.Parse(paymentStatus.TransactionId),
+                    UserId = Ads.UserId,
+                    AdsId = Ads.AdsId,
+                    PackageId = Ads.PackageId.Value,
+                    TransactionDetail = paymentStatus.OrderDescription,
+                    PaymentMethod = paymentStatus.PaymentMethod,
+                    TransactionDate = DateTime.Now,
+                    TotalPrice = Package.Price.Value*Quantity,
+                    Duration = Package.Duration*Quantity
+                });
+
+
+                Ads.StatusId = 2;
+                Ads.PaymentStatus = true;
+                Ads.Duration = Package.Duration * Quantity;
+
+                await _unitOfWork.AdvertisementRepository.UpdateAsync(Ads);
+
+                var transaction = await _unitOfWork.TransactionRepository.GetByIdAsync(int.Parse(paymentStatus.TransactionId));
+
+                response.Data = new
+                {
+                    PaymentStatus = paymentStatus,
+                    Ads = Ads,
+                    Invoice = transaction
+                };
+
                 return Ok(response);
+
             }
             catch (Exception err)
             {
