@@ -10,5 +10,6 @@
         public string? Content { get; set; }
         public int ElementId { get; set; }
         public string? ImageUrl { get; set; }
+
     }
 }

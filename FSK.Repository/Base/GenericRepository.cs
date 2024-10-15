@@ -85,6 +85,36 @@ namespace FSK.Repository.Base
             _context.Add(entity);
             return await _context.SaveChangesAsync();
         }
+
+        public async Task<T> CreateNewAsync(T entity)
+        {
+            _context.Add(entity);
+            await _context.SaveChangesAsync();
+            return await _context.Set<T>().LastAsync();
+        }
+
+
+        public async Task<int> CreateIdentityAsync(T entity)
+        {
+            var transaction = _context.Database.BeginTransaction();
+                try
+                {
+                    _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Transaction] ON");
+                    _context.Add(entity);
+                    var count = await _context.SaveChangesAsync();
+                    _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Transaction] OFF");
+                    transaction.Commit();
+                    return count;
+                }
+                catch (Exception err)
+                {
+                    transaction.Rollback();
+                    return 0;
+                }
+        }
+
+        
+
         public async Task<int> UpdateAsync(T entity)
         {
             var tracker = _context.Attach(entity);
