@@ -49,10 +49,10 @@ namespace FSK.APIService.Controllers
         /// <summary>
         /// Get every Koi varieties
         /// </summary>
-        /// <returns>A list of Koi varieties divided by page</returns>
+        /// <returns>A list of all Koi varieties</returns>
         /// <response code="200">Returns the list contains all Koi varieties</response>
-        [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<Variety>>> GetKois()
+        [HttpGet("GetAllKois")]
+        public async Task<ActionResult<IEnumerable<Variety>>> GetAllKois()
         {
 
             BaseResponseModel response = new BaseResponseModel();
