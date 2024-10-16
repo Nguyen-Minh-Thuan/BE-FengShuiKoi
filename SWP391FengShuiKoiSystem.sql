@@ -44,7 +44,26 @@ CREATE TABLE [dbo].[Role](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
+/****** Object:  Table [dbo].[Blog]    Script Date: 24/09/24 7:10PM  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Blog](
+	[BlogId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Content] [nvarchar](3000) NULL,
+	[StatusId] [int]  NOT NULL,
+	[ElementID] [int] NOT NULL,
+	[CreatedDate] [datetime] NULL,
+	[ImageUrl] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Blog] PRIMARY KEY CLUSTERED 
+(
+	[BlogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 /****** Object:  Table [dbo].[Advertisement]    Script Date: 24/09/24 7:10PM  ******/
 SET ANSI_NULLS ON
 GO
@@ -63,6 +82,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[ExpiredDate] [datetime] NULL,
 	[Duration] [int] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
+	[Reason] [nvarchar](500) NULL,
 	[PaymentStatus] [bit] NULL,
  CONSTRAINT [PK_Advertisement] PRIMARY KEY CLUSTERED 
 (

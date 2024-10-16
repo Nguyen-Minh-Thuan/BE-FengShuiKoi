@@ -33,6 +33,7 @@ namespace FSK.Repository
         private StatusRepository _statusRepository;
         private RoleRepository _roleRepository;
         private AdsTypeRepository _adsTypeRepository;
+        private BlogRepository _blogRepository;
 
         public UnitOfWork() => _context ??= new SWP391FengShuiKoiSystemContext();
 
@@ -147,6 +148,11 @@ namespace FSK.Repository
         public AdsTypeRepository AdsTypeRepository
         {
             get { return _adsTypeRepository ??= new AdsTypeRepository(_context); }
+        }
+
+        public BlogRepository BlogRepository
+        {
+            get { return _blogRepository ??= new BlogRepository(_context); }
         }
 
         public async Task<int> SaveChangesAsync()
