@@ -327,49 +327,56 @@ namespace FSK.APIService.Controllers
 
         private async Task<int> CreateDraftedAdV2([FromBody] AdvertisementRequestModel model)
         {
-            //try
-            //{
-            if (model == null || model.UserId == 0)
+            try
             {
+                if (model == null || model.UserId == 0)
+                {
+                    return -1;
+                }
+
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+
+                //Putting this for checking user's role, should be the authentication's work but cant implement that right now
+                //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
+                if (user == null || user.RoleId != 3)
+                {
+                    return -2;
+                }
+
+                var draftId = _unitOfWork.StatusRepository.GetAll().Where(x => x.Status1 == "Drafted").First().StatusId;
+                // Check the number of existing drafted ads for this user
+                var existingDraftedAdsCount = await _unitOfWork.AdvertisementRepository.CountAsync(
+                    a => a.UserId == model.UserId && a.StatusId == draftId);
+
+                if (existingDraftedAdsCount >= 3)
+                {
+                    return -3;
+                }
+
+                var advertisement = new Advertisement
+                {
+                    UserId = model.UserId,
+                    AdsTypeId = model.AdsTypeId,
+                    Title = model.Title,
+                    Content = model.Content,
+                    StatusId = draftId,
+                    ElementId = model.ElementId,
+                    ImageUrl = model.ImageUrl,
+                    PaymentStatus = false
+                };
+
+                await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
+                var newAds = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == model.UserId).Last();
+                await _unitOfWork.SaveChangesAsync();
+
+                return newAds.AdsId;
+            }
+            catch (Exception)
+            {
+
                 return 0;
             }
-
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
-
-            //Putting this for checking user's role, should be the authentication's work but cant implement that right now
-            //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
-            if (user == null || user.RoleId != 3)
-            {
-                return 0;
-            }
-
-            var draftId = _unitOfWork.StatusRepository.GetAll().Where(x => x.Status1 == "Drafted").First().StatusId;
-            // Check the number of existing drafted ads for this user
-            var existingDraftedAdsCount = await _unitOfWork.AdvertisementRepository.CountAsync(
-                a => a.UserId == model.UserId && a.StatusId == draftId);
-
-            if (existingDraftedAdsCount >= 3)
-            {
-                return 0;
-            }
-
-            var advertisement = new Advertisement
-            {
-                UserId = model.UserId,
-                AdsTypeId = model.AdsTypeId,
-                Title = model.Title,
-                Content = model.Content,
-                StatusId = draftId,
-                ElementId = model.ElementId,
-                ImageUrl = model.ImageUrl,
-                PaymentStatus = false
-            };
-
-            await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
-            var newAds = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == model.UserId).Last();
-            await _unitOfWork.SaveChangesAsync();
-
-            return newAds.AdsId;
+            
         }
 
 
@@ -460,36 +467,38 @@ namespace FSK.APIService.Controllers
                     return Ok(response);
                 }
             }
-            catch (Exception)
+            catch (Exception err)
             {
-
-                throw;
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+                
             }
 
             
         }
 
-        private async Task<Boolean> UpdateAdv2([FromBody] UpdateAdvertisementRequestModel model)
+        private async Task<int> UpdateAdv2([FromBody] UpdateAdvertisementRequestModel model)
         {
 
             try
             {
                 if (model == null || model.AdvertisementId == 0 || model.UserId == 0)
                 {
-                    return false;
+                    return -1;
                 }
 
                 var advertisement = await _unitOfWork.AdvertisementRepository.GetByIdAsync(model.AdvertisementId);
 
                 if (advertisement == null)
                 {
-                    return false;
+                    return -2;
                 }
 
                 // Check if the user is the owner of the advertisement
                 if (advertisement.UserId != model.UserId)
                 {
-                    return false;
+                    return -3;
                 }
 
                 // Check if the advertisement is in a state that allows updates (e.g., 'Drafted')
@@ -497,7 +506,7 @@ namespace FSK.APIService.Controllers
 
                 if (allowedStatusIds.StatusId != advertisement.StatusId)
                 {
-                    return false;
+                    return -4;
                 }
 
                 bool hasChanges = false;
@@ -533,17 +542,16 @@ namespace FSK.APIService.Controllers
                 {
                     await _unitOfWork.AdvertisementRepository.UpdateAsync(advertisement);
                     await _unitOfWork.SaveChangesAsync();
-                    return true;
+                    return 1;
                 }
                 else
                 {
-                    return true;
+                    return 1;
                 }
             }
             catch (Exception err)
             {
-
-                return false;
+                return -999;
             }
 
 
@@ -606,7 +614,7 @@ namespace FSK.APIService.Controllers
 
             Advertisement item;
 
-            if (ads.AdsId.Value == 0)
+            if (!ads.AdsId.HasValue)
             {
                 AdvertisementRequestModel createModel = new AdvertisementRequestModel
                 {
@@ -620,10 +628,16 @@ namespace FSK.APIService.Controllers
 
                 var checkCreate = CreateDraftedAdV2(createModel).Result;
 
-                if (checkCreate == 0)
+                if (checkCreate <= 0)
                 {
                     response.Status = false;
-                    response.Message = "Create failed.";
+
+                    if (checkCreate == -1) response.Message = "Invalid request data.";
+                    else if (checkCreate == -2) response.Message = "Invalid user or user is not a member";
+                    else if (checkCreate == -3) response.Message = "You have reached the maximum limit of 3 drafted advertisements. " +
+                            "Please submit or delete an existing draft before creating a new one.";
+                    else response.Message = "Something wrong while creating an Advertisement.";
+
                     return BadRequest(response);
                 }
 
@@ -644,10 +658,14 @@ namespace FSK.APIService.Controllers
 
                 var checkUpdate = UpdateAdv2(updateContent).Result;
 
-                 if (checkUpdate == false)
+                 if (checkUpdate <= 0)
                  {
                      response.Status = false;
-                     response.Message = "Update failed.";
+                    if (checkUpdate == -1) response.Message = "Invalid request data";
+                    else if (checkUpdate == -2) response.Message = "Advertisement not found";
+                    else if (checkUpdate == -3) response.Message = "You don't have permission to update this advertisement";
+                    else if (checkUpdate == -4) response.Message = "This advertisement cannot be updated in its current state";
+                    else response.Message = "Something wrong while updating an Advertisement.";
                      return BadRequest(response);
                  }
 

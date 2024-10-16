@@ -31,6 +31,8 @@ public partial class Advertisement
 
     public string ImageUrl { get; set; }
 
+    public string Reason { get; set; }
+
     public bool? PaymentStatus { get; set; }
 
     public virtual AdsType AdsType { get; set; }
