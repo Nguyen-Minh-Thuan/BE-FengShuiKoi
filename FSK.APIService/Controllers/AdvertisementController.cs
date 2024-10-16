@@ -614,7 +614,7 @@ namespace FSK.APIService.Controllers
 
             Advertisement item;
 
-            if (ads.AdsId.Value == 0)
+            if (!ads.AdsId.HasValue)
             {
                 AdvertisementRequestModel createModel = new AdvertisementRequestModel
                 {

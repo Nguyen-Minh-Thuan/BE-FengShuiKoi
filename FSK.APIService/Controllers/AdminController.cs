@@ -32,6 +32,8 @@ namespace FSK.APIService.Controllers
             }
 
             advertisement.StatusId = 4;
+            advertisement.StartedDate = DateTime.Now;
+            advertisement.ExpiredDate = advertisement.StartedDate.Value.AddDays(advertisement.Duration.Value);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -48,7 +50,13 @@ namespace FSK.APIService.Controllers
                 return NotFound("Advertisement not found");
             }
 
+            if (advertisement.StatusId != 2)
+            {
+                return BadRequest("This Advertisement are not allow to update Status");
+            }
+
             advertisement.StatusId = 3;
+            advertisement.Reason = reason;
 
             // add a new property to the Advertisement model to store the decline reason, or not?
             // advertisement.DeclineReason = reason;
@@ -60,7 +68,7 @@ namespace FSK.APIService.Controllers
             //{
             //}
 
-            return Ok(new { message = "Advertisement declined", reason = reason });
+            return Ok(new { message = "Advertisement declined" });
         }
     }
 }

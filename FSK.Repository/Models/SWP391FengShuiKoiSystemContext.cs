@@ -24,6 +24,8 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
     public virtual DbSet<Auspiciou> Auspicious { get; set; }
 
+    public virtual DbSet<Blog> Blogs { get; set; }
+
     public virtual DbSet<Color> Colors { get; set; }
 
     public virtual DbSet<Direction> Directions { get; set; }
@@ -64,7 +66,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=MINHTHUAN\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
+    //        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     public static string GetConnectionString(string connectionStringName)
     {
@@ -96,6 +98,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.ExpiredDate).HasColumnType("datetime");
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
             entity.Property(e => e.PackageId).HasColumnName("PackageID");
+            entity.Property(e => e.Reason).HasMaxLength(500);
             entity.Property(e => e.StartedDate).HasColumnType("datetime");
             entity.Property(e => e.Title)
                 .IsRequired()
@@ -141,6 +144,19 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasForeignKey(d => d.KuaId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Auspicious_Kua");
+        });
+
+        modelBuilder.Entity<Blog>(entity =>
+        {
+            entity.ToTable("Blog");
+
+            entity.Property(e => e.Content).HasMaxLength(3000);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.ElementId).HasColumnName("ElementID");
+            entity.Property(e => e.ImageUrl).HasMaxLength(250);
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<Color>(entity =>
