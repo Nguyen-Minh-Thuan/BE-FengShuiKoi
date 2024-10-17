@@ -222,7 +222,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = false;
                 response.Message = "An error occurred while updating the koi variety";
-                return StatusCode(500, response);
+                return BadRequest(response);
             }
         }
 
@@ -232,7 +232,7 @@ namespace FSK.APIService.Controllers
         /// <param name="id">The ID of the Koi variety to delete</param>
         /// <returns>A response indicating the result of the delete operation</returns>
         /// <response code="200">Returns a success message if the Koi variety was deleted</response>
-        /// <response code="500">If there was an error during the delete operation</response>
+        /// <response code="400">If there was an error during the delete operation</response>   
         [HttpDelete("DeleteKoi/{id}")]
         public async Task<IActionResult> DeleteKoi(int id)
         {

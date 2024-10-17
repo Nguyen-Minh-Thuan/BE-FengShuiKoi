@@ -25,7 +25,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.UserRepository.GetPageAsync(pageIndex,pageSize);
+                response.Data = await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize);
                 return Ok(response);
             }
             catch (Exception err)
@@ -51,6 +51,7 @@ namespace FSK.APIService.Controllers
             {
                 item.Users = null;
             }
+            user.Password = null;
             response.Data = user;
 
             if (response.Data == null)
@@ -118,62 +119,118 @@ namespace FSK.APIService.Controllers
             return NoContent();
         }
 
-        [HttpPut("UpdateInfo/{id}")]
-        public async Task<IActionResult> UpdateUserInfo(int id, string newName, string newBio, string newImageURL)
+        /// <summary>
+        /// Update information of an existed user
+        /// </summary>
+        /// <param name="id">Id of the user</param>
+        /// <param name="model">Information needed to update</param>
+        /// <returns>The updated information of the user</returns>
+        /// <response code="200" cref="UserRequestModel">Returns the updated user</response>
+        [HttpPut("UpdateUser/{id}")]
+        public async Task<IActionResult> UpdateKoi(int id, [FromBody] UserRequestModel model)
         {
             BaseResponseModel response = new BaseResponseModel();
+
             try
             {
-                //Get user.
+                if (model == null || id <= 0)
+                {
+                    response.Status = false;
+                    response.Message = "Invalid request data";
+                    return BadRequest(response);
+                }
+
                 var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+
                 if (user == null)
                 {
                     response.Status = false;
                     response.Message = "User not found";
                     return NotFound(response);
                 }
-                //Trying to save data.
-                try
-                {
-                    user.UserName = newName;
-                    user.Bio = newBio;
-                    user.ImageUrl = newImageURL;
-                    await _unitOfWork.UserRepository.UpdateAsync(user);
-                    await _unitOfWork.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException db_err)
-                {
-                    if (!await UserExists(id))
-                    {
-                        response.Status = false;
-                        response.Message = "User not found while inserting";
-                        return NotFound(response);
-                    }
-                    else
-                    {
-                        response.Status = false;
-                        response.Message = db_err.ToString();
-                        return BadRequest(response);
-                    }
-                }
+
+                //// Check if the VarietyName is unique (excluding the current variety)
+                //var existingVarieties = await _unitOfWork.VarietyRepository.GetAllAsync();
+                //var duplicateVariety = existingVarieties.FirstOrDefault(v => v.VarietyName.Equals(model.VarietyName, StringComparison.OrdinalIgnoreCase) && v.VarietyId != id);
+                //if (duplicateVariety != null)
+                //{
+                //    response.Status = false;
+                //    response.Message = "A Koi variety with this name already exists";
+                //    return BadRequest(response);
+                //}
+
+                // Update fields
+                user.UserName = model.UserName;
+                user.ImageUrl = model.ImageUrl;
+                user.Bio = model.Bio;
+
+                await _unitOfWork.UserRepository.UpdateAsync(user);
+                await _unitOfWork.SaveChangesAsync();
+
                 response.Status = true;
-                response.Message = "User info updated successfully";
+                response.Message = "User's information updated successfully";
                 response.Data = user;
                 return Ok(response);
-
             }
-            catch (Exception err)
+            catch (Exception)
             {
                 response.Status = false;
-                response.Message = err.ToString();
+                response.Message = "An error occurred while updating user's information";
                 return BadRequest(response);
             }
-
-            
-
-
-            
         }
+
+
+
+        [HttpPut("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequestModel model)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                if (model == null || model.UserId <= 0 || string.IsNullOrEmpty(model.OldPassword) || string.IsNullOrEmpty(model.NewPassword))
+                {
+                    response.Status = false;
+                    response.Message = "Invalid request data";
+                    return BadRequest(response);
+                }
+
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+
+                if (user == null)
+                {
+                    response.Status = false;
+                    response.Message = "User not found";
+                    return NotFound(response);
+                }
+
+                // Verify old password
+                if (user.Password != model.OldPassword)
+                {
+                    response.Status = false;
+                    response.Message = "Incorrect old password";
+                    return BadRequest(response);
+                }
+
+                // Update password
+                user.Password = model.NewPassword;
+
+                await _unitOfWork.UserRepository.UpdateAsync(user);
+                await _unitOfWork.SaveChangesAsync();
+
+                response.Status = true;
+                response.Message = "Password updated successfully";
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                response.Status = false;
+                response.Message = "An error occurred while updating the password";
+                return StatusCode(500, response);
+            }
+        }
+
 
     }
 }
