@@ -203,6 +203,32 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetAdsElement",
+    "RelativePath": "api/Advertisement/GetRecAds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Elementid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "UpdateAd",
     "RelativePath": "api/Advertisement/UpdateAd",
     "HttpMethod": "PUT",
@@ -757,22 +783,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "FSK.APIService.Controllers.PaymentController",
-    "Method": "ProcessPayment",
-    "RelativePath": "api/Payment/ProcessPayment/{advertisementId}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "advertisementId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "FSK.APIService.Controllers.RegistrationController",
