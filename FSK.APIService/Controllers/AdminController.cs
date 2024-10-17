@@ -30,8 +30,14 @@ namespace FSK.APIService.Controllers
             {
                 return BadRequest("Payment must be completed before approval");
             }
-
+            //Approved
             advertisement.StatusId = 4;
+
+            //Smth should have been here but idk for now :D
+
+
+            //Deploying
+            advertisement.StatusId = 5;
             advertisement.StartedDate = DateTime.Now;
             advertisement.ExpiredDate = advertisement.StartedDate.Value.AddDays(advertisement.Duration.Value);
 

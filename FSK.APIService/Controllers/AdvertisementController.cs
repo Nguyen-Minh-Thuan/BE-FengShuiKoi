@@ -150,6 +150,53 @@ namespace FSK.APIService.Controllers
 
         }
 
+        [HttpGet("GetRecAds")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsElement(int Elementid)
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                
+                var AdsList = await _unitOfWork.AdvertisementRepository.GetAllAsync();
+
+                var RecAds = AdsList.Where(x => x.ElementId == Elementid && x.StatusId == 5).ToList();
+
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+
+                if (RecAds.Count == 0)
+                {
+                    response.Status = false;
+                    response.Message = "No Ads Recommended.";
+                    return BadRequest(response);
+                }
+
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = RecAds;
+
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
 
         [HttpGet("GetPackage")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetPackage()
@@ -614,7 +661,7 @@ namespace FSK.APIService.Controllers
 
             Advertisement item;
 
-            if (!ads.AdsId.HasValue)
+            if (!ads.AdsId.HasValue || ads.AdsId == 0)
             {
                 AdvertisementRequestModel createModel = new AdvertisementRequestModel
                 {
@@ -632,7 +679,7 @@ namespace FSK.APIService.Controllers
                 {
                     response.Status = false;
 
-                    if (checkCreate == -1) response.Message = "Invalid request data.";
+                    if (checkCreate == -1) response.Message = "Invalid data for create.";
                     else if (checkCreate == -2) response.Message = "Invalid user or user is not a member";
                     else if (checkCreate == -3) response.Message = "You have reached the maximum limit of 3 drafted advertisements. " +
                             "Please submit or delete an existing draft before creating a new one.";
@@ -661,7 +708,7 @@ namespace FSK.APIService.Controllers
                  if (checkUpdate <= 0)
                  {
                      response.Status = false;
-                    if (checkUpdate == -1) response.Message = "Invalid request data";
+                    if (checkUpdate == -1) response.Message = "Invalid data for update";
                     else if (checkUpdate == -2) response.Message = "Advertisement not found";
                     else if (checkUpdate == -3) response.Message = "You don't have permission to update this advertisement";
                     else if (checkUpdate == -4) response.Message = "This advertisement cannot be updated in its current state";
