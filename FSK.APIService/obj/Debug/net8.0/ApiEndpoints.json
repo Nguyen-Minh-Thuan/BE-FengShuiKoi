@@ -895,31 +895,16 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "UpdateUserInfo",
-    "RelativePath": "api/User/UpdateInfo/{id}",
+    "Method": "UpdatePassword",
+    "RelativePath": "api/User/UpdatePassword",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "model",
+        "Type": "FSK.APIService.RequestModel.UpdatePasswordRequestModel",
         "IsRequired": true
-      },
-      {
-        "Name": "newName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "newBio",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "newImageURL",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -941,6 +926,27 @@
         "Name": "newRole",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.UserController",
+    "Method": "UpdateKoi",
+    "RelativePath": "api/User/UpdateUser/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "FSK.APIService.RequestModel.UserRequestModel",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
