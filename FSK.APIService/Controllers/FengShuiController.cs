@@ -280,6 +280,12 @@ namespace FSK.APIService.Controllers
             BaseResponseModel response = new BaseResponseModel();
             try
             {
+                int totalAmount = 0;
+                foreach (var item in request)
+                {
+                    totalAmount += item.Quantity;
+                }
+
                 var elementId = _fengShuiService.CalculateFengShui(birthday, gender);
 
                 var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementId);
@@ -310,7 +316,7 @@ namespace FSK.APIService.Controllers
                 }
                 var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
 
-                var Bonus = Testing3(elementId, patterns.Count());
+                var Bonus = Testing3(elementId, totalAmount);
 
                 var test = patterns.Select(x => new PatternResponseModel
                 {
@@ -362,9 +368,11 @@ namespace FSK.APIService.Controllers
 
                 var TotalPoint = total / test.Count;
 
+                String Comments = getComments(TotalPoint);
+
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint };
+                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments };
                 return Ok(response);
             }
             catch (Exception ex)
@@ -374,6 +382,20 @@ namespace FSK.APIService.Controllers
                 return BadRequest(response);
             }
 
+        }
+
+        private string getComments(double totalPoint)
+        {
+            if (totalPoint > 8 && totalPoint <= 10)
+                return "Môi trường sống phản ánh sự hòa hợp tự nhiên, nơi dòng chảy năng lượng được lưu thông một cách thông suốt, tạo cảm giác bình an và thịnh vượng vượt bậc.";
+            else if (totalPoint > 5 && totalPoint <= 8)
+                return "Môi trường sống cân đối, ổn định nhưng đôi chỗ năng lượng có thể chưa thực sự lưu thông hoàn hảo, đòi hỏi thêm sự tinh tế trong việc cân bằng các yếu tố.";
+            else if (totalPoint > 3 && totalPoint <= 5)
+                return "Tổng thể không gian sống còn nhiều điểm cần khắc phục để đạt được sự hài hòa phong thủy, có những chỗ năng lượng bị ứ đọng hoặc không thông suốt, ảnh hưởng đến chất lượng cuộc sống.";
+            else if (totalPoint >= 0 && totalPoint <= 3)
+                return "Môi trường sống tạo ra cảm giác ngột ngạt, nơi năng lượng bị chặn đứng hoặc phát tán một cách tiêu cực, khiến cho chủ nhân dễ gặp căng thẳng, mệt mỏi và đối diện với những thử thách không đáng có.";
+            else
+                return "Somehow total Point is out of range.";
         }
 
         [HttpGet("GetPondDir")]

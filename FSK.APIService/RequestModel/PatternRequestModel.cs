@@ -5,6 +5,7 @@
 
         public int PatternId { get; set; }
 
+        public int Quantity { get; set; }
 
     }
 }
