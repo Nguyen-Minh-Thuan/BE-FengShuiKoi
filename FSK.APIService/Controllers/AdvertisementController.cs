@@ -758,14 +758,13 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("CheckData")]
-        public async Task<IActionResult> PaymentCallback()
+        public async void PaymentCallback()
         {
             BaseResponseModel response = new BaseResponseModel();
 
             try
             {
-                response.Status = true;
-                response.Message = "Success";
+                
                 var paymentStatus = _vnPayService.PaymentExecute(Request.Query);
 
                 var lastIndex = paymentStatus.OrderDescription.Split(": ").Last();
@@ -801,26 +800,21 @@ namespace FSK.APIService.Controllers
 
                 var transaction = await _unitOfWork.TransactionRepository.GetByIdAsync(int.Parse(paymentStatus.TransactionId));
 
-                response.Data = new
-                {
-                    PaymentStatus = paymentStatus,
-                    Ads = Ads,
-                    Invoice = transaction
-                };
+                //Trả về thanh toán thành công ở đây.
+                Response.Redirect("");
 
-                return Ok(response);
 
             }
             catch (Exception err)
             {
 
-                response.Status = false;
-                response.Message = err.ToString();
-                return BadRequest(response);
+                //Trả về trang thanh toán thất bại.
+                Response.Redirect("");
+
             }
 
         }
 
-
+        
     }
 }
