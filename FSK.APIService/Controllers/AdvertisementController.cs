@@ -4,6 +4,7 @@ using FSK.APIService.RequestModel;
 using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
+using FSK.Service.Services.MyDispose;
 using FSK.Service.Services.Systems;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -611,8 +612,8 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var listUser = (await _unitOfWork.UserRepository.GetAllAsync()).Select(x => x.UserId).ToList();
-                if (!listUser.Contains(userid))
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(userid);
+                if (user == null)
                 {
                     response.Status = false;
                     response.Message = "This user is invalid.";
@@ -620,6 +621,10 @@ namespace FSK.APIService.Controllers
                 }
 
                 var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == userid).ToList();
+                foreach (var item in ads)
+                {
+                    item.User = null;
+                }
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -629,6 +634,12 @@ namespace FSK.APIService.Controllers
                 foreach (var item in type)
                 {
                     item.Advertisements = null;
+                }
+                var trasaction = await _unitOfWork.TransactionRepository.GetAllAsync();
+                foreach (var item in trasaction)
+                {
+                    item.Ads = null;
+                    item.User = null;
                 }
 
                 if (ads == null)
@@ -758,14 +769,18 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("CheckData")]
-        public async void PaymentCallback()
+        public async Task<IActionResult> PaymentCallback()
         {
-            BaseResponseModel response = new BaseResponseModel();
+
+            await using var resource = new MyResource();
 
             try
             {
-                
+                await resource.PerformAsyncOperation();
+
+
                 var paymentStatus = _vnPayService.PaymentExecute(Request.Query);
+
 
                 var lastIndex = paymentStatus.OrderDescription.Split(": ").Last();
                 var listIndex = lastIndex.Split(",");
@@ -778,7 +793,7 @@ namespace FSK.APIService.Controllers
                 var Package = await _unitOfWork.PackageRepository.GetByIdAsync(Ads.PackageId.Value);
 
 
-                await _unitOfWork.TransactionRepository.CreateIdentityAsync(new Transaction
+                var checkInput = await _unitOfWork.TransactionRepository.CreateIdentityAsync(new Transaction
                 {
                     TransactionId = int.Parse(paymentStatus.TransactionId),
                     UserId = Ads.UserId,
@@ -791,30 +806,66 @@ namespace FSK.APIService.Controllers
                     Duration = Package.Duration*Quantity
                 });
 
+                if (checkInput != 0)
+                {
+                    Ads.StatusId = 2;
+                    Ads.PaymentStatus = true;
+                    Ads.Duration = Package.Duration * Quantity;
 
-                Ads.StatusId = 2;
-                Ads.PaymentStatus = true;
-                Ads.Duration = Package.Duration * Quantity;
+                    await _unitOfWork.AdvertisementRepository.UpdateAsync(Ads);
 
-                await _unitOfWork.AdvertisementRepository.UpdateAsync(Ads);
+                    var transaction = await _unitOfWork.TransactionRepository.GetByIdAsync(int.Parse(paymentStatus.TransactionId));
 
-                var transaction = await _unitOfWork.TransactionRepository.GetByIdAsync(int.Parse(paymentStatus.TransactionId));
 
-                //Trả về thanh toán thành công ở đây.
-                Response.Redirect("");
+                    //Trả về thanh toán thành công ở đây.
+                    String successUrl = "http://localhost:5173";
+                    return Redirect(successUrl);
+                }
+                else
+                {
+                    //Trả về lỗi lưu hóa đơn ở đây
+                    String failedInvoiceUrl = "http://localhost:5173";
+                    return Redirect(failedInvoiceUrl);
+                }
+                
 
 
             }
             catch (Exception err)
             {
-
                 //Trả về trang thanh toán thất bại.
-                Response.Redirect("");
+                String failedPayment = "http://localhost:5173";
+                return Redirect(failedPayment);
 
             }
 
         }
 
-        
+        //[HttpGet("Test")]
+        private async Task<IActionResult> Test(bool status, string message)
+        {
+
+
+            if(status == true)
+            {
+                return Ok(message);
+            }
+
+            else
+            {
+                return BadRequest(message);
+            }
+                
+
+        }
+
+        //[HttpGet("Test2")]
+        private async void Test2()
+        {
+
+            Response.Redirect("http://localhost:5173");
+
+        }
+
     }
 }
