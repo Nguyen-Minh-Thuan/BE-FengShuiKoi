@@ -24,3 +24,16 @@ C:\Users\MINH THUAN\Source\Repos\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK
 C:\Users\MINH THUAN\Source\Repos\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\refint\FSK.Service.dll
 C:\Users\MINH THUAN\Source\Repos\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.pdb
 C:\Users\MINH THUAN\Source\Repos\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\ref\FSK.Service.dll
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\bin\Debug\net8.0\FSK.Service.deps.json
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\bin\Debug\net8.0\FSK.Service.dll
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\bin\Debug\net8.0\FSK.Service.pdb
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.csproj.AssemblyReference.cache
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.AssemblyInfoInputs.cache
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.AssemblyInfo.cs
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.csproj.CoreCompileInputs.cache
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.sourcelink.json
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.dll
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\refint\FSK.Service.dll
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\FSK.Service.pdb
+C:\Users\MINH THUAN\Desktop\test\SWP\BE-FengShuiKoi\FSK.Service\obj\Debug\net8.0\ref\FSK.Service.dll
