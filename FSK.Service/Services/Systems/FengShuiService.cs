@@ -134,7 +134,7 @@ namespace FSK.Service.Services.Systems
                 {
                     int c = 6 + sum;
                     //return GetCungPhi(c, gender);
-                    return SumDigits(c); ;
+                    return SumDigits(c);
                 }
             }
         }
@@ -150,23 +150,23 @@ namespace FSK.Service.Services.Systems
         }
 
         // Method to determine Cung Phi based on the final value
-        private string GetCungPhi(int value, string gender)
-        {
-            return value switch
-            {
-                0 => gender.ToLower() == "male" ? "Ly" : "Invalid value",
-                1 => "Khảm",
-                2 => "Khôn",
-                3 => "Chấn",
-                4 => "Tốn",
-                5 => gender.ToLower() == "male" ? "Khôn" : "Cấn",
-                6 => "Càn",
-                7 => "Đoài",
-                8 => "Cấn",
-                9 => "Ly",
-                _ => "Invalid value"
-            };
-        }
+        //private string GetCungPhi(int value, string gender)
+        //{
+        //    return value switch
+        //    {
+        //        0 => gender.ToLower() == "male" ? "Ly" : "Invalid value",
+        //        1 => "Khảm",
+        //        2 => "Khôn",
+        //        3 => "Chấn",
+        //        4 => "Tốn",
+        //        5 => gender.ToLower() == "male" ? "Khôn" : "Cấn",
+        //        6 => "Càn",
+        //        7 => "Đoài",
+        //        8 => "Cấn",
+        //        9 => "Ly",
+        //        _ => "Invalid value"
+        //    };
+        //}
     }
 
 
