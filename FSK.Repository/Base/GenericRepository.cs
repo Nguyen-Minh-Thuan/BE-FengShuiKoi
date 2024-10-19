@@ -99,11 +99,11 @@ namespace FSK.Repository.Base
             var transaction = _context.Database.BeginTransaction();
                 try
                 {
-                    var split = entity.ToString().Split('.').Last();
-                    _context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT [dbo].[{split}] ON");
+                    var table = entity.ToString().Split('.').Last();
+                    _context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT [dbo].[{table}] ON");
                     _context.Add(entity);
                     var count = await _context.SaveChangesAsync();
-                    _context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT [dbo].[{split}] OFF");
+                    _context.Database.ExecuteSqlRaw($"SET IDENTITY_INSERT [dbo].[{table}] OFF");
                     transaction.Commit();
                     return count;
                 }
