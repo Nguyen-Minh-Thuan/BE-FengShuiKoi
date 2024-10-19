@@ -9,6 +9,7 @@ using System.Reflection;
 using FSK.APIService.RequestModel;
 //using Azure.Core;
 using FSK.Service.Services.Systems;
+using System.Security.Cryptography;
 
 namespace FSK.APIService.Controllers
 {
@@ -82,10 +83,14 @@ namespace FSK.APIService.Controllers
             }
 
             var kuaID = _fengShuiService.CalculateCungPhi(birthday, gender);
+            if (kuaID == 5)
+            {
+                kuaID = gender.ToLower() == "male" ? 2 : 8;
+            }
 
             var kua = await _unitOfWork.KuaRepository.GetByIdAsync(kuaID);
             var auspicious = await _unitOfWork.AuspiciousRepository.GetAllAsync();
-            var inauspicoous = await _unitOfWork.InauspiciousRepository.GetAllAsync();
+            var inauspicous = await _unitOfWork.InauspiciousRepository.GetAllAsync();
             var direction = await _unitOfWork.DirectionRepository.GetAllAsync();
             foreach (var item in direction)
             {
