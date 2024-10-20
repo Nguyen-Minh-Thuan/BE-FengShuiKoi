@@ -35,7 +35,7 @@ namespace FSK.APIService.Controllers
                 var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
 
                 //Putting this for checking user's role, should be the authentication's work but cant implement that right now
-                if (user == null || user.RoleId != 2 || user.RoleId != 1)
+                if (user == null || !(user.RoleId == 2 || user.RoleId == 1))
                 {
                     return BadRequest("Invalid user or user is not a staff/ admin");
                 }
