@@ -80,7 +80,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var ads = await _unitOfWork.AdvertisementRepository.GetAllAsync();
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5);
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -869,6 +869,36 @@ namespace FSK.APIService.Controllers
             Response.Redirect("http://localhost:5173");
 
         }
+
+        [HttpGet("GetType")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsType()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+
+                var adsType = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in adsType)
+                {
+                    item.Advertisements = null;
+                }
+
+                response.Data = adsType;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
 
     }
 }

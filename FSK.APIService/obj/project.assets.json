@@ -3338,19 +3338,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MINH THUAN\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\FSK.APIService.csproj",
       "projectName": "FSK.APIService",
-      "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\FSK.APIService.csproj",
-      "packagesPath": "C:\\Users\\MINH THUAN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.APIService\\obj\\",
+      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\FSK.APIService.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.APIService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MINH THUAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3365,11 +3365,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj": {
-              "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Repository\\FSK.Repository.csproj"
+            "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Repository\\FSK.Repository.csproj"
             },
-            "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj": {
-              "projectPath": "C:\\Users\\MINH THUAN\\Desktop\\test\\SWP\\BE-FengShuiKoi\\FSK.Service\\FSK.Service.csproj"
+            "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\source\\repos\\SWP391.FengShuiKoi.FA24\\FSK.Service\\FSK.Service.csproj"
             }
           }
         }

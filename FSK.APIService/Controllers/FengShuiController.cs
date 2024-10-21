@@ -10,6 +10,7 @@ using FSK.APIService.RequestModel;
 //using Azure.Core;
 using FSK.Service.Services.Systems;
 using System.Security.Cryptography;
+using System;
 
 namespace FSK.APIService.Controllers
 {
@@ -303,6 +304,10 @@ namespace FSK.APIService.Controllers
                 
 
                 var kuaId = _fengShuiService.CalculateCungPhi(birthday, gender);
+                if (kuaId == 5)
+                {
+                    kuaId = gender.ToLower() == "male" ? 2 : 8;
+                }
 
                 //Pond Pointing
 
