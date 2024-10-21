@@ -15,7 +15,15 @@ namespace FSK.APIService.Controllers
 
         public UserController(UnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-        [HttpGet]
+
+        /// <summary>
+        /// Get users (in divided pages)
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize">Size of the page</param>
+        /// <returns>A list of users divided by page</returns>
+        /// <response code="200">Returns the list contains all users (divided in page)</response>
+        [HttpGet("GetUserByPage")]
         public async Task<ActionResult<IEnumerable<User>>> GetPageUser(int pageIndex = 0, int pageSize = 10)
         {
 
@@ -38,7 +46,15 @@ namespace FSK.APIService.Controllers
 
         }
 
-        [HttpGet("{id}")]
+
+
+        /// <summary>
+        /// Get an user by their id
+        /// </summary>
+        /// <param name="id">The id of the user needed to be shown</param>
+        /// <returns>The user of that id</returns>
+        /// <response code="200">Returns the user</response>
+        [HttpGet("GetUserById")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             BaseResponseModel response = new BaseResponseModel();
@@ -65,9 +81,14 @@ namespace FSK.APIService.Controllers
         }
 
 
-        // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("UpdateRole/{id}")]
+        /// <summary>
+        /// Update information of an existed user
+        /// </summary>
+        /// <param name="id">Id of the user</param>
+        /// <param name="newRole">New role to update</param>
+        /// <returns>The updated information of the Koi variety</returns>
+        /// <response code="200">Returns the updated user</response>
+        [HttpPut("UpdateUserRole/{id}")]
         public async Task<IActionResult> UpdateUserRole(int id, int newRole)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
@@ -103,7 +124,7 @@ namespace FSK.APIService.Controllers
             return await _unitOfWork.UserRepository.GetByIdAsync(id) != null;
         }
 
-
+        //Note to adjust this to not really "delete"
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
@@ -127,7 +148,7 @@ namespace FSK.APIService.Controllers
         /// <returns>The updated information of the user</returns>
         /// <response code="200" cref="UserRequestModel">Returns the updated user</response>
         [HttpPut("UpdateUser/{id}")]
-        public async Task<IActionResult> UpdateKoi(int id, [FromBody] UserRequestModel model)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserRequestModel model)
         {
             BaseResponseModel response = new BaseResponseModel();
 

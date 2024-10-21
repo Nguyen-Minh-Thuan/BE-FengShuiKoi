@@ -1,7 +1,5 @@
 ﻿using FSK.APIService.RequestModel;
 using FSK.Repository;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FSK.APIService.Controllers
@@ -11,8 +9,13 @@ namespace FSK.APIService.Controllers
     public class LoginController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
+        private readonly JwtService _jwtService;
 
-        public LoginController(UnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+        public LoginController(UnitOfWork unitOfWork, JwtService jwtService)
+        {
+            _unitOfWork = unitOfWork;
+            _jwtService = jwtService;
+        }
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequestModel loginDto)
@@ -30,9 +33,9 @@ namespace FSK.APIService.Controllers
                 return Unauthorized("Invalid username/email or password");
             }
 
-            // Here you would typically generate and return a JWT token for authenticated requests
-            // For simplicity, we're just returning a success message
-            return Ok(new { message = "Login successful", user = user });
+            var token = _jwtService.GenerateToken(user.UserId, user.UserName, user.RoleId);
+
+            return Ok(new { message = "Login successful", token = token, user = user });
         }
     }
 }

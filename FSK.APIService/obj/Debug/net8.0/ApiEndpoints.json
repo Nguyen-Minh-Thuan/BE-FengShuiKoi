@@ -798,7 +798,7 @@
   {
     "ContainingType": "FSK.APIService.Controllers.PackageController",
     "Method": "DeletePackage",
-    "RelativePath": "api/Package/DeleteKoi/{id}",
+    "RelativePath": "api/Package/DeletePackage/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -926,8 +926,50 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.UserController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.UserController",
+    "Method": "GetUser",
+    "RelativePath": "api/User/GetUserById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FSK.Repository.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.UserController",
     "Method": "GetPageUser",
-    "RelativePath": "api/User",
+    "RelativePath": "api/User/GetUserByPage",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -957,48 +999,6 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "GetUser",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "FSK.Repository.Models.User",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "DeleteUser",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FSK.APIService.Controllers.UserController",
     "Method": "UpdatePassword",
     "RelativePath": "api/User/UpdatePassword",
     "HttpMethod": "PUT",
@@ -1015,28 +1015,7 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "UpdateUserRole",
-    "RelativePath": "api/User/UpdateRole/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "newRole",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FSK.APIService.Controllers.UserController",
-    "Method": "UpdateKoi",
+    "Method": "UpdateUser",
     "RelativePath": "api/User/UpdateUser/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -1051,6 +1030,27 @@
         "Name": "model",
         "Type": "FSK.APIService.RequestModel.UserRequestModel",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.UserController",
+    "Method": "UpdateUserRole",
+    "RelativePath": "api/User/UpdateUserRole/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newRole",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

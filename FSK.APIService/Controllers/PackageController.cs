@@ -4,6 +4,7 @@ using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FSK.APIService.Controllers
 {
@@ -89,6 +90,7 @@ namespace FSK.APIService.Controllers
         /// </remarks>
         /// <response code="200" cref="PackageRequestModel">Returns the newly created package</response>
         /// <response code="400">If the package's name already existed</response>
+        [Authorize(Policy = "Admin")]
         [HttpPost("AddNewPackage")]
         public async Task<IActionResult> CreateNewPackage([FromBody] PackageRequestModel model)
         {
@@ -138,6 +140,7 @@ namespace FSK.APIService.Controllers
         /// <param name="updatedPackage">Information needed to update</param>
         /// <returns>The updated information of the package</returns>
         /// <response code="200" cref="KoiVarietyRequestModel">Returns the updated package</response>
+        [Authorize(Policy = "Admin")]
         [HttpPut("UpdatePackage/{id}")]
         public async Task<ActionResult<Package>> UpdatePackage(int id, UpdatePackageRequestModel updatedPackage)
         {
@@ -192,7 +195,8 @@ namespace FSK.APIService.Controllers
         /// <returns>A response indicating the result of the delete operation</returns>
         /// <response code="200">Returns a success message if the package was deleted</response>
         /// <response code="500">If there was an error during the delete operation</response>
-        [HttpDelete("DeleteKoi/{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpDelete("DeletePackage/{id}")]
         public async Task<IActionResult> DeletePackage(int id)
         {
             BaseResponseModel response = new BaseResponseModel();
