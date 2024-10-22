@@ -25,6 +25,8 @@ public partial class Transaction
 
     public decimal TotalPrice { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual Advertisement Ads { get; set; }
 
     public virtual User User { get; set; }

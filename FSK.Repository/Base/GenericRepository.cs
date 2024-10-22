@@ -16,6 +16,23 @@ namespace FSK.Repository.Base
         public GenericRepository() => _context ??= new SWP391FengShuiKoiSystemContext();
 
         public GenericRepository(SWP391FengShuiKoiSystemContext context) => _context = context;
+
+        public void Shuffle(List<T> list)
+        {
+            Random rng = new Random();
+
+            int n = list.Count;
+
+            for (int i = n - 1; i > 0; i--)
+            {
+                int j = rng.Next(0, i + 1);
+                // Swap list[i] with list[j]
+                T temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
+        }
+
         public List<T> GetAll()
         {
             return _context.Set<T>().ToList();
@@ -62,6 +79,7 @@ namespace FSK.Repository.Base
         {
             return _context.Set<T>().Find(code);
         }
+        
 
         public async Task<int> CountAsync(Expression<Func<T, bool>> filter)
         {

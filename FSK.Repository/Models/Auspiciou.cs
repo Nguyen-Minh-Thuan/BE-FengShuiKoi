@@ -15,6 +15,8 @@ public partial class Auspiciou
 
     public string Description { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual Direction Direction { get; set; }
 
     public virtual Kua Kua { get; set; }

@@ -11,5 +11,7 @@ public partial class Status
 
     public string Status1 { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
 }

@@ -35,6 +35,8 @@ public partial class Advertisement
 
     public bool? PaymentStatus { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual AdsType AdsType { get; set; }
 
     public virtual Package Package { get; set; }

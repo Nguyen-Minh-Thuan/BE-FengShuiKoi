@@ -11,6 +11,8 @@ public partial class Color
 
     public string Name { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<ElementColor> ElementColors { get; set; } = new List<ElementColor>();
 
     public virtual ICollection<PatternColor> PatternColors { get; set; } = new List<PatternColor>();

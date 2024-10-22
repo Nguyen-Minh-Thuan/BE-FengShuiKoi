@@ -2,10 +2,12 @@
 {
     public class PatternRequestModel
     {
+        public String PatternName { get; set; }
 
-        public int PatternId { get; set; }
+        public String ImageUrl { get; set; }
 
-        public int Quantity { get; set; }
+        public int VarietyId { get; set; }
+
 
     }
 }

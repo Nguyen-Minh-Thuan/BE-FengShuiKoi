@@ -13,6 +13,8 @@ public partial class Kua
 
     public string Description { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Auspiciou> Auspicious { get; set; } = new List<Auspiciou>();
 
     public virtual ICollection<General> Generals { get; set; } = new List<General>();

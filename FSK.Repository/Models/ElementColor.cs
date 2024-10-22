@@ -15,6 +15,8 @@ public partial class ElementColor
 
     public double Values { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual Color Color { get; set; }
 
     public virtual Element Element { get; set; }

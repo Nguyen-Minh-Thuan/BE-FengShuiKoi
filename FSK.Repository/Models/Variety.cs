@@ -15,5 +15,7 @@ public partial class Variety
 
     public string Description { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Pattern> Patterns { get; set; } = new List<Pattern>();
 }

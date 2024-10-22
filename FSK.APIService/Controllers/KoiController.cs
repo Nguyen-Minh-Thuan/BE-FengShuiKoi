@@ -5,6 +5,7 @@ using FSK.Repository.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FSK.APIService.Controllers
 {
@@ -35,7 +36,7 @@ namespace FSK.APIService.Controllers
                 response.Message = "Success";
                 var varieties = await _unitOfWork.VarietyRepository.GetPageAsync(pageIndex, pageSize);
 
-                response.Data = varieties;
+                response.Data = varieties.Where(x => x.IsActive != false);
 
                 return Ok(response);
             }
@@ -63,8 +64,7 @@ namespace FSK.APIService.Controllers
                 response.Status = true;
                 response.Message = "Success";
                 var varieties = await _unitOfWork.VarietyRepository.GetAllAsync();
-
-                response.Data = varieties;
+                response.Data = varieties.Where(x => x.IsActive != false);
                 return Ok(response);
             }
             catch (Exception err)
@@ -88,7 +88,20 @@ namespace FSK.APIService.Controllers
 
             response.Status = true;
             response.Message = "Success";
+            var totalVar = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
+            if (id < 0 || id > totalVar)
+            {
+                response.Status = false;
+                response.Message = "Koi variety not found";
+                return NotFound(response);
+            }
             var variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
+            if (variety.IsActive == false)
+            {
+                response.Status = false;
+                response.Message = "Koi variety not found";
+                return NotFound(response);
+            }
             var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
             foreach (var p in patterns)
             {
@@ -97,12 +110,7 @@ namespace FSK.APIService.Controllers
             
             response.Data = variety;
 
-            if (response.Data == null)
-            {
-                response.Status = false;
-                response.Message = "Koi variety not found";
-                return BadRequest(response);
-            }
+            
 
             return Ok(response);
         }
@@ -132,6 +140,26 @@ namespace FSK.APIService.Controllers
 
             try
             {
+
+                if (model.ImageUrl.IsNullOrEmpty())
+                {
+                    response.Status = false;
+                    response.Message = "There must be an Image!";
+                    return BadRequest(response);
+                }
+                if (model.Description.IsNullOrEmpty())
+                {
+                    response.Status = false;
+                    response.Message = "There must be an Description!";
+                    return BadRequest(response);
+                }
+                if (model.VarietyName.IsNullOrEmpty())
+                {
+                    response.Status = false;
+                    response.Message = "There must be an Name!";
+                    return BadRequest(response);
+                }
+
                 var existingKoi = await _unitOfWork.VarietyRepository.GetAllAsync();
                 var koiExists = existingKoi.Any(k => k.VarietyName.Equals(model.VarietyName, StringComparison.OrdinalIgnoreCase));
 
@@ -148,11 +176,11 @@ namespace FSK.APIService.Controllers
                 {
                     VarietyName = model.VarietyName,
                     Description = model.Description,
-                    ImageUrl = model.ImageUrl
+                    ImageUrl = model.ImageUrl,
+                    IsActive = true
                 };
 
                 await _unitOfWork.VarietyRepository.CreateAsync(variety);
-                await _unitOfWork.SaveChangesAsync();
 
                 response.Status = true;
                 response.Message = "Successfully added new Koi";
@@ -182,21 +210,23 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                if (model == null || id <= 0)
+                var total = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
+                if (0 > id || id > total || model == null)
                 {
                     response.Status = false;
                     response.Message = "Invalid request data";
                     return BadRequest(response);
                 }
-
-                var variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
-
-                if (variety == null)
+                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
+                if (Variety.IsActive == false)
                 {
                     response.Status = false;
                     response.Message = "Koi variety not found";
                     return NotFound(response);
                 }
+
+
+
 
                 // Check if the VarietyName is unique (excluding the current variety)
                 var existingVarieties = await _unitOfWork.VarietyRepository.GetAllAsync();
@@ -209,16 +239,16 @@ namespace FSK.APIService.Controllers
                 }
 
                 // Update fields
-                variety.VarietyName = model.VarietyName;
-                variety.ImageUrl = model.ImageUrl;
-                variety.Description = model.Description;
+                if (!model.VarietyName.IsNullOrEmpty()) Variety.VarietyName = model.VarietyName;
+                if (!model.Description.IsNullOrEmpty()) Variety.Description = model.Description;
+                if (!model.ImageUrl.IsNullOrEmpty()) Variety.ImageUrl = model.ImageUrl;
 
-                await _unitOfWork.VarietyRepository.UpdateAsync(variety);
+                await _unitOfWork.VarietyRepository.UpdateAsync(Variety);
                 await _unitOfWork.SaveChangesAsync();
 
                 response.Status = true;
                 response.Message = "Koi variety updated successfully";
-                response.Data = variety;
+                response.Data = Variety;
                 return Ok(response);
             }
             catch (Exception)
@@ -246,24 +276,27 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                if (id <= 0)
+
+                var total = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
+                if (0 > id || id > total)
                 {
                     response.Status = false;
                     response.Message = "Invalid Koi variety ID";
-                    return BadRequest(response);
+                    return NotFound(response);
                 }
 
-                var variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
-
-                if (variety == null)
+                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
+                if (Variety.IsActive == false)
                 {
                     response.Status = false;
                     response.Message = "Koi variety not found";
                     return NotFound(response);
                 }
+                Variety.IsActive = false;
 
-                await _unitOfWork.VarietyRepository.RemoveAsync(variety);
-                await _unitOfWork.SaveChangesAsync();
+
+
+                await _unitOfWork.VarietyRepository.UpdateAsync(Variety);
 
                 response.Status = true;
                 response.Message = "Koi variety deleted successfully";
