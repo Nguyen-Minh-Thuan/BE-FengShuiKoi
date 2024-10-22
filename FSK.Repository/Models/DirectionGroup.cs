@@ -13,5 +13,7 @@ public partial class DirectionGroup
 
     public string Description { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Direction> Directions { get; set; } = new List<Direction>();
 }

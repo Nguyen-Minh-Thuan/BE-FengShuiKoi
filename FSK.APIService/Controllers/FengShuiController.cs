@@ -326,7 +326,7 @@ namespace FSK.APIService.Controllers
                 }
                 var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
 
-                var Bonus = Testing3(elementId, totalAmount);
+                var bonusQuantity = Testing3(elementId, totalAmount);
 
                 var test = patterns.Select(x => new PatternResponseModel
                 {
@@ -343,7 +343,7 @@ namespace FSK.APIService.Controllers
                         ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
                     }).ToList(),
-                    PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + Bonus + bonusPond + bonusDirection,
+                    PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + bonusQuantity + bonusPond + bonusDirection,
                 }).ToList();
 
                 double total = 0;
@@ -382,7 +382,7 @@ namespace FSK.APIService.Controllers
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments };
+                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments , bonusQuantity = bonusQuantity, bonusPond = bonusPond , bonusDirection = bonusDirection};
                 return Ok(response);
             }
             catch (Exception ex)

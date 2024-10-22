@@ -37,7 +37,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Role](
 	[RoleID] [int] IDENTITY(1,1) NOT NULL,
-	[RoleName] [nvarchar](50) NOT NULL,
+	[RoleName] [nvarchar] (50) NOT NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
 (
 	[RoleID] ASC
@@ -58,6 +59,7 @@ CREATE TABLE [dbo].[Blog](
 	[ElementID] [int] NOT NULL,
 	[CreatedDate] [datetime] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Blog] PRIMARY KEY CLUSTERED 
 (
 	[BlogId] ASC
@@ -84,6 +86,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[ImageUrl] [nvarchar](250) NULL,
 	[Reason] [nvarchar](500) NULL,
 	[PaymentStatus] [bit] NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Advertisement] PRIMARY KEY CLUSTERED 
 (
 	[AdsId] ASC
@@ -97,7 +100,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Status](
 	[StatusId] [int] IDENTITY(1,1) NOT NULL,
-	[Status] [nvarchar](50) NOT NULL
+	[Status] [nvarchar](50) NOT NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
 (
 	[StatusId] ASC
@@ -112,6 +116,7 @@ GO
 CREATE TABLE [dbo].[AdsTypes](
 	[AdsTypeId] [int] IDENTITY(1,1) NOT NULL,
 	[TypeName] [nvarchar](100) NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_AdsTypes] PRIMARY KEY CLUSTERED 
 (
 	[AdsTypeId] ASC
@@ -128,6 +133,7 @@ CREATE TABLE [dbo].[Package](
 	[PackageName] [nvarchar](50) NULL,
 	[Duration] [int] NOT NULL,
 	[Price] [decimal](18, 2) NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_PackageID] PRIMARY KEY CLUSTERED 
 (
 	[PackageID] ASC
@@ -149,6 +155,7 @@ CREATE TABLE [dbo].[Transaction](
 	[PaymentMethod] [nvarchar] (50) NOT NULL,
 	[TransactionDate] [datetime] NOT NULL,
 	[TotalPrice] [decimal](18, 2) NOT NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
 (
 	[TransactionID] ASC
@@ -164,7 +171,7 @@ CREATE TABLE [dbo].[Element](
 	[ElementID] [int] IDENTITY(1,1) NOT NULL,
 	[Element] [nvarchar] (25) NOT NULL,
 	[Description] [nvarchar] (500)  NULL,
-	[Status] [bit] NOT NULL,
+	[Status] [bit] NULL,
  CONSTRAINT [PK_Element] PRIMARY KEY CLUSTERED 
 (
 	[ElementID] ASC
@@ -196,6 +203,7 @@ CREATE TABLE [dbo].[Kua](
 	[KuaID] [int] IDENTITY(1,1) NOT NULL,
 	[KuaName] [nvarchar] (25) NOT NULL,
 	[Description] [nvarchar] (500) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Kua] PRIMARY KEY CLUSTERED 
 (
@@ -213,6 +221,7 @@ CREATE TABLE [dbo].[Auspicious](
 	[DirectionID] [int] NOT NULL,
 	[KuaID] [int] NOT NULL,
 	[Description] [nvarchar] (300) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Auspicious] PRIMARY KEY CLUSTERED 
 (
@@ -230,6 +239,7 @@ CREATE TABLE [dbo].[Inauspicious](
 	[DirectionID] [int] NOT NULL,
 	[KuaID] [int] NOT NULL,
 	[Description] [nvarchar] (300) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Inauspicious] PRIMARY KEY CLUSTERED 
 (
@@ -246,6 +256,7 @@ CREATE TABLE [dbo].[Direction](
 	[DirectionID] [int] IDENTITY(1,1) NOT NULL,
 	[GroupID] [int] NOT NULL,
 	[DirectionName] [nvarchar] (25) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Direction] PRIMARY KEY CLUSTERED 
 (
@@ -262,6 +273,7 @@ CREATE TABLE [dbo].[DirectionGroup](
 	[GroupID] [int] IDENTITY(1,1) NOT NULL,
 	[GroupName] [nvarchar] (25) NOT NULL,
 	[Description] [nvarchar] (300) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_DirectionGroup] PRIMARY KEY CLUSTERED 
 (
@@ -278,6 +290,7 @@ CREATE TABLE [dbo].[Pond](
 	[PondID] [int] IDENTITY(1,1) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[ShapeID] [int] NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Pond] PRIMARY KEY CLUSTERED 
 (
@@ -293,6 +306,7 @@ GO
 CREATE TABLE [dbo].[Shape](
 	[ShapeID] [int] IDENTITY(1,1) NOT NULL,
 	[Shape] [nvarchar] (25) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Shape] PRIMARY KEY CLUSTERED 
 (
@@ -310,6 +324,7 @@ CREATE TABLE [dbo].[ElementColor](
 	[ElementID] [int] NOT NULL,
 	[ColorID] [int] NOT NULL,
 	[Values] [float] NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_ElementColor] PRIMARY KEY CLUSTERED 
 (
@@ -325,6 +340,7 @@ GO
 CREATE TABLE [dbo].[Color](
 	[ColorID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar] (25) NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Color] PRIMARY KEY CLUSTERED 
 (
@@ -342,6 +358,7 @@ CREATE TABLE [dbo].[PatternColor](
 	[PatternID] [int] NOT NULL,
 	[ColorID] [int] NOT NULL,
 	[Values] [float] NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_PatternColor] PRIMARY KEY CLUSTERED 
 (
@@ -359,6 +376,7 @@ CREATE TABLE [dbo].[Pattern](
 	[VarietyID] [int] NOT NULL,
 	[PatternName] [nvarchar] (25) NOT NULL,
 	[ImageURL] [nvarchar] (250) NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Pattern] PRIMARY KEY CLUSTERED 
 (
@@ -376,6 +394,7 @@ CREATE TABLE [dbo].[Variety](
 	[VarietyName] [nvarchar] (50) NOT NULL,
 	[ImageURL] [nvarchar] (250) NULL,
 	[Description] [nvarchar] (1500) NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Variety] PRIMARY KEY CLUSTERED 
 (
@@ -392,6 +411,7 @@ CREATE TABLE [dbo].[ElementQuantity](
 	[RecID] [int] IDENTITY(1,1) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[Quantity] [int] NOT NULL,
+	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_ElementQuantity] PRIMARY KEY CLUSTERED 
 (
@@ -1190,7 +1210,6 @@ GO
 ALTER TABLE [dbo].[ElementColor] CHECK CONSTRAINT [FK_ElementColor_Element]
 GO
 
-select * from [dbo].[AdsTypes]
 
 /**** 
 

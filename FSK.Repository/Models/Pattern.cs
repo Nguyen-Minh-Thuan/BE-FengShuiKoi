@@ -15,6 +15,8 @@ public partial class Pattern
 
     public string ImageUrl { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<PatternColor> PatternColors { get; set; } = new List<PatternColor>();
 
     public virtual Variety Variety { get; set; }

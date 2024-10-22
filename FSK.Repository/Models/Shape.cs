@@ -11,5 +11,7 @@ public partial class Shape
 
     public string Shape1 { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Pond> Ponds { get; set; } = new List<Pond>();
 }

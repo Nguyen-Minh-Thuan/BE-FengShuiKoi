@@ -62,7 +62,6 @@ namespace FSK.APIService.Controllers
                 response.Status = true;
                 response.Message = "Success";
                 var varieties = await _unitOfWork.VarietyRepository.GetAllAsync();
-
                 response.Data = varieties;
                 return Ok(response);
             }

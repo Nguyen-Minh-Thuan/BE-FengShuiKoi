@@ -15,6 +15,8 @@ public partial class PatternColor
 
     public double Values { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual Color Color { get; set; }
 
     public virtual Pattern Pattern { get; set; }

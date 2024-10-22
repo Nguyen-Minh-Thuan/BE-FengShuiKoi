@@ -30,6 +30,10 @@ namespace FSK.APIService.Controllers
             {
                 return BadRequest("Payment must be completed before approval");
             }
+            if (advertisement.StatusId != 2)
+            {
+                return BadRequest("This Advertisement are not allow to update Status");
+            }
             //Approved
             advertisement.StatusId = 4;
 

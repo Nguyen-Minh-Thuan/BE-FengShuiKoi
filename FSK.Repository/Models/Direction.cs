@@ -13,6 +13,8 @@ public partial class Direction
 
     public string DirectionName { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Auspiciou> Auspicious { get; set; } = new List<Auspiciou>();
 
     public virtual DirectionGroup Group { get; set; }

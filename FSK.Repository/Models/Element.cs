@@ -13,7 +13,7 @@ public partial class Element
 
     public string Description { get; set; }
 
-    public bool Status { get; set; }
+    public bool? Status { get; set; }
 
     public virtual ICollection<ElementColor> ElementColors { get; set; } = new List<ElementColor>();
 

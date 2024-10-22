@@ -15,5 +15,7 @@ public partial class Package
 
     public decimal? Price { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
 }

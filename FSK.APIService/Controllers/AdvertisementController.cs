@@ -79,7 +79,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5);
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync());
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -625,6 +625,11 @@ namespace FSK.APIService.Controllers
                 {
                     item.User = null;
                 }
+                var package = await _unitOfWork.PackageRepository.GetAllAsync();
+                foreach (var item in package)
+                {
+                    item.Advertisements = null;
+                }
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -818,7 +823,7 @@ namespace FSK.APIService.Controllers
 
 
                     //Trả về thanh toán thành công ở đây.
-                    String successUrl = "http://localhost:5173";
+                    String successUrl = "http://localhost:5173/ads/create/package/result";
                     return Redirect(successUrl);
                 }
                 else
