@@ -114,7 +114,9 @@ namespace FSK.APIService.Controllers
                 {
                     PackageName = model.PackageName,
                     Price = model.Price,
-                    Duration = model.Duration
+                    Duration = model.Duration,
+                    
+                    IsActive = true,
                 };
 
                 await _unitOfWork.PackageRepository.CreateAsync(package);

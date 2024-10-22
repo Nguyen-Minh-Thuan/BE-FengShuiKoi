@@ -281,7 +281,7 @@ namespace FSK.APIService.Controllers
 
 
         [HttpPost("Pointing")]
-        public async Task<ActionResult<Element>> Pointing([FromQuery] DateTime birthday, [FromQuery] string gender, int shapeId, int dirId, List<PatternRequestModel> request)
+        public async Task<ActionResult<Element>> Pointing([FromQuery] DateTime birthday, [FromQuery] string gender, int shapeId, int dirId, List<PointingModel> request)
         {
             BaseResponseModel response = new BaseResponseModel();
             try
