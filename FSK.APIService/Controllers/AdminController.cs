@@ -1,5 +1,6 @@
 ﻿using FSK.Repository;
 using FSK.Repository.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace FSK.APIService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;

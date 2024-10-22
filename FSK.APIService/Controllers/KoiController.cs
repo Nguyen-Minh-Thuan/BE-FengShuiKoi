@@ -2,6 +2,7 @@
 using FSK.APIService.ResponseModel;
 using FSK.Repository;
 using FSK.Repository.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -122,6 +123,7 @@ namespace FSK.APIService.Controllers
         ///     }
         /// </remarks>
         /// <response code="200" cref="KoiVarietyRequestModel">Returns the newly created Koi variety</response>
+        [Authorize(Policy = "Admin")]
         [HttpPost("AddNewKoi")]
         public async Task<IActionResult> CreateNewKoi([FromBody] KoiVarietyRequestModel model)
         {
@@ -171,6 +173,7 @@ namespace FSK.APIService.Controllers
         /// <param name="model">Information needed to update</param>
         /// <returns>The updated information of the Koi variety</returns>
         /// <response code="200" cref="KoiVarietyRequestModel">Returns the updated Koi variety</response>
+        [Authorize(Policy = "Admin")]
         [HttpPut("UpdateKoi/{id}")]
         public async Task<IActionResult> UpdateKoi(int id, [FromBody] KoiVarietyRequestModel model)
         {
@@ -225,6 +228,8 @@ namespace FSK.APIService.Controllers
             }
         }
 
+
+        //Note to adjust this to not really "delete"
         /// <summary>
         /// Delete a Koi variety by its ID
         /// </summary>
@@ -232,6 +237,7 @@ namespace FSK.APIService.Controllers
         /// <returns>A response indicating the result of the delete operation</returns>
         /// <response code="200">Returns a success message if the Koi variety was deleted</response>
         /// <response code="400">If there was an error during the delete operation</response>   
+        [Authorize(Policy = "Admin")]
         [HttpDelete("DeleteKoi/{id}")]
         public async Task<IActionResult> DeleteKoi(int id)
         {

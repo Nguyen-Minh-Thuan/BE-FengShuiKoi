@@ -16,8 +16,8 @@ namespace FSK.APIService.Controllers
         private readonly UnitOfWork _unitOfWork;
 
         public BlogController(UnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
-        
 
+        [Authorize(Policy = "Staff")]
         [HttpPost("CreateBlog")]
         public async Task<IActionResult> CreateBlog([FromBody] CreateBlogRequestModel model)
         {
@@ -32,13 +32,6 @@ namespace FSK.APIService.Controllers
                     return BadRequest(response);
                 }
 
-                var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
-
-                //Putting this for checking user's role, should be the authentication's work but cant implement that right now
-                if (user == null || !(user.RoleId == 2 || user.RoleId == 1))
-                {
-                    return BadRequest("Invalid user or user is not a staff/ admin");
-                }
 
                 var blog = new Blog
                 {
@@ -142,6 +135,7 @@ namespace FSK.APIService.Controllers
 
         }
 
+        [Authorize(Policy = "Staff")]
         [HttpPut("UpdateBlog")]
         public async Task<IActionResult> UpdateBlog([FromBody] UpdateBlogRequestModel model)
         {

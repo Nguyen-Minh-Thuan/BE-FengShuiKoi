@@ -6,6 +6,7 @@ using FSK.Repository;
 using FSK.Repository.Models;
 using FSK.Service.Services.MyDispose;
 using FSK.Service.Services.Systems;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -221,7 +222,7 @@ namespace FSK.APIService.Controllers
 
         }
 
-
+        [Authorize(Policy = "Member")]
         [HttpPost("CreateDraftedAd")]
         public async Task<IActionResult> CreateDraftedAd([FromBody] AdvertisementRequestModel model)
         {
@@ -427,7 +428,7 @@ namespace FSK.APIService.Controllers
             
         }
 
-
+        [Authorize(Policy = "Member")]
         [HttpPut("UpdateAd")]
         public async Task<IActionResult> UpdateAd([FromBody] UpdateAdvertisementRequestModel model)
         {
@@ -670,6 +671,8 @@ namespace FSK.APIService.Controllers
             }
         }
 
+
+        [Authorize(Policy = "Member")]
         [HttpPost("CreatePayment")]
         public async Task<IActionResult> CreatePaymentUrl(AdsPaymentModel ads)
         {
