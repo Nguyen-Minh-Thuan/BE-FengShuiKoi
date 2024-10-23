@@ -3,6 +3,8 @@ using FSK.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FSK.APIService.RequestModel;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace FSK.APIService.Controllers
 {
@@ -36,19 +38,26 @@ namespace FSK.APIService.Controllers
                 var user = new User
                 {
                     UserName = userDto.UserName,
-                    Password = userDto.Password,
                     Email = userDto.Email,
-                    RoleId = 3
+                    RoleId = 3 // Assuming 3 is the Member role ID
                 };
+
+                // Hash the password
+                var passwordHasher = new PasswordHasher<User>();
+                user.Password = passwordHasher.HashPassword(user, userDto.Password);
 
                 await _unitOfWork.UserRepository.CreateAsync(user);
                 await _unitOfWork.SaveChangesAsync();
                 return Ok(new { message = "User registered successfully", userId = user.UserId });
             }
+            catch (DbUpdateException dbEx)
+            {
+                // Log the exception details
+                return BadRequest($"An error occurred while saving the user: {dbEx.InnerException?.Message}");
+            }
             catch (Exception ex)
             {
-                // Log the exception
-                return BadRequest("An error occurred while registering the user.");
+                return BadRequest($"An error occurred while registering the user: {ex.Message}. Inner Exception: {ex.InnerException?.Message}");
             }
         }
     }
