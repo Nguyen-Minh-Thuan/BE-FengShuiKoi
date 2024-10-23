@@ -67,16 +67,16 @@ namespace FSK.APIService.Controllers
             {
                 item.Users = null;
             }
-            user.Password = null;
-            response.Data = user;
+            
 
-            if (response.Data == null)
+            if (user == null)
             {
                 response.Status = false;
                 response.Message = "User not found";
                 return BadRequest(response);
             }
-
+            user.Password = null;
+            response.Data = user;
             return Ok(response);
         }
 

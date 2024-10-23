@@ -80,6 +80,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AdsType>(entity =>
@@ -431,14 +432,15 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
         {
             entity.ToTable("User");
 
-            entity.Property(e => e.Bio).HasMaxLength(250);
+            entity.Property(e => e.Bio).HasMaxLength(500);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasMaxLength(50);
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
             entity.Property(e => e.Password)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(300);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UserName)
                 .IsRequired()
