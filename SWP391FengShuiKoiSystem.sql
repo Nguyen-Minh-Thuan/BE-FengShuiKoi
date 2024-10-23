@@ -18,7 +18,7 @@ GO
 CREATE TABLE [dbo].[User](
 	[UserId] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](50) NOT NULL,
-	[Password] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](256) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Bio] [nvarchar](250) NULL,
 	[ImageUrl] [nvarchar](250) NULL,
