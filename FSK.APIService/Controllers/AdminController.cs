@@ -1,4 +1,5 @@
-﻿using FSK.Repository;
+﻿using FSK.APIService.ResponseModel;
+using FSK.Repository;
 using FSK.Repository.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -82,5 +83,42 @@ namespace FSK.APIService.Controllers
 
             return Ok(new { message = "Advertisement declined" });
         }
+
+        [HttpPost("GetDeployingAds")]
+        public async Task<IActionResult> GetDeployingAds()
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var advertisements = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5).Count();
+
+                if (advertisements == 0)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found";
+                    return NotFound(response);
+                }
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = advertisements;
+                return Ok(response);
+
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+
+
+
+        }
+
+
+
+
     }
 }

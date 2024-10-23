@@ -296,7 +296,7 @@ namespace FSK.APIService.Controllers
 
                 var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementId);
 
-                var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
+                var elementColor = (await _unitOfWork.ElementColorRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 foreach (var n in elementColor)
                 {
                     n.Element = null;
@@ -322,9 +322,17 @@ namespace FSK.APIService.Controllers
                 List<Pattern> patterns = new List<Pattern>();
                 foreach (var item in request)
                 {
-                    patterns.Add(_unitOfWork.PatternRepository.GetById(item.PatternId));
+                    var pattern = (await _unitOfWork.PatternRepository.GetByIdAsync(item.PatternId));
+                    if (pattern.IsActive != false)
+                        patterns.Add(pattern);
+                    else
+                    {
+                        response.Status = false;
+                        response.Message = "Invalid Patterns does not found";
+                        return NotFound(response);
+                    }
                 }
-                var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+                var patternColor = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Where(x => x.IsActive != false);
 
                 var bonusQuantity = Testing3(elementId, totalAmount);
 
