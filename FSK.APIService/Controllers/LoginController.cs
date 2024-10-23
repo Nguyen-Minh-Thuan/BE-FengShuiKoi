@@ -1,6 +1,8 @@
 ﻿using FSK.APIService.RequestModel;
 using FSK.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using FSK.Repository.Models;
 
 namespace FSK.APIService.Controllers
 {
@@ -25,10 +27,23 @@ namespace FSK.APIService.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u =>
-                u.UserName == loginDto.UsernameOrEmail || u.Email == loginDto.UsernameOrEmail);
+            // Normalize the input username/email to lowercase for case-insensitive comparison
+            var normalizedInput = loginDto.UsernameOrEmail.ToLower();
 
-            if (user == null || user.Password != loginDto.Password) // Note: In a real application, use proper password hashing and verification
+            // Fetch the user from the database
+            var user = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u =>
+                u.UserName.ToLower() == normalizedInput || u.Email.ToLower() == normalizedInput);
+
+            if (user == null)
+            {
+                return Unauthorized("Invalid username/email or password");
+            }
+
+            // Use PasswordHasher to verify the password
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.Password, loginDto.Password);
+
+            if (result == PasswordVerificationResult.Failed)
             {
                 return Unauthorized("Invalid username/email or password");
             }
