@@ -440,15 +440,14 @@ GO
 /****** Insert  ******/
 SET IDENTITY_INSERT [dbo].[User] ON 
 
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (1, N'Admin', N'1', N'None', N'This is an Admin account', N'None', 1, 1)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (2, N'Laazy', N'1', N'None', N'HungDepTrai', N'None', 1, 2)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (3, N'User1', N'1', N'None', N'This is an User account', N'None', 1, 3)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (4, N'User2', N'2', N'None', N'This is an User account', N'None', 1, 3)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (5, N'User3', N'3', N'None', N'This is an User account', N'None', 1, 3)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (1, N'Admin', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an Admin account', N'None', 1, 1)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (2, N'Laazy', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'HungDepTrai', N'None', 1, 2)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (3, N'User1', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an User account', N'None', 1, 3)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (4, N'User2', N'AQAAAAIAAYagAAAAEBS7udiChbw7EwjTR6Eire4uX2drQOaTizzJMQe9WsfIS6BT516Jx/tWoNP/QhpQ4w==', N'None', N'This is an User account', N'None', 1, 3)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (5, N'User3', N'AQAAAAIAAYagAAAAEMvFPFtUuXPD2vBcE6J0bcwv4PHlmMO5crxGyQpVNbqEWniejWC7ze4722Ruh+G5Ag==', N'None', N'This is an User account', N'None', 1, 3)
 
 SET IDENTITY_INSERT [dbo].[User] OFF
 GO
-
 
 SET IDENTITY_INSERT [dbo].[Role] ON;
 INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (1, N'Admin');
@@ -1210,7 +1209,6 @@ REFERENCES [dbo].[Element] ([ElementID])
 GO
 ALTER TABLE [dbo].[ElementColor] CHECK CONSTRAINT [FK_ElementColor_Element]
 GO
-
 
 /**** 
 
