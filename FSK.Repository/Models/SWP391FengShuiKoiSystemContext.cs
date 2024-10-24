@@ -42,6 +42,8 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
     public virtual DbSet<Inauspiciou> Inauspicious { get; set; }
 
+    public virtual DbSet<Interact> Interacts { get; set; }
+
     public virtual DbSet<Kua> Kuas { get; set; }
 
     public virtual DbSet<Package> Packages { get; set; }
@@ -78,6 +80,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
         string connectionString = config.GetConnectionString(connectionStringName);
         return connectionString;
     }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -94,6 +97,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.ToTable("Advertisement");
 
             entity.Property(e => e.Content).HasMaxLength(3000);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.ElementId).HasColumnName("ElementID");
             entity.Property(e => e.ExpiredDate).HasColumnType("datetime");
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
@@ -108,6 +112,11 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasForeignKey(d => d.AdsTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Advertisement_AdsTypes");
+
+            entity.HasOne(d => d.Element).WithMany(p => p.Advertisements)
+                .HasForeignKey(d => d.ElementId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Advertisement_Element");
 
             entity.HasOne(d => d.Package).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.PackageId)
@@ -157,6 +166,11 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.Title)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            entity.HasOne(d => d.Element).WithMany(p => p.Blogs)
+                .HasForeignKey(d => d.ElementId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Blog_Element");
         });
 
         modelBuilder.Entity<Color>(entity =>
@@ -251,6 +265,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.ToTable("General");
 
             entity.Property(e => e.GeneralId).HasColumnName("GeneralID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.ElementId).HasColumnName("ElementID");
             entity.Property(e => e.KuaId).HasColumnName("KuaID");
 
@@ -285,6 +300,18 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasForeignKey(d => d.KuaId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Inauspicious_Kua");
+        });
+
+        modelBuilder.Entity<Interact>(entity =>
+        {
+            entity.ToTable("Interact");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Ads).WithMany(p => p.Interacts)
+                .HasForeignKey(d => d.AdsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Interact_Advertisement");
         });
 
         modelBuilder.Entity<Kua>(entity =>
@@ -431,14 +458,15 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
         {
             entity.ToTable("User");
 
-            entity.Property(e => e.Bio).HasMaxLength(250);
+            entity.Property(e => e.Bio).HasMaxLength(500);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasMaxLength(50);
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
             entity.Property(e => e.Password)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(300);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UserName)
                 .IsRequired()

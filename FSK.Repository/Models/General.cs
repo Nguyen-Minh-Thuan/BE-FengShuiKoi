@@ -13,6 +13,8 @@ public partial class General
 
     public int KuaId { get; set; }
 
+    public DateTime? CreatedDate { get; set; }
+
     public virtual Element Element { get; set; }
 
     public virtual Kua Kua { get; set; }
