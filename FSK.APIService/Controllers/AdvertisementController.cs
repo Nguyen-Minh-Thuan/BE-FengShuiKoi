@@ -236,12 +236,12 @@ namespace FSK.APIService.Controllers
                 var user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
                 var currentDate = DateTime.UtcNow;
 
-                //Putting this for checking user's role, should be the authentication's work but cant implement that right now
-                //Khúc này t sửa lại thành ID nếu thấy sai thì sửa
-                if (user == null || user.RoleId != 3)
-                {
-                    return BadRequest("Invalid user or user is not a member");
-                }
+                ////Putting this for checking user's role, should be the authentication's work but cant implement that right now
+                ////Khúc này t sửa lại thành ID nếu thấy sai thì sửa
+                //if (user == null || user.RoleId != 3)
+                //{
+                //    return BadRequest("Invalid user or user is not a member");
+                //}
 
             var draftId = _unitOfWork.StatusRepository.GetAll().Where(x => x.Status1 == "Drafted").First().StatusId;
             // Check the number of existing drafted ads for this user
@@ -672,7 +672,6 @@ namespace FSK.APIService.Controllers
         }
 
 
-        [Authorize(Policy = "Member")]
         [HttpPost("CreatePayment")]
         public async Task<IActionResult> CreatePaymentUrl(AdsPaymentModel ads)
         {
