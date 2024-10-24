@@ -121,6 +121,7 @@ namespace FSK.APIService
 
             app.UseAuthorization();
 
+            app.UseAuthentication();
 
             app.MapControllers();
 
