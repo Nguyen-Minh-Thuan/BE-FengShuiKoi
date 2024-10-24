@@ -118,6 +118,46 @@ namespace FSK.APIService.Controllers
         }
 
 
+        [HttpPost("GetExpiredAds")]
+        public async Task<IActionResult> GetExpiredAds()
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var advertisements = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 6).Count();
+
+                if (advertisements == 0)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found";
+                    return NotFound(response);
+                }
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = advertisements;
+                return Ok(response);
+
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+
+
+
+        }
+
+
+
+        //Total view:
+
+
+
+
 
 
     }

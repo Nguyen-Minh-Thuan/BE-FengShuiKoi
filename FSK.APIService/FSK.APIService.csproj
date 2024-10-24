@@ -19,8 +19,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\FSK.Repository\FSK.Repository.csproj" />
-		<ProjectReference Include="..\FSK.Service\FSK.Service.csproj" />
+		<ProjectReference Include="..\FSK.Repository\FSK.Repository.csproj">
+		  <Private>True</Private>
+		</ProjectReference>
+		<ProjectReference Include="..\FSK.Service\FSK.Service.csproj">
+		  <Private>True</Private>
+		</ProjectReference>
 	</ItemGroup>
 
 	<PropertyGroup>
