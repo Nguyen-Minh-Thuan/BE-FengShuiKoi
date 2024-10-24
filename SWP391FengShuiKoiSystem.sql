@@ -455,7 +455,6 @@ INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[Is
 SET IDENTITY_INSERT [dbo].[User] OFF
 GO
 
-
 SET IDENTITY_INSERT [dbo].[Role] ON;
 INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (1, N'Admin');
 INSERT INTO [dbo].[Role] ([RoleID], [RoleName]) VALUES (2, N'Staff');
@@ -1231,7 +1230,7 @@ GO
 ALTER TABLE [dbo].[Blog] CHECK CONSTRAINT [FK_Blog_Element]
 GO
 
-/****** Object:  Table [dbo].[I]    Script Date:   ******/
+/****** Object:  Table [dbo].[Interact]    Script Date:   ******/
 
 ALTER TABLE [dbo].[Interact]  WITH CHECK ADD  CONSTRAINT [FK_Interact_Advertisement] FOREIGN KEY([AdsId])
 REFERENCES [dbo].[Advertisement] ([AdsId])
