@@ -63,6 +63,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Interact]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Kua]",
          "ObjectType": 0
       },

@@ -35,9 +35,15 @@ public partial class Advertisement
 
     public bool? PaymentStatus { get; set; }
 
+    public DateTime? CreatedDate { get; set; }
+
     public bool? IsActive { get; set; }
 
     public virtual AdsType AdsType { get; set; }
+
+    public virtual Element Element { get; set; }
+
+    public virtual ICollection<Interact> Interacts { get; set; } = new List<Interact>();
 
     public virtual Package Package { get; set; }
 
