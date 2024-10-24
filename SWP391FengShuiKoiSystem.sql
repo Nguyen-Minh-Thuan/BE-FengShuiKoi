@@ -31,7 +31,22 @@ CREATE TABLE [dbo].[User](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User]    Script Date: 24/09/24 7:10PM  ******/
+/****** Object:  Table [dbo].[Interact]    Script Date: 24/09/24 7:10PM  ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Interact](
+	[InteractId] [int] IDENTITY(1,1) NOT NULL,
+	[AdsId] [int] NOT NULL,
+	[CreatedDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Interact] PRIMARY KEY CLUSTERED 
+(
+	[InteractId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 24/09/24 7:10PM  ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,6 +102,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[ImageUrl] [nvarchar](250) NULL,
 	[Reason] [nvarchar](500) NULL,
 	[PaymentStatus] [bit] NULL,
+	[CreatedDate] [datetime] NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Advertisement] PRIMARY KEY CLUSTERED 
 (
@@ -172,7 +188,7 @@ CREATE TABLE [dbo].[Element](
 	[ElementID] [int] IDENTITY(1,1) NOT NULL,
 	[Element] [nvarchar] (25) NOT NULL,
 	[Description] [nvarchar] (500)  NULL,
-	[Status] [bit] NULL,
+	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Element] PRIMARY KEY CLUSTERED 
 (
 	[ElementID] ASC
@@ -188,6 +204,7 @@ CREATE TABLE [dbo].[General](
 	[GeneralID] [int] IDENTITY(1,1) NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[KuaID] [int] NOT NULL,
+	[CreatedDate] [datetime] NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_General] PRIMARY KEY CLUSTERED 
 (
@@ -241,7 +258,6 @@ CREATE TABLE [dbo].[Inauspicious](
 	[KuaID] [int] NOT NULL,
 	[Description] [nvarchar] (300) NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Inauspicious] PRIMARY KEY CLUSTERED 
 (
 	[InauspiciousID] ASC
@@ -258,7 +274,6 @@ CREATE TABLE [dbo].[Direction](
 	[GroupID] [int] NOT NULL,
 	[DirectionName] [nvarchar] (25) NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Direction] PRIMARY KEY CLUSTERED 
 (
 	[DirectionID] ASC
@@ -275,7 +290,6 @@ CREATE TABLE [dbo].[DirectionGroup](
 	[GroupName] [nvarchar] (25) NOT NULL,
 	[Description] [nvarchar] (300) NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_DirectionGroup] PRIMARY KEY CLUSTERED 
 (
 	[GroupID] ASC
@@ -292,7 +306,6 @@ CREATE TABLE [dbo].[Pond](
 	[ElementID] [int] NOT NULL,
 	[ShapeID] [int] NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Pond] PRIMARY KEY CLUSTERED 
 (
 	[PondID] ASC
@@ -308,7 +321,6 @@ CREATE TABLE [dbo].[Shape](
 	[ShapeID] [int] IDENTITY(1,1) NOT NULL,
 	[Shape] [nvarchar] (25) NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Shape] PRIMARY KEY CLUSTERED 
 (
 	[ShapeID] ASC
@@ -326,7 +338,6 @@ CREATE TABLE [dbo].[ElementColor](
 	[ColorID] [int] NOT NULL,
 	[Values] [float] NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_ElementColor] PRIMARY KEY CLUSTERED 
 (
 	[ElementColorID] ASC
@@ -342,7 +353,6 @@ CREATE TABLE [dbo].[Color](
 	[ColorID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar] (25) NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Color] PRIMARY KEY CLUSTERED 
 (
 	[ColorID] ASC
@@ -360,7 +370,6 @@ CREATE TABLE [dbo].[PatternColor](
 	[ColorID] [int] NOT NULL,
 	[Values] [float] NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_PatternColor] PRIMARY KEY CLUSTERED 
 (
 	[PColorID] ASC
@@ -378,7 +387,6 @@ CREATE TABLE [dbo].[Pattern](
 	[PatternName] [nvarchar] (25) NOT NULL,
 	[ImageURL] [nvarchar] (250) NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Pattern] PRIMARY KEY CLUSTERED 
 (
 	[PatternID] ASC
@@ -396,7 +404,6 @@ CREATE TABLE [dbo].[Variety](
 	[ImageURL] [nvarchar] (250) NULL,
 	[Description] [nvarchar] (1500) NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_Variety] PRIMARY KEY CLUSTERED 
 (
 	[VarietyID] ASC
@@ -413,7 +420,6 @@ CREATE TABLE [dbo].[ElementQuantity](
 	[ElementID] [int] NOT NULL,
 	[Quantity] [int] NOT NULL,
 	[IsActive] [bit] NULL,
-	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_ElementQuantity] PRIMARY KEY CLUSTERED 
 (
 	[RecID] ASC
@@ -521,11 +527,11 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Element] ON 
 
-INSERT [dbo].[Element] ([ElementID], [Element], [Description], [Status]) VALUES (1, N'Kim', N'Hành Kim tượng trưng cho sức mạnh, tính cách kiên định và nghiêm túc.', 1)
-INSERT [dbo].[Element] ([ElementID], [Element], [Description], [Status]) VALUES (2, N'Thủy', N'Hành Thủy tượng trưng cho nước, có tính tàng chứa.', 1)
-INSERT [dbo].[Element] ([ElementID], [Element], [Description], [Status]) VALUES (3, N'Hỏa', N'Hành Hỏa tượng trưng cho sự may mắn, hạnh phúc, danh vọng và thành công.', 1)
-INSERT [dbo].[Element] ([ElementID], [Element], [Description], [Status]) VALUES (4, N'Thổ', N'Hành Thổ tượng trưng cho sự nuôi dưỡng, màu mỡ và được coi là trung tâm của sự cân bằng, ổn định.', 1)
-INSERT [dbo].[Element] ([ElementID], [Element], [Description], [Status]) VALUES (5, N'Mộc', N'Hành Mộc tượng trưng cho cây, có tính động, khởi đầu.', 1)
+INSERT [dbo].[Element] ([ElementID], [Element], [Description], [IsActive]) VALUES (1, N'Kim', N'Hành Kim tượng trưng cho sức mạnh, tính cách kiên định và nghiêm túc.', 1)
+INSERT [dbo].[Element] ([ElementID], [Element], [Description], [IsActive]) VALUES (2, N'Thủy', N'Hành Thủy tượng trưng cho nước, có tính tàng chứa.', 1)
+INSERT [dbo].[Element] ([ElementID], [Element], [Description], [IsActive]) VALUES (3, N'Hỏa', N'Hành Hỏa tượng trưng cho sự may mắn, hạnh phúc, danh vọng và thành công.', 1)
+INSERT [dbo].[Element] ([ElementID], [Element], [Description], [IsActive]) VALUES (4, N'Thổ', N'Hành Thổ tượng trưng cho sự nuôi dưỡng, màu mỡ và được coi là trung tâm của sự cân bằng, ổn định.', 1)
+INSERT [dbo].[Element] ([ElementID], [Element], [Description], [IsActive]) VALUES (5, N'Mộc', N'Hành Mộc tượng trưng cho cây, có tính động, khởi đầu.', 1)
 
 SET IDENTITY_INSERT [dbo].[Element] OFF
 GO
@@ -1068,6 +1074,12 @@ GO
 ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_Status]
 GO
 
+ALTER TABLE [dbo].[Advertisement]  WITH CHECK ADD  CONSTRAINT [FK_Advertisement_Element] FOREIGN KEY([ElementID])
+REFERENCES [dbo].[Element] ([ElementID])
+GO
+ALTER TABLE [dbo].[Advertisement] CHECK CONSTRAINT [FK_Advertisement_Element]
+GO
+
 /****** Object:  Table [dbo].[User]    Script Date: 24/09/24 7:10PM  ******/
 
 ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Role] FOREIGN KEY([RoleID])
@@ -1210,10 +1222,25 @@ GO
 ALTER TABLE [dbo].[ElementColor] CHECK CONSTRAINT [FK_ElementColor_Element]
 GO
 
+/****** Object:  Table [dbo].[Blog]    Script Date:   ******/
+
+ALTER TABLE [dbo].[Blog]  WITH CHECK ADD  CONSTRAINT [FK_Blog_Element] FOREIGN KEY([ElementID])
+REFERENCES [dbo].[Element] ([ElementID])
+GO
+ALTER TABLE [dbo].[Blog] CHECK CONSTRAINT [FK_Blog_Element]
+GO
+
+/****** Object:  Table [dbo].[Interact]    Script Date:   ******/
+
+ALTER TABLE [dbo].[Interact]  WITH CHECK ADD  CONSTRAINT [FK_Interact_Advertisement] FOREIGN KEY([AdsId])
+REFERENCES [dbo].[Advertisement] ([AdsId])
+GO
+ALTER TABLE [dbo].[Interact] CHECK CONSTRAINT [FK_Interact_Advertisement]
+GO
+
 /**** 
 
 
-Remember to fix Transaction -> Advertisement Only
 
 
 ****/
