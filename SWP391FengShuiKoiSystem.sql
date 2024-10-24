@@ -1231,7 +1231,7 @@ GO
 ALTER TABLE [dbo].[Blog] CHECK CONSTRAINT [FK_Blog_Element]
 GO
 
-/****** Object:  Table [dbo].[I]    Script Date:   ******/
+/****** Object:  Table [dbo].[Interact]    Script Date:   ******/
 
 ALTER TABLE [dbo].[Interact]  WITH CHECK ADD  CONSTRAINT [FK_Interact_Advertisement] FOREIGN KEY([AdsId])
 REFERENCES [dbo].[Advertisement] ([AdsId])
