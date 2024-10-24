@@ -119,8 +119,9 @@ namespace FSK.APIService
 
             app.UseCors(MyAllowSpecificOrigins);
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
