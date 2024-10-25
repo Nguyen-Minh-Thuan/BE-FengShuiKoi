@@ -15,8 +15,6 @@ public partial class Blog
 
     public string Content { get; set; }
 
-    public int StatusId { get; set; }
-
     public int ElementId { get; set; }
 
     public DateTime? CreatedDate { get; set; }

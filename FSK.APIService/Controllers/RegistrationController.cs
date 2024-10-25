@@ -39,7 +39,8 @@ namespace FSK.APIService.Controllers
                 {
                     UserName = userDto.UserName,
                     Email = userDto.Email,
-                    RoleId = 3 // Assuming 3 is the Member role ID
+                    RoleId = 3, // Assuming 3 is the Member role ID\
+                    CreatedDate = DateTime.Now
                 };
 
                 // Hash the password
