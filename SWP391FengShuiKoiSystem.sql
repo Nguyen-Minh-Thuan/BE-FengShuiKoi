@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[User](
 	[ImageUrl] [nvarchar](250) NULL,
 	[IsActive] [bit] NULL,
 	[RoleID] [int] NOT NULL,
-	[CreatedDate] [datetime] NULL,
+	[CreatedDate] [datetime] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC
@@ -71,7 +71,6 @@ CREATE TABLE [dbo].[Blog](
 	[UserId] [int] NOT NULL,
 	[Title] [nvarchar](50) NOT NULL,
 	[Content] [nvarchar](3000) NULL,
-	[StatusId] [int]  NOT NULL,
 	[ElementID] [int] NOT NULL,
 	[CreatedDate] [datetime] NULL,
 	[ImageUrl] [nvarchar](250) NULL,
@@ -102,7 +101,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[ImageUrl] [nvarchar](250) NULL,
 	[Reason] [nvarchar](500) NULL,
 	[PaymentStatus] [bit] NULL,
-	[CreatedDate] [datetime] NULL,
+	[CreatedDate] [datetime] NOT NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Advertisement] PRIMARY KEY CLUSTERED 
 (
@@ -202,9 +201,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[General](
 	[GeneralID] [int] IDENTITY(1,1) NOT NULL,
-	[ElementID] [int] NOT NULL,
-	[KuaID] [int] NOT NULL,
-	[CreatedDate] [datetime] NULL,
+	[ElementID] [int] NULL,
+	[KuaID] [int] NULL,
+	[CreatedDate] [datetime] NOT NULL,
 	--[Status] [bit] NOT NULL,
  CONSTRAINT [PK_General] PRIMARY KEY CLUSTERED 
 (
@@ -446,11 +445,11 @@ GO
 /****** Insert  ******/
 SET IDENTITY_INSERT [dbo].[User] ON 
 
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (1, N'Admin', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an Admin account', N'None', 1, 1)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (2, N'Laazy', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'HungDepTrai', N'None', 1, 2)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (3, N'User1', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an User account', N'None', 1, 3)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (4, N'User2', N'AQAAAAIAAYagAAAAEBS7udiChbw7EwjTR6Eire4uX2drQOaTizzJMQe9WsfIS6BT516Jx/tWoNP/QhpQ4w==', N'None', N'This is an User account', N'None', 1, 3)
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID]) VALUES (5, N'User3', N'AQAAAAIAAYagAAAAEMvFPFtUuXPD2vBcE6J0bcwv4PHlmMO5crxGyQpVNbqEWniejWC7ze4722Ruh+G5Ag==', N'None', N'This is an User account', N'None', 1, 3)
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (1, N'Admin', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an Admin account', N'None', 1, 1,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (2, N'Laazy', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'HungDepTrai', N'None', 1, 2,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (3, N'User1', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (4, N'User2', N'AQAAAAIAAYagAAAAEBS7udiChbw7EwjTR6Eire4uX2drQOaTizzJMQe9WsfIS6BT516Jx/tWoNP/QhpQ4w==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (5, N'User3', N'AQAAAAIAAYagAAAAEMvFPFtUuXPD2vBcE6J0bcwv4PHlmMO5crxGyQpVNbqEWniejWC7ze4722Ruh+G5Ag==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
 
 SET IDENTITY_INSERT [dbo].[User] OFF
 GO
@@ -472,24 +471,30 @@ INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (4, 10);
 INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (4, 5);
 INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 3);
 INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
-/*
---Add đồ phong thủy
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,3,1,N'Tiêu đề Quảng cáo #1',N'Nội dung quảng cáo #1',4,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,1,N'Tiêu đề Quảng cáo #2',N'Nội dung quảng cáo #2',5,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,4,2,N'Tiêu đề Quảng cáo #3',N'Nội dung quảng cáo #3',2,3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (1,5,2,N'Tiêu đề Quảng cáo #4',N'Nội dung quảng cáo #4',6,4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
 
---Add Koi
-SET IDENTITY_INSERT [dbo].[Advertisement] ON 
+-- Add đồ phong thủy
+INSERT [dbo].[Advertisement] 
+    ([AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [ImageUrl], [PaymentStatus], [CreatedDate]) 
+VALUES 
+    (1, 3, 1, N'Tiêu đề Quảng cáo #1', N'Nội dung quảng cáo #1', 4, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
+    (1, 4, 1, N'Tiêu đề Quảng cáo #2', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (1, 4, 2, N'Tiêu đề Quảng cáo #3', N'Nội dung quảng cáo #3', 2, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (1, 5, 2, N'Tiêu đề Quảng cáo #4', N'Nội dung quảng cáo #4', 6, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
 
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (5,2,3,1,N'Tiêu đề Quảng cáo #5',N'Nội dung quảng cáo #1',4,1,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',0)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (6,2,4,1,N'Tiêu đề Quảng cáo #6',N'Nội dung quảng cáo #2',5,2,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (7,2,4,2,N'Tiêu đề Quảng cáo #7',N'Nội dung quảng cáo #3',1,3,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-25T00:00:00.000' AS DateTime),N'None',1)
-INSERT [dbo].[Advertisement] ([AdsId],[AdsTypeId],[UserId],[PackageID],[Title],[Content],[StatusId],[ElementID],[StartedDate],[ExpiredDate],[ImageUrl],[PaymentStatus]) VALUES (8,2,5,2,N'Tiêu đề Quảng cáo #8',N'Nội dung quảng cáo #4',6,4,CAST(N'2024-09-20T00:00:00.000' AS DateTime),CAST(N'2024-09-24T00:00:00.000' AS DateTime),N'None',1)
+-- Add Koi
+SET IDENTITY_INSERT [dbo].[Advertisement] ON;
 
-SET IDENTITY_INSERT [dbo].[Advertisement] OFF
+INSERT [dbo].[Advertisement] 
+    ([AdsId], [AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [ImageUrl], [PaymentStatus], [CreatedDate]) 
+VALUES 
+    (5, 2, 3, 1, N'Tiêu đề Quảng cáo #5', N'Nội dung quảng cáo #1', 4, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
+    (6, 2, 4, 1, N'Tiêu đề Quảng cáo #6', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (7, 2, 4, 2, N'Tiêu đề Quảng cáo #7', N'Nội dung quảng cáo #3', 1, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (8, 2, 5, 2, N'Tiêu đề Quảng cáo #8', N'Nội dung quảng cáo #4', 6, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
+
+SET IDENTITY_INSERT [dbo].[Advertisement] OFF;
 GO
-*/
+
 SET IDENTITY_INSERT [dbo].[AdsTypes] ON;
 INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (1, N'Cá Koi');
 INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (2, N'Đồ Phong Thủy');
@@ -681,6 +686,8 @@ INSERT [dbo].[DirectionGroup] ([GroupID], [GroupName], [Description]) VALUES (2,
 SET IDENTITY_INSERT [dbo].[DirectionGroup] OFF
 GO
 **/
+
+
 SET IDENTITY_INSERT [dbo].[DirectionGroup] ON 
 
 INSERT [dbo].[DirectionGroup] ([GroupID], [GroupName], [Description])
@@ -712,6 +719,16 @@ VALUES
 
 SET IDENTITY_INSERT [dbo].[Direction] OFF
 GO
+
+
+INSERT INTO [dbo].[Blog] ( UserId, Title, Content, ElementID, CreatedDate, ImageUrl, IsActive) 
+VALUES 
+( 1001, 'Introduction to Feng Shui', 'Feng Shui is an ancient Chinese art focusing on the placement of objects to create harmony...',  2, '2023-10-01 08:00:00', 'https://example.com/image1.jpg', 1),
+
+( 1002, 'Benefits of Koi Ponds', 'Koi ponds are not only aesthetically pleasing but also bring good fortune according to Feng Shui.',  2, '2023-10-15 10:30:00', 'https://example.com/image2.jpg', 1),
+
+( 1003, 'Feng Shui for Prosperity', 'Arranging your home or office space in alignment with Feng Shui principles can attract wealth...',  3, '2023-10-22 15:45:00', 'https://example.com/image3.jpg', 0);
+
 
 SET IDENTITY_INSERT [dbo].[Pond] ON 
 

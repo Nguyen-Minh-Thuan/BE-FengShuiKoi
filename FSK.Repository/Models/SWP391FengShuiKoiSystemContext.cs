@@ -80,8 +80,8 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
         string connectionString = config.GetConnectionString(connectionStringName);
         return connectionString;
     }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -271,12 +271,10 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
             entity.HasOne(d => d.Element).WithMany(p => p.Generals)
                 .HasForeignKey(d => d.ElementId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_General_Element");
 
             entity.HasOne(d => d.Kua).WithMany(p => p.Generals)
                 .HasForeignKey(d => d.KuaId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_General_Kua");
         });
 

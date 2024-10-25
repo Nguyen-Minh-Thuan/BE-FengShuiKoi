@@ -33,7 +33,8 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize);
+                var output = await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize);
+                response.Data = output;
                 return Ok(response);
             }
             catch (Exception err)

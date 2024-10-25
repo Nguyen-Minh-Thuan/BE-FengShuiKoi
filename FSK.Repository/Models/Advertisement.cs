@@ -35,7 +35,7 @@ public partial class Advertisement
 
     public bool? PaymentStatus { get; set; }
 
-    public DateTime? CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     public bool? IsActive { get; set; }
 

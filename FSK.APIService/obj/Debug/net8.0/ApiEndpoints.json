@@ -1,6 +1,48 @@
 [
   {
     "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "AdsMonthlyCheck",
+    "RelativePath": "api/Admin/AdsMonthlyCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AdsId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "AdsYearlyCheck",
+    "RelativePath": "api/Admin/AdsYearlyCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AdsId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
     "Method": "ApproveAdvertisement",
     "RelativePath": "api/Admin/ApproveAdvertisement/{advertisementId}",
     "HttpMethod": "POST",
@@ -11,6 +53,54 @@
         "Name": "advertisementId",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "DailyAds",
+    "RelativePath": "api/Admin/DailyAds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "DailyFengshui",
+    "RelativePath": "api/Admin/DailyFengshui",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "DailyUser",
+    "RelativePath": "api/Admin/DailyUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -40,7 +130,7 @@
     "ContainingType": "FSK.APIService.Controllers.AdminController",
     "Method": "GetDeployingAds",
     "RelativePath": "api/Admin/GetDeployingAds",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
@@ -50,10 +140,136 @@
     "ContainingType": "FSK.APIService.Controllers.AdminController",
     "Method": "GetExpiredAds",
     "RelativePath": "api/Admin/GetExpiredAds",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "MonthlyAds",
+    "RelativePath": "api/Admin/MonthlyAds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "MonthlyFengshui",
+    "RelativePath": "api/Admin/MonthlyFengshui",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "MonthlyUser",
+    "RelativePath": "api/Admin/MonthlyUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "TotalAds",
+    "RelativePath": "api/Admin/TotalAds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "TotalRegisteredUser",
+    "RelativePath": "api/Admin/TotalRegisteredUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "TotalUser",
+    "RelativePath": "api/Admin/TotalUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "YearlyAds",
+    "RelativePath": "api/Admin/YearlyAds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "YearlyFengshui",
+    "RelativePath": "api/Admin/YearlyFengshui",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "YearlyUser",
+    "RelativePath": "api/Admin/YearlyUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -223,6 +439,26 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetPendingAds",
+    "RelativePath": "api/Advertisement/GetPendingAds",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "GetAdsElement",
     "RelativePath": "api/Advertisement/GetRecAds",
     "HttpMethod": "GET",
@@ -255,6 +491,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetView",
+    "RelativePath": "api/Advertisement/GetView",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "adsId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -664,6 +926,26 @@
     "ReturnTypes": [
       {
         "Type": "FSK.Repository.Models.Element",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.FengShuiController",
+    "Method": "TotalAction",
+    "RelativePath": "api/FengShui/TotalAction",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "FSK.Repository.Models.Variety",
         "MediaTypes": [
           "text/plain",
           "application/json",

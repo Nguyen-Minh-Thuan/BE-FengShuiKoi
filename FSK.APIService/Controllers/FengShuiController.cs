@@ -74,7 +74,17 @@ namespace FSK.APIService.Controllers
 
             
             var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
-
+            var kuaID = _fengShuiService.CalculateCungPhi(birthday, gender);
+            if (kuaID == 5)
+            {
+                kuaID = gender.ToLower() == "male" ? 2 : 8;
+            }
+            await _unitOfWork.GeneralRepository.CreateAsync(new General
+            {
+                CreatedDate = DateTime.Now,
+                KuaId = kuaID,
+                ElementId = null
+            });
             var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
             var pond = await _unitOfWork.PondRepository.GetAllAsync();
             var shape = await _unitOfWork.ShapeRepository.GetAllAsync();
@@ -83,11 +93,7 @@ namespace FSK.APIService.Controllers
                 item.Ponds = null;
             }
 
-            var kuaID = _fengShuiService.CalculateCungPhi(birthday, gender);
-            if (kuaID == 5)
-            {
-                kuaID = gender.ToLower() == "male" ? 2 : 8;
-            }
+            
 
             var kua = await _unitOfWork.KuaRepository.GetByIdAsync(kuaID);
             var auspicious = await _unitOfWork.AuspiciousRepository.GetAllAsync();
@@ -105,7 +111,7 @@ namespace FSK.APIService.Controllers
             if (response.Data == null)
             {
                 response.Status = false;
-                response.Message = "User not found";
+                response.Message = "Error while calculate!";
                 return BadRequest(response);
             }
 
@@ -118,83 +124,106 @@ namespace FSK.APIService.Controllers
         {
             BaseResponseModel response = new BaseResponseModel();
 
-            response.Status = true;
-            response.Message = "Success";
-
-
-            var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
-            var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
-            //foreach (var n in variety)
-            //{
-            //    n.Patterns.Clear();
-            //}
-            var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
-            //var color = await _unitOfWork.ColorRepository.GetAllAsync();
-
-            var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
-
-            var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
-
-            var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
-            foreach (var n in elementColor)
+            try
             {
-                n.Element = null;
-            }
+                response.Status = true;
+                response.Message = "Success";
 
 
-            var test = variety.Select(x => new VarietyResponseModel
-            {
-                VarietyId = x.VarietyId,
-                VarietyName = x.VarietyName,
-                Description = x.Description,
-                Patterns = x.Patterns.Select(y => new PatternResponseModel
+                var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
+                var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
+                //foreach (var n in variety)
+                //{
+                //    n.Patterns.Clear();
+                //}
+                var patternColor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+                //var color = await _unitOfWork.ColorRepository.GetAllAsync();
+
+                var elementID = _fengShuiService.CalculateFengShui(birthday, gender);
+
+                var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementID);
+                if (element == null)
                 {
-                    PatternId = y.PatternId,
-                    PatternName = y.PatternName,
-                    ImageUrl = y.ImageUrl,
-                    VarietyId = y.VarietyId,
-                    PatternColors = y.PatternColors.Select(z => new PatternColorResponseModel
+                    response.Status = false;
+                    response.Message = "Cannot calculate your element!";
+                    return NotFound(Response);
+                }
+
+                await _unitOfWork.GeneralRepository.CreateAsync(new General
+                {
+                    CreatedDate = DateTime.Now,
+                    ElementId = elementID,
+                    KuaId = null,
+                });
+
+                var elementColor = await _unitOfWork.ElementColorRepository.GetAllAsync();
+                foreach (var n in elementColor)
+                {
+                    n.Element = null;
+                }
+
+
+                var test = variety.Select(x => new VarietyResponseModel
+                {
+                    VarietyId = x.VarietyId,
+                    VarietyName = x.VarietyName,
+                    Description = x.Description,
+                    Patterns = x.Patterns.Select(y => new PatternResponseModel
                     {
-                        ColorId = z.ColorId,
-                        PatternId = z.PatternId,
-                        PcolorId = z.PcolorId,
-                        Values = z.Values,
-                        ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
+                        PatternId = y.PatternId,
+                        PatternName = y.PatternName,
+                        ImageUrl = y.ImageUrl,
+                        VarietyId = y.VarietyId,
+                        PatternColors = y.PatternColors.Select(z => new PatternColorResponseModel
+                        {
+                            ColorId = z.ColorId,
+                            PatternId = z.PatternId,
+                            PcolorId = z.PcolorId,
+                            Values = z.Values,
+                            ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
+                        }).ToList(),
+                        PatternPoint = y.PatternColors.Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
                     }).ToList(),
-                    PatternPoint = y.PatternColors.Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
-                }).ToList(),
-                TotalPattern = x.Patterns.Count(),
-            }).ToList();
+                    TotalPattern = x.Patterns.Count(),
+                }).ToList();
 
 
-            var recQuantity = await _unitOfWork.ElementQuantityRepository.GetAllAsync();
-            foreach (var item in recQuantity)
-            {
-                item.Element = null;
+                var recQuantity = await _unitOfWork.ElementQuantityRepository.GetAllAsync();
+                foreach (var item in recQuantity)
+                {
+                    item.Element = null;
+                }
+
+                
+
+
+                response.Data = new { Variety = test, RecQuantity = recQuantity.Where(x => x.ElementId == elementID), Element = element.Element1 };
+
+
+                //var pond = await _unitOfWork.PondRepository.GetAllAsync();
+                //var shape = await _unitOfWork.ShapeRepository.GetAllAsync();
+                //foreach (Shape item in shape)
+                //{
+                //    item.Ponds = null;
+                //}
+
+
+                if (response.Data == null)
+                {
+                    response.Status = false;
+                    response.Message = "User not found";
+                    return BadRequest(response);
+                }
+
+                return Ok(response);
             }
-
-
-
-
-            response.Data = new { Variety = test, RecQuantity = recQuantity.Where(x => x.ElementId == elementID) , Element = element.Element1 };
-
-
-            //var pond = await _unitOfWork.PondRepository.GetAllAsync();
-            //var shape = await _unitOfWork.ShapeRepository.GetAllAsync();
-            //foreach (Shape item in shape)
-            //{
-            //    item.Ponds = null;
-            //}
-
-
-            if (response.Data == null)
+            catch (Exception err)
             {
                 response.Status = false;
-                response.Message = "User not found";
+                response.Message = err.ToString();
                 return BadRequest(response);
             }
-
-            return Ok(response);
+            
         }
 
         private double TotalPoint(ICollection<PatternColor> patternColors)
@@ -293,8 +322,24 @@ namespace FSK.APIService.Controllers
                 }
 
                 var elementId = _fengShuiService.CalculateFengShui(birthday, gender);
-
+                var kuaId = _fengShuiService.CalculateCungPhi(birthday, gender);
+                if (kuaId == 5)
+                {
+                    kuaId = gender.ToLower() == "male" ? 2 : 8;
+                }
                 var element = await _unitOfWork.ElementRepository.GetByIdAsync(elementId);
+                if (element == null)
+                {
+                    response.Status = false;
+                    response.Message = "Cannot calculate your element!";
+                    return NotFound(Response);
+                }
+                await _unitOfWork.GeneralRepository.CreateAsync(new General
+                {
+                    ElementId = elementId,
+                    KuaId = kuaId,
+                    CreatedDate = DateTime.Now
+                });
 
                 var elementColor = (await _unitOfWork.ElementColorRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 foreach (var n in elementColor)
@@ -303,11 +348,6 @@ namespace FSK.APIService.Controllers
                 }
                 
 
-                var kuaId = _fengShuiService.CalculateCungPhi(birthday, gender);
-                if (kuaId == 5)
-                {
-                    kuaId = gender.ToLower() == "male" ? 2 : 8;
-                }
 
                 //Pond Pointing
 
@@ -348,10 +388,15 @@ namespace FSK.APIService.Controllers
                         PatternId = z.PatternId,
                         PcolorId = z.PcolorId,
                         Values = z.Values,
-                        ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
+                        ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name + $"({z.Values*100}%)",
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
                     }).ToList(),
-                    PatternPoint = x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) + bonusQuantity + bonusPond + bonusDirection,
+                    PatternPoint = Math.Round(x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)), 2) + bonusQuantity + bonusPond + bonusDirection,
+                    Description = $"Default Value: {_defaultPoint}, " +
+                    $"Koi's Values: {Math.Round(x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) - _defaultPoint, 2)}, " +
+                    $"Bonus on Quantity: {bonusQuantity}, " +
+                    $"Bonus on Pond: {bonusPond}, " +
+                    $"Bonus on Direction: {bonusDirection}"
                 }).ToList();
 
                 double total = 0;
@@ -387,6 +432,8 @@ namespace FSK.APIService.Controllers
                 var TotalPoint = total / test.Count;
 
                 String Comments = getComments(TotalPoint);
+
+                
 
                 response.Status = true;
                 response.Message = "Success";
@@ -521,7 +568,7 @@ namespace FSK.APIService.Controllers
                 }).ToList();
 
 
-
+                
 
 
                 if (response.Data == null)
@@ -543,6 +590,36 @@ namespace FSK.APIService.Controllers
 
             
         }
+
+        [HttpGet("TotalAction")]
+        public async Task<ActionResult<Variety>> TotalAction()
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+
+                var dir = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.KuaId != null && x.ElementId == null).Count();
+                var koi = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.KuaId == null && x.ElementId != null).Count();
+                var pointing = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.KuaId != null && x.ElementId != null).Count();
+
+                response.Data = new { TotalDirection = dir, TotalKoi = koi, TotalPointing = pointing, Total = dir + koi + pointing };
+
+                return Ok(response);
+
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return BadRequest(response);
+            }
+
+
+        }
+
 
     }
 
