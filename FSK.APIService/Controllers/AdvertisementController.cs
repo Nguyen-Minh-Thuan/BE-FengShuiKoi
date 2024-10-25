@@ -479,9 +479,9 @@ namespace FSK.APIService.Controllers
 
                 return newAds.AdsId;
             }
-            catch (Exception)
+            catch (Exception err)
             {
-
+                err.ToString();
                 return 0;
             }
             

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace FSK.Repository.Models;
 
@@ -66,22 +65,9 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
 
     public virtual DbSet<Variety> Varieties { get; set; }
 
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
-
-    public static string GetConnectionString(string connectionStringName)
-    {
-        var config = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
-
-        string connectionString = config.GetConnectionString(connectionStringName);
-        return connectionString;
-    }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(GetConnectionString("DefaultConnection"));
-
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=LAAZY\\SQLEXPRESS;Initial Catalog=SWP391FengShuiKoiSystem;Persist Security Info=True;User ID=sa;Password=12345;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -106,7 +92,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.StartedDate).HasColumnType("datetime");
             entity.Property(e => e.Title)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
 
             entity.HasOne(d => d.AdsType).WithMany(p => p.Advertisements)
                 .HasForeignKey(d => d.AdsTypeId)
@@ -165,7 +151,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
             entity.Property(e => e.Title)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
 
             entity.HasOne(d => d.Element).WithMany(p => p.Blogs)
                 .HasForeignKey(d => d.ElementId)
@@ -180,7 +166,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.ColorId).HasColumnName("ColorID");
             entity.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(250);
         });
 
         modelBuilder.Entity<Direction>(entity =>
@@ -190,7 +176,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.DirectionId).HasColumnName("DirectionID");
             entity.Property(e => e.DirectionName)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(250);
             entity.Property(e => e.GroupId).HasColumnName("GroupID");
 
             entity.HasOne(d => d.Group).WithMany(p => p.Directions)
@@ -211,7 +197,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasMaxLength(300);
             entity.Property(e => e.GroupName)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(250);
         });
 
         modelBuilder.Entity<Element>(entity =>
@@ -222,7 +208,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.Element1)
                 .IsRequired()
-                .HasMaxLength(25)
+                .HasMaxLength(250)
                 .HasColumnName("Element");
         });
 
@@ -322,7 +308,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasMaxLength(500);
             entity.Property(e => e.KuaName)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(250);
         });
 
         modelBuilder.Entity<Package>(entity =>
@@ -332,7 +318,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.ToTable("Package");
 
             entity.Property(e => e.PackageId).HasColumnName("PackageID");
-            entity.Property(e => e.PackageName).HasMaxLength(50);
+            entity.Property(e => e.PackageName).HasMaxLength(250);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
         });
 
@@ -346,7 +332,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasColumnName("ImageURL");
             entity.Property(e => e.PatternName)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(250);
             entity.Property(e => e.VarietyId).HasColumnName("VarietyID");
 
             entity.HasOne(d => d.Variety).WithMany(p => p.Patterns)
@@ -402,7 +388,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.RoleName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
         });
 
         modelBuilder.Entity<Shape>(entity =>
@@ -412,7 +398,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.ShapeId).HasColumnName("ShapeID");
             entity.Property(e => e.Shape1)
                 .IsRequired()
-                .HasMaxLength(25)
+                .HasMaxLength(250)
                 .HasColumnName("Shape");
         });
 
@@ -434,7 +420,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.PackageId).HasColumnName("PackageID");
             entity.Property(e => e.PaymentMethod)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TransactionDate).HasColumnType("datetime");
             entity.Property(e => e.TransactionDetail)
@@ -460,7 +446,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.Email)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
             entity.Property(e => e.ImageUrl).HasMaxLength(250);
             entity.Property(e => e.Password)
                 .IsRequired()
@@ -468,7 +454,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UserName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
@@ -487,7 +473,7 @@ public partial class SWP391FengShuiKoiSystemContext : DbContext
                 .HasColumnName("ImageURL");
             entity.Property(e => e.VarietyName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(250);
         });
 
         OnModelCreatingPartial(modelBuilder);
