@@ -10,7 +10,7 @@ namespace FSK.APIService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
