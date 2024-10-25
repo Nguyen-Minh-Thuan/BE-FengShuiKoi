@@ -481,7 +481,6 @@ namespace FSK.APIService.Controllers
             }
             catch (Exception err)
             {
-                err.ToString();
                 return 0;
             }
             
