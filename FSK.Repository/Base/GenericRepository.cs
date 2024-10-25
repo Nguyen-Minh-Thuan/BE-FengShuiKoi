@@ -17,7 +17,7 @@ namespace FSK.Repository.Base
 
         public GenericRepository(SWP391FengShuiKoiSystemContext context) => _context = context;
 
-        public void Shuffle(List<T> list)
+        public List<T> Shuffle(List<T> list)
         {
             Random rng = new Random();
 
@@ -31,7 +31,9 @@ namespace FSK.Repository.Base
                 list[i] = list[j];
                 list[j] = temp;
             }
+            return list;
         }
+
 
         public List<T> GetAll()
         {
