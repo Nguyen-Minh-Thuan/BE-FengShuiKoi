@@ -21,13 +21,58 @@ namespace FSK.APIService.Controllers
 
         private readonly UnitOfWork _unitOfWork;
         private readonly IVnPayService _vnPayService;
-        //private readonly DatabaseContext _Dbcontext;
 
         public AdvertisementController(UnitOfWork unitOfWork, IVnPayService vnPayService)
         {
             _unitOfWork = unitOfWork;
             _vnPayService = vnPayService;
         }
+
+        [HttpGet("GetPendingAds")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetPendingAds()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                response.Status = true;
+                response.Message = "Success";
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 2);
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+                var user = await _unitOfWork.UserRepository.GetAllAsync();
+                foreach (var item in user)
+                {
+                    item.Advertisements = null;
+                    item.Transactions = null;
+                }
+                var role = await _unitOfWork.RoleRepository.GetAllAsync();
+                foreach (var item in role)
+                {
+                    item.Users = null;
+                }
+
+                response.Data = ads;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
 
 
         [HttpGet("AdsByPage")]
@@ -41,7 +86,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var ads = await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize);
+                var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.StatusId == 5);
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -80,7 +125,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync());
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5);
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -127,7 +172,17 @@ namespace FSK.APIService.Controllers
                 response.Status = true;
                 response.Message = "Success";
                 var ads = await _unitOfWork.AdvertisementRepository.GetByIdAsync(id);
-
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found!";
+                    return NotFound(response);
+                }
+                await _unitOfWork.InteractRepository.CreateAsync(new Interact
+                {
+                    AdsId = id,
+                    CreatedDate = DateTime.Now
+                });
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -138,6 +193,7 @@ namespace FSK.APIService.Controllers
                 {
                     item.Advertisements = null;
                 }
+
 
                 response.Data = ads;
 
@@ -183,10 +239,11 @@ namespace FSK.APIService.Controllers
                     return BadRequest(response);
                 }
 
+                var output = _unitOfWork.AdvertisementRepository.Shuffle(RecAds);
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = RecAds;
+                response.Data = output.Take(3);
 
                 return Ok(response);
             }
@@ -210,7 +267,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.PackageRepository.GetAllAsync();
+                response.Data = (await _unitOfWork.PackageRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 return Ok(response);
             }
             catch (Exception err)
@@ -262,7 +319,8 @@ namespace FSK.APIService.Controllers
                 StatusId = draftId,
                 ElementId = model.ElementId,
                 ImageUrl = model.ImageUrl,
-                PaymentStatus = false
+                PaymentStatus = false,
+                CreatedDate = DateTime.Now,
             };
 
             await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
@@ -411,7 +469,8 @@ namespace FSK.APIService.Controllers
                     StatusId = draftId,
                     ElementId = model.ElementId,
                     ImageUrl = model.ImageUrl,
-                    PaymentStatus = false
+                    PaymentStatus = false,
+                    CreatedDate = DateTime.Now,
                 };
 
                 await _unitOfWork.AdvertisementRepository.CreateAsync(advertisement);
@@ -902,6 +961,42 @@ namespace FSK.APIService.Controllers
             }
 
         }
+
+        [HttpGet("GetView")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetView(int adsId)
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var ads = await _unitOfWork.AdvertisementRepository.GetByIdAsync(adsId);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found!";
+                    return NotFound(response);
+                }
+
+                var totalView = (await _unitOfWork.InteractRepository.GetAllAsync()).Where(x => x.AdsId == adsId).Count();
+                
+                
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = totalView;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
+
+
 
 
     }

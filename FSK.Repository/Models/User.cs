@@ -23,7 +23,7 @@ public partial class User
 
     public int RoleId { get; set; }
 
-    public DateTime? CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     public virtual ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
 
