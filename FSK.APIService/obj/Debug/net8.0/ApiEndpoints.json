@@ -57,6 +57,36 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "TotalAds",
+    "RelativePath": "api/Admin/TotalAds",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "TotalRegisteredUser",
+    "RelativePath": "api/Admin/TotalRegisteredUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "TotalUser",
+    "RelativePath": "api/Admin/TotalUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "GetPageAds",
     "RelativePath": "api/Advertisement/AdsByPage",
