@@ -476,10 +476,10 @@ INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
 INSERT [dbo].[Advertisement] 
     ([AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [ImageUrl], [PaymentStatus], [CreatedDate]) 
 VALUES 
-    (1, 3, 1, N'Tiêu đề Quảng cáo #1', N'Nội dung quảng cáo #1', 4, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
-    (1, 4, 1, N'Tiêu đề Quảng cáo #2', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
-    (1, 4, 2, N'Tiêu đề Quảng cáo #3', N'Nội dung quảng cáo #3', 2, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
-    (1, 5, 2, N'Tiêu đề Quảng cáo #4', N'Nội dung quảng cáo #4', 6, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
+    (1, 3, 1, N'Tiêu đề Quảng cáo #1', N'Nội dung quảng cáo #1', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
+    (1, 4, 1, N'Tiêu đề Quảng cáo #2', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (1, 4, 2, N'Tiêu đề Quảng cáo #3', N'Nội dung quảng cáo #3', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (1, 5, 2, N'Tiêu đề Quảng cáo #4', N'Nội dung quảng cáo #4', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
 
 -- Add Koi
 SET IDENTITY_INSERT [dbo].[Advertisement] ON;
@@ -487,10 +487,10 @@ SET IDENTITY_INSERT [dbo].[Advertisement] ON;
 INSERT [dbo].[Advertisement] 
     ([AdsId], [AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [ImageUrl], [PaymentStatus], [CreatedDate]) 
 VALUES 
-    (5, 2, 3, 1, N'Tiêu đề Quảng cáo #5', N'Nội dung quảng cáo #1', 4, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
-    (6, 2, 4, 1, N'Tiêu đề Quảng cáo #6', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
-    (7, 2, 4, 2, N'Tiêu đề Quảng cáo #7', N'Nội dung quảng cáo #3', 1, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
-    (8, 2, 5, 2, N'Tiêu đề Quảng cáo #8', N'Nội dung quảng cáo #4', 6, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
+    (5, 2, 3, 1, N'Tiêu đề Quảng cáo #5', N'Nội dung quảng cáo #1', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
+    (6, 2, 4, 1, N'Tiêu đề Quảng cáo #6', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (7, 2, 4, 2, N'Tiêu đề Quảng cáo #7', N'Nội dung quảng cáo #3', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
+    (8, 2, 5, 2, N'Tiêu đề Quảng cáo #8', N'Nội dung quảng cáo #4', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
 
 SET IDENTITY_INSERT [dbo].[Advertisement] OFF;
 GO

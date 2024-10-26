@@ -87,6 +87,12 @@ namespace FSK.APIService.Controllers
                 UpdateExpired();
                 
                 var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.StatusId == 5 && x.IsActive != false);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "There is no Deploying ads!";
+                    return NotFound(response);
+                }
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -126,6 +132,12 @@ namespace FSK.APIService.Controllers
             {
                 UpdateExpired();
                 var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5 && x.IsActive != false);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "There is no Deploying ads!";
+                    return NotFound(response);
+                }
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -361,6 +373,8 @@ namespace FSK.APIService.Controllers
                 var AdsList = await _unitOfWork.AdvertisementRepository.GetAllAsync();
 
                 var RecAds = AdsList.Where(x => x.ElementId == Elementid && x.StatusId == 5 && x.IsActive != false).ToList();
+
+
 
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
@@ -1141,10 +1155,10 @@ namespace FSK.APIService.Controllers
             var DeployingAds = _unitOfWork.AdvertisementRepository.GetAll().Where(x => x.StatusId == 5);
             foreach (var item in DeployingAds)
             {
-                if(item.ExpiredDate.Value.Date.CompareTo(today) <= 0)
+                if (item.ExpiredDate.Value.Date.CompareTo(today) <= 0)
                     item.StatusId = 6;
             }
-             _unitOfWork.AdvertisementRepository.Save();
+            _unitOfWork.AdvertisementRepository.Save();
         }
 
 
