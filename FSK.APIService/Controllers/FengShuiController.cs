@@ -433,11 +433,11 @@ namespace FSK.APIService.Controllers
 
                 String Comments = getComments(TotalPoint);
 
-                
+                var shape = (await _unitOfWork.ShapeRepository.GetByIdAsync(shapeId)).Shape1;
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments , bonusQuantity = bonusQuantity, bonusPond = bonusPond , bonusDirection = bonusDirection , defaultValues = _defaultPoint};
+                response.Data = new { Element = element, Shape = shape, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments , bonusQuantity = bonusQuantity, bonusPond = bonusPond , bonusDirection = bonusDirection , defaultValues = _defaultPoint};
                 return Ok(response);
             }
             catch (Exception ex)

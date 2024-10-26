@@ -508,6 +508,7 @@ INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (3, N'Cancelled');
 INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (4, N'Approved');
 INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (5, N'Deploying');
 INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (6, N'Expired');
+INSERT INTO [dbo].[Status] ([StatusId], [Status]) VALUES (7, N'Sold Out');
 SET IDENTITY_INSERT [dbo].[Status] OFF;
 GO
 

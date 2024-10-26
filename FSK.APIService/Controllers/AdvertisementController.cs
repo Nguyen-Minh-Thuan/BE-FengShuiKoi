@@ -84,9 +84,9 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                response.Status = true;
-                response.Message = "Success";
-                var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.StatusId == 5);
+                UpdateExpired();
+                
+                var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.StatusId == 5 && x.IsActive != false);
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -99,7 +99,8 @@ namespace FSK.APIService.Controllers
                 }
 
                 response.Data = ads;
-
+                response.Status = true;
+                response.Message = "Success";
                 return Ok(response);
             }
             catch (Exception err)
@@ -123,9 +124,8 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                response.Status = true;
-                response.Message = "Success";
-                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5);
+                UpdateExpired();
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5 && x.IsActive != false);
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -147,7 +147,8 @@ namespace FSK.APIService.Controllers
                 {
                     item.Users = null;
                 }
-
+                response.Status = true;
+                response.Message = "Success";
                 response.Data = ads;
                 return Ok(response);
             }
@@ -208,6 +209,145 @@ namespace FSK.APIService.Controllers
 
         }
 
+        [Authorize(Policy = "Member")]
+        [HttpDelete("DeleteDraftById")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> DeleteDraftById(int id, int userId)
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var ads = (await _unitOfWork.AdvertisementRepository.GetByIdAsync(id));
+
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found!";
+                    return NotFound(response);
+                }
+                if (ads.UserId != userId)
+                {
+                    response.Status = false;
+                    response.Message = "Invalid User!";
+                    return BadRequest(response);
+                }
+                if (ads.StatusId != 1)
+                {
+                    response.Status = false;
+                    response.Message = "This function is use to delete draft Advertisement";
+                    return BadRequest(response);
+                }
+                ads.StatusId = 3;
+                ads.IsActive = false;
+
+                response.Status = true;
+                response.Message = "Draft removed successfully!";
+                response.Data = await _unitOfWork.AdvertisementRepository.UpdateAsync(ads);
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
+        [Authorize(Policy = "Member")]
+        [HttpPut("AdsSoldOut")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> AdsSoldOut(int id, int userId)
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var ads = (await _unitOfWork.AdvertisementRepository.GetByIdAsync(id));
+
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found!";
+                    return NotFound(response);
+                }
+                if (ads.UserId != userId)
+                {
+                    response.Status = false;
+                    response.Message = "Invalid User!";
+                    return BadRequest(response);
+                }
+                if (ads.StatusId != 5)
+                {
+                    response.Status = false;
+                    response.Message = "This function is for deploying Advertisement";
+                    return BadRequest(response);
+                }
+                ads.StatusId = 7;
+                ads.IsActive = true;
+
+                response.Status = true;
+                response.Message = "Update successfully!";
+                response.Data = await _unitOfWork.AdvertisementRepository.UpdateAsync(ads);
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
+        [Authorize(Policy = "Member")]
+        [HttpPut("AdsSoldBack")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> AdsSoldBack(int id, int userId)
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var ads = (await _unitOfWork.AdvertisementRepository.GetByIdAsync(id));
+
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "Advertisement not found!";
+                    return NotFound(response);
+                }
+                if (ads.UserId != userId)
+                {
+                    response.Status = false;
+                    response.Message = "Invalid User!";
+                    return BadRequest(response);
+                }
+                if (ads.StatusId != 7)
+                {
+                    response.Status = false;
+                    response.Message = "This function is for deploying Advertisement";
+                    return BadRequest(response);
+                }
+                ads.StatusId = 5;
+                ads.IsActive = true;
+
+                response.Status = true;
+                response.Message = "Update successfully!";
+                response.Data = await _unitOfWork.AdvertisementRepository.UpdateAsync(ads);
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
+
         [HttpGet("GetRecAds")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdsElement(int Elementid)
         {
@@ -216,10 +356,11 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                
+                UpdateExpired();
+
                 var AdsList = await _unitOfWork.AdvertisementRepository.GetAllAsync();
 
-                var RecAds = AdsList.Where(x => x.ElementId == Elementid && x.StatusId == 5).ToList();
+                var RecAds = AdsList.Where(x => x.ElementId == Elementid && x.StatusId == 5 && x.IsActive != false).ToList();
 
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
@@ -679,7 +820,7 @@ namespace FSK.APIService.Controllers
                     return BadRequest(response);
                 }
 
-                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == userid).ToList();
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.UserId == userid && x.IsActive != false).ToList();
                 foreach (var item in ads)
                 {
                     item.User = null;
@@ -994,7 +1135,17 @@ namespace FSK.APIService.Controllers
 
         }
 
-
+        private void UpdateExpired()
+        {
+            var today = DateTime.Now.Date;
+            var DeployingAds = _unitOfWork.AdvertisementRepository.GetAll().Where(x => x.StatusId == 5);
+            foreach (var item in DeployingAds)
+            {
+                if(item.ExpiredDate.Value.Date.CompareTo(today) <= 0)
+                    item.StatusId = 6;
+            }
+             _unitOfWork.AdvertisementRepository.Save();
+        }
 
 
 
