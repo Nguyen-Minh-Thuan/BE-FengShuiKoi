@@ -437,7 +437,7 @@ namespace FSK.APIService.Controllers
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments , bonusQuantity = bonusQuantity, bonusPond = bonusPond , bonusDirection = bonusDirection};
+                response.Data = new { Element = element, Direction = selectDir, RecDir = recDir, KoiPoint = test , TotalPoint = TotalPoint, TotalAmount = totalAmount, Comment = Comments , bonusQuantity = bonusQuantity, bonusPond = bonusPond , bonusDirection = bonusDirection , defaultValues = _defaultPoint};
                 return Ok(response);
             }
             catch (Exception ex)
