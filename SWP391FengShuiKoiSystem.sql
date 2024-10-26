@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[User](
 	[UserId] [int] IDENTITY(1,1) NOT NULL,
-	[UserName] [nvarchar](50) NOT NULL,
+	[UserName] [nvarchar](250) NOT NULL,
 	[Password] [nvarchar](300) NOT NULL,
-	[Email] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](250) NOT NULL,
 	[Bio] [nvarchar](500) NULL,
 	[ImageUrl] [nvarchar](250) NULL,
 	[IsActive] [bit] NULL,
@@ -53,7 +53,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Role](
 	[RoleID] [int] IDENTITY(1,1) NOT NULL,
-	[RoleName] [nvarchar] (50) NOT NULL,
+	[RoleName] [nvarchar] (250) NOT NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
 (
@@ -69,7 +69,7 @@ GO
 CREATE TABLE [dbo].[Blog](
 	[BlogId] [int] IDENTITY(1,1) NOT NULL,
 	[UserId] [int] NOT NULL,
-	[Title] [nvarchar](50) NOT NULL,
+	[Title] [nvarchar](250) NOT NULL,
 	[Content] [nvarchar](3000) NULL,
 	[ElementID] [int] NOT NULL,
 	[CreatedDate] [datetime] NULL,
@@ -91,7 +91,7 @@ CREATE TABLE [dbo].[Advertisement](
 	[AdsTypeId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
 	[PackageID] [int] NULL,
-	[Title] [nvarchar](50) NOT NULL,
+	[Title] [nvarchar](250) NOT NULL,
 	[Content] [nvarchar](3000) NULL,
 	[StatusId] [int]  NOT NULL,
 	[ElementID] [int] NOT NULL,
@@ -146,7 +146,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Package](
 	[PackageID] [int] IDENTITY(1,1) NOT NULL,
-	[PackageName] [nvarchar](50) NULL,
+	[PackageName] [nvarchar](250) NULL,
 	[Duration] [int] NOT NULL,
 	[Price] [decimal](18, 2) NULL,
 	[IsActive] [bit] NULL,
@@ -168,7 +168,7 @@ CREATE TABLE [dbo].[Transaction](
 	[PackageID] [int] NOT NULL,
 	[TransactionDetail] [nvarchar] (3000) NOT NULL,
 	[Duration] [int] NOT NULL,
-	[PaymentMethod] [nvarchar] (50) NOT NULL,
+	[PaymentMethod] [nvarchar] (250) NOT NULL,
 	[TransactionDate] [datetime] NOT NULL,
 	[TotalPrice] [decimal](18, 2) NOT NULL,
 	[IsActive] [bit] NULL,
@@ -185,7 +185,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Element](
 	[ElementID] [int] IDENTITY(1,1) NOT NULL,
-	[Element] [nvarchar] (25) NOT NULL,
+	[Element] [nvarchar] (250) NOT NULL,
 	[Description] [nvarchar] (500)  NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Element] PRIMARY KEY CLUSTERED 
@@ -218,7 +218,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Kua](
 	[KuaID] [int] IDENTITY(1,1) NOT NULL,
-	[KuaName] [nvarchar] (25) NOT NULL,
+	[KuaName] [nvarchar] (250) NOT NULL,
 	[Description] [nvarchar] (500) NOT NULL,
 	[IsActive] [bit] NULL,
 	--[Status] [bit] NOT NULL,
@@ -271,7 +271,7 @@ GO
 CREATE TABLE [dbo].[Direction](
 	[DirectionID] [int] IDENTITY(1,1) NOT NULL,
 	[GroupID] [int] NOT NULL,
-	[DirectionName] [nvarchar] (25) NOT NULL,
+	[DirectionName] [nvarchar] (250) NOT NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Direction] PRIMARY KEY CLUSTERED 
 (
@@ -286,7 +286,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[DirectionGroup](
 	[GroupID] [int] IDENTITY(1,1) NOT NULL,
-	[GroupName] [nvarchar] (25) NOT NULL,
+	[GroupName] [nvarchar] (250) NOT NULL,
 	[Description] [nvarchar] (300) NOT NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_DirectionGroup] PRIMARY KEY CLUSTERED 
@@ -318,7 +318,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Shape](
 	[ShapeID] [int] IDENTITY(1,1) NOT NULL,
-	[Shape] [nvarchar] (25) NOT NULL,
+	[Shape] [nvarchar] (250) NOT NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Shape] PRIMARY KEY CLUSTERED 
 (
@@ -350,7 +350,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Color](
 	[ColorID] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar] (25) NOT NULL,
+	[Name] [nvarchar] (250) NOT NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Color] PRIMARY KEY CLUSTERED 
 (
@@ -383,7 +383,7 @@ GO
 CREATE TABLE [dbo].[Pattern](
 	[PatternID] [int] IDENTITY(1,1) NOT NULL,
 	[VarietyID] [int] NOT NULL,
-	[PatternName] [nvarchar] (25) NOT NULL,
+	[PatternName] [nvarchar] (250) NOT NULL,
 	[ImageURL] [nvarchar] (250) NULL,
 	[IsActive] [bit] NULL,
  CONSTRAINT [PK_Pattern] PRIMARY KEY CLUSTERED 
@@ -399,7 +399,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Variety](
 	[VarietyID] [int] IDENTITY(1,1) NOT NULL,
-	[VarietyName] [nvarchar] (50) NOT NULL,
+	[VarietyName] [nvarchar] (250) NOT NULL,
 	[ImageURL] [nvarchar] (250) NULL,
 	[Description] [nvarchar] (1500) NULL,
 	[IsActive] [bit] NULL,

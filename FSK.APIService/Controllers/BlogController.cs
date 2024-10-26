@@ -38,7 +38,6 @@ namespace FSK.APIService.Controllers
                     UserId = model.UserId,
                     Title = model.Title,
                     Content = model.Content,
-                    StatusId = model.StatusId,
                     ElementId = model.ElementID,
                     CreatedDate = DateTime.UtcNow,
                     ImageUrl = model.ImageUrl
@@ -161,7 +160,6 @@ namespace FSK.APIService.Controllers
                 // Update blog properties
                 blog.Title = model.Title;
                 blog.Content = model.Content;
-                blog.StatusId = model.StatusId;
                 blog.ElementId = model.ElementID;
                 blog.ImageUrl = model.ImageUrl;
 
