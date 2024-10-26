@@ -577,7 +577,137 @@ namespace FSK.APIService.Controllers
 
         }
 
+        [HttpGet("AdsCheckAllById")]
+        public async Task<IActionResult> AdsCheckAllById(int id)
+        {
+            BaseResponseModel response = new BaseResponseModel();
 
+            try
+            {
+                var list = (await _unitOfWork.InteractRepository.GetAllAsync()).Where(x => x.AdsId == id).Select(x => 
+                new Interact
+                {
+                    InteractId = x.InteractId,
+                    AdsId = x.AdsId,
+                    CreatedDate = x.CreatedDate.Date,
+                }).ToList();
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = list;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("GetFengShuiCheck")]
+        public async Task<IActionResult> GetFengShuiCheck()
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Select(x => new General
+                {
+                    GeneralId = x.GeneralId,
+                    ElementId = x.ElementId,
+                    KuaId = x.KuaId,
+                    CreatedDate = x.CreatedDate.Date,
+                }).ToList();
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = new 
+                { 
+                    total = list, 
+                    kua = list.Where(x => x.KuaId != null && x.ElementId == null), 
+                    element = list.Where(x => x.KuaId == null && x.ElementId != null), 
+                    pointing = list.Where(x => x.KuaId != null && x.ElementId != null),
+                };
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("WeeklyAdsCheck")]
+        public async Task<IActionResult> WeeklyAdsCheck(int skip)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var Monday = getMonday(skip);
+                var Sunday = Monday.AddDays(6);
+                var list = (await _unitOfWork.InteractRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday).Select(x => new Interact
+                {
+                    InteractId = x.InteractId,
+                    AdsId = x.AdsId,
+                    CreatedDate = x.CreatedDate.Date,
+                }).ToList();
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = new { list = list, total = list.Count() , FromDate = Monday.Date, ToDate  = Sunday.Date};
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("WeeklyFengShuiCheck")]
+        public async Task<IActionResult> WeeklyFengShuiCheck(int skip)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var Monday = getMonday(skip);
+                var Sunday = Monday.AddDays(6);
+                var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday).Select(x => new General
+                {
+                    GeneralId = x.GeneralId,
+                    ElementId = x.ElementId,
+                    KuaId = x.KuaId,
+                    CreatedDate = x.CreatedDate.Date,
+                }).ToList();
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = new { list = list, total = list.Count(), FromDate = Monday.Date, ToDate = Sunday.Date };
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+
+        private DateTime getMonday(int skip)
+        {
+            var today = DateTime.Now.AddDays(skip);
+            var test = (today.DayOfWeek == DayOfWeek.Monday) ? today :
+                        (today.DayOfWeek == DayOfWeek.Tuesday) ? today.AddDays(-1) :
+                        (today.DayOfWeek == DayOfWeek.Wednesday) ? today.AddDays(-2) :
+                        (today.DayOfWeek == DayOfWeek.Thursday) ? today.AddDays(-3) :
+                        (today.DayOfWeek == DayOfWeek.Friday) ? today.AddDays(-4) :
+                        (today.DayOfWeek == DayOfWeek.Saturday) ? today.AddDays(-5) :
+                        today.AddDays(-6)
+                        ;
+            return today;
+        }
 
 
     }
