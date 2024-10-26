@@ -4,6 +4,7 @@ using FSK.APIService.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FSK.APIService.RequestModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace FSK.APIService.Controllers
 {
@@ -227,16 +228,19 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
-                // Verify old password
-                if (user.Password != model.OldPassword)
+                // Use PasswordHasher to verify the old password
+                var passwordHasher = new PasswordHasher<User>();
+                var result = passwordHasher.VerifyHashedPassword(user, user.Password, model.OldPassword);
+
+                if (result == PasswordVerificationResult.Failed)
                 {
                     response.Status = false;
                     response.Message = "Incorrect old password";
                     return BadRequest(response);
                 }
 
-                // Update password
-                user.Password = model.NewPassword;
+                // Hash the new password before saving
+                user.Password = passwordHasher.HashPassword(user, model.NewPassword);
 
                 await _unitOfWork.UserRepository.UpdateAsync(user);
                 await _unitOfWork.SaveChangesAsync();
