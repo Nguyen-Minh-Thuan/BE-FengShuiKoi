@@ -164,8 +164,8 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdminController",
-    "Method": "GetFungShuiCheck",
-    "RelativePath": "api/Admin/GetFungShuiCheck",
+    "Method": "GetFengShuiCheck",
+    "RelativePath": "api/Admin/GetFengShuiCheck",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -248,6 +248,38 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "WeeklyAdsCheck",
+    "RelativePath": "api/Admin/WeeklyAdsCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "WeeklyFengShuiCheck",
+    "RelativePath": "api/Admin/WeeklyFengShuiCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skip",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
