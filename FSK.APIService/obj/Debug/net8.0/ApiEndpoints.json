@@ -1759,6 +1759,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FSK.APIService.Controllers.StaffController",
+    "Method": "ApproveAdvertisement",
+    "RelativePath": "api/Staff/ApproveAdvertisement/{advertisementId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "advertisementId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.StaffController",
+    "Method": "DeclineAdvertisement",
+    "RelativePath": "api/Staff/DeclineAdvertisement/{advertisementId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "advertisementId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FSK.APIService.Controllers.TestController",
     "Method": "PaymentCallback",
     "RelativePath": "api/Test/CheckData",
