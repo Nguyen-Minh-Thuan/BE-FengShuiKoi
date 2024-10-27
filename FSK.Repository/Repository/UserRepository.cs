@@ -20,5 +20,6 @@ namespace FSK.Repository.Repository
             return await _context.Set<User>().FirstOrDefaultAsync(predicate);
         }
 
+
     }
 }

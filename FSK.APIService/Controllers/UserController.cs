@@ -136,8 +136,8 @@ namespace FSK.APIService.Controllers
             {
                 return NotFound();
             }
-
-            await _unitOfWork.UserRepository.RemoveAsync(user);
+            user.IsActive = false;
+            await _unitOfWork.UserRepository.UpdateAsync(user);
 
             return NoContent();
         }
