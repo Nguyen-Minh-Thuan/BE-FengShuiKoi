@@ -69,7 +69,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var blog = await _unitOfWork.BlogRepository.GetAllAsync();
+                var blog = (await _unitOfWork.BlogRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 
                 response.Data = blog;
                 return Ok(response);
@@ -94,7 +94,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var blog = (await _unitOfWork.BlogRepository.GetAllAsync()).Where(x => x.ElementId == id).ToList();
+                var blog = (await _unitOfWork.BlogRepository.GetAllAsync()).Where(x => x.ElementId == id && x.IsActive != false).ToList();
                 
                 response.Data = blog;
 
@@ -179,5 +179,45 @@ namespace FSK.APIService.Controllers
                 return StatusCode(500, response);
             }
         }
+
+        [Authorize(Policy = "Staff")]
+        [HttpPut("DeleteBlog")]
+        public async Task<IActionResult> DeleteBlog(int id)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                
+                var blog = await _unitOfWork.BlogRepository.GetByIdAsync(id);
+                if (blog == null)
+                {
+                    response.Status = false;
+                    response.Message = "Blog not found!";
+                    return NotFound(response);
+                }
+                if (blog.IsActive == false)
+                {
+                    response.Status = false;
+                    response.Message = "Blog is already deleted!";
+                    return NotFound(response);
+                }
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = blog;
+
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
+
     }
 }

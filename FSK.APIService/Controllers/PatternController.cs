@@ -69,14 +69,14 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var total = (await _unitOfWork.PatternRepository.GetAllAsync()).Count();
-                if (id < 0 || id > total)
+                
+                var output = await _unitOfWork.PatternRepository.GetByIdAsync(id);
+                if (output == null)
                 {
                     response.Status = false;
                     response.Message = "Pattern not found";
                     return NotFound(response);
                 }
-                var output = await _unitOfWork.PatternRepository.GetByIdAsync(id);
                 if (output.IsActive == false)
                 {
                     response.Status = false;
@@ -119,15 +119,13 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var totalVariety = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
-
-                if (model.VarietyId < 0 || model.VarietyId > totalVariety)
+                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(model.VarietyId);
+                if (Variety == null)
                 {
                     response.Status = false;
                     response.Message = "Variety not found";
                     return NotFound(response);
                 }
-                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(model.VarietyId);
                 if (Variety.IsActive == false)
                 {
                     response.Status = false;

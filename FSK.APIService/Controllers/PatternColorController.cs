@@ -80,16 +80,13 @@ namespace FSK.APIService.Controllers
         {
             BaseResponseModel response = new BaseResponseModel();
 
-            response.Status = true;
-            response.Message = "Success";
-            var total = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Count();
-            if (id < 0 || id > total)
+            var pattern = await _unitOfWork.PatternColorRepository.GetByIdAsync(id);
+            if (pattern == null)
             {
                 response.Status = false;
                 response.Message = "Koi Pattern color not found";
                 return NotFound(response);
             }
-            var pattern = await _unitOfWork.PatternColorRepository.GetByIdAsync(id);
             if (pattern.IsActive == false)
             {
                 response.Status = false;
@@ -103,9 +100,10 @@ namespace FSK.APIService.Controllers
                 item.Color = null;
             }
 
+
+            response.Status = true;
+            response.Message = "Success";
             response.Data = pattern;
-
-
 
             return Ok(response);
         }
@@ -184,7 +182,13 @@ namespace FSK.APIService.Controllers
             try
             {
                 var model = await _unitOfWork.PatternColorRepository.GetByIdAsync(id);
-                if (model == null || model.IsActive == false)
+                if (model == null)
+                {
+                    response.Status = false;
+                    response.Message = "PatternColor not found!";
+                    return NotFound(response);
+                }
+                if (model.IsActive == false)
                 {
                     response.Status = false;
                     response.Message = "PatternColor not found!";
@@ -217,6 +221,12 @@ namespace FSK.APIService.Controllers
                 double totalValue = 0;
                 var update = await _unitOfWork.PatternColorRepository.GetByIdAsync(PatternColorId);
                 if(update == null)
+                {
+                    response.Status = false;
+                    response.Message = "PatternColor not found!";
+                    return NotFound(response);
+                }
+                if (update.IsActive == false)
                 {
                     response.Status = false;
                     response.Message = "PatternColor not found!";
