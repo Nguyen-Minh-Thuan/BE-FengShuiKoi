@@ -27,10 +27,17 @@ namespace FSK.APIService.Controllers
                 return BadRequest(ModelState);
             }
 
-            var existingUser = await _unitOfWork.UserRepository.FirstOrDefaultAsync(x => x.Email == userDto.Email);
+            var existingUser = (await _unitOfWork.UserRepository.GetAllAsync()).Where(x => x.UserName == userDto.UserName).LastOrDefault();
             if (existingUser != null)
             {
-                return BadRequest("User already exists with the same email address.");
+                if (existingUser.IsActive != false)
+                    return BadRequest("Username already taken by someone else.");
+            }
+            var existingEmail = (await _unitOfWork.UserRepository.GetAllAsync()).Where(x => x.Email == userDto.Email).LastOrDefault();
+            if (existingEmail != null)
+            {
+                if (existingEmail.IsActive != false)
+                    return BadRequest("User already exists with the same email address.");
             }
 
             try

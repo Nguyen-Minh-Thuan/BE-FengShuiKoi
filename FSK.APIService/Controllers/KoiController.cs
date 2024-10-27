@@ -102,7 +102,7 @@ namespace FSK.APIService.Controllers
                 response.Message = "Koi variety not found";
                 return NotFound(response);
             }
-            var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
+            var patterns = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != false);
             foreach (var p in patterns)
             {
                 p.Variety = null;
