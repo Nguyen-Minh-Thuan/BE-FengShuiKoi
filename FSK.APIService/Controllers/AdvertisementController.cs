@@ -75,8 +75,8 @@ namespace FSK.APIService.Controllers
 
 
 
-        [HttpGet("AdsByPage")]
-        public async Task<ActionResult<IEnumerable<Advertisement>>> GetPageAds(int pageIndex = 0, int pageSize = 10)
+        [HttpGet("AdsDeployByPage")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> AdsDeployByPage(int pageIndex = 0, int pageSize = 10)
         {
 
             BaseResponseModel response = new BaseResponseModel();
@@ -87,6 +87,58 @@ namespace FSK.APIService.Controllers
                 UpdateExpired();
                 
                 var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.StatusId == 5 && x.IsActive != false);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "There is no Deploying ads!";
+                    return NotFound(response);
+                }
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+
+                response.Data = ads;
+                response.Status = true;
+                response.Message = "Success";
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+
+
+
+        }
+
+        [HttpGet("AdsByPage")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetPageAds(int pageIndex = 0, int pageSize = 10)
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+
+            try
+            {
+                UpdateExpired();
+
+                var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != false);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "There is no ads found!";
+                    return NotFound(response);
+                }
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -116,6 +168,57 @@ namespace FSK.APIService.Controllers
         }
 
 
+        [HttpGet("GetAllDeploying")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAllDeployingAds()
+        {
+
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                UpdateExpired();
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5 && x.IsActive != false);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "There is no Deploying ads!";
+                    return NotFound(response);
+                }
+                var status = await _unitOfWork.StatusRepository.GetAllAsync();
+                foreach (var item in status)
+                {
+                    item.Advertisements = null;
+                }
+                var type = await _unitOfWork.AdsTypeRepository.GetAllAsync();
+                foreach (var item in type)
+                {
+                    item.Advertisements = null;
+                }
+                var user = await _unitOfWork.UserRepository.GetAllAsync();
+                foreach (var item in user)
+                {
+                    item.Advertisements = null;
+                    item.Transactions = null;
+                }
+                var role = await _unitOfWork.RoleRepository.GetAllAsync();
+                foreach (var item in role)
+                {
+                    item.Users = null;
+                }
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = ads;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.Message;
+                return BadRequest(response);
+            }
+
+        }
+
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Advertisement>>> GetAds()
         {
@@ -125,7 +228,13 @@ namespace FSK.APIService.Controllers
             try
             {
                 UpdateExpired();
-                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5 && x.IsActive != false);
+                var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.IsActive != false);
+                if (ads == null)
+                {
+                    response.Status = false;
+                    response.Message = "There is no ads found!";
+                    return NotFound(response);
+                }
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -361,6 +470,8 @@ namespace FSK.APIService.Controllers
                 var AdsList = await _unitOfWork.AdvertisementRepository.GetAllAsync();
 
                 var RecAds = AdsList.Where(x => x.ElementId == Elementid && x.StatusId == 5 && x.IsActive != false).ToList();
+
+
 
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
@@ -1141,10 +1252,10 @@ namespace FSK.APIService.Controllers
             var DeployingAds = _unitOfWork.AdvertisementRepository.GetAll().Where(x => x.StatusId == 5);
             foreach (var item in DeployingAds)
             {
-                if(item.ExpiredDate.Value.Date.CompareTo(today) <= 0)
+                if (item.ExpiredDate.Value.Date.CompareTo(today) <= 0)
                     item.StatusId = 6;
             }
-             _unitOfWork.AdvertisementRepository.Save();
+            _unitOfWork.AdvertisementRepository.Save();
         }
 
 

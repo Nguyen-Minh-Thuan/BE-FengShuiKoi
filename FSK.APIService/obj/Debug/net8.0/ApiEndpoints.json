@@ -363,6 +363,37 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "AdsDeployByPage",
+    "RelativePath": "api/Advertisement/AdsDeployByPage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageIndex",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "AdsSoldBack",
     "RelativePath": "api/Advertisement/AdsSoldBack",
     "HttpMethod": "PUT",
@@ -552,6 +583,26 @@
     "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
     "Method": "GetAds",
     "RelativePath": "api/Advertisement/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FSK.Repository.Models.Advertisement, FSK.Repository, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdvertisementController",
+    "Method": "GetAllDeployingAds",
+    "RelativePath": "api/Advertisement/GetAllDeploying",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
