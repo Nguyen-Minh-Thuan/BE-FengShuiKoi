@@ -303,6 +303,12 @@ namespace FSK.APIService.Controllers
                 {
                     item.Advertisements = null;
                 }
+                var trasaction = await _unitOfWork.TransactionRepository.GetAllAsync();
+                foreach (var item in trasaction)
+                {
+                    item.User = null;
+                    item.Ads = null;
+                }
 
 
                 response.Data = ads;

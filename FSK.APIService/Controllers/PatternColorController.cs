@@ -141,7 +141,7 @@ namespace FSK.APIService.Controllers
                     }
                     totalValue += item.value;
                 }
-                if (totalValue != 1)
+                if (totalValue > 1 || totalValue <= 0)
                 {
                     response.Status = false;
                     response.Message = "The total values of a pattern must be 1";
