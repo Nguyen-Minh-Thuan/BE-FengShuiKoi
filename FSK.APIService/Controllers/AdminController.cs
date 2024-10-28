@@ -694,19 +694,57 @@ namespace FSK.APIService.Controllers
             }
         }
 
+        [HttpGet("GetWeeklyList")]
+        public async Task<IActionResult> GetListInteraction(int skip)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var Monday = getMonday(skip*7);
+                var Sunday = Monday.AddDays(6);
+                var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday);
+                
+                var list2 = list.GroupBy(x => x.CreatedDate.Date);
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+                String test1 = null;
+                int test2 = 0;
+                foreach (var item in list2)
+                {
+                    test1 = item.Key.ToString();
+                    test2 = item.Count();
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = test1,
+                        content = test2
+                    });
+                }
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
 
         private DateTime getMonday(int skip)
         {
             var today = DateTime.Now.AddDays(skip);
-            var test = (today.DayOfWeek == DayOfWeek.Monday) ? today :
+            var test = (today.DayOfWeek == DayOfWeek.Sunday) ? today.AddDays(-6) :
                         (today.DayOfWeek == DayOfWeek.Tuesday) ? today.AddDays(-1) :
                         (today.DayOfWeek == DayOfWeek.Wednesday) ? today.AddDays(-2) :
                         (today.DayOfWeek == DayOfWeek.Thursday) ? today.AddDays(-3) :
                         (today.DayOfWeek == DayOfWeek.Friday) ? today.AddDays(-4) :
                         (today.DayOfWeek == DayOfWeek.Saturday) ? today.AddDays(-5) :
-                        today.AddDays(-6)
-                        ;
-            return today;
+                        today;
+            return test;
         }
 
 
