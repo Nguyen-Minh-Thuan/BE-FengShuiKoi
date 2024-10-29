@@ -83,7 +83,7 @@ namespace FSK.APIService.Controllers
                     response.Message = "Pattern not found";
                     return NotFound(response);
                 }
-                var Pcolor = await _unitOfWork.PatternColorRepository.GetAllAsync();
+                var Pcolor = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 foreach (var item in Pcolor)
                 {
                     item.Pattern = null;
