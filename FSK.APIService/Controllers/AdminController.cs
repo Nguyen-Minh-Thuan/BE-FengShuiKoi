@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FSK.APIService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
@@ -645,7 +646,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var Monday = getMonday(skip);
+                var Monday = GetMonday(skip);
                 var Sunday = Monday.AddDays(6);
                 var list = (await _unitOfWork.InteractRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday).Select(x => new Interact
                 {
@@ -673,7 +674,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var Monday = getMonday(skip);
+                var Monday = GetMonday(skip);
                 var Sunday = Monday.AddDays(6);
                 var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday).Select(x => new General
                 {
@@ -696,30 +697,70 @@ namespace FSK.APIService.Controllers
         }
 
         [HttpGet("GetWeeklyList")]
-        public async Task<IActionResult> GetListInteraction(int skip)
+        public async Task<IActionResult> GetWeeklyListGeneral(int skip)
         {
             BaseResponseModel response = new BaseResponseModel();
 
             try
             {
-                var Monday = getMonday(skip*7);
+                var Monday = GetMonday(skip*7);
                 var Sunday = Monday.AddDays(6);
-                var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday);
-                
-                var list2 = list.GroupBy(x => x.CreatedDate.Date);
+
+                var Week = GetDatesInWeek(Monday, Sunday);
                 List<DashboardResponseModel> output = new List<DashboardResponseModel>();
-                String test1 = null;
-                int test2 = 0;
-                foreach (var item in list2)
+
+                foreach (var date in Week)
                 {
-                    test1 = item.Key.ToString();
-                    test2 = item.Count();
+                    var data = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == date.Date);
                     output.Add(new DashboardResponseModel
                     {
-                        date = test1,
-                        content = test2
+                        date = date.ToString(),
+                        total = data.Count(),
+                        pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                        koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
+                        point = data.Where(x => x.KuaId != null && x.ElementId != null).Count()
                     });
                 }
+                
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("GetMonthlyList")]
+        public async Task<IActionResult> GetMonthlyListGeneral(int year, int month)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+
+                var Month = GetDatesInMonth(year,month);
+
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+
+                foreach (var date in Month)
+                {
+                    var data = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == date.Date);
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = date.ToString(),
+                        total = data.Count(),
+                        pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                        koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
+                        point = data.Where(x => x.KuaId != null && x.ElementId != null).Count()
+                    });
+                }
+
 
                 response.Status = true;
                 response.Message = "Success";
@@ -735,17 +776,47 @@ namespace FSK.APIService.Controllers
         }
 
 
-        private DateTime getMonday(int skip)
+        private DateTime GetMonday(int skip)
         {
             var today = DateTime.Now.AddDays(skip);
-            var test = (today.DayOfWeek == DayOfWeek.Sunday) ? today.AddDays(-6) :
+            var ouput = (today.DayOfWeek == DayOfWeek.Sunday) ? today.AddDays(-6) :
                         (today.DayOfWeek == DayOfWeek.Tuesday) ? today.AddDays(-1) :
                         (today.DayOfWeek == DayOfWeek.Wednesday) ? today.AddDays(-2) :
                         (today.DayOfWeek == DayOfWeek.Thursday) ? today.AddDays(-3) :
                         (today.DayOfWeek == DayOfWeek.Friday) ? today.AddDays(-4) :
                         (today.DayOfWeek == DayOfWeek.Saturday) ? today.AddDays(-5) :
                         today;
-            return test;
+            return ouput;
+        }
+
+        private List<DateTime> GetDatesInWeek(DateTime monday, DateTime sunday)
+        {
+            var dates = new List<DateTime>();
+
+            DateTime newWeek = sunday.AddDays(1);
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = monday; date.Date != newWeek.Date; date = date.AddDays(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+
+        }
+
+        private List<DateTime> GetDatesInMonth(int year, int month)
+        {
+            var dates = new List<DateTime>();
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+
         }
 
 
