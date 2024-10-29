@@ -174,7 +174,28 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.AdminController",
-    "Method": "GetListInteraction",
+    "Method": "GetMonthlyListGeneral",
+    "RelativePath": "api/Admin/GetMonthlyList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.AdminController",
+    "Method": "GetWeeklyListGeneral",
     "RelativePath": "api/Admin/GetWeeklyList",
     "HttpMethod": "GET",
     "IsController": true,
