@@ -10,7 +10,7 @@ namespace FSK.APIService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Policy = "Admin")]
+    //[Authorize(Policy = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
@@ -45,9 +45,10 @@ namespace FSK.APIService.Controllers
 
 
             //Deploying
-            advertisement.StatusId = 5;
-            advertisement.StartedDate = DateTime.Now;
-            advertisement.ExpiredDate = advertisement.StartedDate.Value.AddDays(advertisement.Duration.Value);
+            //advertisement.StatusId = 5;
+
+            //advertisement.StartedDate = DateTime.Now;
+            //advertisement.ExpiredDate = advertisement.StartedDate.Value.AddDays(advertisement.Duration.Value);
 
             await _unitOfWork.SaveChangesAsync();
 
