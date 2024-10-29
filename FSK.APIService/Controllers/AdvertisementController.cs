@@ -62,6 +62,11 @@ namespace FSK.APIService.Controllers
                 {
                     item.Users = null;
                 }
+                var package = await _unitOfWork.PackageRepository.GetAllAsync();
+                foreach (var item in package)
+                {
+                    item.Advertisements = null;
+                }
 
                 response.Data = ads;
                 return Ok(response);
@@ -262,6 +267,11 @@ namespace FSK.APIService.Controllers
                 {
                     item.Users = null;
                 }
+                var package = await _unitOfWork.PackageRepository.GetAllAsync();
+                foreach (var item in package)
+                {
+                    item.Advertisements = null;
+                }
                 response.Status = true;
                 response.Message = "Success";
                 response.Data = ads;
@@ -301,6 +311,11 @@ namespace FSK.APIService.Controllers
                     AdsId = id,
                     CreatedDate = DateTime.Now
                 });
+                var user = await _unitOfWork.UserRepository.GetByIdAsync(ads.UserId);
+                user.Advertisements = null;
+                user.Transactions = null;
+                var package = await _unitOfWork.PackageRepository.GetByIdAsync(ads.PackageId.Value);
+                package.Advertisements = null;
                 var status = await _unitOfWork.StatusRepository.GetAllAsync();
                 foreach (var item in status)
                 {
@@ -317,7 +332,7 @@ namespace FSK.APIService.Controllers
                     item.User = null;
                     item.Ads = null;
                 }
-
+                ads.Interacts = null;
 
                 response.Data = ads;
 

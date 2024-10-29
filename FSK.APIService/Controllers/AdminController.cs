@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FSK.APIService.Controllers
 {
@@ -818,6 +819,7 @@ namespace FSK.APIService.Controllers
             }
         }
 
+        
 
         private DateTime GetMonday(int skip)
         {
