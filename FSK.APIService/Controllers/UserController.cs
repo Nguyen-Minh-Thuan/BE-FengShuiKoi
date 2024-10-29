@@ -34,7 +34,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var output = await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize);
+                var output = (await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != null);
                 response.Data = output;
                 return Ok(response);
             }
