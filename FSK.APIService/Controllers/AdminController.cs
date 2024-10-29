@@ -11,7 +11,7 @@ namespace FSK.APIService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Policy = "Admin")]
+    //[Authorize(Policy = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
@@ -450,13 +450,17 @@ namespace FSK.APIService.Controllers
             {
                 var today = DateTime.Today.AddYears(skip);
                 var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Year == today.Year);
-                var total = list.Count();
-                var dir = list.Where(x => x.KuaId != null && x.ElementId == null).Count();
-                var element = list.Where(x => x.ElementId != null && x.KuaId == null).Count();
-                var pointing = list.Where(x => x.ElementId != null && x.KuaId != null).Count();
+                DashboardResponseModel output = new DashboardResponseModel
+                {
+                    date = today.Year.ToString(),
+                    total = list.Count(),
+                    pond = list.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                    koi = list.Where(x => x.ElementId != null && x.KuaId == null).Count(),
+                    point = list.Where(x => x.ElementId != null && x.KuaId != null).Count(),
+                };
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { total = total, totalDir = dir, totalElement = element, totalPoint = pointing };
+                response.Data = output;
                 return Ok(response);
             }
             catch (Exception err)
@@ -736,8 +740,8 @@ namespace FSK.APIService.Controllers
             }
         }
 
-        [HttpGet("GetMonthlyList")]
-        public async Task<IActionResult> GetMonthlyListGeneral(int year, int month)
+        [HttpGet("GetMonthList")]
+        public async Task<IActionResult> GetMonthListGeneral(int year, int month)
         {
             BaseResponseModel response = new BaseResponseModel();
 
@@ -754,6 +758,45 @@ namespace FSK.APIService.Controllers
                     output.Add(new DashboardResponseModel
                     {
                         date = date.ToString(),
+                        total = data.Count(),
+                        pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                        koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
+                        point = data.Where(x => x.KuaId != null && x.ElementId != null).Count()
+                    });
+                }
+
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("GetMonthlyList")]
+        public async Task<IActionResult> GetMonthlyListGeneral(int year)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+
+                var Year = GetMonthInYear(year);
+
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+
+                foreach (var date in Year)
+                {
+                    var data = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date.Month == date.Date.Month);
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = $"{date.Month}/{date.Year}",
                         total = data.Count(),
                         pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
                         koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
@@ -811,6 +854,20 @@ namespace FSK.APIService.Controllers
 
             // Loop from the first day of the month until we hit the next month, moving forward a day at a time
             for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+
+        }
+
+        private List<DateTime> GetMonthInYear(int year)
+        {
+            var dates = new List<DateTime>();
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = new DateTime(year, 1, 1); date.Year == year; date = date.AddMonths(1))
             {
                 dates.Add(date);
             }
