@@ -13,6 +13,10 @@
 
         public int point { get; set; }
 
+        public int deploying { get; set; }
+
+        public int expired { get; set; } 
+
 
     }
 }
