@@ -36,6 +36,8 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
+                UpdateExpired();
                 response.Status = true;
                 response.Message = "Success";
                 var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 2);
@@ -84,6 +86,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
                 UpdateExpired();
                 
                 var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.StatusId == 5 && x.IsActive != false);
@@ -130,6 +133,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
                 UpdateExpired();
 
                 var ads = (await _unitOfWork.AdvertisementRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != false);
@@ -176,6 +180,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
                 UpdateExpired();
                 var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.StatusId == 5 && x.IsActive != false);
                 if (ads == null)
@@ -227,6 +232,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
                 UpdateExpired();
                 var ads = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 if (ads == null)
@@ -279,6 +285,8 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
+                UpdateExpired();
                 response.Status = true;
                 response.Message = "Success";
                 var ads = await _unitOfWork.AdvertisementRepository.GetByIdAsync(id);
@@ -471,6 +479,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+                UpdateDeploying();
                 UpdateExpired();
 
                 var AdsList = await _unitOfWork.AdvertisementRepository.GetAllAsync();
@@ -1065,6 +1074,8 @@ namespace FSK.APIService.Controllers
 
             item.PackageId = ads.PackageId;
 
+            item.StartedDate = ads.StartedDate;
+
             await _unitOfWork.AdvertisementRepository.UpdateAsync(item);
 
             item.Package = await _unitOfWork.PackageRepository.GetByIdAsync(item.PackageId.Value);
@@ -1134,6 +1145,7 @@ namespace FSK.APIService.Controllers
                     Ads.StatusId = 2;
                     Ads.PaymentStatus = true;
                     Ads.Duration = Package.Duration * Quantity;
+                    Ads.ExpiredDate = Ads.StartedDate.Value.AddDays(Ads.Duration.Value);
 
                     await _unitOfWork.AdvertisementRepository.UpdateAsync(Ads);
 
@@ -1260,6 +1272,18 @@ namespace FSK.APIService.Controllers
             {
                 if (item.ExpiredDate.Value.Date.CompareTo(today) <= 0)
                     item.StatusId = 6;
+            }
+            _unitOfWork.AdvertisementRepository.Save();
+        }
+
+        private void UpdateDeploying()
+        {
+            var today = DateTime.Now.Date;
+            var PendingAds = _unitOfWork.AdvertisementRepository.GetAll().Where(x => x.StatusId == 4);
+            foreach (var item in PendingAds)
+            {
+                if (item.StartedDate.Value.Date.CompareTo(today) <= 0)
+                    item.StatusId = 5;
             }
             _unitOfWork.AdvertisementRepository.Save();
         }
