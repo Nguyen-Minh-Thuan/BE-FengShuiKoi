@@ -40,7 +40,8 @@ namespace FSK.APIService.Controllers
                     Content = model.Content,
                     ElementId = model.ElementID,
                     CreatedDate = DateTime.UtcNow,
-                    ImageUrl = model.ImageUrl
+                    ImageUrl = model.ImageUrl,
+                    IsActive = true
                 };
 
                 await _unitOfWork.BlogRepository.CreateAsync(blog);
