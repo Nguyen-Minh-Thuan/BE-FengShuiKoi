@@ -64,11 +64,10 @@ namespace FSK.APIService.Controllers
                 response.Status = true;
                 response.Message = "Success";
                 var varieties = (await _unitOfWork.VarietyRepository.GetAllAsync()).Where(x => x.IsActive != false);
-                var patterns = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != false);
-                foreach ( var item in patterns)
+
+                foreach (var variety in varieties)
                 {
-                    item.Variety = null;
-                    item.PatternColors = null;
+                    variety.Patterns = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != false && x.VarietyId == variety.VarietyId).ToList();
                 }
                 response.Data = varieties.Where(x => x.IsActive != false);
                 return Ok(response);
