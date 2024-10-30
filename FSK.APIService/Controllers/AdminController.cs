@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FSK.APIService.Controllers
 {
@@ -45,9 +47,10 @@ namespace FSK.APIService.Controllers
 
 
             //Deploying
-            advertisement.StatusId = 5;
-            advertisement.StartedDate = DateTime.Now;
-            advertisement.ExpiredDate = advertisement.StartedDate.Value.AddDays(advertisement.Duration.Value);
+            //advertisement.StatusId = 5;
+
+            //advertisement.StartedDate = DateTime.Now;
+            //advertisement.ExpiredDate = advertisement.StartedDate.Value.AddDays(advertisement.Duration.Value);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -448,13 +451,17 @@ namespace FSK.APIService.Controllers
             {
                 var today = DateTime.Today.AddYears(skip);
                 var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Year == today.Year);
-                var total = list.Count();
-                var dir = list.Where(x => x.KuaId != null && x.ElementId == null).Count();
-                var element = list.Where(x => x.ElementId != null && x.KuaId == null).Count();
-                var pointing = list.Where(x => x.ElementId != null && x.KuaId != null).Count();
+                DashboardResponseModel output = new DashboardResponseModel
+                {
+                    date = today.Year.ToString(),
+                    total = list.Count(),
+                    pond = list.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                    koi = list.Where(x => x.ElementId != null && x.KuaId == null).Count(),
+                    point = list.Where(x => x.ElementId != null && x.KuaId != null).Count(),
+                };
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = new { total = total, totalDir = dir, totalElement = element, totalPoint = pointing };
+                response.Data = output;
                 return Ok(response);
             }
             catch (Exception err)
@@ -644,7 +651,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var Monday = getMonday(skip);
+                var Monday = GetMonday(skip);
                 var Sunday = Monday.AddDays(6);
                 var list = (await _unitOfWork.InteractRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday).Select(x => new Interact
                 {
@@ -672,7 +679,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var Monday = getMonday(skip);
+                var Monday = GetMonday(skip);
                 var Sunday = Monday.AddDays(6);
                 var list = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date >= Monday.Date && x.CreatedDate.Date <= Sunday).Select(x => new General
                 {
@@ -694,19 +701,181 @@ namespace FSK.APIService.Controllers
             }
         }
 
+        [HttpGet("GetWeeklyList")]
+        public async Task<IActionResult> GetWeeklyListGeneral(int skip)
+        {
+            BaseResponseModel response = new BaseResponseModel();
 
-        private DateTime getMonday(int skip)
+            try
+            {
+                var Monday = GetMonday(skip*7);
+                var Sunday = Monday.AddDays(6);
+
+                var Week = GetDatesInWeek(Monday, Sunday);
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+
+                foreach (var date in Week)
+                {
+                    var data = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == date.Date);
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = date.ToString(),
+                        total = data.Count(),
+                        pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                        koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
+                        point = data.Where(x => x.KuaId != null && x.ElementId != null).Count()
+                    });
+                }
+                
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("GetMonthList")]
+        public async Task<IActionResult> GetMonthListGeneral(int year, int month)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+
+                var Month = GetDatesInMonth(year,month);
+
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+
+                foreach (var date in Month)
+                {
+                    var data = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == date.Date);
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = date.ToString(),
+                        total = data.Count(),
+                        pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                        koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
+                        point = data.Where(x => x.KuaId != null && x.ElementId != null).Count()
+                    });
+                }
+
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        [HttpGet("GetMonthlyList")]
+        public async Task<IActionResult> GetMonthlyListGeneral(int year)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+
+                var Year = GetMonthInYear(year);
+
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+
+                foreach (var date in Year)
+                {
+                    var data = (await _unitOfWork.GeneralRepository.GetAllAsync()).Where(x => x.CreatedDate.Date.Month == date.Date.Month);
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = $"{date.Month}/{date.Year}",
+                        total = data.Count(),
+                        pond = data.Where(x => x.KuaId != null && x.ElementId == null).Count(),
+                        koi = data.Where(x => x.KuaId == null && x.ElementId != null).Count(),
+                        point = data.Where(x => x.KuaId != null && x.ElementId != null).Count()
+                    });
+                }
+
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
+        
+
+        private DateTime GetMonday(int skip)
         {
             var today = DateTime.Now.AddDays(skip);
-            var test = (today.DayOfWeek == DayOfWeek.Monday) ? today :
+            var ouput = (today.DayOfWeek == DayOfWeek.Sunday) ? today.AddDays(-6) :
                         (today.DayOfWeek == DayOfWeek.Tuesday) ? today.AddDays(-1) :
                         (today.DayOfWeek == DayOfWeek.Wednesday) ? today.AddDays(-2) :
                         (today.DayOfWeek == DayOfWeek.Thursday) ? today.AddDays(-3) :
                         (today.DayOfWeek == DayOfWeek.Friday) ? today.AddDays(-4) :
                         (today.DayOfWeek == DayOfWeek.Saturday) ? today.AddDays(-5) :
-                        today.AddDays(-6)
-                        ;
-            return today;
+                        today;
+            return ouput;
+        }
+
+        private List<DateTime> GetDatesInWeek(DateTime monday, DateTime sunday)
+        {
+            var dates = new List<DateTime>();
+
+            DateTime newWeek = sunday.AddDays(1);
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = monday; date.Date != newWeek.Date; date = date.AddDays(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+
+        }
+
+        private List<DateTime> GetDatesInMonth(int year, int month)
+        {
+            var dates = new List<DateTime>();
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+
+        }
+
+        private List<DateTime> GetMonthInYear(int year)
+        {
+            var dates = new List<DateTime>();
+
+            // Loop from the first day of the month until we hit the next month, moving forward a day at a time
+            for (var date = new DateTime(year, 1, 1); date.Year == year; date = date.AddMonths(1))
+            {
+                dates.Add(date);
+            }
+
+            return dates;
+
         }
 
 

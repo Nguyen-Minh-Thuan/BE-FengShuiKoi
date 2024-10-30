@@ -18,7 +18,7 @@
 
         public int ElementId { get; set; }
 
-        //public DateTime? StartedDate { get; set; }
+        public DateTime StartedDate { get; set; }
 
         //public DateTime? ExpiredDate { get; set; }
 

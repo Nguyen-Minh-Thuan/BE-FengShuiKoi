@@ -80,16 +80,13 @@ namespace FSK.APIService.Controllers
         {
             BaseResponseModel response = new BaseResponseModel();
 
-            response.Status = true;
-            response.Message = "Success";
-            var total = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Count();
-            if (id < 0 || id > total)
+            var pattern = await _unitOfWork.PatternColorRepository.GetByIdAsync(id);
+            if (pattern == null)
             {
                 response.Status = false;
                 response.Message = "Koi Pattern color not found";
                 return NotFound(response);
             }
-            var pattern = await _unitOfWork.PatternColorRepository.GetByIdAsync(id);
             if (pattern.IsActive == false)
             {
                 response.Status = false;
@@ -103,9 +100,10 @@ namespace FSK.APIService.Controllers
                 item.Color = null;
             }
 
+
+            response.Status = true;
+            response.Message = "Success";
             response.Data = pattern;
-
-
 
             return Ok(response);
         }
@@ -143,7 +141,7 @@ namespace FSK.APIService.Controllers
                     }
                     totalValue += item.value;
                 }
-                if (totalValue != 1)
+                if (totalValue > 1 || totalValue <= 0)
                 {
                     response.Status = false;
                     response.Message = "The total values of a pattern must be 1";
@@ -184,7 +182,13 @@ namespace FSK.APIService.Controllers
             try
             {
                 var model = await _unitOfWork.PatternColorRepository.GetByIdAsync(id);
-                if (model == null || model.IsActive == false)
+                if (model == null)
+                {
+                    response.Status = false;
+                    response.Message = "PatternColor not found!";
+                    return NotFound(response);
+                }
+                if (model.IsActive == false)
                 {
                     response.Status = false;
                     response.Message = "PatternColor not found!";
@@ -222,6 +226,12 @@ namespace FSK.APIService.Controllers
                     response.Message = "PatternColor not found!";
                     return NotFound(response);
                 }
+                if (update.IsActive == false)
+                {
+                    response.Status = false;
+                    response.Message = "PatternColor not found!";
+                    return NotFound(response);
+                }
                 var samePattern = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Where(x => x.PatternId == PatternId && x.IsActive != false);
                 if (!samePattern.IsNullOrEmpty())
                     foreach (var item in samePattern)
@@ -244,7 +254,7 @@ namespace FSK.APIService.Controllers
                 }
                 totalValue += model.value;
 
-                if (totalValue != 1)
+                if (totalValue > 1 && totalValue <= 0)
                 {
                     response.Status = false;
                     response.Message = "The total values of a pattern must be 1";

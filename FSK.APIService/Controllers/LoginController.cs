@@ -31,8 +31,8 @@ namespace FSK.APIService.Controllers
             var normalizedInput = loginDto.UsernameOrEmail.ToLower();
 
             // Fetch the user from the database
-            var user = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u =>
-                u.UserName.ToLower() == normalizedInput || u.Email.ToLower() == normalizedInput);
+            var user = (await _unitOfWork.UserRepository.GetAllAsync()).Where(u =>
+                u.UserName.ToLower() == normalizedInput || u.Email.ToLower() == normalizedInput).LastOrDefault();
 
             Boolean check = false;
             if (user.UserName == loginDto.UsernameOrEmail)
@@ -40,7 +40,7 @@ namespace FSK.APIService.Controllers
             if (user.Email == loginDto.UsernameOrEmail)
                 check = true;
 
-                if (user == null || check == false)
+                if (user == null || check == false || user.IsActive == false)
             {
                 return Unauthorized("Invalid username/email or password");
             }

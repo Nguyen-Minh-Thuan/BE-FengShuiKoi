@@ -476,12 +476,26 @@ INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
 INSERT [dbo].[Advertisement] 
     ([AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [ImageUrl], [PaymentStatus], [CreatedDate]) 
 VALUES 
-    (1, 3, 1, N'Tiêu đề Quảng cáo #1', N'Nội dung quảng cáo #1', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'None', 0, GETDATE()),
-    (1, 4, 1, N'Tiêu đề Quảng cáo #2', N'Nội dung quảng cáo #2', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
-    (1, 4, 2, N'Tiêu đề Quảng cáo #3', N'Nội dung quảng cáo #3', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'None', 1, GETDATE()),
-    (1, 5, 2, N'Tiêu đề Quảng cáo #4', N'Nội dung quảng cáo #4', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'None', 1, GETDATE());
+    (1, 3, 1, N'Beautiful Japanese Koi for Sale', N'High-quality koi fish with vibrant colors and unique patterns, perfect for any pond. Available for a limited time!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FMatsuba.jpg?alt=media&token=2f80db4d-0f43-482e-97f6-a6cf45375a2f', 0, GETDATE()),
+    (1, 4, 1, N'Premium Imported Koi Fish Collection', N'Discover our premium selection of koi fish, directly imported from Japan. Enhance your pond with these stunning beauties!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9', 1, GETDATE()),
+    (1, 4, 2, N'Limited Edition Koi Fish Now Available', N'Get your hands on rare koi fish breeds with exclusive patterns. Perfect for collectors and enthusiasts!', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FGin-Matsuba.jpg?alt=media&token=5679c7a0-3ed6-4db9-895f-f84ed77551e2', 1, GETDATE()),
+    (1, 5, 2, N'Koi Fish for Your Dream Pond', N'Create a mesmerizing pond with our colorful koi fish. Available in various sizes and colors to suit your space.', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f', 1, GETDATE()),
+	(1, 3, 1, N'Exclusive Japanese Koi for Sale', N'High-quality koi fish with distinct patterns and vibrant colors. Limited stock, so act fast!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2', 0, GETDATE()),
+    (1, 4, 1, N'Stunning Koi Fish Collection Available', N'Hand-picked, premium koi fish to make your pond stand out. Imported directly from Japan!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FOrange-Ogon.jpg?alt=media&token=4f455796-030b-493a-99bd-34f215a3ea84', 1, GETDATE()),
+    (1, 4, 2, N'Rare Koi Fish Breeds for Sale', N'Enhance your collection with our rare koi fish varieties. Perfect for any koi enthusiast!', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b', 1, GETDATE()),
+    (1, 5, 2, N'Colorful Koi Fish for Your Pond', N'Add life to your pond with vibrant, hand-selected koi fish. Available in various colors and patterns!', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FHi-Utsuri.jpg?alt=media&token=0b1920a6-bf37-48b6-b573-fdda6ac03db7', 1, GETDATE()),
+    (1, 3, 1, N'Hand-Picked Koi Fish for Sale', N'Carefully selected koi fish with unique markings, ideal for a beautiful pond display. Limited stock available!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FShiro-Utsuri.jpg?alt=media&token=4d21716f-642b-437f-8a0a-baa765a6bbee', 0, GETDATE()),
+    (1, 4, 1, N'Japanese Koi Fish – Add Color to Your Pond', N'Brighten up your pond with our colorful Japanese koi. Available now for a limited time!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FGinrin-Shiro-Utsuri.jpg?alt=media&token=9adb852e-7de4-47db-aa1a-9f1aec1bf940', 1, GETDATE()),
+    (1, 4, 2, N'High-Quality Koi Fish Collection', N'Featuring koi with vibrant colors and great health. Perfect addition for koi fish lovers.', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FDoitsu-Shiro-Utsuri.jpg?alt=media&token=3ecfbc0b-dcd0-48ad-ad9c-371b0ec5a0ca', 1, GETDATE()),
+    (1, 5, 2, N'Rare and Beautiful Koi Fish', N'Select koi fish breeds with one-of-a-kind patterns. Excellent choice for collectors and pond owners.', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a', 1, GETDATE()),
+    (1, 3, 1, N'Imported Japanese Koi Fish Sale', N'Imported koi with brilliant colors and exceptional health. Great addition for a stunning pond!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FGinrin-Asagi.jpg?alt=media&token=51a76d75-179c-473f-a8b3-a713ca8a0bdd', 0, GETDATE()),
+    (1, 4, 1, N'Vibrant Koi Fish for Sale', N'Koi fish with captivating patterns and colors. Perfect for creating a serene pond atmosphere.', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FKonjo-Asagi.jpg?alt=media&token=22be26a5-bab5-46ec-959e-4f10de008f93', 1, GETDATE()),
+    (1, 4, 2, N'Exclusive Koi Fish from Japan', N'High-quality, imported koi fish with vibrant colors to transform your pond.', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FBenigoi.jpg?alt=media&token=7a929e28-e2c1-4023-892e-fc505327241b', 1, GETDATE()),
+    (1, 5, 2, N'Koi Fish for a Beautiful Pond', N'Enhance your pond with colorful, healthy koi fish. Various patterns available to suit your style!', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FDoitsu-Benigoi.jpg?alt=media&token=1d1492ce-837f-47f2-881e-b90490760c55', 1, GETDATE());
+
 
 -- Add Koi
+/*
 SET IDENTITY_INSERT [dbo].[Advertisement] ON;
 
 INSERT [dbo].[Advertisement] 
@@ -494,7 +508,7 @@ VALUES
 
 SET IDENTITY_INSERT [dbo].[Advertisement] OFF;
 GO
-
+*/
 SET IDENTITY_INSERT [dbo].[AdsTypes] ON;
 INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (1, N'Cá Koi');
 INSERT INTO [dbo].[AdsTypes] ([AdsTypeId], [TypeName]) VALUES (2, N'Đồ Phong Thủy');
@@ -514,8 +528,10 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Package] ON 
 
-INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (1,N'Normal Package',3 ,30000)
-INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (2,N'Exclusive Package',7 ,60000)
+INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (1,N'Weekly Package',1 ,35000)
+INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (2,N'Weekly Package',7 ,200000)
+INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (3,N'Monthly Package',30 ,1500000)
+INSERT [dbo].[Package] ([PackageID],[PackageName],[Duration] ,[Price]) VALUES (4,N'Yearly Package',365 ,100000000)
 
 SET IDENTITY_INSERT [dbo].[Package] OFF
 GO
@@ -991,20 +1007,55 @@ INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (35, 
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (36, 1, 1);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (37, 1, 0.8);
 INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (37, 29, 0.2);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (38, 1, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (38, 29, 0.4);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (39, 5, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (39, 29, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (40, 18, 0.3);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (40, 2, 0.7);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (41, 1, 0.1);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (41, 9, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (41, 12, 0.3);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (42, 1, 0.4);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (42, 9, 0.3);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (42, 29, 0.3);
 
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (43, 12, 0.3);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (43, 1, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (43, 29, 0.3);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (44, 12, 0.1);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (44, 1, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (44, 29, 0.3);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (45, 12, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (45, 29, 0.5);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (46, 12, 0.2);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (46, 29, 0.2);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (46, 1, 0.6);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (47, 12, 0.3);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (47, 29, 0.4);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (47, 1, 0.3);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (48, 1, 0.5);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (48, 12, 0.5);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (49, 9, 1);
 --select * from [dbo].[Pattern] where [VarietyID] = 7
 --select * from [dbo].[Variety]
 --select * from [dbo].[PatternColor] where [PatternID] = 35
 --select * from [dbo].[Color]
 --Xóa loại này
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (1, N'Shiro Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FShiro-Utsuri.jpg?alt=media&token=4d21716f-642b-437f-8a0a-baa765a6bbee');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName]) VALUES (1, N'Yamabuki Shiro Utsuri');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (1, 0, N'Shiro Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FShiro-Utsuri.jpg?alt=media&token=4d21716f-642b-437f-8a0a-baa765a6bbee');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName]) VALUES (1, 0, N'Yamabuki Shiro Utsuri');
 --
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (2, N'Taisho Sanke', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSanke%2FTaisho-Sanke.jpg?alt=media&token=cc98e1eb-e8c0-4390-91a7-efdafe4d410b');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (2, N'Yamato Nishiki', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSanke%2FYamato-Nishiki.jpg?alt=media&token=0d75c7f8-e30c-40ff-a54f-51d6ac73ee66');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Showa Sanke', N'');
 --
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName]) VALUES (3, N'Yamabuki Showa');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (3, 0, N'Showa Sanke', N'');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName]) VALUES (3, 0, N'Yamabuki Showa');
 --
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FKohaku.jpg?alt=media&token=6f01b2f0-50a2-4280-9851-b5d623f30f84');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Kohaku Maruten', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FMaruten-Kohaku.jpg?alt=media&token=e6529947-e1e3-43ac-86ec-356abe212b9f');
@@ -1012,35 +1063,65 @@ INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, 
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, N'Hi Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FHi-Utsuri.jpg?alt=media&token=0b1920a6-bf37-48b6-b573-fdda6ac03db7');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, N'Ki Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (6, N'Asagi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (6, N'Asagi Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (6, 0, N'Asagi Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (7, N'Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (7, N'Doitsu Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Yamabuki Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Gin Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FGin-Matsuba.jpg?alt=media&token=5679c7a0-3ed6-4db9-895f-f84ed77551e2');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (9, N'Tancho Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FTancho-Kohaku.jpg?alt=media&token=8b55c477-d348-4815-b161-38d7fd57e78a');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (9, N'Tancho Sanke', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FTancho%20Sanke.png?alt=media&token=b82b41b6-e40f-4671-a390-c1181328fa0b');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (10, N'Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FMatsuba.jpg?alt=media&token=2f80db4d-0f43-482e-97f6-a6cf45375a2f');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (10, N'Ki Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Tancho Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FTancho-Kohaku.jpg?alt=media&token=8b55c477-d348-4815-b161-38d7fd57e78a');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Tancho Sanke', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FTancho%20Sanke.png?alt=media&token=b82b41b6-e40f-4671-a390-c1181328fa0b');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FMatsuba.jpg?alt=media&token=2f80db4d-0f43-482e-97f6-a6cf45375a2f');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Kin Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (11, N'Goshiki', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FGoshiki%2FGoshiki.jpg?alt=media&token=fbeeecb5-5b4e-4ab8-a4ee-e9581d181228');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (11, N'Goshiki Doitsu', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FGoshiki%2FDoitsu-Goshiki.jpg?alt=media&token=51e0bc53-c5f4-4bf6-b40e-8213b192f018');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (12, N'Yamabuki Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (12, N'Yamabuki Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (12, 0, N'Yamabuki Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (12, 0, N'Yamabuki Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (13, N'Benigoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FBenigoi.jpg?alt=media&token=7a929e28-e2c1-4023-892e-fc505327241b');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (13, N'Benigoi Doitsu', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FDoitsu-Benigoi.jpg?alt=media&token=1d1492ce-837f-47f2-881e-b90490760c55');
 -- Đổi id thành Utsuri
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (14, N'Ki Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, N'Ki Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b');
 --
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (15, N'Chagoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FChagoi%2FChagoi.jpg?alt=media&token=674fd910-a553-46d4-bcfa-bfd9a0cfa286');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (15, N'Chagoi Doitsu', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FChagoi%2FChagoi%20Doitsu.jpg?alt=media&token=59177106-4e75-4942-8835-0a1ccc81909c');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (16, N'Soragoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSoragoi%2FSoragoi.jpg?alt=media&token=2bb14ebe-77ad-45c0-b8c7-f1e0fb0e7540');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (17, N'Doitsu Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FDoitsu%20Kohaku.png?alt=media&token=1b65e987-5df8-4a5e-8108-546ecc3a527a');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (17, N'Doitsu Sanke', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSanke%2FDoitsu%20Sanke.png?alt=media&token=6c1f5951-2cbc-45e7-ba7f-25d2627e5fbf');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (17, N'Doitsu Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FDoitsu-Showa.jpg?alt=media&token=bc49cae4-c28b-499e-b430-76577921bf9f');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (18, N'Hikari Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (19, N'Platinum Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Doitsu Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FDoitsu%20Kohaku.png?alt=media&token=1b65e987-5df8-4a5e-8108-546ecc3a527a');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (2, N'Doitsu Sanke', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSanke%2FDoitsu%20Sanke.png?alt=media&token=6c1f5951-2cbc-45e7-ba7f-25d2627e5fbf');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Doitsu Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FDoitsu-Showa.jpg?alt=media&token=bc49cae4-c28b-499e-b430-76577921bf9f');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (18, N'Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Platinum Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (20, N'Shiro Bekko', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBekko%2FShiro-Bekko.jpg?alt=media&token=56d3368d-07c1-4d78-87e9-919c163b5c39');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, N'Doitsu Shiro Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FDoitsu-Shiro-Utsuri.jpg?alt=media&token=3ecfbc0b-dcd0-48ad-ad9c-371b0ec5a0ca');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, N'Ginrin Shiro Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FGinrin-Shiro-Utsuri.jpg?alt=media&token=9adb852e-7de4-47db-aa1a-9f1aec1bf940');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (16, N'Doitsu Soragoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSoragoi%2FSoragoi.jpg?alt=media&token=2bb14ebe-77ad-45c0-b8c7-f1e0fb0e7540');
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (18, N'Hana Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FHana-Shusui.jpg?alt=media&token=2d77a411-f1bc-407c-84ef-a3a6fbd1823c');
+--42
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Boke Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FBoke-Showa.jpg?alt=media&token=4e59144d-b00a-414a-84e7-90d8b0fd8402');
+--43
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FShowa.jpg?alt=media&token=ecd3bd82-3e18-4872-82ee-d8a795f5e3de');
+--44
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Tancho Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FTancho-Showa.jpg?alt=media&token=650aaf76-ce4e-477d-8e02-a947f8e16417');
+--45
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Hi Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FHi-Showa.jpg?alt=media&token=ecb14507-8102-41de-8939-b8469a15f7f6');
+--46
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Kindai Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FKindai-Showa.jpg?alt=media&token=25c7fd36-f549-4733-8cda-c14327246c9b');
+--47
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (3, N'Maruten Showa', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShowa%2FMaruten-Showa.jpg?alt=media&token=03a0888f-9807-454d-b9bf-5738677dad47');
+--48
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Inazuma Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FInazuma-Kohaku.jpg?alt=media&token=7cefd3bf-a48a-42b9-8710-a156023daccc');
+--49
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Orange Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FOrange-Ogon.jpg?alt=media&token=4f455796-030b-493a-99bd-34f215a3ea84');
+--50
+--INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Inazuma Kohaku', N'');
+
+
+
+--INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (48, 12, 0.5);
+
+
+
+
 -- Xóa pattern này
-INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Shiro Utsuri', N'Cá Koi Shiro Utsuri có màu trắng với các đốm đen, thể hiện sự tương phản nổi bật.');
+INSERT INTO [dbo].[Variety] ([VarietyName], [IsActive], [Description]) VALUES ('Koi Shiro Utsuri', 0 ,N'Cá Koi Shiro Utsuri có màu trắng với các đốm đen, thể hiện sự tương phản nổi bật.');
 --
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Sanke', N'Sanke có màu trắng với các đốm đỏ và đen, mang đến vẻ đẹp cân đối và thanh thoát.');
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Showa', N'Showa có nền màu đen với các đốm đỏ và trắng, thể hiện sự mạnh mẽ và cá tính.');
@@ -1055,15 +1136,16 @@ INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Goshiki'
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Yamabuki', N'Yamabuki có màu vàng sáng, biểu thị sự thịnh vượng và may mắn.');
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Benigoi', N'Benigoi có màu đỏ đậm, thể hiện sự mạnh mẽ và cá tính.');
 -- Pattern của Utsuri
-INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Ki Utsuri', N'Ki Utsuri có nền màu vàng với các đốm đen, mang lại cảm giác mới mẻ.');
+INSERT INTO [dbo].[Variety] ([IsActive], [VarietyName], [Description]) VALUES (0 ,'Koi Ki Utsuri', N'Ki Utsuri có nền màu vàng với các đốm đen, mang lại cảm giác mới mẻ.');
 --
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Chagoi', N'Chagoi có màu nâu hoặc xanh lá cây, biểu thị sự thân thiện và dễ gần.');
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Soragoi', N'Soragoi có màu xám hoặc xanh xám, thường mang lại vẻ đẹp thanh thoát.');
-INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Doitsu', N'Doitsu có bề mặt trơn và không có vảy, tạo cảm giác hiện đại.');
+-- Pattern kh phải loại
+INSERT INTO [dbo].[Variety] ([IsActive], [VarietyName], [Description]) VALUES (0, 'Koi Doitsu', N'Doitsu có bề mặt trơn và không có vảy, tạo cảm giác hiện đại.');
+--
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Hikari Shusui', N'Hikari Shusui là một biến thể kim loại của Shusui, thể hiện vẻ đẹp quý phái.');
 INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Platinum', N'Platinum có màu bạc bóng, thể hiện sự sang trọng và thanh lịch.');
-INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Shiro Bekko', N'Shiro Bekko có nền màu trắng với các đốm đen, mang lại sự thanh lịch và tinh khiết.');
-
+INSERT INTO [dbo].[Variety] ([VarietyName], [Description]) VALUES ('Koi Bekko', N'Cá koi bekko thuộc nhóm koi có vẩy đục, trên thân cá là bản giao hưởng màu sắc giữa màu đỏ, vàng, trắng. Có rất nhiều người nhầm lẫn cá koi bekko với cá koi utsuri vì chúng đều sở hữu những chấm đen điểm xuyết trên mình.');
 
 /****** ========================================================================================================================================================================================================================================================================================================================================================================  ******/
 /****** Object:  Table [dbo].[Advertisement]    Script Date: 24/09/24 7:10PM  ******/
@@ -1258,7 +1340,15 @@ GO
 
 /**** 
 
+Select * from [dbo].[Variety]
+Select * from [dbo].[Pattern] where [VarietyID] = 8
+Select * from [dbo].[PatternColor] where [PatternID] = 21
+Select * from [dbo].[Color]
 
+
+--21 25
 
 
 ****/
+
+USE [master]

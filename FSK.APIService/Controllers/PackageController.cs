@@ -32,7 +32,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = await _unitOfWork.PackageRepository.GetAllAsync();
+                response.Data = (await _unitOfWork.PackageRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 return Ok(response);
             }
             catch (Exception err)
@@ -56,20 +56,35 @@ namespace FSK.APIService.Controllers
         {
             BaseResponseModel response = new BaseResponseModel();
 
-            response.Status = true;
-            response.Message = "Success";
-            var package = await _unitOfWork.PackageRepository.GetByIdAsync(id);
-
-            response.Data = package;
-
-            if (response.Data == null)
+            try
             {
-                response.Status = false;
-                response.Message = "Package not found";
-                return BadRequest(response);
-            }
+                var package = await _unitOfWork.PackageRepository.GetByIdAsync(id);
 
-            return Ok(response);
+                if (package == null)
+                {
+                    response.Status = false;
+                    response.Message = "Package not found";
+                    return BadRequest(response);
+                }
+                if (package.IsActive == false)
+                {
+                    response.Status = false;
+                    response.Message = "Package not found";
+                    return BadRequest(response);
+                }
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = package;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = true;
+                response.Message = $"{err.ToString()}";
+                return BadRequest(response);
+
+            }
         }
 
         /// <summary>
@@ -221,8 +236,8 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
-                await _unitOfWork.PackageRepository.RemoveAsync(package);
-                await _unitOfWork.SaveChangesAsync();
+                package.IsActive = false;
+                await _unitOfWork.PackageRepository.UpdateAsync(package);
 
                 response.Status = true;
                 response.Message = "Package deleted successfully";

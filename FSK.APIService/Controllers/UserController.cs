@@ -34,7 +34,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var output = await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize);
+                var output = (await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != null);
                 response.Data = output;
                 return Ok(response);
             }
@@ -136,8 +136,8 @@ namespace FSK.APIService.Controllers
             {
                 return NotFound();
             }
-
-            await _unitOfWork.UserRepository.RemoveAsync(user);
+            user.IsActive = false;
+            await _unitOfWork.UserRepository.UpdateAsync(user);
 
             return NoContent();
         }

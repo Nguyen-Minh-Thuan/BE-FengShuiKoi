@@ -64,6 +64,12 @@ namespace FSK.APIService.Controllers
                 response.Status = true;
                 response.Message = "Success";
                 var varieties = await _unitOfWork.VarietyRepository.GetAllAsync();
+                var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
+                foreach ( var item in patterns)
+                {
+                    item.Variety = null;
+                    item.PatternColors = null;
+                }
                 response.Data = varieties.Where(x => x.IsActive != false);
                 return Ok(response);
             }
@@ -86,28 +92,30 @@ namespace FSK.APIService.Controllers
         {
             BaseResponseModel response = new BaseResponseModel();
 
-            response.Status = true;
-            response.Message = "Success";
-            var totalVar = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
-            if (id < 0 || id > totalVar)
+            
+            var variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
+            if (variety == null)
             {
                 response.Status = false;
                 response.Message = "Koi variety not found";
                 return NotFound(response);
             }
-            var variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
             if (variety.IsActive == false)
             {
                 response.Status = false;
                 response.Message = "Koi variety not found";
                 return NotFound(response);
             }
-            var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
-            foreach (var p in patterns)
-            {
-                p.Variety = null;
-            }
-            
+
+            variety.Patterns = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != false && x.VarietyId == variety.VarietyId).ToList();
+            //foreach (var p in patterns)
+            //{
+            //    p.Variety = null;
+            //}
+            //variety.Patterns = patterns;
+
+            response.Status = true;
+            response.Message = "Success";
             response.Data = variety;
 
             
@@ -210,14 +218,19 @@ namespace FSK.APIService.Controllers
 
             try
             {
-                var total = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
-                if (0 > id || id > total || model == null)
+                if (model == null)
                 {
                     response.Status = false;
                     response.Message = "Invalid request data";
                     return BadRequest(response);
                 }
                 var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
+                if (Variety == null)
+                {
+                    response.Status = false;
+                    response.Message = "Koi variety not found";
+                    return NotFound(response);
+                }
                 if (Variety.IsActive == false)
                 {
                     response.Status = false;
@@ -277,15 +290,15 @@ namespace FSK.APIService.Controllers
             try
             {
 
-                var total = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
-                if (0 > id || id > total)
-                {
-                    response.Status = false;
-                    response.Message = "Invalid Koi variety ID";
-                    return NotFound(response);
-                }
+                
 
                 var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(id);
+                if (Variety == null)
+                {
+                    response.Status = false;
+                    response.Message = "Koi variety not found";
+                    return NotFound(response);
+                }
                 if (Variety.IsActive == false)
                 {
                     response.Status = false;
