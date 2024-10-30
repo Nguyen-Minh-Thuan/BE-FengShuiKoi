@@ -203,9 +203,12 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
+                blog.IsActive = false;
+                
+
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = blog;
+                response.Data = await _unitOfWork.BlogRepository.UpdateAsync(blog);
 
                 return Ok(response);
             }
