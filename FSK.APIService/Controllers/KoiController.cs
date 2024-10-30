@@ -34,9 +34,9 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var varieties = await _unitOfWork.VarietyRepository.GetPageAsync(pageIndex, pageSize);
-
-                response.Data = varieties.Where(x => x.IsActive != false);
+                var varieties = (await _unitOfWork.VarietyRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != null);
+                var patterns = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != null);
+                response.Data = varieties;
 
                 return Ok(response);
             }
@@ -63,8 +63,8 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var varieties = await _unitOfWork.VarietyRepository.GetAllAsync();
-                var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
+                var varieties = (await _unitOfWork.VarietyRepository.GetAllAsync()).Where(x => x.IsActive != null);
+                var patterns = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != null);
                 foreach ( var item in patterns)
                 {
                     item.Variety = null;
