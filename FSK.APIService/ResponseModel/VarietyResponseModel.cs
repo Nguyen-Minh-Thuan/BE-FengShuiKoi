@@ -15,6 +15,8 @@ namespace FSK.APIService.ResponseModel
 
         public double TotalPattern { get; set; }
 
+        public Boolean? IsActive { get; set; }
+
         public List<PatternResponseModel> Patterns { get; set; } = new List<PatternResponseModel>();
 
     }

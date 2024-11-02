@@ -115,6 +115,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+
                 double totalValue = 0;
 
                 var samePattern = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Where(x => x.PatternId == id && x.IsActive != false);
@@ -218,6 +219,7 @@ namespace FSK.APIService.Controllers
 
             try
             {
+
                 double totalValue = 0;
                 var update = await _unitOfWork.PatternColorRepository.GetByIdAsync(PatternColorId);
                 if(update == null)

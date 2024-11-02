@@ -14,6 +14,8 @@
 
         public double? ComputeValues {  get; set; }
 
+        public Boolean? IsActive { get; set; }
+
         public List<ColorResponseModel> Color {  get; set; } = new List<ColorResponseModel>();
 
         public List<PatternResponseModel> Pattern { get; set; } = new List<PatternResponseModel>();
