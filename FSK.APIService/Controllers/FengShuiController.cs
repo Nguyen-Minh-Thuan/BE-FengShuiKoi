@@ -131,7 +131,7 @@ namespace FSK.APIService.Controllers
 
 
                 var patterns = await _unitOfWork.PatternRepository.GetAllAsync();
-                var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
+                var variety = (await _unitOfWork.VarietyRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 //foreach (var n in variety)
                 //{
                 //    n.Patterns.Clear();
@@ -181,9 +181,9 @@ namespace FSK.APIService.Controllers
                             PcolorId = z.PcolorId,
                             Values = z.Values,
                             ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
-                        }).ToList(),
+                        }).Where(x => x.IsActive != false).ToList(),
                         PatternPoint = y.PatternColors.Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
-                    }).ToList(),
+                    }).Where(x => x.IsActive != false).ToList(),
                     TotalPattern = x.Patterns.Count(),
                 }).ToList();
 
@@ -232,7 +232,8 @@ namespace FSK.APIService.Controllers
 
             foreach (var item in patternColors)
             {
-                total += item.Values;
+                if(item.IsActive != false)
+                    total += item.Values;
             }
 
             return total;
@@ -528,8 +529,8 @@ namespace FSK.APIService.Controllers
 
 
 
-                var variety = await _unitOfWork.VarietyRepository.GetAllAsync();
-                var pattern = await _unitOfWork.PatternRepository.GetAllAsync();
+                var variety = (await _unitOfWork.VarietyRepository.GetAllAsync()).Where(x => x.IsActive != false);
+                var pattern = (await _unitOfWork.PatternRepository.GetAllAsync()).Where(x => x.IsActive != false);
                 //foreach (var item in pattern)
                 //{
                 //    item.Variety = null;
@@ -557,14 +558,16 @@ namespace FSK.APIService.Controllers
                         PatternName = y.PatternName,
                         ImageUrl = y.ImageUrl,
                         VarietyId = y.VarietyId,
+                        IsActive = y.IsActive,
                         PatternColors = y.PatternColors.Select(z => new PatternColorResponseModel
                         {
                             ColorId = z.ColorId,
                             PatternId = z.PatternId,
                             PcolorId = z.PcolorId,
                             ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name,
-                        }).ToList(),
-                    }).ToList(),
+                            IsActive = z.IsActive,
+                        }).Where( x => x.IsActive != false).ToList(),
+                    }).Where( x => x.IsActive != false).ToList(),
                 }).ToList();
 
 

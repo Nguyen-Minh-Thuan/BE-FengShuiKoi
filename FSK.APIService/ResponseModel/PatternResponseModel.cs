@@ -17,6 +17,8 @@ namespace FSK.APIService.ResponseModel
 
         public string Description { get; set; }
 
+        public Boolean? IsActive { get; set; }
+
         public List<PatternColorResponseModel> PatternColors { get; set; } = new List<PatternColorResponseModel>();
 
         public List<VarietyResponseModel> Variety { get; set; } = new List<VarietyResponseModel>();
