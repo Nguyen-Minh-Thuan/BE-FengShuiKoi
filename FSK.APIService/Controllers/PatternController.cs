@@ -186,15 +186,14 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
-                var totalVariety = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
-
-                if (model.VarietyId < 0 || model.VarietyId > totalVariety)
+                
+                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(model.VarietyId);
+                if (Variety == null)
                 {
                     response.Status = false;
                     response.Message = "Variety not found!";
                     return NotFound(response);
                 }
-                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(model.VarietyId);
                 if (Variety.IsActive == false)
                 {
                     response.Status = false;
