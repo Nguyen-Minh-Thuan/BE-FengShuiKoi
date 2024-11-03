@@ -17,6 +17,7 @@
 
         public int expired { get; set; } 
 
+        public decimal income { get; set; }
 
     }
 }
