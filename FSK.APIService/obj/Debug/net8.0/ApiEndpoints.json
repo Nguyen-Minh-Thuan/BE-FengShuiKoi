@@ -963,6 +963,27 @@
   },
   {
     "ContainingType": "FSK.APIService.Controllers.DashboardSearch",
+    "Method": "GetIncomeFromTo",
+    "RelativePath": "api/DashboardSearch/GetIncomeFromTo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FromDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FSK.APIService.Controllers.DashboardSearch",
     "Method": "GetTotalAdsFromTo",
     "RelativePath": "api/DashboardSearch/GetTotalAdsFromTo",
     "HttpMethod": "GET",
