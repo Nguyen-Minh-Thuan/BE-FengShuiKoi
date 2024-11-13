@@ -329,7 +329,7 @@ namespace FSK.APIService.Controllers
             {
                 var today = DateTime.Today.AddMonths(skip);
                 var list = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == today.Date && x.CreatedDate.Month == today.Month && x.CreatedDate.Year == today.Year);
-                var total = list.Count();
+                var total = list.Where(x => x.StatusId != 1).Count();
                 response.Status = true;
                 response.Message = "Success";
                 response.Data = total;
@@ -352,7 +352,7 @@ namespace FSK.APIService.Controllers
             {
                 var today = DateTime.Today.AddMonths(skip);
                 var list = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.CreatedDate.Month == today.Month && x.CreatedDate.Year == today.Year);
-                var total = list.Count();
+                var total = list.Where(x => x.StatusId != 1).Count();
                 response.Status = true;
                 response.Message = "Success";
                 response.Data = total;
