@@ -4,6 +4,7 @@ using FSK.APIService.ResponseModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FSK.APIService.RequestModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace FSK.APIService.Controllers
 {
@@ -179,28 +180,60 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
-                //// Check if the VarietyName is unique (excluding the current variety)
-                //var existingVarieties = await _unitOfWork.VarietyRepository.GetAllAsync();
-                //var duplicateVariety = existingVarieties.FirstOrDefault(v => v.VarietyName.Equals(model.VarietyName, StringComparison.OrdinalIgnoreCase) && v.VarietyId != id);
-                //if (duplicateVariety != null)
-                //{
-                //    response.Status = false;
-                //    response.Message = "A Koi variety with this name already exists";
-                //    return BadRequest(response);
-                //}
+                bool hasChanges = false;
 
-                // Update fields
-                user.UserName = model.UserName;
-                user.ImageUrl = model.ImageUrl;
-                user.Bio = model.Bio;
+                // Update fields if they are provided and different from current values
+                if (model.UserName != null && model.UserName != user.UserName)
+                {
+                    var existingName = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u => u.UserName == model.UserName);
+                    if (existingName != null)
+                    {
+                        response.Status = false;
+                        response.Message = "Username already in use.";
+                        return BadRequest(response);
+                    }
+                    user.UserName = model.UserName;
+                    hasChanges = true;
+                }
+                if (model.Email != null && model.Email != user.Email)
+                {
+                    var existingEmail = await _unitOfWork.UserRepository.FirstOrDefaultAsync(u => u.Email == model.Email);
+                    if (existingEmail != null)
+                    {
+                        response.Status = false;
+                        response.Message = "Email already in use.";
+                        return BadRequest(response);
+                    }
+                    user.Email = model.Email;
+                    hasChanges = true;
+                }
+                if (model.Bio != null && model.Bio != user.Bio)
+                {
+                    user.Bio = model.Bio;
+                    hasChanges = true;
+                }
+                if (model.ImageUrl != null && model.ImageUrl != user.ImageUrl)
+                {
+                    user.ImageUrl = model.ImageUrl;
+                    hasChanges = true;
+                }
 
-                await _unitOfWork.UserRepository.UpdateAsync(user);
-                await _unitOfWork.SaveChangesAsync();
-
-                response.Status = true;
-                response.Message = "User's information updated successfully";
-                response.Data = user;
-                return Ok(response);
+                if (hasChanges)
+                {
+                    await _unitOfWork.UserRepository.UpdateAsync(user);
+                    await _unitOfWork.SaveChangesAsync();
+                    response.Status = true;
+                    response.Message = "User's information updated successfully";
+                    response.Data = user;
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Status = true;
+                    response.Message = "No changes detected";
+                    response.Data = user;
+                    return Ok(response);
+                }
             }
             catch (Exception)
             {
@@ -235,16 +268,19 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
-                // Verify old password
-                if (user.Password != model.OldPassword)
+                // Use PasswordHasher to verify the old password
+                var passwordHasher = new PasswordHasher<User>();
+                var result = passwordHasher.VerifyHashedPassword(user, user.Password, model.OldPassword);
+
+                if (result == PasswordVerificationResult.Failed)
                 {
                     response.Status = false;
                     response.Message = "Incorrect old password";
                     return BadRequest(response);
                 }
 
-                // Update password
-                user.Password = model.NewPassword;
+                // Hash the new password before saving
+                user.Password = passwordHasher.HashPassword(user, model.NewPassword);
 
                 await _unitOfWork.UserRepository.UpdateAsync(user);
                 await _unitOfWork.SaveChangesAsync();
