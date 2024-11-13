@@ -72,7 +72,7 @@ namespace FSK.APIService.Controllers
 
                 foreach (var date in totalDate)
                 {
-                    var data = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == date.Date);
+                    var data = (await _unitOfWork.AdvertisementRepository.GetAllAsync()).Where(x => x.CreatedDate.Date == date.Date && x.StatusId != 1);
                     output.Add(new DashboardResponseModel
                     {
                         date = $"{date}",

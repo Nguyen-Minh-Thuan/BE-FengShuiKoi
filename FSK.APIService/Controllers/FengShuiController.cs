@@ -181,8 +181,10 @@ namespace FSK.APIService.Controllers
                             PcolorId = z.PcolorId,
                             Values = z.Values,
                             ComputeValues = z.Values * (Testing2(elementID, z.ColorId)),
+                            IsActive = z.IsActive
                         }).Where(x => x.IsActive != false).ToList(),
-                        PatternPoint = y.PatternColors.Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
+                        PatternPoint = y.PatternColors.Where(x => x.IsActive != false).Sum(z => z.Values * (Testing2(elementID, z.ColorId))),
+                        IsActive = y.IsActive
                     }).Where(x => x.IsActive != false).ToList(),
                     TotalPattern = x.Patterns.Count(),
                 }).ToList();
@@ -383,22 +385,24 @@ namespace FSK.APIService.Controllers
                     PatternId = x.PatternId,
                     PatternName = x.PatternName,
                     ImageUrl = x.ImageUrl,
-                    PatternColors = x.PatternColors.Select(z => new PatternColorResponseModel
+                    PatternColors = x.PatternColors.Where(y => y.IsActive != false).Select(z => new PatternColorResponseModel
                     {
                         ColorId = z.ColorId,
                         PatternId = z.PatternId,
                         PcolorId = z.PcolorId,
                         Values = z.Values,
                         ColorName = _unitOfWork.ColorRepository.GetById(z.ColorId).Name + $"({z.Values*100}%)",
+                        IsActive = z.IsActive,
                         ComputeValues = (z.Values * Testing2(elementId, z.ColorId)),
-                    }).ToList(),
-                    PatternPoint = Math.Round(x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)), 2) + bonusQuantity + bonusPond + bonusDirection,
+                    }).Where(x => x.IsActive != false).ToList(),
+                    IsActive = x.IsActive,
+                    PatternPoint = Math.Round(x.PatternColors.Where(y => y.IsActive != false).Sum(z => z.Values * Testing2(elementId, z.ColorId)), 2) + bonusQuantity + bonusPond + bonusDirection,
                     Description = $"Default Value: {_defaultPoint}, " +
-                    $"Koi's Values: {Math.Round(x.PatternColors.Sum(z => z.Values * Testing2(elementId, z.ColorId)) - _defaultPoint, 2)}, " +
+                    $"Koi's Values: {Math.Round(x.PatternColors.Where(y => y.IsActive != false).Sum(z => z.Values * Testing2(elementId, z.ColorId)) - _defaultPoint, 2)}, " +
                     $"Bonus on Quantity: {bonusQuantity}, " +
                     $"Bonus on Pond: {bonusPond}, " +
                     $"Bonus on Direction: {bonusDirection}"
-                }).ToList();
+                }).Where(x => x.IsActive != false).ToList();
 
                 double total = 0;
                 foreach (var pattern in test)
