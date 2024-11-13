@@ -34,13 +34,15 @@ namespace FSK.APIService.Controllers
             var user = (await _unitOfWork.UserRepository.GetAllAsync()).Where(u =>
                 u.UserName.ToLower() == normalizedInput || u.Email.ToLower() == normalizedInput).LastOrDefault();
 
+            if (user == null)
+                return Unauthorized("Invalid username/email or password");
             Boolean check = false;
             if (user.UserName == loginDto.UsernameOrEmail)
                 check = true;
             if (user.Email == loginDto.UsernameOrEmail)
                 check = true;
 
-                if (user == null || check == false || user.IsActive == false)
+                if (check == false || user.IsActive == false)
             {
                 return Unauthorized("Invalid username/email or password");
             }

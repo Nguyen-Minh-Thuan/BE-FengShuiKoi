@@ -26,7 +26,8 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = (await _unitOfWork.VarietyRepository.GetAllAsync()).Except(_unitOfWork.VarietyRepository.GetAll().Where(x => x.IsActive == false));
+
+                response.Data = (await _unitOfWork.VarietyRepository.GetAllAsync()).Except(_unitOfWork.VarietyRepository.GetAll().Where(x => x.IsActive != false));
                 return Ok(response);
             }
             catch (Exception err)

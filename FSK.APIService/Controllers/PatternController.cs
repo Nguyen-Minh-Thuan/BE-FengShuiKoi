@@ -83,11 +83,8 @@ namespace FSK.APIService.Controllers
                     response.Message = "Pattern not found";
                     return NotFound(response);
                 }
-                var Pcolor = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Where(x => x.IsActive != false);
-                foreach (var item in Pcolor)
-                {
-                    item.Pattern = null;
-                }
+                output.PatternColors = (await _unitOfWork.PatternColorRepository.GetAllAsync()).Where(x => x.IsActive != false && x.PatternId == output.PatternId).ToList();
+                
                 var color = await _unitOfWork.ColorRepository.GetAllAsync();
                 foreach (var item in color)
                 {
@@ -189,15 +186,14 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
-                var totalVariety = (await _unitOfWork.VarietyRepository.GetAllAsync()).Count();
-
-                if (model.VarietyId < 0 || model.VarietyId > totalVariety)
+                
+                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(model.VarietyId);
+                if (Variety == null)
                 {
                     response.Status = false;
                     response.Message = "Variety not found!";
                     return NotFound(response);
                 }
-                var Variety = await _unitOfWork.VarietyRepository.GetByIdAsync(model.VarietyId);
                 if (Variety.IsActive == false)
                 {
                     response.Status = false;

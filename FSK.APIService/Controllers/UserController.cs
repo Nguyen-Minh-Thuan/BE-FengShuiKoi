@@ -34,7 +34,7 @@ namespace FSK.APIService.Controllers
             {
                 response.Status = true;
                 response.Message = "Success";
-                var output = (await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != null);
+                var output = (await _unitOfWork.UserRepository.GetPageAsync(pageIndex, pageSize)).Where(x => x.IsActive != false);
                 response.Data = output;
                 return Ok(response);
             }
@@ -163,6 +163,14 @@ namespace FSK.APIService.Controllers
                     return BadRequest(response);
                 }
 
+                var isEmail = IsValidEmail(model.Email);
+                if (isEmail == false)
+                {
+                    response.Status = false;
+                    response.Message = "Invalid email address!";
+                    return BadRequest(response);
+                }
+
                 var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
                 if (user == null)
@@ -286,6 +294,25 @@ namespace FSK.APIService.Controllers
                 response.Status = false;
                 response.Message = "An error occurred while updating the password";
                 return StatusCode(500, response);
+            }
+        }
+
+        private static bool IsValidEmail(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            if (trimmedEmail.EndsWith("."))
+            {
+                return false; // suggested by @TK-421
+            }
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == trimmedEmail;
+            }
+            catch
+            {
+                return false;
             }
         }
 

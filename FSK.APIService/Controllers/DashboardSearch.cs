@@ -133,6 +133,42 @@ namespace FSK.APIService.Controllers
             }
         }
 
+        [HttpGet("GetIncomeFromTo")]
+        public async Task<IActionResult> GetIncomeFromTo([FromQuery] DateTime FromDate, [FromQuery] DateTime ToDate)
+        {
+            BaseResponseModel response = new BaseResponseModel();
+
+            try
+            {
+                var totalDate = GetFromTo(FromDate, ToDate);
+
+                List<DashboardResponseModel> output = new List<DashboardResponseModel>();
+
+                foreach (var date in totalDate)
+                {
+                    var data = (await _unitOfWork.TransactionRepository.GetAllAsync()).Where(x => x.TransactionDate.Date == date.Date);
+                    output.Add(new DashboardResponseModel
+                    {
+                        date = $"{date}",
+                        income = data.Select(x => x.TotalPrice).Sum()
+                    });
+                }
+
+
+
+                response.Status = true;
+                response.Message = "Success";
+                response.Data = output;
+                return Ok(response);
+            }
+            catch (Exception err)
+            {
+                response.Status = false;
+                response.Message = err.ToString();
+                return NotFound(response);
+            }
+        }
+
 
         private DateTime GetMonday(int skip)
         {

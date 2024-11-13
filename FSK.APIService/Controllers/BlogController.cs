@@ -40,7 +40,8 @@ namespace FSK.APIService.Controllers
                     Content = model.Content,
                     ElementId = model.ElementID,
                     CreatedDate = DateTime.UtcNow,
-                    ImageUrl = model.ImageUrl
+                    ImageUrl = model.ImageUrl,
+                    IsActive = true
                 };
 
                 await _unitOfWork.BlogRepository.CreateAsync(blog);
@@ -203,9 +204,12 @@ namespace FSK.APIService.Controllers
                     return NotFound(response);
                 }
 
+                blog.IsActive = false;
+                
+
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = blog;
+                response.Data = await _unitOfWork.BlogRepository.UpdateAsync(blog);
 
                 return Ok(response);
             }
