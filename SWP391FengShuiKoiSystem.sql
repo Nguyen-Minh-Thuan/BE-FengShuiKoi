@@ -445,11 +445,12 @@ GO
 /****** Insert  ******/
 SET IDENTITY_INSERT [dbo].[User] ON 
 
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (1, N'Admin', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an Admin account', N'None', 1, 1,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (2, N'Laazy', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'HungDepTrai', N'None', 1, 2,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (3, N'User1', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (4, N'User2', N'AQAAAAIAAYagAAAAEBS7udiChbw7EwjTR6Eire4uX2drQOaTizzJMQe9WsfIS6BT516Jx/tWoNP/QhpQ4w==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
-INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (5, N'User3', N'AQAAAAIAAYagAAAAEMvFPFtUuXPD2vBcE6J0bcwv4PHlmMO5crxGyQpVNbqEWniejWC7ze4722Ruh+G5Ag==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-10-19T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (1, N'Admin', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an Admin account', N'None', 1, 1,CAST(N'2024-11-11T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (2, N'Staff', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'HungDepTrai', N'None', 1, 2,CAST(N'2024-11-12T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (3, N'User1', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-11-13T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (4, N'User2', N'AQAAAAIAAYagAAAAEBS7udiChbw7EwjTR6Eire4uX2drQOaTizzJMQe9WsfIS6BT516Jx/tWoNP/QhpQ4w==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-11-13T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (5, N'User3', N'AQAAAAIAAYagAAAAEMvFPFtUuXPD2vBcE6J0bcwv4PHlmMO5crxGyQpVNbqEWniejWC7ze4722Ruh+G5Ag==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-11-13T00:00:00.000' AS DateTime))
+INSERT [dbo].[User] ([UserId],[UserName],[Password],[Email],[Bio],[ImageUrl],[IsActive],[RoleID],[CreatedDate]) VALUES (6, N'Tester', N'AQAAAAIAAYagAAAAEGWQ2ceLUyQuWZu7/w00GKLr54HUuzrmkPMr5gXbvtrvVfUXoUiTR2q7F9z2J9H+nw==', N'None', N'This is an User account', N'None', 1, 3,CAST(N'2024-11-14T00:00:00.000' AS DateTime))
 
 SET IDENTITY_INSERT [dbo].[User] OFF
 GO
@@ -476,25 +477,25 @@ INSERT INTO [dbo].[ElementQuantity] ([ElementID], [Quantity]) VALUES (5, 8);
 INSERT [dbo].[Advertisement] 
     ([AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [ImageUrl], [PaymentStatus], [CreatedDate]) 
 VALUES 
-    (1, 3, 1, N'Đẹp Cá Koi Nhật Bản Đang Bán', N'Cá Koi chất lượng cao với màu sắc sống động và họa tiết độc đáo, lý tưởng cho bất kỳ hồ cá nào. Còn bán trong thời gian có hạn!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2025-09-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FMatsuba.jpg?alt=media&token=2f80db4d-0f43-482e-97f6-a6cf45375a2f', 0, GETDATE()),
-    (1, 4, 1, N'Bộ Sưu Tập Cá Koi Nhập Khẩu Cao Cấp', N'Khám phá bộ sưu tập cá Koi cao cấp của chúng tôi, được nhập khẩu trực tiếp từ Nhật Bản. Làm đẹp hồ cá của bạn với những chú cá tuyệt vời này!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9', 1, GETDATE()),
+    (1, 3, 1, N'Đẹp Cá Koi Nhật Bản Đang Bán', N'Cá Koi chất lượng cao với màu sắc sống động và họa tiết độc đáo, lý tưởng cho bất kỳ hồ cá nào. Còn bán trong thời gian có hạn!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2025-09-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FMatsuba.jpg?alt=media&token=2f80db4d-0f43-482e-97f6-a6cf45375a2f', 0, DATEADD(day, -1, GETDATE())),
+    (1, 4, 1, N'Bộ Sưu Tập Cá Koi Nhập Khẩu Cao Cấp', N'Khám phá bộ sưu tập cá Koi cao cấp của chúng tôi, được nhập khẩu trực tiếp từ Nhật Bản. Làm đẹp hồ cá của bạn với những chú cá tuyệt vời này!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9', 1, DATEADD(day, -1, GETDATE())),
     (1, 4, 2, N'Koi Cá Phiên Bản Giới Hạn Đang Bán', N'Hãy sở hữu những giống cá Koi hiếm có với họa tiết độc quyền. Hoàn hảo cho những người sưu tầm và đam mê!', 5, 3, CAST(N'2024-09-21T00:00:00.000' AS DateTime), CAST(N'2024-09-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FGin-Matsuba.jpg?alt=media&token=5679c7a0-3ed6-4db9-895f-f84ed77551e2', 1, GETDATE()),
-    (1, 5, 2, N' Cá Koi Cho Hồ Cá Mơ Ước Của Bạn', N'Tạo dựng một hồ cá mê hoặc với những chú cá Koi đầy màu sắc của chúng tôi. Có sẵn nhiều kích thước và màu sắc phù hợp với không gian của bạn.', 5, 4, CAST(N'2024-10-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f', 1, GETDATE()),
-	(1, 3, 1, N'Koi Nhật Bản Độc Quyền Đang Bán', N'Cá Koi chất lượng cao với những họa tiết độc đáo và màu sắc sống động. Hàng có hạn, nhanh tay sở hữu ngay!', 5, 1, CAST(N'2024-10-20T00:00:00.000' AS DateTime), CAST(N'2024-11-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2', 0, GETDATE()),
+    (1, 5, 2, N' Cá Koi Cho Hồ Cá Mơ Ước Của Bạn', N'Tạo dựng một hồ cá mê hoặc với những chú cá Koi đầy màu sắc của chúng tôi. Có sẵn nhiều kích thước và màu sắc phù hợp với không gian của bạn.', 5, 4, CAST(N'2024-10-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f', 1, DATEADD(day, -1, GETDATE())),
+	(1, 3, 1, N'Koi Nhật Bản Độc Quyền Đang Bán', N'Cá Koi chất lượng cao với những họa tiết độc đáo và màu sắc sống động. Hàng có hạn, nhanh tay sở hữu ngay!', 5, 1, CAST(N'2024-10-20T00:00:00.000' AS DateTime), CAST(N'2024-11-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2', 0, DATEADD(day, -2, GETDATE())),
     (1, 3, 1, N'Cá Koi Nhật Bản Đặc Biệt Cho Hồ Cá Của Bạn', N'Cá Koi cao cấp với màu sắc sống động và họa tiết độc đáo. Lý tưởng cho những người đam mê hồ cá!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-20T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FMatsuba.jpg?alt=media&token=2f80db4d-0f43-482e-97f6-a6cf45375a2f', 0, GETDATE()),
-    (1, 4, 1, N'Cá Koi Đẹp Cho Vườn Của Bạn', N'Tô điểm vườn nhà bạn với bộ sưu tập cá Koi tuyệt vời của chúng tôi, có sẵn với nhiều kích thước và màu sắc khác nhau!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-10T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FMatsuba.jpg?alt=media&token=1122334455', 0, GETDATE()),
-    (1, 5, 1, N'Cá Koi Chất Lượng Cao Đang Có Sẵn', N'Hãy sở hữu những chú cá Koi tuyệt vời với màu sắc đa dạng, họa tiết đặc biệt và chất lượng tuyệt hảo.', 5, 1, CAST(N'2024-09-21T00:00:00.000' AS DateTime), CAST(N'2024-12-05T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FGin-Matsuba.jpg?alt=media&token=5679c7a0-3ed6-4db9-895f-f84ed77551e2', 0, GETDATE()),
-    (1, 3, 2, N'Cá Koi Tuyệt Vời Đang Cung Cấp', N'Tăng cường vẻ đẹp cho hồ cá của bạn với bộ sưu tập cá Koi tuyệt vời. Đang bán trong thời gian có hạn!', 5, 1, CAST(N'2024-09-21T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2', 0, GETDATE()),
+    (1, 4, 1, N'Cá Koi Đẹp Cho Vườn Của Bạn', N'Tô điểm vườn nhà bạn với bộ sưu tập cá Koi tuyệt vời của chúng tôi, có sẵn với nhiều kích thước và màu sắc khác nhau!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-10T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FMatsuba.jpg?alt=media&token=1122334455', 0, DATEADD(day, -4, GETDATE())),
+    (1, 5, 1, N'Cá Koi Chất Lượng Cao Đang Có Sẵn', N'Hãy sở hữu những chú cá Koi tuyệt vời với màu sắc đa dạng, họa tiết đặc biệt và chất lượng tuyệt hảo.', 5, 1, CAST(N'2024-09-21T00:00:00.000' AS DateTime), CAST(N'2024-12-05T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FGin-Matsuba.jpg?alt=media&token=5679c7a0-3ed6-4db9-895f-f84ed77551e2', 0, DATEADD(day, -1, GETDATE())),
+    (1, 3, 2, N'Cá Koi Tuyệt Vời Đang Cung Cấp', N'Tăng cường vẻ đẹp cho hồ cá của bạn với bộ sưu tập cá Koi tuyệt vời. Đang bán trong thời gian có hạn!', 5, 1, CAST(N'2024-09-21T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FPlatinum-Ogon.jpg?alt=media&token=7b3ba4f4-3795-4e48-9af3-f36d88f645d2', 0, DATEADD(day, -3, GETDATE())),
     (1, 4, 1, N'Bộ Sưu Tập Cá Koi Tuyệt Đẹp Đang Bán', N'Cá Koi cao cấp được chọn lọc kỹ càng, mang đến cho hồ cá của bạn sự nổi bật. Được nhập khẩu trực tiếp từ Nhật Bản!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FOrange-Ogon.jpg?alt=media&token=4f455796-030b-493a-99bd-34f215a3ea84', 1, GETDATE()),
-    (1, 4, 2, N'Cá Koi Loại Hiếm Đang Bán', N'Tăng thêm giá trị cho bộ sưu tập của bạn với các giống cá Koi hiếm. Lý tưởng cho những người yêu thích cá Koi!', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b', 1, GETDATE()),
-    (1, 5, 2, N'Cá Koi Màu Sắc Tươi Sáng Cho Hồ Cá Của Bạn', N'Tô điểm cho hồ cá của bạn với những chú cá Koi sắc màu rực rỡ, được chọn lựa thủ công. Có sẵn với nhiều màu sắc và họa tiết đa dạng!', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FHi-Utsuri.jpg?alt=media&token=0b1920a6-bf37-48b6-b573-fdda6ac03db7', 1, GETDATE()),
-    (1, 3, 1, N'Cá Koi Được Chọn Lọc Cẩn Thận Đang Bán', N'Cá Koi được chọn lọc kỹ lưỡng với những đặc điểm độc đáo, lý tưởng cho một hồ cá đẹp mắt. Hàng giới hạn, hãy nhanh tay sở hữu!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FShiro-Utsuri.jpg?alt=media&token=4d21716f-642b-437f-8a0a-baa765a6bbee', 0, GETDATE()),
-    (1, 4, 1, N'Cá Koi Nhật Bản – Tô Điểm Cho Hồ Cá Của Bạn', N'Tô điểm cho hồ cá của bạn với những chú cá Koi Nhật Bản rực rỡ sắc màu. Còn bán trong thời gian có hạn!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FGinrin-Shiro-Utsuri.jpg?alt=media&token=9adb852e-7de4-47db-aa1a-9f1aec1bf940', 1, GETDATE()),
-    (1, 4, 2, N'Bộ Sưu Tập Cá Koi Chất Lượng Cao', N'Những chú cá Koi với màu sắc sống động và sức khỏe tốt. Sự lựa chọn hoàn hảo cho những người yêu thích cá Koi.', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FDoitsu-Shiro-Utsuri.jpg?alt=media&token=3ecfbc0b-dcd0-48ad-ad9c-371b0ec5a0ca', 1, GETDATE()),
-    (1, 5, 2, N'Cá Koi Hiếm Và Đẹp', N'Chọn lựa các giống cá Koi với hoa văn độc đáo. Lựa chọn tuyệt vời cho những nhà sưu tập và chủ hồ cá.', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a', 1, GETDATE()),
+    (1, 4, 2, N'Cá Koi Loại Hiếm Đang Bán', N'Tăng thêm giá trị cho bộ sưu tập của bạn với các giống cá Koi hiếm. Lý tưởng cho những người yêu thích cá Koi!', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b', 1, DATEADD(day, -4, GETDATE())),
+    (1, 5, 2, N'Cá Koi Màu Sắc Tươi Sáng Cho Hồ Cá Của Bạn', N'Tô điểm cho hồ cá của bạn với những chú cá Koi sắc màu rực rỡ, được chọn lựa thủ công. Có sẵn với nhiều màu sắc và họa tiết đa dạng!', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FHi-Utsuri.jpg?alt=media&token=0b1920a6-bf37-48b6-b573-fdda6ac03db7', 1, DATEADD(day, -3, GETDATE())),
+    (1, 3, 1, N'Cá Koi Được Chọn Lọc Cẩn Thận Đang Bán', N'Cá Koi được chọn lọc kỹ lưỡng với những đặc điểm độc đáo, lý tưởng cho một hồ cá đẹp mắt. Hàng giới hạn, hãy nhanh tay sở hữu!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FShiro-Utsuri.jpg?alt=media&token=4d21716f-642b-437f-8a0a-baa765a6bbee', 0, DATEADD(day, -1, GETDATE())),
+    (1, 4, 1, N'Cá Koi Nhật Bản – Tô Điểm Cho Hồ Cá Của Bạn', N'Tô điểm cho hồ cá của bạn với những chú cá Koi Nhật Bản rực rỡ sắc màu. Còn bán trong thời gian có hạn!', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FGinrin-Shiro-Utsuri.jpg?alt=media&token=9adb852e-7de4-47db-aa1a-9f1aec1bf940', 1, DATEADD(day, -2, GETDATE())),
+    (1, 4, 2, N'Bộ Sưu Tập Cá Koi Chất Lượng Cao', N'Những chú cá Koi với màu sắc sống động và sức khỏe tốt. Sự lựa chọn hoàn hảo cho những người yêu thích cá Koi.', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-15T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FShiro%20Utsuri%2FDoitsu-Shiro-Utsuri.jpg?alt=media&token=3ecfbc0b-dcd0-48ad-ad9c-371b0ec5a0ca', 1, DATEADD(day, -3, GETDATE())),
+    (1, 5, 2, N'Cá Koi Hiếm Và Đẹp', N'Chọn lựa các giống cá Koi với hoa văn độc đáo. Lựa chọn tuyệt vời cho những nhà sưu tập và chủ hồ cá.', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-11-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a', 1, DATEADD(day, -5, GETDATE())),
     (1, 3, 1, N'Cá Koi Nhập Khẩu Chính Hãng Từ Nhật Bản', N'Cá Koi nhập khẩu với màu sắc rực rỡ và sức khỏe tuyệt vời. Sự bổ sung tuyệt vời cho một hồ cá đẹp mắt!', 5, 1, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FGinrin-Asagi.jpg?alt=media&token=51a76d75-179c-473f-a8b3-a713ca8a0bdd', 0, GETDATE()),
-    (1, 4, 1, N'Cá Koi Màu Sắc Nổi Bật Đang Bán', N'Cá Koi với họa tiết và màu sắc hấp dẫn. Lý tưởng để tạo nên không gian hồ cá thanh bình.', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FKonjo-Asagi.jpg?alt=media&token=22be26a5-bab5-46ec-959e-4f10de008f93', 1, GETDATE()),
-    (1, 4, 2, N'Cá Koi Độc Quyền Từ Nhật Bản', N'Cá Koi cao cấp, nhập khẩu với màu sắc nổi bật để biến hồ cá của bạn thành tuyệt tác.', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FBenigoi.jpg?alt=media&token=7a929e28-e2c1-4023-892e-fc505327241b', 1, GETDATE()),
+    (1, 4, 1, N'Cá Koi Màu Sắc Nổi Bật Đang Bán', N'Cá Koi với họa tiết và màu sắc hấp dẫn. Lý tưởng để tạo nên không gian hồ cá thanh bình.', 5, 2, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-25T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FKonjo-Asagi.jpg?alt=media&token=22be26a5-bab5-46ec-959e-4f10de008f93', 1, DATEADD(day, -3, GETDATE())),
+    (1, 4, 2, N'Cá Koi Độc Quyền Từ Nhật Bản', N'Cá Koi cao cấp, nhập khẩu với màu sắc nổi bật để biến hồ cá của bạn thành tuyệt tác.', 5, 3, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-10-30T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FBenigoi.jpg?alt=media&token=7a929e28-e2c1-4023-892e-fc505327241b', 1, DATEADD(day, -3, GETDATE())),
     (1, 5, 2, N'Cá Koi Cho Hồ Cá Tuyệt Đẹp', N'Tăng thêm vẻ đẹp cho hồ cá của bạn với những chú cá Koi đầy màu sắc và khỏe mạnh. Có nhiều họa tiết để phù hợp với phong cách của bạn!', 5, 4, CAST(N'2024-09-20T00:00:00.000' AS DateTime), CAST(N'2024-12-24T00:00:00.000' AS DateTime), N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FDoitsu-Benigoi.jpg?alt=media&token=1d1492ce-837f-47f2-881e-b90490760c55', 1, GETDATE());
 
 
@@ -1086,7 +1087,9 @@ INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, 
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (6, N'Asagi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (6, 0, N'Asagi Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FAsagi.jpg?alt=media&token=06058be9-7fbb-4316-818c-3df56d81a87a');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (7, N'Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (7, N'Doitsu Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
+--Set Inactive
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (7, 0, N'Doitsu Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FShusui.jpg?alt=media&token=b7cfc9cf-3301-4339-9ee7-de23a0475022');
+--
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Yamabuki Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FYamabuki-Ogon.jpg?alt=media&token=883d442a-75eb-4a31-9477-d08c4611c73f');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Gin Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FGin-Matsuba.jpg?alt=media&token=5679c7a0-3ed6-4db9-895f-f84ed77551e2');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Tancho Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FTancho-Kohaku.jpg?alt=media&token=8b55c477-d348-4815-b161-38d7fd57e78a');
@@ -1099,11 +1102,13 @@ INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL])
 INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (12, 0, N'Yamabuki Matsuba', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FMatsuba%2FKin-Matsuba.jpg?alt=media&token=d05512e8-4934-4075-a1a6-4e5c84e953c9');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (13, N'Benigoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FBenigoi.jpg?alt=media&token=7a929e28-e2c1-4023-892e-fc505327241b');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (13, N'Benigoi Doitsu', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FDoitsu-Benigoi.jpg?alt=media&token=1d1492ce-837f-47f2-881e-b90490760c55');
--- Đổi id thành Utsuri
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (5, N'Ki Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b');
+-- Set Inactive
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (5, 0, N'Ki Utsuri', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FUtsuri%2FKi-Utsuri.jpg?alt=media&token=6c22adde-59b6-4bab-8e3e-36bda066228b');
 --
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (15, N'Chagoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FChagoi%2FChagoi.jpg?alt=media&token=674fd910-a553-46d4-bcfa-bfd9a0cfa286');
-INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (15, N'Chagoi Doitsu', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FChagoi%2FChagoi%20Doitsu.jpg?alt=media&token=59177106-4e75-4942-8835-0a1ccc81909c');
+--Set Inactive
+INSERT INTO [dbo].[Pattern] ([VarietyID], [IsActive], [PatternName], [ImageURL]) VALUES (15, 0, N'Chagoi Doitsu', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FChagoi%2FChagoi%20Doitsu.jpg?alt=media&token=59177106-4e75-4942-8835-0a1ccc81909c');
+--
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (16, N'Soragoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSoragoi%2FSoragoi.jpg?alt=media&token=2bb14ebe-77ad-45c0-b8c7-f1e0fb0e7540');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Doitsu Kohaku', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FKohaku%2FDoitsu%20Kohaku.png?alt=media&token=1b65e987-5df8-4a5e-8108-546ecc3a527a');
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (2, N'Doitsu Sanke', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FSanke%2FDoitsu%20Sanke.png?alt=media&token=6c1f5951-2cbc-45e7-ba7f-25d2627e5fbf');
@@ -1132,6 +1137,46 @@ INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, 
 --49
 INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (8, N'Orange Ogon', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FHikari%20Muji%2FOgon%2FOrange-Ogon.jpg?alt=media&token=4f455796-030b-493a-99bd-34f215a3ea84');
 --50
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (20, N'Aka Bekko', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBekko%2FAka-Bekko.jpg?alt=media&token=7e1dc75b-a9dc-4ee6-ab16-df93d75e9e4d');
+--51
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (20, N'Ki Bekko', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBekko%2FKi-Bekko.jpg?alt=media&token=80fb6816-9ca5-4f5b-ac20-4496ab086120');
+--52
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (15, N'Green Chagoi', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FChagoi%2FGreen-Chagoi.jpg?alt=media&token=60839930-b284-4428-90db-9f75eff7f97f');
+--53
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (6, N'Asagi Ginrin', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FGinrin-Asagi.jpg?alt=media&token=51a76d75-179c-473f-a8b3-a713ca8a0bdd');
+--54
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (6, N'Asagi Konjo', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FAsagi%2FKonjo-Asagi.jpg?alt=media&token=22be26a5-bab5-46ec-959e-4f10de008f93');
+--55
+INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (7, N'Hana Shusui', N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FShusui%2FHana-Shusui.jpg?alt=media&token=2d77a411-f1bc-407c-84ef-a3a6fbd1823c');
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (50, 9, 0.8);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (50, 29, 0.2);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (51, 7, 0.7);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (51, 29, 0.3);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (52, 19, 1);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (53, 4, 0.7);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (53, 28, 0.2);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (53, 9, 0.1);
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (54, 9, 0.3);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (54, 1, 0.2);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (54, 20, 0.5);
+--INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Inazuma Kohaku', N'');
+
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (55, 15, 0.6);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (55, 28, 0.2);
+INSERT INTO [dbo].[PatternColor] ([PatternID], [ColorID], [Values]) VALUES (55, 15, 0.2);
+
+--Aka Bekko, Ki Bekko
+
+--Green Chagoi
+
+--Asagi Ginrin, Asagi Konjo
+
+--Hana Shusui
 --INSERT INTO [dbo].[Pattern] ([VarietyID], [PatternName], [ImageURL]) VALUES (4, N'Inazuma Kohaku', N'');
 
 
@@ -1372,41 +1417,26 @@ Select * from [dbo].[User]
 
 ****/
 
-DECLARE @startDate DATE = '2024-10-01';
-DECLARE @endDate DATE = '2024-11-14';
-DECLARE @currentDate DATE = @startDate;
 
-WHILE @currentDate <= @endDate
-BEGIN
-    -- Insert records for ElementID with larger gaps (for 1 element)
-    DECLARE @i INT = 1;
-    WHILE @i <= 20 -- Reduced the number of iterations to create larger gaps
-    BEGIN
-        INSERT INTO [dbo].[General] (ElementID, KuaID, CreatedDate)
-        VALUES (FLOOR(RAND() * 5) + 1, NULL, @currentDate);
-        SET @i = @i + 1;
-    END
 
-    -- Insert records for KuaID with larger gaps (for 1 element)
-    SET @i = 1;
-    WHILE @i <= 8 -- Reduced number of iterations for KuaID as well
-    BEGIN
-        INSERT INTO [dbo].[General] (ElementID, KuaID, CreatedDate)
-        VALUES (NULL, FLOOR(RAND() * 9) + 1, @currentDate);
-        SET @i = @i + 1;
-    END
 
-    -- Insert records for both ElementID and KuaID with larger gaps
-    SET @i = 1;
-    WHILE @i <= 12 -- Reduced number of iterations here as well
-    BEGIN
-        INSERT INTO [dbo].[General] (ElementID, KuaID, CreatedDate)
-        VALUES (FLOOR(RAND() * 5) + 1, FLOOR(RAND() * 9) + 1, @currentDate);
-        SET @i = @i + 1;
-    END
-
-    -- Move to the next day to simulate a larger gap
-    SET @currentDate = DATEADD(DAY, 1, @currentDate);
-END
+INSERT INTO [dbo].[Advertisement] 
+([AdsTypeId], [UserId], [PackageID], [Title], [Content], [StatusId], [ElementID], [StartedDate], [ExpiredDate], [Duration], [ImageUrl], [CreatedDate], [IsActive]) 
+VALUES 
+(1, 3, 1, N'Cá Koi Showa Nhật Size Lớn', N'Cá Koi Showa Nhật Size Lớn là một trong những loài cá được ưa chuộng trong thế giới cá Koi. Với bộ ba màu sắc đặc trưng, Showa có vẻ ngoài bắt mắt và hấp dẫn, rất phù hợp để nuôi trong các hồ cá phong thủy.', 5, 3, '2024-11-12', '2025-11-12', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/Koi_Images%2Fyamabuki-lon.webp?alt=media&token=37b4cdce-c35b-495a-b7da-5cc374e4918b', '2024-11-8', 1),
+(2, 4, 2, N'Đồ Phong Thủy Tượng Quan Âm', N'Tượng Quan Âm bằng đá tự nhiên là một trong những món đồ phong thủy được ưa chuộng. Đặt tượng Quan Âm trong nhà giúp thu hút năng lượng tích cực, mang lại bình an và may mắn cho gia đình.', 5, 2, '2024-11-13', '2025-11-13', 7, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimages.jpg?alt=media&token=5e449d81-616d-49e3-bdb9-dd2a0e8b1510', '2024-11-5', 1),
+(1, 5, 1, N'Cá Koi Sanke Nhật Size Lớn', N'Cá Koi Sanke Nhật Size Lớn có màu sắc đặc trưng với ba màu trắng, đỏ và đen. Loài cá này tượng trưng cho sự thịnh vượng và may mắn, là một lựa chọn tuyệt vời cho những ai yêu thích sự tinh tế trong việc trang trí hồ cá.', 5, 3, '2024-11-14', '2025-11-14', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/Koi_Images%2Fsp-sanke-7488.png?alt=media&token=3bc39ab0-e735-4333-8ec5-4e39b1d66c30', '2024-11-3', 1),
+(2, 3, 2, N'Bộ Đồ Phong Thủy Vòng Tay Bát Quái', N'Vòng tay Bát Quái được làm từ đá tự nhiên, mang lại sự bảo vệ và xua đuổi tà khí. Đây là món quà phong thủy tuyệt vời cho những ai muốn tăng cường năng lượng tích cực trong cuộc sống.', 5, 4, '2024-11-15', '2025-11-15', 7, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2F679620e9fac079d32317cd956b9f2414.jpg?alt=media&token=b9a0da68-e563-4411-b0d8-7d813598c178', '2024-11-8', 1),
+(1, 4, 1, N'Cá Koi Kohaku Nhật Size Lớn', N'Cá Koi Kohaku Nhật là một trong những giống cá Koi nổi bật nhất với màu trắng tinh khiết và những đốm đỏ rực rỡ. Đây là loài cá rất phổ biến trong các hồ cá phong thủy.', 5, 3, '2024-11-16', '2025-11-16', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimages%20(1).jpg?alt=media&token=bcb4d469-b860-4d0f-96f6-983cbd69bec8', '2024-11-7', 1),
+(2, 5, 2, N'Đồ Phong Thủy Tượng Rồng', N'Tượng Rồng phong thủy được cho là mang lại sức mạnh, quyền lực và sự thịnh vượng cho gia chủ. Đây là một trong những biểu tượng phong thủy được ưa chuộng trong việc trang trí nhà cửa, văn phòng.', 5, 2, '2024-11-17', '2025-11-17', 7, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Ftuong-rong%20(5).JPG?alt=media&token=f0455fe4-3f28-44ff-ba70-8f51cb1a6684', '2024-11-8', 1),
+(1, 3, 1, N'Cá Koi Tancho Nhật Size Lớn', N'Cá Koi Tancho là giống cá nổi bật với vết đỏ hình tròn trên đầu. Tancho là biểu tượng của sự thanh cao, mạnh mẽ, và được xem là biểu tượng may mắn trong phong thủy.', 5, 1, '2024-11-18', '2025-11-18', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/Koi_Images%2Fca-koi-tancho-5ff10c55-deb0-4b26-ae3c-5c27d8cf8c89.webp?alt=media&token=ee04372c-dde4-4829-bc2c-6161a37ea40d', '2024-11-6', 1),
+(2, 4, 2, N'Đồ Phong Thủy Mắt Phật', N'Mắt Phật là một vật phẩm phong thủy mạnh mẽ giúp bảo vệ gia đình khỏi những điều xấu, mang lại sự an lành và bình yên. Sản phẩm này thường được sử dụng trong trang trí nhà cửa.', 5, 5, '2024-11-19', '2025-11-19', 7, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fmat-nhu-lai-dai-nhat.jpg?alt=media&token=45b21036-3b45-44fa-9913-c09f39cc228b', '2024-11-2', 1),
+(1, 5, 1, N'Cá Koi Ginrin Nhật Size Lớn', N'Cá Koi Ginrin là giống cá Koi có vảy sáng bóng, phản chiếu ánh sáng giống như một viên ngọc quý. Loài cá này mang lại sự may mắn và thịnh vượng cho gia chủ.', 5, 4, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/Koi_Images%2Fca-koi-ginrin-kohaku-fbec4a03-65b9-45cb-897d-9675da7b4cb7.webp?alt=media&token=958bb788-06fb-4326-9822-613ded0422b4', '2024-11-10', 1),
+(1, 6, 1, N'Cá Koi Tancho - Đặc Trưng Với Chấm Đỏ', N'Cá Koi Tancho nổi bật với chấm đỏ tròn trên đầu. Đây là dòng cá tượng trưng cho Nhật Bản, mang đến vẻ đẹp thanh nhã và truyền thống.', 2, 4, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimage_2024-11-14_023122351.png?alt=media&token=0b8156c3-101e-4b0b-906c-6290b7798381', '2024-11-14', 1),
+(1, 6, 1, N'Cá Koi Benigoi - Màu Đỏ Rực Rỡ', N'Benigoi là loại cá koi màu đỏ hoàn toàn, tạo sự nổi bật và thu hút ánh nhìn. Đây là dòng cá yêu thích trong hồ để làm nổi bật các yếu tố phong thủy.', 2, 2, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2FKoi_fishes%2FBenigoi%2FBenigoi.jpg?alt=media&token=7a929e28-e2c1-4023-892e-fc505327241b', '2024-11-10', 1),
+(1, 6, 1, N'Cá Koi Goshiki - Ngũ Sắc Độc Đáo', N'Goshiki là dòng cá koi đặc biệt với sự pha trộn của năm màu sắc, thường có nền trắng với các đốm màu đen, đỏ, xanh, và xám, tạo nên vẻ đẹp riêng biệt.', 2, 5, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimage_2024-11-14_022657154.png?alt=media&token=5fe5edd0-2349-40e5-b636-c933a4dc0f4a', '2024-11-11', 1),
+(1, 6, 1, N'Cá Koi Ki Utsuri - Tương Phản Đen Vàng', N'Ki Utsuri là loại cá koi với màu nền đen cùng các vệt vàng, tạo nên sự tương phản mạnh mẽ và vẻ đẹp độc đáo cho hồ cá của bạn.', 2, 4, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimage_2024-11-14_022805911.png?alt=media&token=ff35bb88-1b4a-4812-99b6-d1d078afbc33', '2024-11-13', 1),
+(1, 6, 1, N'Cá Koi Doitsu - Vảy Ít Đặc Trưng', N'Cá Koi Doitsu có đặc điểm là ít vảy, tạo nên vẻ ngoài mượt mà hơn so với các dòng cá koi truyền thống khác. Đây là dòng cá phù hợp cho người yêu thích sự đơn giản.', 2, 2, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimage_2024-11-14_022905616.png?alt=media&token=378375ae-12c9-45a2-b0fd-b30bb1bc7276', '2024-11-11', 1),
+(1, 6, 1, N'Cá Koi Ochiba - Lá Thu Rơi', N'Ochiba là dòng cá koi với màu nâu và xám, gợi hình ảnh lá thu rơi trên mặt nước. Cá này mang lại cảm giác thanh bình cho hồ cá.', 2, 5, '2024-11-20', '2025-11-20', 10, N'https://firebasestorage.googleapis.com/v0/b/koi-fengshui.appspot.com/o/images%2Fimage_2024-11-14_022959178.png?alt=media&token=65ccae0a-7812-40ea-b356-d382b5067095', '2024-11-12', 1);
 
 USE [master]
