@@ -525,7 +525,7 @@ namespace FSK.APIService.Controllers
 
                 response.Status = true;
                 response.Message = "Success";
-                response.Data = output.Take(4);
+                response.Data = output.Take(3);
 
                 return Ok(response);
             }
